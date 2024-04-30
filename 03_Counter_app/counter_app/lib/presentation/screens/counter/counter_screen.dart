@@ -5,13 +5,17 @@ class CounterScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-        body: Center(
-      child: Column(
-        //El mainAxisAligment se utiliza para controlar la alineación de los elementos
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [Text('10'), Text('Cantidad de Clicks')],
+    return Scaffold(
+      body: const Center(
+        child: Column(
+          //El mainAxisAligment se utiliza para controlar la alineación de los elementos
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [Text('10'), Text('Cantidad de Clicks')],
+        ),
       ),
-    ));
+      //Creamos un Boton Flotante
+      floatingActionButton: FloatingActionButton(
+          onPressed: () {}, child: const Icon(Icons.plus_one)),
+    );
   }
 }
