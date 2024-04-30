@@ -66,6 +66,21 @@ class _CounterFunctionscreenState extends State<CounterFunctionscreen> {
                   });
                 },
                 child: const Icon(Icons.plus_one)),
+            //?Creamos un contenedor especifico para los espacios
+            const SizedBox(
+              height: 15,
+            ),
+            //Creamos otro Botón
+            FloatingActionButton(
+                //Creamos la función de disminuir al presionar el botón
+                onPressed: () {
+                  //Le indicamos cuando queremos que se renderice nuestra pantalla
+                  //o cuando se renderice nuestro Widget.
+                  setState(() {
+                    clickcounter--;
+                  });
+                },
+                child: const Icon(Icons.exposure_minus_1_outlined)),
           ],
         ));
   }
