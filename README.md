@@ -21,7 +21,7 @@ Este Curso lo pueden encontrar en la Plataforma de <a href="https://www.udemy.co
  <table>
 	<tr>
 		<td>
-			<a href="https://www.udemy.com/course/flutter-cero-a-experto/?kw=flutter&src=sac"><img src="https://th.bing.com/th/id/OIP.FRF_lnZzWro9V50Ifq7-JQHaEK?rs=1&pid=ImgDetMain" style="height:150" 
+			<a href="https://www.udemy.com/course/flutter-cero-a-experto/?kw=flutter&src=sac"><img src="https://th.bing.com/th/id/OIP.FRF_lnZzWro9V50Ifq7-JQHaEK?rs=1&pid=ImgDetMain" style="height:200" 
  width="180"/></a>
 		</td>
 		<td>
