@@ -15,7 +15,8 @@ class CounterScreen extends StatelessWidget {
               '10',
               style: TextStyle(fontSize: 160, fontWeight: FontWeight.w100),
             ),
-            Text('Cantidad de Clicks')
+            Text('CANTIDAD DE CLICKS',
+                style: TextStyle(fontSize: 25, fontWeight: FontWeight.w700))
           ],
         ),
       ),
