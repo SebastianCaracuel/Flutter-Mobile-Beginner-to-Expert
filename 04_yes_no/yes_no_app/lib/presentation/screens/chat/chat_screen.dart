@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yes_no_app/presentation/widgets/chat/miles_message_buble.dart';
 import 'package:yes_no_app/presentation/widgets/chat/my_message_buble.dart';
 
 class ChatScreen extends StatelessWidget {
@@ -43,7 +44,10 @@ class _ChatView extends StatelessWidget {
                 child: ListView.builder(
               itemCount: 100,
               itemBuilder: (context, index) {
-                return const MyMessageBubble();
+                //?Creamos este alternario para alternar cuales son los mensajes mio y cuales son los de el
+                return (index % 2 == 0)
+                    ? const MilesMessageBubble()
+                    : const MyMessageBubble();
               },
             )),
 
