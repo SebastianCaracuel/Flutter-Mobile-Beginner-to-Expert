@@ -18,6 +18,39 @@ class ChatScreen extends StatelessWidget {
         //Titulo del mensaje
         title: const Text("Miles Morales 🕷️"),
       ),
+
+      //Cuerpo
+      body: const _ChatView(),
+    );
+  }
+}
+
+//Creamos el Widget de Forma privada para que solo este aquí y no en otra screen
+class _ChatView extends StatelessWidget {
+  const _ChatView();
+
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 10),
+        child: Column(
+          children: [
+            //Usamos un WIdget Expanded ( PERMITE expandir el widget hijo a todo el espacio disponible que el padre le de)
+            Expanded(
+                //Hijo
+                child: ListView.builder(
+              itemCount: 100,
+              itemBuilder: (context, index) {
+                return Text('Indice: $index');
+              },
+            )),
+
+            //El otro espacio
+            const Text("Teclado")
+          ],
+        ),
+      ),
     );
   }
 }
