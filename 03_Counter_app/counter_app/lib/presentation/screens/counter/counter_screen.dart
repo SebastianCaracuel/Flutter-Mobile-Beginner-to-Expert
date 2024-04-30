@@ -8,6 +8,9 @@ class CounterScreen extends StatefulWidget {
 }
 
 class _CounterScreenState extends State<CounterScreen> {
+  //Creamos una variable que es igual a 0
+  int clickcounter = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -15,23 +18,33 @@ class _CounterScreenState extends State<CounterScreen> {
       appBar: AppBar(
         title: const Center(child: Text("CONTADOR")),
       ),
-      body: const Center(
+      body: Center(
         child: Column(
           //El mainAxisAligment se utiliza para controlar la alineación de los elementos
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            //Colocamos la variable dentro de nuestro texto
             Text(
-              '10',
-              style: TextStyle(fontSize: 160, fontWeight: FontWeight.w100),
+              '$clickcounter',
+              style:
+                  const TextStyle(fontSize: 160, fontWeight: FontWeight.w100),
             ),
-            Text('CANTIDAD DE CLICKS',
+            const Text('CANTIDAD DE CLICKS',
                 style: TextStyle(fontSize: 25, fontWeight: FontWeight.w700))
           ],
         ),
       ),
       //Creamos un Boton Flotante
       floatingActionButton: FloatingActionButton(
-          onPressed: () {}, child: const Icon(Icons.plus_one)),
+          //Creamos la función de incrementación al presionar el botón
+          onPressed: () {
+            //Le indicamos cuando queremos que se renderice nuestra pantalla
+            //o cuando se renderice nuestro Widget.
+            setState(() {
+              clickcounter++;
+            });
+          },
+          child: const Icon(Icons.plus_one)),
     );
   }
 }
