@@ -78,6 +78,7 @@ class _CounterFunctionscreenState extends State<CounterFunctionscreen> {
                 onPressed: () {
                   //Le indicamos cuando queremos que se renderice nuestra pantalla
                   //o cuando se renderice nuestro Widget.
+                  //? Creamos un IF que nuestro contador no puede pasar de 0 es decir no tendrá números Negativos
                   if (clickcounter == 0) return;
                   setState(() {
                     clickcounter--;
@@ -91,17 +92,32 @@ class _CounterFunctionscreenState extends State<CounterFunctionscreen> {
             ),
 
             //Creamos otro Botón
-            FloatingActionButton(
-                //Creamos la función de reiniciar al presionar el botón
-                onPressed: () {
-                  //Le indicamos cuando queremos que se renderice nuestra pantalla
-                  //o cuando se renderice nuestro Widget.
-                  setState(() {
-                    clickcounter = 0;
-                  });
-                },
-                child: const Icon(Icons.refresh_outlined)),
+            const CustomButton(
+              icon: Icons.refresh_outlined,
+            ),
           ],
         ));
+  }
+}
+
+//?Creamos un Widget Personalizable para nuestro Botón
+class CustomButton extends StatelessWidget {
+  //Colocamos las varibles que queremos dentro de nuestro Widgets
+  final IconData icon;
+
+  const CustomButton({
+    super.key,
+    required this.icon,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return FloatingActionButton(
+        //Creamos la función de reiniciar al presionar el botón
+        onPressed: () {
+          //Le indicamos cuando queremos que se renderice nuestra pantalla
+          //o cuando se renderice nuestro Widget.
+        },
+        child: Icon(icon));
   }
 }
