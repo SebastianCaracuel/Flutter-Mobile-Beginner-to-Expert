@@ -57,7 +57,7 @@ class _CounterFunctionscreenState extends State<CounterFunctionscreen> {
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             FloatingActionButton(
-                //!Cambiaremos el estilo del botón
+                //!Cambiaremos el estilo del botón a circular
                 shape: const StadiumBorder(),
                 //Creamos la función de incrementación al presionar el botón
                 onPressed: () {
@@ -83,6 +83,23 @@ class _CounterFunctionscreenState extends State<CounterFunctionscreen> {
                   });
                 },
                 child: const Icon(Icons.exposure_minus_1_outlined)),
+
+            //?Creamos un contenedor especifico para los espacios
+            const SizedBox(
+              height: 15,
+            ),
+
+            //Creamos otro Botón
+            FloatingActionButton(
+                //Creamos la función de reiniciar al presionar el botón
+                onPressed: () {
+                  //Le indicamos cuando queremos que se renderice nuestra pantalla
+                  //o cuando se renderice nuestro Widget.
+                  setState(() {
+                    clickcounter == 0;
+                  });
+                },
+                child: const Icon(Icons.refresh_outlined)),
           ],
         ));
   }
