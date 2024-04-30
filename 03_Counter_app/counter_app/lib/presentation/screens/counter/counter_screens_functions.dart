@@ -100,11 +100,7 @@ class CustomButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return FloatingActionButton(
         //Creamos la función de reiniciar al presionar el botón
-        onPressed: () {
-          //VoidCallBack
-          //Le indicamos cuando queremos que se renderice nuestra pantalla
-          //o cuando se renderice nuestro Widget.
-        },
+        onPressed: onPressed,
         child: Icon(icon));
   }
 }
