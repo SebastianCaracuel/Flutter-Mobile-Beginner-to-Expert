@@ -57,6 +57,8 @@ class _CounterFunctionscreenState extends State<CounterFunctionscreen> {
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             FloatingActionButton(
+                //!Cambiaremos el estilo del botón
+                shape: const StadiumBorder(),
                 //Creamos la función de incrementación al presionar el botón
                 onPressed: () {
                   //Le indicamos cuando queremos que se renderice nuestra pantalla
