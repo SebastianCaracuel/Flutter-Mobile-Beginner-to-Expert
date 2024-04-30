@@ -10,7 +10,13 @@ class CounterScreen extends StatelessWidget {
         child: Column(
           //El mainAxisAligment se utiliza para controlar la alineación de los elementos
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [Text('10'), Text('Cantidad de Clicks')],
+          children: [
+            Text(
+              '10',
+              style: TextStyle(fontSize: 160, fontWeight: FontWeight.w100),
+            ),
+            Text('Cantidad de Clicks')
+          ],
         ),
       ),
       //Creamos un Boton Flotante
