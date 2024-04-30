@@ -16,7 +16,23 @@ class _CounterFunctionscreenState extends State<CounterFunctionscreen> {
     return Scaffold(
       //Creación de menu superior
       appBar: AppBar(
+        //titulo de la barra
         title: const Center(child: Text("CONTADOR")),
+        //Creamos un Botón en nuestro menu superior o Barra
+        //?Si queremos que nuestro botón este a mano izq debemos colocar leading.
+        actions: [
+          //Le colocamos la función de refrescar al IconButton
+          IconButton(
+              onPressed: () {
+                setState(() {
+                  //?Lo que hacemos aquí es que nuestra variable es igual a 0
+                  //?Por lo que si dentro de nuestra variable hay un valor, la llevaremos a 0.
+                  clickcounter = 0;
+                });
+              },
+              //Colocamos un Icono que sea relevante a lo que estamos programando
+              icon: const Icon(Icons.refresh_rounded)),
+        ],
       ),
       body: Center(
         child: Column(
