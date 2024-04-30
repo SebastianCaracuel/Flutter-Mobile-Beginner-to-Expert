@@ -87,10 +87,13 @@ class _CounterFunctionscreenState extends State<CounterFunctionscreen> {
 class CustomButton extends StatelessWidget {
   //Colocamos las varibles que queremos dentro de nuestro Widgets
   final IconData icon;
+  //!Variable onPressed
+  final VoidCallback? onPressed;
 
   const CustomButton({
     super.key,
     required this.icon,
+    this.onPressed,
   });
 
   @override
@@ -98,6 +101,7 @@ class CustomButton extends StatelessWidget {
     return FloatingActionButton(
         //Creamos la función de reiniciar al presionar el botón
         onPressed: () {
+          //VoidCallBack
           //Le indicamos cuando queremos que se renderice nuestra pantalla
           //o cuando se renderice nuestro Widget.
         },
