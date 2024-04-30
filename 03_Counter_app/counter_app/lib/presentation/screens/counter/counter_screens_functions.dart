@@ -96,7 +96,7 @@ class _CounterFunctionscreenState extends State<CounterFunctionscreen> {
                   //Le indicamos cuando queremos que se renderice nuestra pantalla
                   //o cuando se renderice nuestro Widget.
                   setState(() {
-                    clickcounter == 0;
+                    clickcounter = 0;
                   });
                 },
                 child: const Icon(Icons.refresh_outlined)),
