@@ -78,6 +78,7 @@ class _CounterFunctionscreenState extends State<CounterFunctionscreen> {
                 onPressed: () {
                   //Le indicamos cuando queremos que se renderice nuestra pantalla
                   //o cuando se renderice nuestro Widget.
+                  if (clickcounter == 0) return;
                   setState(() {
                     clickcounter--;
                   });
