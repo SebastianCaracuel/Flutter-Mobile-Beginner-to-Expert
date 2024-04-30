@@ -38,9 +38,11 @@ En esta Segunda Etapa, creamos una aplicación que nos enseñó conceptos básic
 6. Constantes
 7. MaterialApp
 8. AppBars
+9. Color Schemes
 <br>
 
 La aplicación consiste en un contador, donde el número inicial es el Número 0, existen 3 botones, el primer botón aumenta nuestro valor en uno, el Segundo Botón, disminuye el valor en uno y el Ultimo botón refresca y vuelve el valor a su estado original es decir 0.
 
 Este tiene una condición, esa condición es no poder bajar del Número 0, por lo que si presiono el Botón disminuir, este no mostrará un número negativo.
 
+Además le agregamos un color predeterminado a los botones (Colors.blue), cada uno de estos botones con su respectivo Icono y función.
