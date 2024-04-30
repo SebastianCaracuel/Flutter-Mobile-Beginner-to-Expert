@@ -53,30 +53,47 @@ class _CounterFunctionscreenState extends State<CounterFunctionscreen> {
         ),
 
         //Creamos un Boton Flotante
-        floatingActionButton: const Column(
+        floatingActionButton: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             CustomButton(
               icon: Icons.plus_one_outlined,
+              onPressed: () {
+                setState(() {
+                  clickcounter++;
+                });
+              },
             ),
 
             //?Creamos un contenedor especifico para los espacios
-            SizedBox(
+            const SizedBox(
               height: 15,
             ),
             //Creamos otro Botón
             CustomButton(
               icon: Icons.exposure_minus_1_outlined,
+              onPressed: () {
+                //!Creamos una condición de que nuestro contador no puede pasar a número negativos.
+                if (clickcounter == 0) return;
+                setState(() {
+                  clickcounter--;
+                });
+              },
             ),
 
             //?Creamos un contenedor especifico para los espacios
-            SizedBox(
+            const SizedBox(
               height: 15,
             ),
 
             //Creamos otro Botón
             CustomButton(
               icon: Icons.refresh_outlined,
+              onPressed: () {
+                setState(() {
+                  clickcounter = 0;
+                });
+              },
             ),
           ],
         ));
