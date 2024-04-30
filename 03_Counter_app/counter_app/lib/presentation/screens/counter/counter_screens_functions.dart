@@ -53,46 +53,29 @@ class _CounterFunctionscreenState extends State<CounterFunctionscreen> {
         ),
 
         //Creamos un Boton Flotante
-        floatingActionButton: Column(
+        floatingActionButton: const Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            FloatingActionButton(
-                //!Cambiaremos el estilo del botón a circular
-                shape: const StadiumBorder(),
-                //Creamos la función de incrementación al presionar el botón
-                onPressed: () {
-                  //Le indicamos cuando queremos que se renderice nuestra pantalla
-                  //o cuando se renderice nuestro Widget.
-                  setState(() {
-                    clickcounter++;
-                  });
-                },
-                child: const Icon(Icons.plus_one)),
+            CustomButton(
+              icon: Icons.plus_one_outlined,
+            ),
+
             //?Creamos un contenedor especifico para los espacios
-            const SizedBox(
+            SizedBox(
               height: 15,
             ),
             //Creamos otro Botón
-            FloatingActionButton(
-                //Creamos la función de disminuir al presionar el botón
-                onPressed: () {
-                  //Le indicamos cuando queremos que se renderice nuestra pantalla
-                  //o cuando se renderice nuestro Widget.
-                  //? Creamos un IF que nuestro contador no puede pasar de 0 es decir no tendrá números Negativos
-                  if (clickcounter == 0) return;
-                  setState(() {
-                    clickcounter--;
-                  });
-                },
-                child: const Icon(Icons.exposure_minus_1_outlined)),
+            CustomButton(
+              icon: Icons.exposure_minus_1_outlined,
+            ),
 
             //?Creamos un contenedor especifico para los espacios
-            const SizedBox(
+            SizedBox(
               height: 15,
             ),
 
             //Creamos otro Botón
-            const CustomButton(
+            CustomButton(
               icon: Icons.refresh_outlined,
             ),
           ],
