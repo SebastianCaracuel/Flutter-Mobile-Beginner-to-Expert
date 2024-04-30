@@ -6,6 +6,10 @@ class CounterScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      //Creación de menu superior
+      appBar: AppBar(
+        title: const Center(child: Text("CONTADOR")),
+      ),
       body: const Center(
         child: Column(
           //El mainAxisAligment se utiliza para controlar la alineación de los elementos
