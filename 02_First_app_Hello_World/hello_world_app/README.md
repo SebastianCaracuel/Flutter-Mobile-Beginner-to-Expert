@@ -1,16 +1,32 @@
-# hello_world_app
+<p align="center">
+  <a href="#" target="blank"><img src="https://storage.googleapis.com/cms-storage-bucket/6a07d8a62f4308d2b854.svg" width="330" alt="Flutter Logo" /></a>
+</p>
 
-A new Flutter project.
+<br>
+<br>
+<br>
 
-## Getting Started
+# Hello World! <img src="https://raw.githubusercontent.com/MartinHeinz/MartinHeinz/master/wave.gif" width="30px" height="30px" />
 
-This project is a starting point for a Flutter application.
+Mi nombre es Sebastián Caracuel. Titulado en Ingenería en Informática, soy de Chile y este es mi Proyecto Personal.
 
-A few resources to get you started if this is your first Flutter project:
+Este Proyecto Personal es de Autodesarrollo en el Mundo de Flutter.
+Donde realizo el Curso Impartido por <a href="https://gist.github.com/Klerith"><b>Fernando Herrera.</b></a><br>
+Este Curso lo pueden encontrar en la Plataforma de <a href="https://www.udemy.com/course/flutter-cero-a-experto/?kw=flutter&src=sac"><b>Udemy</b></a> como también en la Pagina <a href="https://cursos.devtalles.com/"><b>DevTalles</b></a>. 
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+<br>
+<br>
+<p align="center">
+  <a href="https://skillicons.dev">
+    <img src="https://skillicons.dev/icons?i=flutter,dart,vscode&perline=14" />
+  </a>
+</p>
+
+
+<br>
+
+## &#x270d; Blog & Writing
+
+En esta primera etapa, super importante de conocimiento y primeros pasos con la aplicación. Con conceptos muy básicos, estructura limpia o código limpio, donde creamos carpetas y pages o screens para comprender como será nuestra aplicación en un futuro y como debemos seguir buenas practicas, creamos nuestro primer { Hello World }, este iconico texto que creamos al primer contacto con un nuevo lenguaje de programación.
+
