@@ -9,6 +9,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Yes No App',
+      //Quitamos el banner debug (Aplicación en desarrollo)
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
           title: const Text('Material App Bar'),
