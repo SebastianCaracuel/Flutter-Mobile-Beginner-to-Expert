@@ -14,54 +14,59 @@ class _CounterFunctionscreenState extends State<CounterFunctionscreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //Creación de menu superior
-      appBar: AppBar(
-        //titulo de la barra
-        title: const Center(child: Text("CONTADOR")),
-        //Creamos un Botón en nuestro menu superior o Barra
-        //?Si queremos que nuestro botón este a mano izq debemos colocar leading.
-        actions: [
-          //Le colocamos la función de refrescar al IconButton
-          IconButton(
-              onPressed: () {
-                setState(() {
-                  //?Lo que hacemos aquí es que nuestra variable es igual a 0
-                  //?Por lo que si dentro de nuestra variable hay un valor, la llevaremos a 0.
-                  clickcounter = 0;
-                });
-              },
-              //Colocamos un Icono que sea relevante a lo que estamos programando
-              icon: const Icon(Icons.refresh_rounded)),
-        ],
-      ),
-      body: Center(
-        child: Column(
-          //El mainAxisAligment se utiliza para controlar la alineación de los elementos
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            //Colocamos la variable dentro de nuestro texto
-            Text(
-              '$clickcounter',
-              style:
-                  const TextStyle(fontSize: 160, fontWeight: FontWeight.w100),
-            ),
-            Text('Click${clickcounter == 1 ? '' : 's'}',
-                style:
-                    const TextStyle(fontSize: 25, fontWeight: FontWeight.w700))
+        //Creación de menu superior
+        appBar: AppBar(
+          //titulo de la barra
+          title: const Center(child: Text("CONTADOR")),
+          //Creamos un Botón en nuestro menu superior o Barra
+          //?Si queremos que nuestro botón este a mano izq debemos colocar leading.
+          actions: [
+            //Le colocamos la función de refrescar al IconButton
+            IconButton(
+                onPressed: () {
+                  setState(() {
+                    //?Lo que hacemos aquí es que nuestra variable es igual a 0
+                    //?Por lo que si dentro de nuestra variable hay un valor,
+                    clickcounter = 0;
+                  });
+                },
+                //Colocamos un Icono que sea relevante a lo que estamos programando
+                icon: const Icon(Icons.refresh_rounded)),
           ],
         ),
-      ),
-      //Creamos un Boton Flotante
-      floatingActionButton: FloatingActionButton(
-          //Creamos la función de incrementación al presionar el botón
-          onPressed: () {
-            //Le indicamos cuando queremos que se renderice nuestra pantalla
-            //o cuando se renderice nuestro Widget.
-            setState(() {
-              clickcounter++;
-            });
-          },
-          child: const Icon(Icons.plus_one)),
-    );
+        body: Center(
+          child: Column(
+            //El mainAxisAligment se utiliza para controlar la alineación de los elementos
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              //Colocamos la variable dentro de nuestro texto
+              Text(
+                '$clickcounter',
+                style:
+                    const TextStyle(fontSize: 160, fontWeight: FontWeight.w100),
+              ),
+              Text('Click${clickcounter == 1 ? '' : 's'}',
+                  style: const TextStyle(
+                      fontSize: 25, fontWeight: FontWeight.w700))
+            ],
+          ),
+        ),
+
+        //Creamos un Boton Flotante
+        floatingActionButton: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            FloatingActionButton(
+                //Creamos la función de incrementación al presionar el botón
+                onPressed: () {
+                  //Le indicamos cuando queremos que se renderice nuestra pantalla
+                  //o cuando se renderice nuestro Widget.
+                  setState(() {
+                    clickcounter++;
+                  });
+                },
+                child: const Icon(Icons.plus_one)),
+          ],
+        ));
   }
 }
