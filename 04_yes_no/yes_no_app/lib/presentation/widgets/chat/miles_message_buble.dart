@@ -31,7 +31,17 @@ class MilesMessageBubble extends StatelessWidget {
         const SizedBox(height: 5),
 
         // Todo:imagen
+        const _ImageBubble()
       ],
     );
+  }
+}
+
+class _ImageBubble extends StatelessWidget {
+  const _ImageBubble();
+
+  @override
+  Widget build(BuildContext context) {
+    return Image.network('');
   }
 }
