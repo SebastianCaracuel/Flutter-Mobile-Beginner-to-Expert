@@ -17,7 +17,7 @@ class _CounterFunctionscreenState extends State<CounterFunctionscreen> {
         //Creación de menu superior
         appBar: AppBar(
           //titulo de la barra
-          title: const Center(child: Text("CONTADOR")),
+          title: const Center(child: Text("Contador App")),
           //Creamos un Botón en nuestro menu superior o Barra
           //?Si queremos que nuestro botón este a mano izq debemos colocar leading.
           //actions: [
