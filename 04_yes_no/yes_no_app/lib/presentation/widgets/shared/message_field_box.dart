@@ -5,6 +5,12 @@ class MessageFieldBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //? Colocamos un textController
+    final textController = TextEditingController();
+
+    //?El focus node es cuando un elemento necesita un foco
+    final focusNode = FocusNode();
+
     //Creamos también un Borde Personalizado para una mejor visualización del Input
     final outlineInputBorder = UnderlineInputBorder(
       borderSide: const BorderSide(color: Colors.transparent),
@@ -23,7 +29,9 @@ class MessageFieldBox extends StatelessWidget {
       //Creamos un Botón con Icono a la Derecha.
       suffixIcon: IconButton(
         onPressed: () {
-          print('Valor de la Caja de Texto?');
+          final textValue = textController.value.text;
+          print('Button $textValue');
+          textController.clear();
         },
         icon: const Icon(Icons.send_outlined),
       ),
@@ -31,14 +39,21 @@ class MessageFieldBox extends StatelessWidget {
 
     //!? Creamos un TextFormField donde colocatremos nuestro Input Personalizado
     return TextFormField(
+      //Colocamos el textController
+      controller: textController,
+      //Elemento FOCUS
+      focusNode: focusNode,
+      //Para presionar afuera y que se pierda el focus
+      onTapOutside: (event) {
+        focusNode.unfocus();
+      },
       //Le colocamos decoración
       decoration: inputDecoraction,
       //Vemos el valor de lo que se esta escribiendo en la caja de texto
       onFieldSubmitted: (value) {
         print('Submit value $value');
-      },
-      onChanged: (value) {
-        print('changed $value');
+        textController.clear();
+        focusNode.requestFocus();
       },
     );
   }
