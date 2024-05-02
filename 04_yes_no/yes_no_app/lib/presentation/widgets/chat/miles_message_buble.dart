@@ -31,7 +31,9 @@ class MilesMessageBubble extends StatelessWidget {
         const SizedBox(height: 5),
 
         // Todo:imagen
-        const _ImageBubble()
+        const _ImageBubble(),
+
+        const SizedBox(height: 10),
       ],
     );
   }
@@ -42,7 +44,19 @@ class _ImageBubble extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Image.network(
-        'https://yesno.wtf/assets/no/2-101be1e3d8a0ed407c4e3c001ef8fa66.gif');
+    final size = MediaQuery.of(context).size;
+
+    //ClipRRect nos permite hacer Bordes redondeados
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(20),
+      child: Image.network(
+        'https://yesno.wtf/assets/no/2-101be1e3d8a0ed407c4e3c001ef8fa66.gif',
+
+        //Queremos que la imagen tome un tamaño en particular
+        width: size.width * 0.7,
+        height: 150,
+        fit: BoxFit.cover,
+      ),
+    );
   }
 }
