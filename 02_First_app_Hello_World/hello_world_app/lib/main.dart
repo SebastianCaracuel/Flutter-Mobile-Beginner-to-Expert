@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hello_world_app/presentation/screens/Hola_Mundo.dart';
+import 'package:hello_world_app/presentation/screens/hola_mundo.dart';
 
 void main() {
   runApp(const MyApp());
