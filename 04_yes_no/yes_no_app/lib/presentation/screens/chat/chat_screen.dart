@@ -54,7 +54,7 @@ class _ChatView extends StatelessWidget {
 
                 return (message.fromWho == FromWho.miles)
                     ? const MilesMessageBubble()
-                    : const MyMessageBubble();
+                    : MyMessageBubble(message: message);
               },
             )),
 
