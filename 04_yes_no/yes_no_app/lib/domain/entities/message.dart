@@ -1,5 +1,5 @@
 //Creamos una enumeración para tener un control
-enum FromWho { mine, miles }
+enum FromWho { me, miles }
 
 //Creamos una entidad
 class Message {
