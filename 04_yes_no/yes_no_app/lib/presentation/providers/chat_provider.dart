@@ -4,7 +4,7 @@ import 'package:yes_no_app/domain/entities/message.dart';
 //Creamos una clase
 class ChatProvider extends ChangeNotifier {
   //Creamos una lista de mensajes
-  List<Message> message = [
+  List<Message> messageList = [
     //Creamos un mensaje
     Message(
         text: '¿Que tal Miles?, ¿Como va todo por Brooklyn?',

@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:yes_no_app/domain/entities/message.dart';
+import 'package:yes_no_app/presentation/providers/chat_provider.dart';
 import 'package:yes_no_app/presentation/widgets/chat/miles_message_buble.dart';
 import 'package:yes_no_app/presentation/widgets/chat/my_message_buble.dart';
 import 'package:yes_no_app/presentation/widgets/shared/message_field_box.dart';
@@ -31,9 +34,11 @@ class ChatScreen extends StatelessWidget {
 //Creamos el Widget de Forma privada para que solo este aquí y no en otra screen
 class _ChatView extends StatelessWidget {
   const _ChatView();
-
   @override
   Widget build(BuildContext context) {
+    //Hacemos referencia a nuestro provider
+    final chatProvider = context.watch<ChatProvider>();
+
     return SafeArea(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -43,10 +48,11 @@ class _ChatView extends StatelessWidget {
             Expanded(
                 //Hijo
                 child: ListView.builder(
-              itemCount: 100,
+              itemCount: chatProvider.messageList.length,
               itemBuilder: (context, index) {
-                //?Creamos este alternario para alternar cuales son los mensajes mio y cuales son los de el
-                return (index % 2 == 0)
+                final message = chatProvider.messageList[index];
+
+                return (message.fromWho == FromWho.miles)
                     ? const MilesMessageBubble()
                     : const MyMessageBubble();
               },
