@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:yes_no_app/domain/entities/message.dart';
 
 class MilesMessageBubble extends StatelessWidget {
-  const MilesMessageBubble({super.key});
+//Creamos una propiedad
+  final Message message;
 
+  const MilesMessageBubble({super.key, required this.message});
   @override
   Widget build(BuildContext context) {
     //?! Llamamos a nuestro color del Theme
@@ -20,18 +23,18 @@ class MilesMessageBubble extends StatelessWidget {
               color: colors.secondary,
               //?No queremos que nuestro contendor sea Cuadrado, queremos que sea redondo.
               borderRadius: BorderRadius.circular(20)),
-          child: const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
             child: Text(
-              'Hola Seba',
-              style: TextStyle(color: Colors.white),
+              message.text,
+              style: const TextStyle(color: Colors.white),
             ),
           ),
         ),
         const SizedBox(height: 5),
 
         // Todo:imagen
-        const _ImageBubble(),
+        _ImageBubble(message.imageUrl!),
 
         const SizedBox(height: 10),
       ],
@@ -40,7 +43,8 @@ class MilesMessageBubble extends StatelessWidget {
 }
 
 class _ImageBubble extends StatelessWidget {
-  const _ImageBubble();
+  final String imageUrl;
+  const _ImageBubble(this.imageUrl);
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +54,7 @@ class _ImageBubble extends StatelessWidget {
     return ClipRRect(
       borderRadius: BorderRadius.circular(20),
       child: Image.network(
-        'https://yesno.wtf/assets/no/2-101be1e3d8a0ed407c4e3c001ef8fa66.gif',
+        imageUrl,
 
         //Queremos que la imagen tome un tamaño en particular
         width: size.width * 0.7,
