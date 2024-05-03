@@ -40,7 +40,11 @@ class ChatProvider extends ChangeNotifier {
 
   //Creamos un nuevo metodo (para las respuestas Answer Yes No)
   Future<void> milesReply() async {
-    final MilesMessage = await getYesNoAnswer.getAnswer();
+    final milesMessage = await getYesNoAnswer.getAnswer();
+    messageList.add(milesMessage);
+    notifyListeners();
+
+    moveScrollToBottom();
   }
 
   //Creamos una nueva función donde no vamos a generar nada

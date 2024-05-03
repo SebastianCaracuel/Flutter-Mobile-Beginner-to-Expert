@@ -3,6 +3,7 @@
 //Creamos una clase
 import 'package:dio/dio.dart';
 import 'package:yes_no_app/domain/entities/message.dart';
+import 'package:yes_no_app/infrastructure/models/yes_no_model.dart';
 
 class GetYesNoAnswer {
   //Creamos una nueva propiedad, una propiedad privada
@@ -13,7 +14,12 @@ class GetYesNoAnswer {
     //Llamamos al URL
     final response = await _dio.get('https://yesno.wtf/api');
 
+    final yesNoModel = YesNoModel.fromJsonMap(response.data);
+
     //Transformamos la instancia del message
-    throw UnimplementedError();
+    return Message(
+        text: yesNoModel.answer,
+        fromWho: FromWho.miles,
+        imageUrl: yesNoModel.image);
   }
 }
