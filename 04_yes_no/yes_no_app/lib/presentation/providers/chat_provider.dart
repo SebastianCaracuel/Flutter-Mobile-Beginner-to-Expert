@@ -16,5 +16,12 @@ class ChatProvider extends ChangeNotifier {
   //Metodos
   Future<void> sendMessage(String text) async {
     //Todo: La idea es que cuando yo envio y escribo un mensaje aquí, lo debo recibir.
+
+    //Metodo
+    final newMessage = Message(text: text, fromWho: FromWho.me);
+    messageList.add(newMessage);
+
+    //
+    notifyListeners();
   }
 }
