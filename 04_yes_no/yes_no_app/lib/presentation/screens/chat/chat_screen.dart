@@ -48,6 +48,7 @@ class _ChatView extends StatelessWidget {
             Expanded(
                 //Hijo
                 child: ListView.builder(
+              controller: chatProvider.chatScrollController,
               itemCount: chatProvider.messageList.length,
               itemBuilder: (context, index) {
                 final message = chatProvider.messageList[index];
