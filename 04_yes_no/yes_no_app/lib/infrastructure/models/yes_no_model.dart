@@ -1,19 +1,32 @@
-//Creamos una clase
-//?El Objetivo de este class es para tener las propiedades que tiene la url
+//Clase creada con QuickType
+import 'package:yes_no_app/domain/entities/message.dart';
 
 class YesNoModel {
-  String answer;
-  bool forced;
-  String image;
+  final String answer;
+  final bool forced;
+  final String image;
 
-  //constructor con parametros
   YesNoModel({
     required this.answer,
     required this.forced,
     required this.image,
   });
 
-  //?Que es Factory?, cuando alguien llame al constructor con nombre, creará una nueva instancia
   factory YesNoModel.fromJsonMap(Map<String, dynamic> json) => YesNoModel(
-      answer: json['answer'], forced: json['forced'], image: json['image']);
+        answer: json["answer"],
+        forced: json["forced"],
+        image: json["image"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "answer": answer,
+        "forced": forced,
+        "image": image,
+      };
+
+  //Creamos un metodo
+  Message toMessageEntity() => Message(
+      text: answer == 'yes' ? 'Si' : 'No',
+      fromWho: FromWho.miles,
+      imageUrl: image);
 }

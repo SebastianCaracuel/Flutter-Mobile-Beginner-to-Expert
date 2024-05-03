@@ -17,9 +17,6 @@ class GetYesNoAnswer {
     final yesNoModel = YesNoModel.fromJsonMap(response.data);
 
     //Transformamos la instancia del message
-    return Message(
-        text: yesNoModel.answer,
-        fromWho: FromWho.miles,
-        imageUrl: yesNoModel.image);
+    return yesNoModel.toMessageEntity();
   }
 }
