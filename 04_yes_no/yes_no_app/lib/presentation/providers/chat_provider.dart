@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:yes_no_app/config/helpers/get_yes_no_answer.dart';
 import 'package:yes_no_app/domain/entities/message.dart';
 
 //Creamos una clase
 class ChatProvider extends ChangeNotifier {
   //Creamos una instancia de controll del chat
   final ScrollController chatScrollController = ScrollController();
+  //Instancia de la clase de MilesMessage
+  final GetYesNoAnswer getYesNoAnswer = GetYesNoAnswer();
 
   //Creamos una lista de mensajes
   List<Message> messageList = [
@@ -26,9 +29,18 @@ class ChatProvider extends ChangeNotifier {
     final newMessage = Message(text: text, fromWho: FromWho.me);
     messageList.add(newMessage);
 
+    //Condición de la "?"
+    if (text.endsWith('?')) {
+      milesReply();
+    }
     //
     notifyListeners();
     moveScrollToBottom();
+  }
+
+  //Creamos un nuevo metodo (para las respuestas Answer Yes No)
+  Future<void> milesReply() async {
+    final MilesMessage = await getYesNoAnswer.getAnswer();
   }
 
   //Creamos una nueva función donde no vamos a generar nada
