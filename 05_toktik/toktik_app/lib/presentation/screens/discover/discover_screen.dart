@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:toktik_app/presentation/providers/discover_provider.dart';
+import 'package:toktik_app/presentation/widgets/shared/video_scroll_view.dart';
 
 class DiscoverScreen extends StatelessWidget {
   const DiscoverScreen({super.key});
@@ -11,7 +12,8 @@ class DiscoverScreen extends StatelessWidget {
     final discoverProvider = context.watch<DiscoverProvider>();
 
     return Scaffold(
-        //Creamos una condición -
+        //Creamos una condición - si los videos aún no cargan, entonces que muestre un Circulo de progreso
+        //Posterior a eso que se nos muestren los "videos"
         body: discoverProvider.initialLoading
             ? const Center(
                 child: CircularProgressIndicator(
@@ -19,6 +21,8 @@ class DiscoverScreen extends StatelessWidget {
                 strokeWidth: 2,
               ))
             //Aquí irán los videos
-            : const Placeholder());
+            : VideoScrollView(
+                videos: discoverProvider.videos,
+              ));
   }
 }
