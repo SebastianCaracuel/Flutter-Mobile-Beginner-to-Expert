@@ -1,4 +1,5 @@
 //Creamos los botones
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:toktik_app/config/helpers/human_formats.dart';
 import 'package:toktik_app/domain/entities/video_post.dart';
@@ -19,8 +20,19 @@ class VideoButtons extends StatelessWidget {
             value: video.likes,
             iconData: Icons.favorite_rounded,
             iconColor: Colors.red),
+        const SizedBox(height: 15),
         _CustomIconButton(
-            value: video.views, iconData: Icons.remove_red_eye_outlined)
+            value: video.views, iconData: Icons.remove_red_eye_outlined),
+        const SizedBox(height: 15),
+
+        //Utilizando el animate_do, colocamos un widget de Spin (Girar)
+        SpinPerfect(
+            //Colocamos que el giro sera infinito
+            infinite: true,
+            //Queremos que el giro sea mas lento
+            duration: const Duration(seconds: 5),
+            child: const _CustomIconButton(
+                value: 0, iconData: Icons.play_circle_outline)),
       ],
     );
   }
@@ -43,13 +55,8 @@ class _CustomIconButton extends StatelessWidget {
     return Column(
       children: [
         IconButton(
-            onPressed: () {},
-            icon: Icon(
-              iconData,
-              color: color,
-              size: 30,
-            )),
-        Text(HumanFormats.humanReadbleNumber(value.toDouble())),
+            onPressed: () {}, icon: Icon(iconData, color: color, size: 30)),
+        if (value > 0) Text(HumanFormats.humanReadbleNumber(value.toDouble())),
       ],
     );
   }
