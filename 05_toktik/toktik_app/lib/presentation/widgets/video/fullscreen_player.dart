@@ -53,7 +53,13 @@ class _FullScreenPlayerState extends State<FullScreenPlayer> {
     return FutureBuilder(
       future: controller.initialize(),
       builder: (context, snapshot) {
-        return const Center(child: CircularProgressIndicator(strokeWidth: 2));
+        //Condición del indicador de progreso - estamos en paso de inicialización de el reproductor
+        if (snapshot.connectionState != ConnectionState.done) {
+          return const Center(child: CircularProgressIndicator(strokeWidth: 2));
+        }
+        return AspectRatio(
+            aspectRatio: controller.value.aspectRatio,
+            child: VideoPlayer(controller));
       },
     );
   }

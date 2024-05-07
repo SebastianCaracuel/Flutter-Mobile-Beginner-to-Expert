@@ -20,7 +20,8 @@ class DiscoverProvider extends ChangeNotifier {
     //!simulación de http async
 
     //Esperamos dos segundos
-    await Future.delayed(const Duration(seconds: 2));
+    //await Future.delayed(const Duration(seconds: 2));
+
     //Luego carga los videos
     final List<VideoPost> newVideos = videoPosts
         .map((video) => LocalVideoModel.fromJson(video).toVideoPostEntity())
