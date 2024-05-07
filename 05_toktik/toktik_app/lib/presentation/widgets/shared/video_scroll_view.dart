@@ -2,7 +2,9 @@
 //Que se puede hacer Scroll
 
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:toktik_app/domain/entities/video_post.dart';
+import 'package:toktik_app/presentation/widgets/shared/video_player/video_buttons.dart';
 
 class VideoScrollView extends StatelessWidget {
   //Recibimos la lista de videos
@@ -26,11 +28,15 @@ class VideoScrollView extends StatelessWidget {
         final VideoPost videoPost = videos[index];
 
         //Retornamos un Stack Widget porque tendremos Widgets uno encima de otros
-        return const Stack(
+        return Stack(
           children: [
             //VideoPlayer + gradiente
 
             //Botones
+            //UTILIZAMOS Positioned que va muy de la mano con stack que nos permite colocar nuestro widget
+            //en una posición mas adecuada
+            Positioned(
+                bottom: 40, right: 20, child: VideoButtons(video: videoPost)),
           ],
         );
       },
