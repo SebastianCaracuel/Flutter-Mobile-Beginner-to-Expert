@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:toktik_app/domain/entities/video_post.dart';
 import 'package:toktik_app/presentation/widgets/shared/video_player/video_buttons.dart';
+import 'package:toktik_app/presentation/widgets/video/fullscreen_player.dart';
 
 class VideoScrollView extends StatelessWidget {
   //Recibimos la lista de videos
@@ -30,9 +31,15 @@ class VideoScrollView extends StatelessWidget {
         //Retornamos un Stack Widget porque tendremos Widgets uno encima de otros
         return Stack(
           children: [
-            //VideoPlayer + gradiente
+            //?VideoPlayer + gradiente
+            //Creamos un Tamaño especifico, utilizamos expand para que utilice toda la pantalla
 
-            //Botones
+            SizedBox.expand(
+                child: FullScreenPlayer(
+                    caption: videoPost.caption, videoUrl: videoPost.videoUrL)),
+            //FullScreenPlayer(),
+
+            //?Botones
             //UTILIZAMOS Positioned que va muy de la mano con stack que nos permite colocar nuestro widget
             //en una posición mas adecuada
             Positioned(
