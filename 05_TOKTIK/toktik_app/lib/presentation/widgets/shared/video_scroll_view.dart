@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:toktik_app/domain/entities/video_post.dart';
 import 'package:toktik_app/presentation/widgets/shared/video_player/video_buttons.dart';
+import 'package:toktik_app/presentation/widgets/videos/full_screen_player.dart';
 
 //Es un reproductor de videos Scrolleable. Esto quiere decir que cremaos un widget que se puede realizar scroll
 
@@ -36,6 +37,13 @@ class VideoScollView extends StatelessWidget {
             //?Gradiant
 
             //?VideoPlayer
+            SizedBox.expand(
+              child: FullScreenPlayer(
+                caption: videoPost.caption,
+                videoUrl: videoPost.videoUrl,
+              ),
+            ),
+            //FullScreenPlayer
 
             //?Button
             //Envolvemos nuestro widget en un nuevo widget
