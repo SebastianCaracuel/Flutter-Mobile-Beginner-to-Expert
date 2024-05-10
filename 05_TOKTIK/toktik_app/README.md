@@ -52,5 +52,5 @@ La aplicación consta de un diseñamos estilo Tik Tok, un reproductor de videos 
 <br>
 
 <p align="center">
-  <a href="#" target="blank"><img src="https://miro.medium.com/v2/resize:fit:828/format:webp/1*uXv5-DB6GyNhZSH_wtorkQ.png" width="330" alt="Clean Arquitecture" /></a>
+  <a href="#" target="blank"><img src="https://miro.medium.com/v2/resize:fit:828/format:webp/1*uXv5-DB6GyNhZSH_wtorkQ.png" alt="Clean Arquitecture" /></a>
 </p>
