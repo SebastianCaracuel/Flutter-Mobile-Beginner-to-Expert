@@ -42,6 +42,9 @@ En esta Etapa, los conceptos que se vieron fueron:
 8. Aserciones
 9. Stacks
 10. Controladores de video
+
+11. Datasource
+12. Repository
 <br> 
 
 La aplicación consta de un reproductor de videos de forma local estilo Tik Tok. 
