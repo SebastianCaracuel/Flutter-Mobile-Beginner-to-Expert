@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:toktik_app/config/theme/app_theme.dart';
+import 'package:toktik_app/presentation/screens/discover/discover_screen.dart';
 
 void main() => runApp(const MyApp());
 
@@ -18,15 +19,8 @@ class MyApp extends StatelessWidget {
       //Titulo de la aplicación
       title: 'TOK TIK',
 
-      //Scaffold
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('TOK TIK'),
-        ),
-        body: const Center(
-          child: Text('Hello World'),
-        ),
-      ),
+      //Importamos nuestro HomeScreen
+      home: const DiscoverScreen(),
     );
   }
 }
