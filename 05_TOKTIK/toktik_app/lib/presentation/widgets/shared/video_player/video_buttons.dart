@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:toktik_app/config/helpers/human_formats.dart';
 import 'package:toktik_app/domain/entities/video_post.dart';
@@ -21,6 +22,17 @@ class VideoButtons extends StatelessWidget {
             iconColor: Colors.red),
         _CustomIconButton(
             value: video.views, iconData: Icons.remove_red_eye_outlined),
+        const _CustomIconButton(value: 0, iconData: Icons.share),
+        const SizedBox(height: 50),
+
+        //Implementación del animate_do con un Spin infinito
+        SpinPerfect(
+          //INFINITO? SI!
+          infinite: true,
+          duration: const Duration(seconds: 5),
+          child: const _CustomIconButton(
+              value: 0, iconData: Icons.play_circle_outlined),
+        ),
       ],
     );
   }
@@ -61,8 +73,11 @@ class _CustomIconButton extends StatelessWidget {
               size: 25,
             )),
 
-        //Mostramos el valor
-        Text(HumanFormats.humanReadbleNumber(value.toDouble())),
+        //Condición de valores nulos
+        if (value > 0)
+
+          //Mostramos el valor
+          Text(HumanFormats.humanReadbleNumber(value.toDouble())),
       ],
     );
   }
