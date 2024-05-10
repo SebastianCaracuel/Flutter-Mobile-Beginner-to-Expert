@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:toktik_app/config/helpers/human_formats.dart';
 import 'package:toktik_app/domain/entities/video_post.dart';
 
 //Creamos nuestros botones
@@ -61,7 +62,7 @@ class _CustomIconButton extends StatelessWidget {
             )),
 
         //Mostramos el valor
-        Text('$value'),
+        Text(HumanFormats.humanReadbleNumber(value.toDouble())),
       ],
     );
   }
