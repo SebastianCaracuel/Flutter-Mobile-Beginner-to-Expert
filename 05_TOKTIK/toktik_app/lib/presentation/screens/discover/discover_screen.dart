@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:toktik_app/presentation/providers/discover_provider.dart';
 
 //Creamos un widget que será nuestro "Home"
 class DiscoverScreen extends StatelessWidget {
@@ -6,8 +8,20 @@ class DiscoverScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(child: Text('Discover Screen')),
+    //Referencia  a nuestro provider
+    final discoverProvider = context.watch<DiscoverProvider>();
+
+    return Scaffold(
+      body:
+          //Condición - si el discoverProvider initialoading esta en true voy a mostrar el circularprogress
+
+          discoverProvider.initialLoading
+              ? const Center(
+                  child: CircularProgressIndicator(
+                      //Cambiamos el grosor de la linea de Carga
+                      strokeWidth: 2))
+              //Aquí irá nuestro VideoPLayer
+              : const Placeholder(),
     );
   }
 }
