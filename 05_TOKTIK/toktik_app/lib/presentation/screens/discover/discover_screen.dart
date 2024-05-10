@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:toktik_app/presentation/providers/discover_provider.dart';
+import 'package:toktik_app/presentation/widgets/shared/video_scroll_view.dart';
 
 //Creamos un widget que será nuestro "Home"
 class DiscoverScreen extends StatelessWidget {
@@ -21,7 +22,7 @@ class DiscoverScreen extends StatelessWidget {
                       //Cambiamos el grosor de la linea de Carga
                       strokeWidth: 2))
               //Aquí irá nuestro VideoPLayer
-              : const Placeholder(),
+              : VideoScollView(videos: discoverProvider.videos),
     );
   }
 }
