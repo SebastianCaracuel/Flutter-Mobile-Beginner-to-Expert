@@ -56,22 +56,34 @@ class _FullScreenPlayerState extends State<FullScreenPlayer> {
         }
 
         //Reproducimos nuestros videos
-        return AspectRatio(
-          aspectRatio: controller.value.aspectRatio,
-          child: Stack(
-            children: [
-              //?Gradiante
+        return GestureDetector(
+          //Detector de gestos -
+          onTap: () {
+            //Condición - si el video se esta reproduciendo se puede pausar y si no se puede dar play
 
-              //?VideoPlayer - Reproductor del Video
-              VideoPlayer(controller),
+            if (controller.value.isPlaying) {
+              controller.pause();
+              return;
+            } //Si esta en pausa le damos play
+            controller.play();
+          },
+          child: AspectRatio(
+            aspectRatio: controller.value.aspectRatio,
+            child: Stack(
+              children: [
+                //?Gradiante
 
-              //?Texto - Nombre etc.
-              Positioned(
-                  //Posición de nuestra info
-                  bottom: 50,
-                  left: 20,
-                  child: _VideoCaption(caption: widget.caption))
-            ],
+                //?VideoPlayer - Reproductor del Video
+                VideoPlayer(controller),
+
+                //?Texto - Nombre etc.
+                Positioned(
+                    //Posición de nuestra info
+                    bottom: 50,
+                    left: 20,
+                    child: _VideoCaption(caption: widget.caption))
+              ],
+            ),
           ),
         );
       },
