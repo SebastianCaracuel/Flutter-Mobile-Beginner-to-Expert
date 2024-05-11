@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:toktik_app/presentation/widgets/videos/gradiant_backgraound.dart';
 import 'package:video_player/video_player.dart';
 
 //FullScreenPlayer donde dejaremos nuestros videos que será de un uso general
@@ -71,10 +72,14 @@ class _FullScreenPlayerState extends State<FullScreenPlayer> {
             aspectRatio: controller.value.aspectRatio,
             child: Stack(
               children: [
-                //?Gradiante
-
                 //?VideoPlayer - Reproductor del Video
                 VideoPlayer(controller),
+
+                //?Gradiante
+                VideoBackground(
+                  //Condionamos los stops
+                  stops: const [0.8, 1.0],
+                ),
 
                 //?Texto - Nombre etc.
                 Positioned(
