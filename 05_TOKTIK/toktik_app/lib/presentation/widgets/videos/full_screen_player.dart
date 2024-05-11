@@ -48,10 +48,54 @@ class _FullScreenPlayerState extends State<FullScreenPlayer> {
     return FutureBuilder(
       future: controller.initialize(),
       builder: (context, snapshot) {
-        return const Center(
-            child:
-                CircularProgressIndicator(strokeWidth: 2, color: Colors.red));
+        //Este indicador circular solo funcionara si estamosen el paso del reproductor - Condición
+        if (snapshot.connectionState != ConnectionState.done) {
+          return const Center(
+              child:
+                  CircularProgressIndicator(strokeWidth: 2, color: Colors.red));
+        }
+
+        //Reproducimos nuestros videos
+        return AspectRatio(
+          aspectRatio: controller.value.aspectRatio,
+          child: Stack(
+            children: [
+              //?Gradiante
+
+              //?VideoPlayer - Reproductor del Video
+              VideoPlayer(controller),
+
+              //?Texto - Nombre etc.
+              Positioned(
+                  //Posición de nuestra info
+                  bottom: 50,
+                  left: 20,
+                  child: _VideoCaption(caption: widget.caption))
+            ],
+          ),
+        );
       },
+    );
+  }
+}
+
+//Creamos un WIdget para recibir nuestro texto o titulo del video
+class _VideoCaption extends StatelessWidget {
+  //Propiedades
+  final String caption;
+
+  const _VideoCaption({required this.caption});
+
+  @override
+  Widget build(BuildContext context) {
+    //Creamos una propiedad para ver el tamaño de la pantalla
+    final size = MediaQuery.of(context).size;
+
+    //Creamos un formato de titulo de texto y lo llamamos para nuestra propiedad.
+    final titleStyle = Theme.of(context).textTheme.titleLarge;
+    return SizedBox(
+      width: size.width * 0.6,
+      child: Text(caption, maxLines: 2, style: titleStyle),
     );
   }
 }

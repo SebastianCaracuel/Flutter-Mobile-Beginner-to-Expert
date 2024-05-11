@@ -19,7 +19,7 @@ class DiscoverProvider extends ChangeNotifier {
     //todo:cargar videos
 
     //Simulación de carga async - Metodo para preloading de dos segundos antes de cargar los videos
-    await Future.delayed(const Duration(seconds: 2));
+    //await Future.delayed(const Duration(seconds: 2));
 
     //Cargamos los videos - con el List
     final List<VideoPost> newVideos = videoPosts
