@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:toktik_app/config/theme/app_theme.dart';
+import 'package:toktik_app/infrastructure/datasources/local_video_post_datasource_impl.dart';
+import 'package:toktik_app/infrastructure/repository/video_post_repository_impl.dart';
 import 'package:toktik_app/presentation/providers/discover_provider.dart';
 import 'package:toktik_app/presentation/screens/discover/discover_screen.dart';
 
@@ -11,6 +13,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //Creación de Instacia del repositorio y del Datassource
+    final videoPostRepository = VideoPostsRepositoryImpl(
+        //
+        videosDatasource: LocalVideoDatasource());
     //Instanciamos nuestro provider
     return MultiProvider(
       providers: [
@@ -18,7 +24,9 @@ class MyApp extends StatelessWidget {
             //Inmediatamente se cree la instancia
             lazy: false,
             //
-            create: (_) => DiscoverProvider()..loadNextPage())
+            create: (_) =>
+                DiscoverProvider(videosRepository: videoPostRepository)
+                  ..loadNextPage())
       ],
       child: MaterialApp(
         //Quitamos el Banner de Debug
