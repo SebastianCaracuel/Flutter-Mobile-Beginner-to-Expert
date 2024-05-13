@@ -29,9 +29,12 @@ class AppTheme {
 
   //IMplementamos el metodo
   ThemeData getTheme() => ThemeData(
-        //Llamamos al material 3
-        useMaterial3: true,
-        //Colores
-        colorSchemeSeed: colorList[selectedColor],
-      );
+      //Llamamos al material 3
+      useMaterial3: true,
+      //Colores
+      colorSchemeSeed: colorList[selectedColor],
+      //Colocamos un estilo o formato a nuestro menu o appbar
+      appBarTheme: const AppBarTheme(
+          //Centramos nuestro titulo
+          centerTitle: true));
 }
