@@ -39,17 +39,28 @@ class _CardsView extends StatelessWidget {
     return SingleChildScrollView(
       child: Column(
         children: [
+          //Tarjetas uno normal
           ...cards.map((card) =>
               _CardType1(elevation: card['elevation'], label: card['label'])),
+          //Tarjetas dos con bordes
           ...cards.map((card) =>
               _CardType2(elevation: card['elevation'], label: card['label'])),
+          //Tarjetas 3 con relleno
+          ...cards.map((card) =>
+              _CardType3(elevation: card['elevation'], label: card['label'])),
+          //Tarjetas 4 con imagen
+          ...cards.map((card) =>
+              _CardType4(elevation: card['elevation'], label: card['label'])),
+
+          //Creamos un espacio para que la ultima tarjeta no este tan apegada al final
+          const SizedBox(height: 50),
         ],
       ),
     );
   }
 }
 
-//Creamos un nuevo Widget que definiremos en nuestra columna
+//Creamos nuestra tarjetas de forma normal
 class _CardType1 extends StatelessWidget {
   //Creamos una propiedad
   final String label;
@@ -89,7 +100,7 @@ class _CardType1 extends StatelessWidget {
   }
 }
 
-//Creamos un Otro nuevo Widget que definiremos en nuestra columna
+//Creamos otras tarjetas pero con bordes
 class _CardType2 extends StatelessWidget {
   //Creamos una propiedad
   final String label;
@@ -134,6 +145,99 @@ class _CardType2 extends StatelessWidget {
               )
             ],
           )),
+    );
+  }
+}
+
+//Creamos nuestras ultimas tarjetas, estas tendrán relleno
+class _CardType3 extends StatelessWidget {
+  //Creamos una propiedad
+  final String label;
+  final double elevation;
+
+  const _CardType3({required this.label, required this.elevation});
+
+  @override
+  Widget build(BuildContext context) {
+    //Llamamos a nuestra paleta de colores
+    final colors = Theme.of(context).colorScheme;
+
+    //Llamamos al card un componente de flutter
+    return Card(
+      //Utilizamos nuestro color de paletas
+      color: colors.surfaceVariant,
+      //a la elevación le pasamos nuestro propiedad elevation
+      elevation: elevation,
+      //child - colocamos un padding para hacer una separación
+      child: Padding(
+          //pading cofiguratipn
+          padding: const EdgeInsets.fromLTRB(10, 5, 10, 10),
+
+          //COlocamos un unico hijo que es un scroll
+          child: Column(
+            children: [
+              //Creamos un aligment para linear los componentes - alineamos arriba a la drecha
+              Align(
+                  alignment: Alignment.topRight,
+                  //Creamos un icono con boton
+                  child: IconButton(
+                      onPressed: () {},
+                      icon: const Icon(Icons.more_vert_rounded))),
+              //Creamos otro alignment ahora para nuestro texto - lo alineamos abajo a la izquierda
+              Align(
+                alignment: Alignment.bottomLeft,
+                child: Text('$label - Card with filler'),
+              )
+            ],
+          )),
+    );
+  }
+}
+
+//Creamos nuestra tarjetas con Imagen
+class _CardType4 extends StatelessWidget {
+  //Creamos una propiedad
+  final String label;
+  final double elevation;
+
+  const _CardType4({required this.label, required this.elevation});
+
+  @override
+  Widget build(BuildContext context) {
+    //Llamamos al card un componente de flutter
+    return Card(
+      //Le volvemos el bordeado a la tarjeta
+      clipBehavior: Clip.hardEdge,
+      //a la elevación le pasamos nuestro propiedad elevation
+      elevation: elevation,
+      //child - colocamos un padding para hacer una separación
+      child: Stack(
+        children: [
+          //Llamamos a una imagen con URL
+          Image.network(
+            'https://picsum.photos/id/${elevation.toInt()}/600/350',
+            //TAMAÑO ESPECIFICO DE LA TARJETA
+            height: 350,
+            fit: BoxFit.cover,
+          ),
+
+          //Creamos un aligment para linear los componentes - alineamos arriba a la drecha
+          Align(
+              alignment: Alignment.topRight,
+              child: Container(
+                decoration: const BoxDecoration(
+                    //Le asignamos un color a nuestro contenedor que contiene nuestro IconButton para que se pueda ver
+                    color: Colors.white,
+                    //Le asignamos el Borde radius, solamente abajo a la izquierda.
+                    borderRadius:
+                        BorderRadius.only(bottomLeft: Radius.circular(20))),
+                //Creamos un icono con boton
+                child: IconButton(
+                    onPressed: () {},
+                    icon: const Icon(Icons.more_vert_rounded)),
+              )),
+        ],
+      ),
     );
   }
 }
