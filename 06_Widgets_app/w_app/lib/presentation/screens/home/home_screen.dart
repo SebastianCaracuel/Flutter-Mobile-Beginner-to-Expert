@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:w_app/config/menu/menu_items.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -67,7 +68,10 @@ class _CustomListTitle extends StatelessWidget {
       //Colocamos el OnTap para que se pueda realizar el gesto de "presionar"
       onTap: () {
         //todo:NAVEGACIÓN NORMAL ENTRE PANTALLAS
-        Navigator.pushNamed(context, menuItem.link);
+        //Navigator.pushNamed(context, menuItem.link);
+
+        //Llamamos a nuestra ruta ahora con el Go_router implementado
+        context.push(menuItem.link);
       },
     );
   }
