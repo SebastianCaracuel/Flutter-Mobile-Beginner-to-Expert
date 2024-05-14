@@ -13,18 +13,24 @@ final appRouter = GoRouter(
     GoRoute(
         //El path es el Url de la ruta
         path: '/',
+        //Agregamos un nombre a nuestra ruta gracias a la propiedad que creamos
+        name: HomeScreen.name,
         builder: (context, state) => const HomeScreen()),
 
     //Primera ruta - Botones
     GoRoute(
         //El path es el Url de la ruta
         path: '/buttons',
+        //Colocamos el nombre de nuestra ruta que esta definida como propiedad en buttonsScreen
+        name: ButtonsScreen.name,
         builder: (context, state) => const ButtonsScreen()),
 
     //Segunda ruta - Botones
     GoRoute(
         //El path es el Url de la ruta
         path: '/cards',
+        //colocamos el nombre de nuestra ruta
+        name: CardsScreen.name,
         builder: (context, state) => const CardsScreen()),
   ],
 );

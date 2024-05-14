@@ -3,6 +3,9 @@ import 'package:go_router/go_router.dart';
 import 'package:w_app/config/menu/menu_items.dart';
 
 class HomeScreen extends StatelessWidget {
+  //Creamos una propiedad estatica
+  static const String name = 'home_screen';
+
   const HomeScreen({super.key});
 
   @override
@@ -68,7 +71,10 @@ class _CustomListTitle extends StatelessWidget {
       //Colocamos el OnTap para que se pueda realizar el gesto de "presionar"
       onTap: () {
         //todo:NAVEGACIÓN NORMAL ENTRE PANTALLAS
-        //Navigator.pushNamed(context, menuItem.link);
+        //?Navigator.pushNamed(context, menuItem.link);
+
+        //Navegación entre pantallas por nombre
+        //?context.pushNamed(CardsScreen.name);
 
         //Llamamos a nuestra ruta ahora con el Go_router implementado
         context.push(menuItem.link);
