@@ -66,7 +66,8 @@ class _CustomListTitle extends StatelessWidget {
       subtitle: Text(menuItem.subTitle),
       //Colocamos el OnTap para que se pueda realizar el gesto de "presionar"
       onTap: () {
-        //todo: Navegar a otra pantalla
+        //todo:NAVEGACIÓN NORMAL ENTRE PANTALLAS
+        Navigator.pushNamed(context, menuItem.link);
       },
     );
   }
