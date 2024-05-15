@@ -40,4 +40,11 @@ const appMenuItems = <MenuItem>[
       subTitle: 'Generales y controlados',
       link: '/progress',
       icon: Icons.refresh_rounded),
+
+  //Cuarto Widgets a utilizar - Snackbars
+  MenuItem(
+      title: 'SnackBars and Dialogs',
+      subTitle: 'Indicadores en pantalla',
+      link: '/snackbars',
+      icon: Icons.info_outline_rounded),
 ];
