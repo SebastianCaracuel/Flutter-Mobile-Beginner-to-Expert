@@ -25,12 +25,20 @@ final appRouter = GoRouter(
         name: ButtonsScreen.name,
         builder: (context, state) => const ButtonsScreen()),
 
-    //Segunda ruta - Botones
+    //Segunda ruta - Tarjetas
     GoRoute(
         //El path es el Url de la ruta
         path: '/cards',
         //colocamos el nombre de nuestra ruta
         name: CardsScreen.name,
         builder: (context, state) => const CardsScreen()),
+
+    //Tercera ruta - ProgressIndicator
+    GoRoute(
+        //El path es el Url de la ruta
+        path: '/progress',
+        //colocamos el nombre de nuestra ruta
+        name: ProgressScreen.name,
+        builder: (context, state) => const ProgressScreen()),
   ],
 );
