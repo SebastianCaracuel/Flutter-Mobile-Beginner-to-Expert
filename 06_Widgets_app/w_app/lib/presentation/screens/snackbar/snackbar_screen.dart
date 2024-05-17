@@ -8,6 +8,26 @@ class SnackbarScreen extends StatelessWidget {
   //Constructor
   const SnackbarScreen({super.key});
 
+  //Creamos una condición para mostrar el mensaje personalizado
+  void showCustomSnackbar(BuildContext context) {
+    //Quiero ocultar mi snackbar anterior cada vez que quiero ver un nuevo snackbar
+
+    ScaffoldMessenger.of(context).clearSnackBars();
+
+    //Creamos el snackbar personalizado
+    final snackbar = SnackBar(
+      //Contenido del SnackBar
+      content: const Text('Hello Flutter'),
+      //Un action es botón que se encuentra dentro de nuestro snacknar
+      action: SnackBarAction(label: 'Close', onPressed: () {}),
+      //Le colocamos también una duración
+      duration: const Duration(seconds: 2),
+    );
+
+    //Le pasamos la propiedad
+    ScaffoldMessenger.of(context).showSnackBar(snackbar);
+  }
+
   //todo: Creamos un metodo que no va a regresar nada
 
   @override
@@ -19,12 +39,7 @@ class SnackbarScreen extends StatelessWidget {
       //Creamos un botón flotante extendido
       floatingActionButton: FloatingActionButton.extended(
           //Funcionalidad
-          onPressed: () {
-            //Mostramos un SnackBar con el scaffold
-            ScaffoldMessenger.of(context).showSnackBar(
-                //SnackBar - Mensaje
-                const SnackBar(content: Text('Hello Flutter!')));
-          },
+          onPressed: () => showCustomSnackbar(context),
           //Texto
           label: const Text('Show SnackBar'),
           //Icono del botón
