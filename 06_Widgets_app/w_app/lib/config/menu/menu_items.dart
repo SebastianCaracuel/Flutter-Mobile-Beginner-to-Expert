@@ -54,4 +54,11 @@ const appMenuItems = <MenuItem>[
       subTitle: 'Stateful widget animado',
       link: '/animated',
       icon: Icons.check_box_outline_blank_rounded),
+
+  //  Sexto Widgets a utilizar - Animated Container
+  MenuItem(
+      title: 'UI Controls + Titles',
+      subTitle: 'Serie de controles de Flutter',
+      link: '/ui-controls',
+      icon: Icons.car_rental_rounded),
 ];
