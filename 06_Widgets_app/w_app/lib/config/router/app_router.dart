@@ -49,7 +49,7 @@ final appRouter = GoRouter(
         name: SnackbarScreen.name,
         builder: (context, state) => const SnackbarScreen()),
 
-    //Quinta ruta - SnackBars
+    //Quinta ruta - Animated
     GoRoute(
         //El path es el Url de la ruta
         path: '/animated',
@@ -57,12 +57,19 @@ final appRouter = GoRouter(
         name: AnimatedScreen.name,
         builder: (context, state) => const AnimatedScreen()),
 
-    //Sexta ruta - SnackBars
+    //Sexta ruta - UI CONTROLS
     GoRoute(
         //El path es el Url de la ruta
         path: '/ui-controls',
         //colocamos el nombre de nuestra ruta
         name: UicontrolsScreen.name,
         builder: (context, state) => const UicontrolsScreen()),
+
+    //Septima ruta - Tutorial - Preloader
+    GoRoute(
+        //El path es el Url de la ruta
+        //colocamos el nombre de nuestra ruta
+        name: AppTutorialScreen.name,
+        builder: (context, state) => const AppTutorialScreen()),
   ],
 );
