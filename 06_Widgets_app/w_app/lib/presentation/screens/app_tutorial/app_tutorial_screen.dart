@@ -16,11 +16,20 @@ class SlideInfo {
 //Creamos una propiedade para la nueva clase
 final slides = <SlideInfo>[
   //Slide uno
-  SlideInfo('Selected your food tastes', 'caption', 'assets/images/1.png'),
+  SlideInfo(
+      'Selected your food tastes',
+      'Welcome to the tutorial page, this is just an exercise. Remember to like and share the video. ',
+      'assets/images/1.png'),
   //Slide dos
-  SlideInfo('Delivery will arrive soon', 'caption', 'assets/images/2.png'),
+  SlideInfo(
+      'Delivery will arrive soon',
+      'You can also log into my Linkedln profile "www.linkedin/in/sebastiancaracuelgonzalez.com" or if you want to take a closer look at my learning process, you can head over to my GitHub "https://github.com/SebastianCaracuel. ',
+      'assets/images/2.png'),
   //Slide tres
-  SlideInfo('Enojoy!', 'caption', 'assets/images/3.png'),
+  SlideInfo(
+      'Enojoy! your meal. Thank you for trusting us.',
+      'Remember that this is continuous learning, practice makes perfect, thank you for watching my video.',
+      'assets/images/3.png'),
 ];
 
 //Creamos nuestra Screen
