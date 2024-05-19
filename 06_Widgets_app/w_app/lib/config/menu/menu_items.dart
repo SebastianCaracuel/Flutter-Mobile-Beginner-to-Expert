@@ -55,10 +55,17 @@ const appMenuItems = <MenuItem>[
       link: '/animated',
       icon: Icons.check_box_outline_blank_rounded),
 
-  //  Sexto Widgets a utilizar - Animated Container
+  //  Sexto Widgets a utilizar - Ui Control
   MenuItem(
       title: 'UI Controls + Titles',
       subTitle: 'Serie de controles de Flutter',
       link: '/ui-controls',
       icon: Icons.car_rental_rounded),
+
+  //  Septimo Widgets a utilizar - Tutorial
+  MenuItem(
+      title: 'Introduction to the application',
+      subTitle: 'Esta es una introducción a la aplicación',
+      link: '/tutorial',
+      icon: Icons.menu_book_sharp),
 ];

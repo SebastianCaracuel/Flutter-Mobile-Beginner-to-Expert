@@ -68,6 +68,7 @@ final appRouter = GoRouter(
     //Septima ruta - Tutorial - Preloader
     GoRoute(
         //El path es el Url de la ruta
+        path: '/tutorial',
         //colocamos el nombre de nuestra ruta
         name: AppTutorialScreen.name,
         builder: (context, state) => const AppTutorialScreen()),
