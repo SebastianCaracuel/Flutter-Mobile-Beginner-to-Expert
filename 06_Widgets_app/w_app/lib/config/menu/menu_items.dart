@@ -68,4 +68,11 @@ const appMenuItems = <MenuItem>[
       subTitle: 'Esta es una introducción a la aplicación',
       link: '/tutorial',
       icon: Icons.menu_book_sharp),
+
+  //  Octavo Widgets a utilizar - Infinite Scroll
+  MenuItem(
+      title: 'InfiniteScroll and Pull Refresh',
+      subTitle: 'Listas infinitas y tirar para refrescar.',
+      link: '/infinite',
+      icon: Icons.list_alt_rounded),
 ];
