@@ -72,5 +72,13 @@ final appRouter = GoRouter(
         //colocamos el nombre de nuestra ruta
         name: AppTutorialScreen.name,
         builder: (context, state) => const AppTutorialScreen()),
+
+    //Octava ruta - Infinite Scroll
+    GoRoute(
+        //El path es el Url de la ruta
+        path: '/infinite',
+        //colocamos el nombre de nuestra ruta
+        name: InfiniteScrollScreen.name,
+        builder: (context, state) => const InfiniteScrollScreen()),
   ],
 );
