@@ -18,8 +18,18 @@ class _SideMenuState extends State<SideMenu> {
   @override
   Widget build(BuildContext context) {
     //Llamamos a un widget navigationDrawer para que tenga la función del menu lateral
-    return const NavigationDrawer(
-      children: [
+    return NavigationDrawer(
+      //Colocamos un selectdIndex para saber donde estamos y que quede presionado el botón
+      selectedIndex: navDrawerIndex,
+      //Llamamos al onTap predeterminado del Drawer para poder realizar la condición de "donde estamos"
+      onDestinationSelected: (value) {
+        //llamamos  aun setState
+        setState(() {
+          //nuestro index lo pasamos al value y ya debería funcionar los OnTap y que cambie nuestra posición en los componentes
+          navDrawerIndex = value;
+        });
+      },
+      children: const [
         //Llamamos a nuestros componentes ya hechos //?MenuItems
 
         //Construimos unas opciones de menu - solo para aprender a como utilizarlo
