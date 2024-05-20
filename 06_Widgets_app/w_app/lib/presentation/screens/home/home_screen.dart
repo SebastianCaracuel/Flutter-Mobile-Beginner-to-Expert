@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:w_app/config/menu/menu_items.dart';
+import 'package:w_app/presentation/widgets/side_menu.dart';
 
 class HomeScreen extends StatelessWidget {
   //Creamos una propiedad estatica
@@ -11,14 +12,14 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Flutter + Material 3'),
-      ),
+      appBar: AppBar(title: const Text('Flutter + Material 3')),
 
       //Cuerpo de nuestro scaffold
-
       //Importamos nuestro WIdget privado( es privado porque utiliza _ )
       body: const _HomeView(),
+
+      //Utilizamos el Drawer para menu lateral
+      drawer: const SideMenu(),
     );
   }
 }
