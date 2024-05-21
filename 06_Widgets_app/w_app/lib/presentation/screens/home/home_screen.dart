@@ -40,7 +40,6 @@ class HomeScreen extends ConsumerWidget {
               icon: Icon(isDarkMode
                   ? Icons.light_mode_rounded
                   : Icons.dark_mode_rounded)),
-          //icon: const Icon(Icons.dark_mode_rounded)),
         ],
       ),
 

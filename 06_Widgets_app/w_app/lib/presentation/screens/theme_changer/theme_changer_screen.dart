@@ -1,8 +1,10 @@
 //Importaciones
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:w_app/presentation/providers/theme_provider.dart';
 
 //Clase
-class ThemeChangeScreen extends StatelessWidget {
+class ThemeChangeScreen extends ConsumerWidget {
   //Propiedades
   static const String name = 'ThemeChanger_screen';
 
@@ -11,19 +13,73 @@ class ThemeChangeScreen extends StatelessWidget {
 
 //Objeto
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, ref) {
+    //Propiedades del objeto
+    final isDarkMode = ref.watch(isDarkModeProvider); //Referencia del DarkMode
+
     return Scaffold(
       //MenuSuperior
       appBar: AppBar(
-          //titulo
-          title: const Text('Theme Change')),
+        //titulo
+        title: const Text('Theme Change'),
+        actions: [
+          IconButton(
+            //Iconos switch
+            icon: Icon(isDarkMode
+                ? Icons.light_mode_rounded
+                : Icons.dark_mode_rounded),
 
-      //Cuerpo
-      body: ListView(
-        children: const [
-          Card(child: Text('hola mundo')),
+            //Función
+            onPressed: () {},
+          ),
         ],
       ),
+
+      //Cuerpo
+      body: const _ThemeChangerView(), //?Extragimos el Widget
+    );
+  }
+}
+
+//?Widget extraido
+class _ThemeChangerView extends ConsumerWidget {
+  //Propiedades de la clase
+
+  //Constructor
+  const _ThemeChangerView();
+
+//Objeto
+  @override
+  Widget build(BuildContext context, ref) {
+    //Propiedades del Objeto
+    final List<Color> colors = ref.watch(colorListProvider);
+
+    return ListView.builder(
+      //Listado de colores con el lenght
+      itemCount: colors.length,
+      //Builder
+      itemBuilder: (context, index) {
+        //Propiedad del builder
+        final Color color = colors[index];
+
+        return RadioListTile(
+          //Colocamos un titulo
+          title: Text('Este color es : ', style: TextStyle(color: color)),
+          //Colocamos un Subtitle
+          subtitle: Text('${color.value}'),
+          //Queremos que al seleccionar el circulito también sea del color que estamos presionando
+          activeColor: color,
+          //Valor del radio
+          value: index,
+          //Grupo del valor
+          groupValue:
+              0, //Este es el valor seleccionado (flutter sabe cual es el valor que tenemos mediante este groupvalue)
+          //Cuando cambia
+          onChanged: (value) {
+            //todo: Notificar el cambio
+          },
+        );
+      },
     );
   }
 }
