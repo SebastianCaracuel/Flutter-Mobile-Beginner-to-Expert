@@ -18,9 +18,10 @@ const colorList = <Color>[
 class AppTheme {
   //Propiedades
   final int selectedColor;
+  final bool isDarkMode;
 
   //Constructor con parametros
-  AppTheme({this.selectedColor = 0})
+  AppTheme({this.isDarkMode = false, this.selectedColor = 0})
       //Nos preocupamos que ningún otro programador vaya a asignar un color que este fuera de mi arreglo
       : assert(selectedColor >= 0, 'Selected color must be Greater then 0'),
         //Ahora nos preocupamos que se asigne el color dentro del tamaño de nuestra lista
@@ -31,6 +32,8 @@ class AppTheme {
   ThemeData getTheme() => ThemeData(
       //Llamamos al material 3
       useMaterial3: true,
+      //Modo oscuro - implementación del Provider Riverpod
+      brightness: isDarkMode ? Brightness.dark : Brightness.light,
       //Colores
       colorSchemeSeed: colorList[selectedColor],
       //Colocamos un estilo o formato a nuestro menu o appbar

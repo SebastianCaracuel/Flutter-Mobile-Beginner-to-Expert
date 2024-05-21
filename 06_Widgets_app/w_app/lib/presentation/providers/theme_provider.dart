@@ -7,4 +7,7 @@ final isDarkModeProvider =
 
 //?Creamos un estado para manejar nuestra lista de colores(ColorList)
 final colorListProvider = Provider((ref) =>
-    colorList);//Esta referencia es (Inmutable) que yo no lo puedo cambiar.
+    colorList); //Esta referencia es (Inmutable) que yo no lo puedo cambiar.
+
+//?Cremaos un estado para manejar un entero
+final selectedColorProvider = StateProvider((ref) => 0);//
