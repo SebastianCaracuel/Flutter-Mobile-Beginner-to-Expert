@@ -14,7 +14,16 @@ class CounterScreen extends StatelessWidget {
       appBar: AppBar(title: const Text('Counter + Riverpod')),
 
       //cuerpo
-      body: const Placeholder(),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Text('Valor'),
+            FilledButton(
+                onPressed: () {}, child: const Icon(Icons.plus_one_rounded)),
+          ],
+        ),
+      ),
     );
   }
 }
