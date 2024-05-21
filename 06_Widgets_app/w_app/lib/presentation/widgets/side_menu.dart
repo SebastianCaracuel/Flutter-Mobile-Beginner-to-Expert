@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:w_app/config/menu/menu_items.dart';
 
 //Clase
 class SideMenu extends StatefulWidget {
@@ -17,6 +18,10 @@ class _SideMenuState extends State<SideMenu> {
 
   @override
   Widget build(BuildContext context) {
+    //!Importante //?Determinado el Notch
+    final hasNotch = MediaQuery.of(context).viewPadding.top >
+        35; //Esto nos ayuda a saber cual es la distancia que tenemos en el Top
+
     //Llamamos a un widget navigationDrawer para que tenga la función del menu lateral
     return NavigationDrawer(
       //Colocamos un selectdIndex para saber donde estamos y que quede presionado el botón
@@ -29,22 +34,56 @@ class _SideMenuState extends State<SideMenu> {
           navDrawerIndex = value;
         });
       },
-      children: const [
-        //Llamamos a nuestros componentes ya hechos //?MenuItems
+      children: [
+        //Creamos un padding y al padding le agregamos nuestro Notch
+        Padding(
+          padding: EdgeInsets.fromLTRB(28, hasNotch ? 0 : 20, 16, 10),
+          child: const Text('Principal Options'),
+        ),
 
-        //Construimos unas opciones de menu - solo para aprender a como utilizarlo
-        NavigationDrawerDestination(
-            //Icono
-            icon: Icon(Icons.add),
-            //Texto
-            label: Text('Home Screen')),
+        //Creo un botón adicional
+        const NavigationDrawerDestination(
+          //Icono
+          icon: Icon(Icons.add),
+          //Texto
+          label: Text('Home Screen'),
+        ),
 
-        //Construimos unas opciones de menu - solo para aprender a como utilizarlo
-        NavigationDrawerDestination(
-            //Icono
-            icon: Icon(Icons.expand_less_rounded),
-            //Texto
-            label: Text('Hello World')),
+        //todo: Llamamos a nuestros componentes ya hechos //?MenuItems
+        ...appMenuItems
+            //Creamos una sublista - Nos permite solo los primeros 3 elementos de nuestra lista
+            .sublist(0, 3)
+            .map((item) => NavigationDrawerDestination(
+                  //Icono
+                  icon: Icon(item.icon),
+                  //Texto
+                  label: Text(item.title),
+                )),
+
+        //Creamos una barrita divisoria
+        const Padding(
+            //Asiganmos le padding
+            padding: EdgeInsets.fromLTRB(28, 16, 28, 10),
+            //Le colocamos un Divider - un diver es una división el padding es para ver cuanto esta dividido
+            child: Divider()),
+
+        //Colocamos nuevamente un padding
+        //Creamos un padding y al padding le agregamos nuestro Notch
+        const Padding(
+          padding: EdgeInsets.fromLTRB(28, 10, 16, 10),
+          child: Text('Secondary Options'),
+        ),
+
+        //Creamos otra ve los items
+        ...appMenuItems
+            //Creamos una sublista - Nos permite solo los primeros 3 elementos de nuestra lista
+            .sublist(3)
+            .map((item) => NavigationDrawerDestination(
+                  //Icono
+                  icon: Icon(item.icon),
+                  //Texto
+                  label: Text(item.title),
+                )),
       ],
     );
   }
