@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 //Clase
 class ThemeChangeScreen extends StatelessWidget {
   //Propiedades
+  static const String name = 'ThemeChanger_screen';
 
   //Constructor
   const ThemeChangeScreen({super.key});
