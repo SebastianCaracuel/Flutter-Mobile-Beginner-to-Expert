@@ -75,4 +75,11 @@ const appMenuItems = <MenuItem>[
       subTitle: 'Listas infinitas y tirar para refrescar.',
       link: '/infinite',
       icon: Icons.list_alt_rounded),
+
+  //  Noveno Widgets a utilizar - Counter Screen + Riverpod
+  MenuItem(
+      title: 'Counter Screen',
+      subTitle: 'Aplicación en Flutter que muestra un contador.',
+      link: '/counter',
+      icon: Icons.plus_one_rounded),
 ];

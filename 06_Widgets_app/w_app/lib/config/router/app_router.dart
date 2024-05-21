@@ -81,7 +81,7 @@ final appRouter = GoRouter(
         name: InfiniteScrollScreen.name,
         builder: (context, state) => const InfiniteScrollScreen()),
 
-    //Novena ruta - Infinite Scroll
+    //Novena ruta - Counter Screen
     GoRoute(
         //El path es el Url de la ruta
         path: '/counter',
