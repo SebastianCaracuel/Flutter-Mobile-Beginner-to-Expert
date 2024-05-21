@@ -23,7 +23,7 @@ const appMenuItems = <MenuItem>[
   //todo: Noveno Widgets a utilizar - Counter Screen + Riverpod //?Pasamos este arriba
   MenuItem(
       title: 'Counter Screen',
-      subTitle: 'Aplicación en Flutter que muestra un contador.',
+      subTitle: 'Riverpod +  contador.',
       link: '/counter',
       icon: Icons.plus_one_rounded),
 
@@ -82,4 +82,11 @@ const appMenuItems = <MenuItem>[
       subTitle: 'Listas infinitas y tirar para refrescar.',
       link: '/infinite',
       icon: Icons.list_alt_rounded),
+
+//  Decimo Widgets a utilizar - Theme Changer
+  MenuItem(
+      title: 'Theme Changer',
+      subTitle: 'Cambiar el tema de la aplicación.',
+      link: '/theme-changer',
+      icon: Icons.palette_rounded),
 ];
