@@ -17,7 +17,18 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       //Referencia al estado actual del scaffold
       key: scaffoldKey,
-      appBar: AppBar(title: const Text('Flutter + Material 3')),
+      appBar: AppBar(
+        title: const Text('Flutter + Material 3'),
+
+        //Creamos el icono de MODE light and mode Dark
+        actions: [
+          IconButton(
+              //Función
+              onPressed: () {},
+              //Icono
+              icon: const Icon(Icons.light_mode_rounded))
+        ],
+      ),
 
       //Cuerpo de nuestro scaffold
       //Importamos nuestro WIdget privado( es privado porque utiliza _ )
