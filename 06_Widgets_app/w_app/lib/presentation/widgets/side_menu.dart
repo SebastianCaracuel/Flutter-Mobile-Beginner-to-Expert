@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:w_app/config/menu/menu_items.dart';
 
 //Clase
 class SideMenu extends StatefulWidget {
+  //Propiedades
+
+  //Quiero que me especifiquen el key
+  final GlobalKey<ScaffoldState> scaffoldKey;
+
   //Constructor
-  const SideMenu({super.key});
+  const SideMenu({super.key, required this.scaffoldKey});
 
   @override
   State<SideMenu> createState() => _SideMenuState();
@@ -33,20 +39,19 @@ class _SideMenuState extends State<SideMenu> {
           //nuestro index lo pasamos al value y ya debería funcionar los OnTap y que cambie nuestra posición en los componentes
           navDrawerIndex = value;
         });
+
+        //!Navegación
+        final menuItem = appMenuItems[value];
+        context.push(menuItem.link);
+
+        //Llamamos a nuestro scaffoldKey para que se cierre cada vez que viajamos a una pantalla por nuestro menu
+        widget.scaffoldKey.currentState?.closeDrawer();
       },
       children: [
         //Creamos un padding y al padding le agregamos nuestro Notch
         Padding(
           padding: EdgeInsets.fromLTRB(28, hasNotch ? 0 : 20, 16, 10),
           child: const Text('Principal Options'),
-        ),
-
-        //Creo un botón adicional
-        const NavigationDrawerDestination(
-          //Icono
-          icon: Icon(Icons.add),
-          //Texto
-          label: Text('Home Screen'),
         ),
 
         //todo: Llamamos a nuestros componentes ya hechos //?MenuItems
