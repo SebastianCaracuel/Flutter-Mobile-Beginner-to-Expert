@@ -1,4 +1,6 @@
 //Este es un archivo barril que se encargará de exportar todas nuestras screens
+export 'package:w_app/presentation/screens/counter/counter_screen.dart';
+
 export 'package:w_app/presentation/screens/animated/animated_screen.dart';
 export 'package:w_app/presentation/screens/app_tutorial/app_tutorial_screen.dart';
 export 'package:w_app/presentation/screens/buttons/buttons_screen.dart';
