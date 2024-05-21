@@ -15,15 +15,11 @@ class CounterScreen extends StatelessWidget {
 
       //cuerpo
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Text('Valor'),
-            FilledButton(
-                onPressed: () {}, child: const Icon(Icons.plus_one_rounded)),
-          ],
-        ),
-      ),
+          child: Text('Valor', style: Theme.of(context).textTheme.titleLarge)),
+
+      //Botón Plus
+      floatingActionButton: FloatingActionButton(
+          onPressed: () {}, child: const Icon(Icons.plus_one_rounded)),
     );
   }
 }
