@@ -1,18 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:w_app/config/menu/menu_items.dart';
+import 'package:w_app/presentation/providers/theme_provider.dart';
 import 'package:w_app/presentation/widgets/side_menu.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends ConsumerWidget {
   //Creamos una propiedad estatica
   static const String name = 'home_screen';
 
   const HomeScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     //Propiedad
     final scaffoldKey = GlobalKey<ScaffoldState>();
+    final bool isDarkMode = ref.watch(isDarkModeProvider);
 
     return Scaffold(
       //Referencia al estado actual del scaffold
@@ -24,9 +27,20 @@ class HomeScreen extends StatelessWidget {
         actions: [
           IconButton(
               //Función
-              onPressed: () {},
-              //Icono
-              icon: const Icon(Icons.light_mode_rounded))
+              onPressed: () {
+                //Llamamos a la referencia para poder cambiar nuestro mode a oscuro
+                ref //Llamamos a la referencia
+                    .read //Leemos la referencia
+                    (isDarkModeProvider
+                        .notifier) // Llamamos a nuestra referencia con un notifier
+                    .update((isDarMode) => //utilizamos el update para hacerlo mas facil
+                        !isDarkMode); //El state va a ser un bool y esto es igual a distinto de nuestro state
+              },
+              //Iconos
+              icon: Icon(isDarkMode
+                  ? Icons.light_mode_rounded
+                  : Icons.dark_mode_rounded)),
+          //icon: const Icon(Icons.dark_mode_rounded)),
         ],
       ),
 
