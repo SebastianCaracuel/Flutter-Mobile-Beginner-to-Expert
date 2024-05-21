@@ -20,6 +20,13 @@ class MenuItem {
 
 //Creamos una constante del menuItems
 const appMenuItems = <MenuItem>[
+  //todo: Noveno Widgets a utilizar - Counter Screen + Riverpod //?Pasamos este arriba
+  MenuItem(
+      title: 'Counter Screen',
+      subTitle: 'Aplicación en Flutter que muestra un contador.',
+      link: '/counter',
+      icon: Icons.plus_one_rounded),
+
   //Primer Widgets a utilizar - Botones
   MenuItem(
       title: 'Botones',
@@ -75,11 +82,4 @@ const appMenuItems = <MenuItem>[
       subTitle: 'Listas infinitas y tirar para refrescar.',
       link: '/infinite',
       icon: Icons.list_alt_rounded),
-
-  //  Noveno Widgets a utilizar - Counter Screen + Riverpod
-  MenuItem(
-      title: 'Counter Screen',
-      subTitle: 'Aplicación en Flutter que muestra un contador.',
-      link: '/counter',
-      icon: Icons.plus_one_rounded),
 ];
