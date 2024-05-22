@@ -58,7 +58,6 @@ class _ThemeChangerView extends ConsumerWidget {
     //Propiedades del Objeto
     final List<Color> colors = ref.watch(colorListProvider);
     final int isSelectedColor = ref.watch(selectedColorProvider);
-    final bool isDarkMode = ref.watch(isDarkModeProvider);
 
     return ListView.builder(
       //Listado de colores con el lenght
