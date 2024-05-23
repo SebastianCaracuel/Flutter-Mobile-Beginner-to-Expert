@@ -28,7 +28,7 @@ Este Curso lo pueden encontrar en la Plataforma de <a href="https://www.udemy.co
 
 ## &#x270d; Blog & Writing
 
-En esta Quinta Etapa los conceptos que se vieron fueron:
+En esta Sexta Etapa los conceptos que se vieron fueron:
 <br>
 1. Navegación entre pantallas.
 2. Nuevos Widgets <br>
