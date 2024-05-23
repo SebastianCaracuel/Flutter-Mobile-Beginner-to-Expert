@@ -69,5 +69,10 @@ La aplicación consta de un diseñamos básico para el entendimiento de los comp
 <br>
 
 
-[![](https://markdown-videos.deta.dev/youtube/9IZI86qKBnQ)](https://youtube.com/shorts/9IZI86qKBnQ?si=SagUq1Eqq-_Bya2w)
+<p align="center">
+  Youtube - SebasCCode <br>
+  Video Preview 
+</p>
+
+[![Alt text](https://img.youtube.com/vi/9IZI86qKBnQ/0.jpg)](https://youtube.com/shorts/9IZI86qKBnQ?si=SagUq1Eqq-_Bya2w)
 
