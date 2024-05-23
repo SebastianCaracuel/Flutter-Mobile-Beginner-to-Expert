@@ -61,7 +61,7 @@ class _ThemeChangerView extends ConsumerWidget {
   Widget build(BuildContext context, ref) {
     //Propiedades del Objeto
     final List<Color> colors = ref.watch(colorListProvider);
-    final int isSelectedColor = ref.watch(selectedColorProvider);
+    final int selectedColor = ref.watch(themeNotifierProvider).selectedColor;
 
     return ListView.builder(
       //Listado de colores con el lenght
@@ -82,14 +82,14 @@ class _ThemeChangerView extends ConsumerWidget {
           value: index,
           //Grupo del valor
           groupValue:
-              isSelectedColor, //Este es el valor seleccionado (flutter sabe cual es el valor que tenemos mediante este groupvalue)
+              selectedColor, //Este es el valor seleccionado (flutter sabe cual es el valor que tenemos mediante este groupvalue)
           //Cuando cambia
           onChanged: (value) {
             //todo: Notificar el cambio
 
             //Llamamos a nuestra referencia, lo leímos y lo notificamos porque queremos que se actualice.
             //Llamamos al state y le mandamos el Index para saber donde estamos parados
-            ref.read(selectedColorProvider.notifier).state = index;
+            ref.read(themeNotifierProvider.notifier).changeColorIndex(index);
           },
         );
       },
