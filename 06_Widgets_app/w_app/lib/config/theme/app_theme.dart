@@ -40,4 +40,10 @@ class AppTheme {
       appBarTheme: const AppBarTheme(
           //Centramos nuestro titulo
           centerTitle: true));
+
+  //todo :Creamos un nuevo metodo que regresará una instancia de nuestro appTheme (Es una copia de la clase)
+  AppTheme copyWith({int? selectedColor, bool? isDarkmode}) => AppTheme(
+        selectedColor: selectedColor ?? this.selectedColor,
+        isDarkMode: isDarkmode ?? isDarkMode,
+      );
 }

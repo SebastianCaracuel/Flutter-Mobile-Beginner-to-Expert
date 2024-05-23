@@ -23,4 +23,17 @@ class ThemeNotifier extends StateNotifier<AppTheme> {
   ThemeNotifier()
       : super(
             AppTheme()); //Necesito que crees la primera instancia de mi apptheme con sus valores por defecto
+
+  //todo :Creamos funciones vacias
+  //
+  //
+  //? Función para el modo Oscuro
+  void toggleDarkMode() {
+    state = state.copyWith(isDarkmode: !state.isDarkMode);
+  }
+
+  //
+  //
+  //? Función para cambiar el color
+  void changeColorIndex(int colorIndex) {}
 }

@@ -15,7 +15,8 @@ class HomeScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     //Propiedad
     final scaffoldKey = GlobalKey<ScaffoldState>();
-    final bool isDarkMode = ref.watch(isDarkModeProvider);
+    final isDarkMode =
+        ref.watch(themeNotifierProvider).isDarkMode; //Referencia del DarkMode
 
     return Scaffold(
       //Referencia al estado actual del scaffold
@@ -29,12 +30,7 @@ class HomeScreen extends ConsumerWidget {
               //Función
               onPressed: () {
                 //Llamamos a la referencia para poder cambiar nuestro mode a oscuro
-                ref //Llamamos a la referencia
-                    .read //Leemos la referencia
-                    (isDarkModeProvider
-                        .notifier) // Llamamos a nuestra referencia con un notifier
-                    .update((isDarMode) => //utilizamos el update para hacerlo mas facil
-                        !isDarkMode); //El state va a ser un bool y esto es igual a distinto de nuestro state
+                ref.read(themeNotifierProvider.notifier).toggleDarkMode();
               },
               //Iconos
               icon: Icon(isDarkMode

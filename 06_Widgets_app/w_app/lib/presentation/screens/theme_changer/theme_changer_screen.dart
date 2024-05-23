@@ -15,7 +15,8 @@ class ThemeChangeScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ref) {
     //Propiedades del objeto
-    final isDarkMode = ref.watch(isDarkModeProvider); //Referencia del DarkMode
+    final isDarkMode =
+        ref.watch(themeNotifierProvider).isDarkMode; //Referencia del DarkMode
 
     return Scaffold(
       //MenuSuperior
@@ -31,9 +32,12 @@ class ThemeChangeScreen extends ConsumerWidget {
 
             //Función
             onPressed: () {
-              ref
-                  .read(isDarkModeProvider.notifier)
-                  .update((isDarkMode) => !isDarkMode);
+              // ref
+              //     .read(isDarkModeProvider.notifier)
+              //     .update((isDarkMode) => !isDarkMode);
+
+              //?
+              ref.read(themeNotifierProvider.notifier).toggleDarkMode();
             },
           ),
         ],
