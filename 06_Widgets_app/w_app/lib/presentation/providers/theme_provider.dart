@@ -10,4 +10,17 @@ final colorListProvider = Provider((ref) =>
     colorList); //Esta referencia es (Inmutable) que yo no lo puedo cambiar.
 
 //?Cremaos un estado para manejar un entero
-final selectedColorProvider = StateProvider((ref) => 0);//
+final selectedColorProvider = StateProvider((ref) => 0); //
+
+//?Creamos un nuevo estado - objeto de tipo AppTheme personalizado
+final themeNotifierProvider = StateNotifierProvider<ThemeNotifier, AppTheme>(
+  (ref) => ThemeNotifier(),
+); //
+
+//Creamos una clase para el NotifierProvider
+class ThemeNotifier extends StateNotifier<AppTheme> {
+  //Controlador //?STATE = Estado = new AppTheme();
+  ThemeNotifier()
+      : super(
+            AppTheme()); //Necesito que crees la primera instancia de mi apptheme con sus valores por defecto
+}
