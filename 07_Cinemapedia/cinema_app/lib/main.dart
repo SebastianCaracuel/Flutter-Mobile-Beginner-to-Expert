@@ -1,10 +1,15 @@
 //Importaciones de Flutter
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 //Importaciones nuestras
 import 'package:cinema_app/config/router/app_router.dart';
 import 'package:cinema_app/config/theme/app_theme.dart';
 
-void main() {
+Future<void> main() async {
+  //Definimos el paquete .env
+  await dotenv.load(fileName: '.env');
+
+  //Corremos la aplicación
   runApp(const MainApp());
 }
 
