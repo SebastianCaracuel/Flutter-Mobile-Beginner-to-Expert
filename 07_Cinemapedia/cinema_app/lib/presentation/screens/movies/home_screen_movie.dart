@@ -1,7 +1,6 @@
 //Importaciones de Flutter
 import 'package:flutter/material.dart';
 //Importaciones nuestras
-import 'package:cinema_app/config/constants/environment.dart';
 
 //Creamos la clases
 class HomeScreen extends StatelessWidget {
@@ -18,10 +17,8 @@ class HomeScreen extends StatelessWidget {
     //Propiedades del objeto
 
     //Widgets
-    return Scaffold(
-      body: Center(
-        child: Text(Environment.movieDBKey),
-      ),
+    return const Scaffold(
+      body: Placeholder(),
     );
   }
 }
