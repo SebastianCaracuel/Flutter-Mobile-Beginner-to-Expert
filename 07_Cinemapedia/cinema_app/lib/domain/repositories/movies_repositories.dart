@@ -5,7 +5,7 @@ import 'package:cinema_app/domain/entities/movie.dart';
 
 //Creamos una clase abstracta //?Es abstracta porque no quiero crear instancias de movie
 
-abstract class MovieRepository {
+abstract class MoviesRepository {
   //El repositorio es quien va a llamar a nuestro Datasources
   //Definimos como lucen los origines de datos que puede traer la API
 
