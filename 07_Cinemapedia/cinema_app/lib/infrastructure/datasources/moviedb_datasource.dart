@@ -10,7 +10,7 @@ import 'package:cinema_app/infrastructure/mappers/movie_mapper.dart';
 
 //Clase para obtener las películas
 
-class MovieDbDatasource extends MoviesDatasource {
+class MoviedbDatasource extends MoviesDatasource {
   //Propiedades
 
   //?Gestor de peticiones HTTP (Dio)
