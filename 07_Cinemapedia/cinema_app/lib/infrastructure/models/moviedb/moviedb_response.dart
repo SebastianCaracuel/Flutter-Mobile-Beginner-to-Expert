@@ -24,7 +24,7 @@ class MovieDbResponse {
   factory MovieDbResponse.fromJson(Map<String, dynamic> json) =>
       MovieDbResponse(
         //Preguntamos si nuestro objeto viene con las fechas que se coloque, si no nulo.
-        dates: json["dates"] ? Dates.fromJson(json["dates"]) : null,
+        dates: json["dates"] != null ? Dates.fromJson(json["dates"]) : null,
         page: json["page"],
         results: List<MovieMovieDB>.from(
             json["results"].map((x) => MovieMovieDB.fromJson(x))),
