@@ -69,25 +69,11 @@ class _HomeViewState extends ConsumerState<_HomeView> {
     //Widgets
     return Column(
       children: [
-        //Llamamos a nuestro custom appBar
+        //todo: Llamamos a nuestro Custom AppBar
         const CustomAppbar(),
 
-        //?Llamamos a nuestras peliculas
-        Expanded(
-          child: ListView.builder(
-            //Llamamos al largo de las peliculas
-            itemCount: nowPlayingMovies.length,
-            //
-            itemBuilder: (context, index) {
-              //Propiedad
-              final movie = nowPlayingMovies[index];
-              return ListTile(
-                //titulo
-                title: Text(movie.title),
-              );
-            },
-          ),
-        )
+        //todo: Llamamos a nuestras peliculas con el SlideShow
+        MovieSlideshow(movies: nowPlayingMovies),
       ],
     );
   }
