@@ -1,5 +1,6 @@
 //Importaciones de Flutter
 import 'package:cinema_app/presentation/providers/movies/movies_providers.dart';
+import 'package:cinema_app/presentation/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 //Importaciones nuestras
@@ -66,18 +67,28 @@ class _HomeViewState extends ConsumerState<_HomeView> {
     // }
 
     //Widgets
-    return ListView.builder(
-      //Llamamos al largo de las peliculas
-      itemCount: nowPlayingMovies.length,
-      //
-      itemBuilder: (context, index) {
-        //Propiedad
-        final movie = nowPlayingMovies[index];
-        return ListTile(
-          //titulo
-          title: Text(movie.title),
-        );
-      },
+    return Column(
+      children: [
+        //Llamamos a nuestro custom appBar
+        const CustomAppbar(),
+
+        //?Llamamos a nuestras peliculas
+        Expanded(
+          child: ListView.builder(
+            //Llamamos al largo de las peliculas
+            itemCount: nowPlayingMovies.length,
+            //
+            itemBuilder: (context, index) {
+              //Propiedad
+              final movie = nowPlayingMovies[index];
+              return ListTile(
+                //titulo
+                title: Text(movie.title),
+              );
+            },
+          ),
+        )
+      ],
     );
   }
 }
