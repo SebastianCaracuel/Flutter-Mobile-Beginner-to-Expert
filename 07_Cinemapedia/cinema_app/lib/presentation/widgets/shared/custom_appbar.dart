@@ -38,7 +38,7 @@ class CustomAppbar extends StatelessWidget {
               //todo:Colocamos un Icono que será distintitvo como el (Logo) de la app
               Icon(
                   //Icono utilizado
-                  Icons.movie_outlined,
+                  Icons.movie_filter_outlined,
                   //Llamamos al color que colocamos en nuestor tema de la aplicación
                   color: colors.primary),
 
