@@ -65,7 +65,55 @@ class _SlideView extends StatelessWidget {
   Widget build(BuildContext context) {
     //Propiedades del Objeto
 
+    //?Cremaos una propiedad para la decoración del carrusel
+    final decoration = BoxDecoration(
+      //Agregamos un borde redondeado circular
+      borderRadius: BorderRadius.circular(20),
+      //Las sombras que tiene la tarjea
+      boxShadow: const [
+        BoxShadow(
+            color: Colors.black45,
+            //difuminación de la sombra
+            blurRadius: 10,
+            //Lugares de x - y donde queremos mover las sombras
+            offset: Offset(0, 10)),
+      ],
+    );
+
     //Widget
-    return const Placeholder();
+    return Padding(
+      //Colocamos un espacio entre el carrusel y nuestra barra
+      padding: const EdgeInsets.only(bottom: 30),
+      //Le agregamos una decoración al carrusel
+      child:
+          //Asignamos una decoración
+          DecoratedBox(
+        //Llamamos a nuestra variable
+        decoration: decoration,
+        //Utilizamos ClipRRect para que tenga un redondeado bonito la tarjeta
+        child: ClipRRect(
+          //Le agregamos el borde
+          borderRadius: BorderRadius.circular(20),
+          //Utilizando image.network llamamos a la imagen de nuestro path
+          child: Image.network(
+            //Llamamos a la imagen que representa la película con el backdrophat.
+            movie.backdropPath,
+            //Le asignamos un fit . cover para que tome el espacio que le estamos dando a la aplicación
+            fit: BoxFit.cover,
+            //Agregamos un loading - que nos ayudará a saber si la imagen se construyo o no
+            loadingBuilder: (context, child, loadingProgress) {
+              //Si la imagen no esta cargando
+              if (loadingProgress != null) {
+                return const DecoratedBox(
+                    //Nos muestra un contenedor oscuro
+                    decoration: BoxDecoration(color: Colors.black12));
+              }
+              //si la imagen ya cargo, muestra la imagen
+              return child;
+            },
+          ),
+        ),
+      ),
+    );
   }
 }
