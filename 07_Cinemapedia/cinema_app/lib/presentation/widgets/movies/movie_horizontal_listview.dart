@@ -1,5 +1,6 @@
 //Importaciones flutter
 import 'package:animate_do/animate_do.dart';
+import 'package:cinema_app/config/helpers/human_formats.dart';
 import 'package:flutter/material.dart';
 
 //Importaciones nuestras
@@ -149,35 +150,44 @@ class _SlideHorizontal extends StatelessWidget {
               )),
 
           //todo: Rating - se refiere a una medida o calificación que indica la popularidad o calidad de algo.
-          Row(
-            children: [
-              //Icono de estrellas
-              Icon(
-                  //MOstramos el icono de la estrella
-                  Icons.star_half_rounded,
-                  //Le agregamos un color
-                  color: Colors.yellow.shade800),
+          SizedBox(
+            //Personalizamos el ancho
+            width: 150,
+            //utilizamos un row para tener los items de forma horizontal
+            child: Row(
+              children: [
+                //Icono de estrellas
+                Icon(
+                    //MOstramos el icono de la estrella
+                    Icons.star_half_rounded,
+                    //Le agregamos un color
+                    color: Colors.yellow.shade800),
 
-              //Texto que indica la calificación
-              Text(
-                  '${
-                  //Llamamos al radio de votos de la puntuación de la película
-                  movie.voteAverage}',
-                  //Estilo del texto
-                  style: titleSyle.bodyMedium?.copyWith(
-                      //Le agregamos el mismo color que al del Icono
-                      color: Colors.yellow.shade800)),
+                //Texto que indica la calificación
+                Text(
+                    '${
+                    //Llamamos al radio de votos de la puntuación de la película
+                    movie.voteAverage}',
+                    //Estilo del texto
+                    style: titleSyle.bodyMedium?.copyWith(
+                        //Le agregamos el mismo color que al del Icono
+                        color: Colors.yellow.shade800)),
 
-              //Espacio entre textos
-              const SizedBox(width: 10),
+                //Espacio entre textos
+                const Spacer(),
 
-              //Mostramos que tan popular es la película, cuanta gente lo ha visto.
-              Text(
-                  //Llamamos a la gente que lo ha visto
-                  '${movie.popularity}',
-                  //Le agregamos el estilo al texto
-                  style: titleSyle.bodySmall),
-            ],
+                //Mostramos que tan popular es la película, cuanta gente la ha visto en formatos númericos humanos.
+                Text(
+                  //Llamamos a nuestro metodo de formatos humanos
+                  HumanFormats.number(
+                      //Llamamos a la gente que lo ha visto con nuestra Ref movie
+                      movie.popularity),
+
+                  //Le agregamos estilo al texto
+                  style: titleSyle.bodySmall,
+                ),
+              ],
+            ),
           ),
         ],
       ),
