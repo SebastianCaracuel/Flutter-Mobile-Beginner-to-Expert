@@ -1,9 +1,9 @@
 //Importaciones de Flutter
-import 'package:cinema_app/presentation/providers/movies/movies_providers.dart';
-import 'package:cinema_app/presentation/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 //Importaciones nuestras
+import 'package:cinema_app/presentation/providers/providers.dart';
+import 'package:cinema_app/presentation/widgets/widgets.dart';
 
 //Creamos la clases
 class HomeScreen extends StatelessWidget {
@@ -59,7 +59,7 @@ class _HomeViewState extends ConsumerState<_HomeView> {
     //Propiedades del objeto
 
     //?Llamamos a nuestra referencia para poder ver las películas por pantalla
-    final nowPlayingMovies = ref.watch(nowPlayingMoviesProvider);
+    final moviesSlideshow = ref.watch(moviesSlideshowProvider);
 
     //Condición - //? Si el largo de las películas en cine ahora, es igual a 0 (no hay películas ) muestra un circulo de progreso
     // if (nowPlayingMovies.isEmpty) {
@@ -73,7 +73,7 @@ class _HomeViewState extends ConsumerState<_HomeView> {
         const CustomAppbar(),
 
         //todo: Llamamos a nuestras peliculas con el SlideShow
-        MovieSlideshow(movies: nowPlayingMovies),
+        MovieSlideshow(movies: moviesSlideshow),
       ],
     );
   }
