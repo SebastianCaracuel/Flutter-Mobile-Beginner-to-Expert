@@ -1,4 +1,5 @@
 //Importaciones flutter
+import 'package:animate_do/animate_do.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 //Importaciones nuestras
@@ -109,7 +110,9 @@ class _SlideView extends StatelessWidget {
                     decoration: BoxDecoration(color: Colors.black12));
               }
               //si la imagen ya cargo, muestra la imagen
-              return child;
+              return
+                  //Utilizando - animate_do creamos una animación de que la imagen entra con suavidad utilizando FadeIn
+                  FadeIn(child: child);
             },
           ),
         ),
