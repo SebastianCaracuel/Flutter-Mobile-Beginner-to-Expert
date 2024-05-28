@@ -61,7 +61,11 @@ class _HomeViewState extends ConsumerState<_HomeView> {
   Widget build(BuildContext context) {
     //Propiedades del objeto
 
-    //?Llamamos a nuestra referencia para poder ver las películas por pantalla
+    //Llamamos a nuestras referencias para poder ver las películas por pantalla
+    //?Referencia para mostrar las películas
+    final nowPlayingMovies = ref.watch(nowPlayingMoviesProvider);
+
+    //?Referencia para los slideShows - Mostrar imagen de las peliculas
     final moviesSlideshow = ref.watch(moviesSlideshowProvider);
 
     //Condición - //? Si el largo de las películas en cine ahora, es igual a 0 (no hay películas ) muestra un circulo de progreso
@@ -75,8 +79,16 @@ class _HomeViewState extends ConsumerState<_HomeView> {
         //todo: Llamamos a nuestro Custom AppBar
         const CustomAppbar(),
 
-        //todo: Llamamos a nuestras peliculas con el SlideShow
+        //todo: Llamamos a nuestra referencia de SlideShows
         MovieSlideshow(movies: moviesSlideshow),
+
+        //todo: Llamamos a nuestra referencia de películas
+        MovieHorizontalListview(
+          //?Llamamos a nuestra referencia
+          movies: nowPlayingMovies,
+          title: 'En cines',
+          subtitle: 'Lunes 20',
+        ),
       ],
     );
   }
