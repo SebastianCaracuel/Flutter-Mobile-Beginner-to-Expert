@@ -20,6 +20,9 @@ class MovieSlideshow extends StatelessWidget {
   Widget build(BuildContext context) {
     //Propiedades del objeto
 
+    //?Listado de nuestros colores
+    final colors = Theme.of(context).colorScheme;
+
     //Utilizamos un SizeBox porque queremos asignarle un espacio determinado
     return SizedBox(
       //Le asginamos un alto de 210 pixeles
@@ -35,6 +38,19 @@ class MovieSlideshow extends StatelessWidget {
         scale: 0.9,
         // Habilita la reproducción automática del carrusel.
         autoplay: true,
+        //Veemos los puntitos de navegación - con SwiperPagination
+        pagination: SwiperPagination(
+          //Le damos un margin o le quitamos el margin para que no este tan junto los puntos con el slider
+          margin: const EdgeInsets.only(top: 0),
+          //DotSwiperPaginationBuilder se utiliza para personalizar la apariencia de la paginación (los puntos indicadores) en un carrusel.
+          builder: DotSwiperPaginationBuilder(
+            //Color utilizando nuestra paleta de colores
+            activeColor: colors.primary,
+            //También utilizamos el color secundario
+            color: colors.secondary,
+            //
+          ),
+        ),
         //Llamamos al largo de nuestras películas
         itemCount: movies.length,
         // Utilizamos itemBuilder par optimizar el rendimiento al crear listas grandes o infinitas,
