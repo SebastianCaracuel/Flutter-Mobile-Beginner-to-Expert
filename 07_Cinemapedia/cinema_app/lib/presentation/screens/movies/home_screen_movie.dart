@@ -23,6 +23,9 @@ class HomeScreen extends StatelessWidget {
     return const Scaffold(
       //Extraemos nuestro widget
       body: _HomeView(),
+
+      //Barra de navegación
+      bottomNavigationBar: CustomButtomBar(),
     );
   }
 }
