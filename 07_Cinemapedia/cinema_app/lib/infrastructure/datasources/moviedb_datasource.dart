@@ -33,7 +33,9 @@ class MoviedbDatasource extends MoviesDatasource {
     //Propiedades del objeto
 
     //?Configuramos nuestra URL para llamar a las peliculas
-    final response = await dio.get('/movie/now_playing');
+    final response = await dio.get('/movie/now_playing',
+        //Agregamos las nuevas películas
+        queryParameters: {'page': page});
 
     //Mapeo de la respuesta
     final movieDBResponse = MovieDbResponse.fromJson(response.data);
