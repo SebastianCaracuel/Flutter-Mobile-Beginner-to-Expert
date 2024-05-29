@@ -84,11 +84,15 @@ class _HomeViewState extends ConsumerState<_HomeView> {
 
         //todo: Llamamos a nuestra referencia de películas
         MovieHorizontalListview(
-          //?Llamamos a nuestra referencia
-          movies: nowPlayingMovies,
-          title: 'En cines',
-          subtitle: 'Lunes 20',
-        ),
+            //?Llamamos a nuestra referencia
+            movies: nowPlayingMovies,
+            title: 'En cines',
+            subtitle: 'Lunes 20',
+            //Llamamos a la función de cargar otras paginas
+            loadNextPage: () {
+              //Utilizamos nuestra referencia y le agregamos el metodo
+              ref.read(nowPlayingMoviesProvider.notifier).laodNextPage();
+            }),
       ],
     );
   }

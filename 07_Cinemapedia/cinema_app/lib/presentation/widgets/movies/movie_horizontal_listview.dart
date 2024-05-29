@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:cinema_app/domain/entities/movie.dart';
 
 //Creamos la clase que mostrará información de la pelicula de forma horizontal
-class MovieHorizontalListview extends StatelessWidget {
+class MovieHorizontalListview extends StatefulWidget {
   //Propiedades de la clase
 
   //?Necesitamos las películas que queremos mostrar - las llamamos de nuestra entidad
@@ -28,6 +28,45 @@ class MovieHorizontalListview extends StatelessWidget {
       this.subtitle,
       this.loadNextPage});
 
+  @override
+  State<MovieHorizontalListview> createState() =>
+      _MovieHorizontalListviewState();
+}
+
+//State
+class _MovieHorizontalListviewState extends State<MovieHorizontalListview> {
+  //Propiedades state
+
+  //?Creamos una propiedad de controller para tener el control de la acción qu el cliente esta realizando
+  final scrollController = ScrollController();
+
+  //Iniciamos el controlador
+  @override
+  void initState() {
+    super.initState();
+
+    //Añadimos el listener y la propeidad
+    scrollController.addListener(() {
+      //todo:
+      //?Llamamos al cargador de la siguiente pagina, si no tiene nada que no regrese nada
+      if (widget.loadNextPage == null) return;
+      //?Pero si tengo algo, si tengo un widget o un callback
+      if ((scrollController.position.pixels + 200) >=
+          scrollController.position.maxScrollExtent) {
+        //
+        widget.loadNextPage!();
+      }
+    });
+  }
+
+  //Cerramos el controlador
+  @override
+  void dispose() {
+    //Cerramos el controlador
+    scrollController.dispose();
+    super.dispose();
+  }
+
   //Objeto
   @override
   Widget build(BuildContext context) {
@@ -43,27 +82,29 @@ class MovieHorizontalListview extends StatelessWidget {
         children: [
           //todo: datos de información de las películas
           //?Creamos una condición  - Si el titulo es diferente a nulo o el subtitlo es diferente de null
-          if (title != null || subtitle != null)
+          if (widget.title != null || widget.subtitle != null)
             //?Llamamos al widget de titulo
-            _Title(title: title, subtitle: subtitle),
+            _Title(title: widget.title, subtitle: widget.subtitle),
 
           //todo:Listview para ver nuestras películas
           //Utilizamos un expanded porque necesitamos que el ListView tenga un tamaño en especifíco
           Expanded(
               //
               child: ListView.builder(
+            //Colocamos nuestra variable de scrollcontroller
+            controller: scrollController,
             //Vemos la dirección en el que será scrolleable
             scrollDirection: Axis.horizontal,
             //Quiero que la fisica sea igual tanto en ios como en android - Rebote de scroll
             physics: const BouncingScrollPhysics(),
             //Cuantas películas yo tengo
-            itemCount: movies.length,
+            itemCount: widget.movies.length,
             //Construcción
             itemBuilder: (context, index) {
               //Propiedades de la construcción
 
               //Regresamos un Widgets personalizado
-              return _SlideHorizontal(movie: movies[index]);
+              return _SlideHorizontal(movie: widget.movies[index]);
             },
           )),
         ],
