@@ -70,3 +70,27 @@ final popularMoviesProvider =
       //proporcionar la función
       fetchMoreMovies: fetchMoreMovies);
 });
+
+//?Películas En el ranking
+final rankingMoviesProvider =
+    StateNotifierProvider<MoviesNotifier, List<Movie>>((ref) {
+  //Propiedades
+  final fetchMoreMovies = ref.watch(movieRepositoryProvider).getTopRated;
+
+  //Retornamos nuestra clase
+  return MoviesNotifier(
+      //proporcionar la función
+      fetchMoreMovies: fetchMoreMovies);
+});
+
+//?Películas Comming soon
+final soonrMoviesProvider =
+    StateNotifierProvider<MoviesNotifier, List<Movie>>((ref) {
+  //Propiedades
+  final fetchMoreMovies = ref.watch(movieRepositoryProvider).getUpcomming;
+
+  //Retornamos nuestra clase
+  return MoviesNotifier(
+      //proporcionar la función
+      fetchMoreMovies: fetchMoreMovies);
+});

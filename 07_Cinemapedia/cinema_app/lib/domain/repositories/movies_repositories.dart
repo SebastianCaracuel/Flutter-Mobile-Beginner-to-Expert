@@ -16,4 +16,10 @@ abstract class MoviesRepository {
 
   //?Películas populares
   Future<List<Movie>> getPopular({int page = 1});
+
+  //?Películas Ranking
+  Future<List<Movie>> getTopRated({int page = 1});
+
+  //?Películas comming soon
+  Future<List<Movie>> getUpcomming({int page = 1});
 }

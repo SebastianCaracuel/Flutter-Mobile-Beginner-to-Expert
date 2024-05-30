@@ -72,4 +72,32 @@ class MoviedbDatasource extends MoviesDatasource {
     //Llamamos al metódo que creamos
     return _jsonToMovies(response.data);
   }
+
+  //todo: Ranking de películas
+  @override
+  Future<List<Movie>> getTopRated({int page = 1}) async {
+    //Propiedades del objeto
+
+    //?Configuramos nuestra URL para llamar a las peliculas
+    final response = await dio.get('/movie/top_rated',
+        //Agregamos las nuevas películas
+        queryParameters: {'page': page});
+
+    //Llamamos al metódo que creamos
+    return _jsonToMovies(response.data);
+  }
+
+//todo: Películas en camino
+  @override
+  Future<List<Movie>> getUpcomming({int page = 1}) async {
+    //Propiedades del objeto
+
+    //?Configuramos nuestra URL para llamar a las peliculas
+    final response = await dio.get('/movie/upcoming',
+        //Agregamos las nuevas películas
+        queryParameters: {'page': page});
+
+    //Llamamos al metódo que creamos
+    return _jsonToMovies(response.data);
+  }
 }

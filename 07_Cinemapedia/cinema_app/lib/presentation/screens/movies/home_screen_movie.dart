@@ -57,6 +57,12 @@ class _HomeViewState extends ConsumerState<_HomeView> {
 
     //?Referencia para mostrar las películas Populares
     ref.read(popularMoviesProvider.notifier).laodNextPage();
+
+    //?Referencia  para mostrar las películas en ranking
+    ref.read(rankingMoviesProvider.notifier).laodNextPage();
+
+    //?Referencia para mostrar las películas en camino
+    ref.read(soonrMoviesProvider.notifier).laodNextPage();
   }
 
   //Objeto
@@ -70,6 +76,12 @@ class _HomeViewState extends ConsumerState<_HomeView> {
 
     //?Referencia para mostrar las películas Populares
     final popularMovie = ref.watch(popularMoviesProvider);
+
+    //?Referencia para mostrar las películas en Ranking
+    final rankingMovie = ref.watch(rankingMoviesProvider);
+
+    //?Referencia para mostrar las películas en camino
+    final csoonMovie = ref.watch(soonrMoviesProvider);
 
     //?Referencia para los slideShows - Mostrar imagen de las peliculas
     final moviesSlideshow = ref.watch(moviesSlideshowProvider);
@@ -107,7 +119,7 @@ class _HomeViewState extends ConsumerState<_HomeView> {
                 //todo: Llamamos a nuestra referencia de SlideShows
                 MovieSlideshow(movies: moviesSlideshow),
 
-                //todo: Llamamos a nuestra referencia de películas
+                //todo: Llamamos a nuestra referencia de películas - cartelera
                 MovieHorizontalListview(
                     //?Llamamos a nuestra referencia
                     movies: nowPlayingMovies,
@@ -121,32 +133,28 @@ class _HomeViewState extends ConsumerState<_HomeView> {
                           .laodNextPage();
                     }),
 
-                //todo: Llamamos a nuestra referencia de películas
+                //todo: Llamamos a nuestra referencia de películas - En coming soon
                 MovieHorizontalListview(
                     //?Llamamos a nuestra referencia
-                    movies: nowPlayingMovies,
+                    movies: csoonMovie,
                     title: 'Comming soon',
                     subtitle: 'In this Month',
                     //Llamamos a la función de cargar otras paginas
                     loadNextPage: () {
                       //Utilizamos nuestra referencia y le agregamos el metodo
-                      ref
-                          .read(nowPlayingMoviesProvider.notifier)
-                          .laodNextPage();
+                      ref.read(soonrMoviesProvider.notifier).laodNextPage();
                     }),
 
-                //todo: Llamamos a nuestra referencia de películas
+                //todo: Llamamos a nuestra referencia de películas - ranking
                 MovieHorizontalListview(
                     //?Llamamos a nuestra referencia
-                    movies: nowPlayingMovies,
+                    movies: rankingMovie,
                     title: 'Top rated',
                     subtitle: 'In this year',
                     //Llamamos a la función de cargar otras paginas
                     loadNextPage: () {
                       //Utilizamos nuestra referencia y le agregamos el metodo
-                      ref
-                          .read(nowPlayingMoviesProvider.notifier)
-                          .laodNextPage();
+                      ref.read(rankingMoviesProvider.notifier).laodNextPage();
                     }),
 
                 //todo: Llamamos a nuestra referencia de películas Populares
