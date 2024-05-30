@@ -58,3 +58,15 @@ final nowPlayingMoviesProvider =
       //proporcionar la función
       fetchMoreMovies: fetchMoreMovies);
 });
+
+//?Películas Populares
+final popularMoviesProvider =
+    StateNotifierProvider<MoviesNotifier, List<Movie>>((ref) {
+  //Propiedades
+  final fetchMoreMovies = ref.watch(movieRepositoryProvider).getPopular;
+
+  //Retornamos nuestra clase
+  return MoviesNotifier(
+      //proporcionar la función
+      fetchMoreMovies: fetchMoreMovies);
+});

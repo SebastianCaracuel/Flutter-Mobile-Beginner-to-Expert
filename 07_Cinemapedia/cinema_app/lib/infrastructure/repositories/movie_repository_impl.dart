@@ -23,4 +23,10 @@ class MovieRepositoryImpl extends MoviesRepository {
     //Implementación del repositorio - llamamos el getNoPlayin basado en el datasource
     return datasource.getNoPlaying(page: page);
   }
+
+  //todo:Películas populares
+  @override
+  Future<List<Movie>> getPopular({int page = 1}) {
+    return datasource.getPopular(page: page);
+  }
 }

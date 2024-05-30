@@ -54,6 +54,9 @@ class _HomeViewState extends ConsumerState<_HomeView> {
 
     //Llamamos a nuestra referencia - el loadnextpage
     ref.read(nowPlayingMoviesProvider.notifier).laodNextPage();
+
+    //?Referencia para mostrar las películas Populares
+    ref.read(popularMoviesProvider.notifier).laodNextPage();
   }
 
   //Objeto
@@ -64,6 +67,9 @@ class _HomeViewState extends ConsumerState<_HomeView> {
     //Llamamos a nuestras referencias para poder ver las películas por pantalla
     //?Referencia para mostrar las películas
     final nowPlayingMovies = ref.watch(nowPlayingMoviesProvider);
+
+    //?Referencia para mostrar las películas Populares
+    final popularMovie = ref.watch(popularMoviesProvider);
 
     //?Referencia para los slideShows - Mostrar imagen de las peliculas
     final moviesSlideshow = ref.watch(moviesSlideshowProvider);
@@ -133,20 +139,6 @@ class _HomeViewState extends ConsumerState<_HomeView> {
                 MovieHorizontalListview(
                     //?Llamamos a nuestra referencia
                     movies: nowPlayingMovies,
-                    title: 'Popular',
-                    subtitle: 'In this Month',
-                    //Llamamos a la función de cargar otras paginas
-                    loadNextPage: () {
-                      //Utilizamos nuestra referencia y le agregamos el metodo
-                      ref
-                          .read(nowPlayingMoviesProvider.notifier)
-                          .laodNextPage();
-                    }),
-
-                //todo: Llamamos a nuestra referencia de películas
-                MovieHorizontalListview(
-                    //?Llamamos a nuestra referencia
-                    movies: nowPlayingMovies,
                     title: 'Top rated',
                     subtitle: 'In this year',
                     //Llamamos a la función de cargar otras paginas
@@ -155,6 +147,18 @@ class _HomeViewState extends ConsumerState<_HomeView> {
                       ref
                           .read(nowPlayingMoviesProvider.notifier)
                           .laodNextPage();
+                    }),
+
+                //todo: Llamamos a nuestra referencia de películas Populares
+                MovieHorizontalListview(
+                    //?Llamamos a nuestra referencia
+                    movies: popularMovie,
+                    title: 'Popular',
+                    subtitle: 'In this Month',
+                    //Llamamos a la función de cargar otras paginas
+                    loadNextPage: () {
+                      //Utilizamos nuestra referencia y le agregamos el metodo
+                      ref.read(popularMoviesProvider.notifier).laodNextPage();
                     }),
 
                 //Espacio

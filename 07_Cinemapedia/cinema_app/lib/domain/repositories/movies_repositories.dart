@@ -13,4 +13,7 @@ abstract class MoviesRepository {
   //?La información de retorno va a ser un Future que regresa una lista de la entidad
   Future<List<Movie>> getNoPlaying(
       {int page = 1}); //Necesito que me especifique la pagina
+
+  //?Películas populares
+  Future<List<Movie>> getPopular({int page = 1});
 }

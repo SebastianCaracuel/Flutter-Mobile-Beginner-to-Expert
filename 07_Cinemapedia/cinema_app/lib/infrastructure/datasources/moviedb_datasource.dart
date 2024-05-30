@@ -27,18 +27,10 @@ class MoviedbDatasource extends MoviesDatasource {
         'language': 'es-MX',
       }));
 
-  //Objeto
-  @override
-  Future<List<Movie>> getNoPlaying({int page = 1}) async {
-    //Propiedades del objeto
-
-    //?Configuramos nuestra URL para llamar a las peliculas
-    final response = await dio.get('/movie/now_playing',
-        //Agregamos las nuevas películas
-        queryParameters: {'page': page});
-
+  //todo: creamos un metódo
+  List<Movie> _jsonToMovies(Map<String, dynamic> json) {
     //Mapeo de la respuesta
-    final movieDBResponse = MovieDbResponse.fromJson(response.data);
+    final movieDBResponse = MovieDbResponse.fromJson(json);
 
     //Necesito un listado de peliculas - LLamamos a las peliculas
     final List<Movie> movies = movieDBResponse.results
@@ -52,5 +44,32 @@ class MoviedbDatasource extends MoviesDatasource {
 
     //Retornamos las peliculas
     return movies;
+  }
+
+  //Objeto
+  @override
+  Future<List<Movie>> getNoPlaying({int page = 1}) async {
+    //Propiedades del objeto
+
+    //?Configuramos nuestra URL para llamar a las peliculas
+    final response = await dio.get('/movie/now_playing',
+        //Agregamos las nuevas películas
+        queryParameters: {'page': page});
+    //Llamamos al metódo que creamos
+    return _jsonToMovies(response.data);
+  }
+
+  //todo: Películas Populares
+  @override
+  Future<List<Movie>> getPopular({int page = 1}) async {
+    //Propiedades del objeto
+
+    //?Configuramos nuestra URL para llamar a las peliculas
+    final response = await dio.get('/movie/popular',
+        //Agregamos las nuevas películas
+        queryParameters: {'page': page});
+
+    //Llamamos al metódo que creamos
+    return _jsonToMovies(response.data);
   }
 }
