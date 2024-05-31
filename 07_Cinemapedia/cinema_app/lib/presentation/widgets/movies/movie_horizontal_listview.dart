@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 
 //Importaciones nuestras
 import 'package:cinema_app/domain/entities/movie.dart';
+import 'package:go_router/go_router.dart';
 
 //Creamos la clase que mostrará información de la pelicula de forma horizontal
 class MovieHorizontalListview extends StatefulWidget {
@@ -168,8 +169,13 @@ class _SlideHorizontal extends StatelessWidget {
                               strokeWidth: 4)),
                     );
                   }
-
-                  return FadeIn(child: child);
+                  //todo: Creamos un Gestor de detección del usuairo
+                  return GestureDetector(
+                    //Agregamos el OnTap que es la función
+                    onTap: () => context.push('/movie/${movie.id}'),
+                    //Añadimos el child
+                    child: FadeIn(child: child),
+                  );
                 },
               ),
             ),
