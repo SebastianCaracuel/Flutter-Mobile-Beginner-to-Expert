@@ -22,6 +22,10 @@ class MovieScreen extends StatelessWidget {
     //Propiedades objeto
 
     //Widget padre
-    return Container();
+    return Scaffold(
+      appBar: AppBar(
+        title: Center(child: Text('MovieID: $movieId')),
+      ),
+    );
   }
 }
