@@ -104,7 +104,8 @@ class _MovieHorizontalListviewState extends State<MovieHorizontalListview> {
               //Propiedades de la construcción
 
               //Regresamos un Widgets personalizado
-              return _SlideHorizontal(movie: widget.movies[index]);
+              return FadeInRight(
+                  child: _SlideHorizontal(movie: widget.movies[index]));
             },
           )),
         ],
