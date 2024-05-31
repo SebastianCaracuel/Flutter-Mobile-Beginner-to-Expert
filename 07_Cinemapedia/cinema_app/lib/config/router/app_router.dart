@@ -22,7 +22,7 @@ final appRouter = GoRouter(
     //Ruta navegación - película Screen
     GoRoute(
         //Ruta definida para la pantalla
-        path: '/movie:id',
+        path: '/movie/:id',
         //Nombre definido para la pantalla
         name: MovieScreen.name,
         //Builder
