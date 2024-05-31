@@ -17,20 +17,23 @@ final appRouter = GoRouter(
         //Nombre definido para la pantalla
         name: HomeScreen.name,
         //Builder
-        builder: (context, state) => const HomeScreen()),
+        builder: (context, state) => const HomeScreen(),
 
-    //Ruta navegación - película Screen
-    GoRoute(
-        //Ruta definida para la pantalla
-        path: '/movie/:id',
-        //Nombre definido para la pantalla
-        name: MovieScreen.name,
-        //Builder
-        builder: (context, state) {
-          //?Como obtengo el ID de la película
-          final movieId = state.pathParameters['id'] ?? 'no-id';
+        //todo:Definimos rutas anidads de la ruta HomeScreen
+        routes: [
+          //Ruta navegación - película Screen
+          GoRoute(
+              //Ruta definida para la pantalla
+              path: 'movie/:id',
+              //Nombre definido para la pantalla
+              name: MovieScreen.name,
+              //Builder
+              builder: (context, state) {
+                //?Como obtengo el ID de la película
+                final movieId = state.pathParameters['id'] ?? 'no-id';
 
-          return MovieScreen(movieId: movieId);
-        }),
+                return MovieScreen(movieId: movieId);
+              }),
+        ]),
   ],
 );
