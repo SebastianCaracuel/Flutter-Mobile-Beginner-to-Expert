@@ -6,7 +6,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart'; // Importa flutter_rive
 import 'package:cinema_app/domain/entities/movie.dart'; // Importa la entidad Movie de nuestro dominio de la aplicación
 
 //? Proveedor de estado para la información de la película
-final movieInfoProvider = StateNotifierProvider((ref) {
+final movieInfoProvider =
+    StateNotifierProvider<MovieMapNotifier, Map<String, Movie>>((ref) {
   // `ref` es una referencia proporcionada por Riverpod que permite acceder a otros proveedores y objetos dentro del árbol de widgets.
   final moviesRepository = ref.watch(
       movieRepositoryProvider); // Utiliza `ref.watch` para observar el proveedor de repositorio de películas y obtener su instancia actual.
