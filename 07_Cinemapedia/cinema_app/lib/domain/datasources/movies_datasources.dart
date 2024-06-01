@@ -21,4 +21,7 @@ abstract class MoviesDatasource {
 
   //?Películas comming soon
   Future<List<Movie>> getUpcomming({int page = 1});
+
+  //?ID de la película - Creamos un metodo para que podamos llamar el ID de las películas
+  Future<Movie> getMovieID(String id);
 }

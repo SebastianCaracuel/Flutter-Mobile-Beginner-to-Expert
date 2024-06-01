@@ -22,4 +22,7 @@ abstract class MoviesRepository {
 
   //?Películas comming soon
   Future<List<Movie>> getUpcomming({int page = 1});
+
+  //?ID de la película - Instanciamos que nuestro metodo sea global es decir que se pueda llamar.
+  Future<Movie> getMovieID(String id);
 }

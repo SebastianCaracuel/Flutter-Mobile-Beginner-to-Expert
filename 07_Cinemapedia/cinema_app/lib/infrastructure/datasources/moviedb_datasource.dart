@@ -1,4 +1,5 @@
 //Importaciones Flutter
+import 'package:cinema_app/infrastructure/models/moviedb/movie_details.dart';
 import 'package:dio/dio.dart';
 
 //Importaciones nuestras
@@ -99,5 +100,28 @@ class MoviedbDatasource extends MoviesDatasource {
 
     //Llamamos al metódo que creamos
     return _jsonToMovies(response.data);
+  }
+
+  //todo: Obtener le ID de la película
+  @override
+  Future<Movie> getMovieID(String id) async {
+//Propiedades del objeto
+
+    //?Configuramos nuestra URL para llamar a el id de la película
+    final response = await dio.get('/movie/$id');
+
+    //validamos la respuesta
+    if (response.statusCode != 200) {
+      //Si la película no existe, coloca "la pelicula con el ID no se ha encontrado"
+      throw Exception('Movie with id: $id not found');
+    }
+
+    //decodificmaos la respuesta JSON y la convertimos en un objeto "movieDetails"
+    final movieDetails = MovieDetails.fromJson(response.data);
+    //Mapeamos el objeto Moviedetails
+    final Movie movie = MovieMapper.movieDetailsToEntity(movieDetails);
+
+    //Retornamos la película
+    return movie;
   }
 }
