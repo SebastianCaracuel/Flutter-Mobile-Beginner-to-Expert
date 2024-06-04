@@ -53,17 +53,128 @@ class MovieScreenState extends ConsumerState<MovieScreen> {
 
     //Widget padre
     return Scaffold(
-      //
+      //Creamos un Scroll personalizado
       body: CustomScrollView(
+        //Quitamos la animación de bouncing
         physics: const ClampingScrollPhysics(),
         //
-        slivers: [_CustomSliverAppbar(movie: movie)],
+        slivers: [
+          //todo: Llamamos a nuestro appBar personalizado que muestra la imagen de la película
+          _CustomSliverAppbar(movie: movie),
+
+          //
+          SliverList(
+            delegate: SliverChildBuilderDelegate(
+              (context, index) => _CustomMovieDetails(movie: movie),
+              childCount: 1,
+            ),
+          ),
+        ],
       ),
     );
   }
 }
 
-//
+//Creamos un Widget para ver la descripción de la película a la que estamos llamando
+class _CustomMovieDetails extends StatelessWidget {
+  //Propiedades de la clase
+
+  //?Llamamos a nuestra Película
+  final Movie movie;
+
+  //Constructor
+  const _CustomMovieDetails({required this.movie});
+
+//Objeto
+  @override
+  Widget build(BuildContext context) {
+    //Propiedades del objeto
+
+    //?Creamos una variable que nos trae las dimensiones del dispositivo fisicamente
+    final size = MediaQuery.of(context).size;
+
+    //?Creamos una variable para el estilo del texto
+    final textSyles = Theme.of(context).textTheme;
+
+    // Utilizamos una columna para apilar los widgets verticalmente
+    return Column(
+      // Alineamos los hijos de la columna al inicio en el eje horizontal
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        // Colocamos un padding porque no queremos que todo quede muy pegado
+        Padding(
+          // Añadimos un padding uniforme de 8 píxeles a todos los lados
+          padding: const EdgeInsets.all(8),
+
+          // Utilizamos una fila para colocar los widgets horizontalmente
+          child: Row(
+            // Alineamos los hijos de la fila al inicio en el eje vertical
+            crossAxisAlignment: CrossAxisAlignment.start,
+
+            children: [
+              // Utilizamos ClipRRect para darle bordes redondeados a la imagen
+              ClipRRect(
+                  // Redondeamos las esquinas de la imagen con un radio de 20
+                  borderRadius: BorderRadius.circular(20),
+                  // Mostramos la imagen de la película desde una URL
+                  child: Image.network(movie.posterPath,
+                      // La imagen ocupará el 30% del ancho total disponible
+                      width: size.width * 0.3)),
+
+              // Añadimos un espacio horizontal entre la imagen y el siguiente widget
+              const SizedBox(width: 10),
+
+              //Titulo y descripción de la película
+              SizedBox(
+                  width: (size.width - 40) *
+                      0.7, // Asignamos un ancho al SizedBox que es el 70% del ancho disponible menos 40 píxeles
+                  child: Column(
+                      //
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      // Utilizamos otra columna para apilar el título y el resumen verticalmente
+                      children: [
+                        Text(movie.title,
+                            style: textSyles
+                                .titleLarge), // Mostramos el título de la película con un estilo de texto grande
+                        Text(movie
+                            .overview) // Mostramos el resumen de la película
+                      ])),
+            ],
+          ),
+        ),
+
+        // Sección de géneros de la película
+        Padding(
+          padding: const EdgeInsets.all(
+              8), // Añadimos padding de 8 píxeles alrededor de esta sección
+          child: Wrap(
+            // Utilizamos Wrap para que los géneros se distribuyan y se envuelvan automáticamente en la línea siguiente si no caben en una sola línea
+            children: [
+              // Usamos el operador de dispersión para agregar cada género como un widget Chip dentro del Wrap
+              ...movie.genreIds.map((gender) => Container(
+                  margin: const EdgeInsets.only(
+                      right:
+                          10), // Añadimos un margen derecho de 10 píxeles entre los chips
+                  child: Chip(
+                    label: Text(
+                        gender), // Mostramos el nombre del género dentro del chip
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(
+                            20)), // Redondeamos los bordes del chip
+                  ))),
+            ],
+          ),
+        ),
+
+        // Espacio reservado para mostrar actores - ListView
+        const SizedBox(
+            height: 150), // Añadimos un espacio vertical fijo de 150 píxeles
+      ],
+    );
+  }
+}
+
+//Creamos un Appbar personalizado para poder ver la información de la película, en esta caso, solo la imagen.
 class _CustomSliverAppbar extends StatelessWidget {
   //Propiedades
 
