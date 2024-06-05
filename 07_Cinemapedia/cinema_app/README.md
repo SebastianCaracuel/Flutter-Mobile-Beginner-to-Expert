@@ -53,7 +53,11 @@ En esta Septima Etapa los conceptos que se vieron fueron:
     b. Películas en cines. <br>
     c. Películas mejores calificadas.<br>
     d. Películas que próximamente estarán en cines.<br>
-11. Clean Arquitecture 
+11. SearchDelegate
+12. Búsqueda contra TheMovieDB
+13. Debouncer
+14. DRY
+15. Clean Arquitecture 
 
 La aplicación consta de un catálogo de películas utilizando una API (TheMovieDB), esta es una aplicación más avanzanda donde utilizamos el gestor de estado Riverpod, arquitectura limpia, entre otras cosas.
 <br> 
