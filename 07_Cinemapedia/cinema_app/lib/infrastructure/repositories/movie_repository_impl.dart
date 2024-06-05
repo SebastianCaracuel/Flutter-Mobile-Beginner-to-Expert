@@ -48,4 +48,11 @@ class MovieRepositoryImpl extends MoviesRepository {
     //Llamamos al datasource con el metodo que creamos de obtener el ID
     return datasource.getMovieID(id);
   }
+
+  //todo: Buscamos una o varias películas
+  @override
+  Future<List<Movie>> searchMovies(String query) {
+    //
+    return datasource.searchMovies(query);
+  }
 }
