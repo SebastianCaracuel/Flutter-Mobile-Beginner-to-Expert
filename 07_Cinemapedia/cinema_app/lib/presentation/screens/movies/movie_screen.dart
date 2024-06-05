@@ -1,5 +1,6 @@
 //Importaciones Flutter
 import 'package:cinema_app/domain/entities/movie.dart';
+import 'package:cinema_app/presentation/providers/actors/actors_by_movie_provider.dart';
 import 'package:cinema_app/presentation/providers/movies/movie_info_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -34,6 +35,9 @@ class MovieScreenState extends ConsumerState<MovieScreen> {
 
     // Usamos `ref` para leer el proveedor `movieInfoProvider` y cargar la película usando su ID
     ref.read(movieInfoProvider.notifier).loadMovie(widget.movieId);
+
+    // Usamos `ref` para leer el proveedor `ActorInfoProvider` y cargar los actores usando el ID de película
+    ref.read(actorsByMovieProvider.notifier).loadActors(widget.movieId);
   }
 
   //Objeto
