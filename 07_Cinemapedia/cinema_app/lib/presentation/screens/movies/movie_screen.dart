@@ -170,10 +170,110 @@ class _CustomMovieDetails extends StatelessWidget {
           ),
         ),
 
-        // Espacio reservado para mostrar actores - ListView
+        //todo:  mostrar actores - ListView
+        _ActorsByMovie(movieId: movie.id.toString()),
+
+        //Espacio para scroll
         const SizedBox(
-            height: 150), // Añadimos un espacio vertical fijo de 150 píxeles
+            height: 50), // Añadimos un espacio vertical fijo de 150 píxeles
       ],
+    );
+  }
+}
+
+//Creamos una nueva clase para mostrar los actores
+class _ActorsByMovie extends ConsumerWidget {
+  //Propiedades de la clase
+
+  //?Creamos una variable para llamar al ID de la película
+  final String movieId;
+
+  //Constructor
+  const _ActorsByMovie({required this.movieId});
+
+  //Objeto
+  @override
+  Widget build(BuildContext context, ref) {
+    //Propiedades del objeto
+
+    //?Llamamos al mapa con la lista de actores
+    final actorsByMovie = ref.watch(actorsByMovieProvider);
+
+    //?Creamos una condición para saber si el ID es nulo
+    if (actorsByMovie[movieId] == null) {
+      //
+      return const Center(child: CircularProgressIndicator(strokeWidth: 4));
+    }
+    //Llamamos a los actores
+    final actors = actorsByMovie[movieId]!;
+
+    //Mostramos los actores por pantalla
+    return SizedBox(
+      height: 300,
+      //Utilizamos un builder ya que es algo que será procesado mientras carga
+      child: ListView.builder(
+        //Colocamos un contador, que sea el largo de los actores
+        itemCount: actors.length,
+        //Le agregamos la dirección que sea horizontal para realizar scroll
+        scrollDirection: Axis.horizontal,
+        //El proceso de carga
+        itemBuilder: (context, index) {
+          //?Creamos una varible que tome al actor en su posición indice
+          final actor = actors[index];
+
+          //COLOCAMOS EL NUEVO WIDGET
+          return Container(
+            //Utilizamos un padding para que no esten tan apegados nuestros actores
+            padding: const EdgeInsets.all(8.0),
+            //Le asignamos un tamaño al contenedor
+            width: 135,
+            //Utilizamos una columna ya que vamos a usar varios widgetrs
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                //? Foto del actor
+                ClipRRect(
+                    //Le agregamos un estilo ciruclar
+                    borderRadius: BorderRadius.circular(20),
+                    //Llamamos a la imagen del actor
+                    child: Image.network(
+                      //Utilizamos el profile path para llamar a la imagen del actor
+                      actor.profilePath,
+                      //Le agregamos una altura a la imagen
+                      height: 180,
+                      //Le asignamos una ancho a la imagen
+                      width: 135,
+                      //Queremos que la imagen se acomde y que se pueda ver correctamnte
+                      fit: BoxFit.cover,
+                    )),
+
+                //? Nombre del actor
+                const SizedBox(
+                    //Le asignamos una altura para hacer una separación con la imagen
+                    height: 5),
+                //Le agregamos el nombre al actor
+                Text(
+                    //Llamamos al nombre
+                    actor.name,
+                    //Queremos que solo utilice dos lineas
+                    maxLines: 2),
+                //Le agregamos el apodo al actor
+                Text(
+                  //Llamamos le apodo, y si esta vacio que no muestre nada
+                  actor.character ?? '',
+                  //Le colocamos que solo utilice dos lienas
+                  maxLines: 2,
+                  //También le agregamos un estilo para que se vean aún más lindas
+                  style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      //Lo que hace el overflow es que si hay mucho texto aparecera un texto como (.....)
+                      overflow: TextOverflow.ellipsis),
+                ),
+              ],
+            ),
+          );
+        },
+      ),
     );
   }
 }
