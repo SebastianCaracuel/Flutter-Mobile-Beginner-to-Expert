@@ -1,11 +1,12 @@
 //Importaciones Flutter
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:animate_do/animate_do.dart';
+
+//Importaciones nuestras
 import 'package:cinema_app/domain/entities/movie.dart';
 import 'package:cinema_app/presentation/providers/actors/actors_by_movie_provider.dart';
 import 'package:cinema_app/presentation/providers/movies/movie_info_provider.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-//Importaciones nuestras
 
 //Clase
 class MovieScreen extends ConsumerStatefulWidget {
@@ -232,20 +233,22 @@ class _ActorsByMovie extends ConsumerWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 //? Foto del actor
-                ClipRRect(
-                    //Le agregamos un estilo ciruclar
-                    borderRadius: BorderRadius.circular(20),
-                    //Llamamos a la imagen del actor
-                    child: Image.network(
-                      //Utilizamos el profile path para llamar a la imagen del actor
-                      actor.profilePath,
-                      //Le agregamos una altura a la imagen
-                      height: 180,
-                      //Le asignamos una ancho a la imagen
-                      width: 135,
-                      //Queremos que la imagen se acomde y que se pueda ver correctamnte
-                      fit: BoxFit.cover,
-                    )),
+                FadeInRight(
+                  child: ClipRRect(
+                      //Le agregamos un estilo ciruclar
+                      borderRadius: BorderRadius.circular(20),
+                      //Llamamos a la imagen del actor
+                      child: Image.network(
+                        //Utilizamos el profile path para llamar a la imagen del actor
+                        actor.profilePath,
+                        //Le agregamos una altura a la imagen
+                        height: 180,
+                        //Le asignamos una ancho a la imagen
+                        width: 135,
+                        //Queremos que la imagen se acomde y que se pueda ver correctamnte
+                        fit: BoxFit.cover,
+                      )),
+                ),
 
                 //? Nombre del actor
                 const SizedBox(
@@ -317,6 +320,13 @@ class _CustomSliverAppbar extends StatelessWidget {
               movie.posterPath,
               //Colocamos un fit.cover para que la imagen se expanda y se vea completo
               fit: BoxFit.cover,
+              //
+              loadingBuilder: (context, child, loadingProgress) {
+                //
+                if (loadingProgress != null) return const SizedBox();
+
+                return FadeIn(child: child);
+              },
             )),
 
             //Creamos un gradiante para poder ver el cuerpo de la imagen y los objetos en su interior
