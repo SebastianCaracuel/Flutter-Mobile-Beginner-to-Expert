@@ -27,5 +27,5 @@ abstract class MoviesRepository {
   Future<Movie> getMovieID(String id);
 
   //?Creamos el metodo para buscar películas
-  Future<List<Movie>> searchMovies({String query});
+  Future<List<Movie>> searchMovies(String query);
 }
