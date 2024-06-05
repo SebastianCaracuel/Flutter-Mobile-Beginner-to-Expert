@@ -25,4 +25,7 @@ abstract class MoviesRepository {
 
   //?ID de la película - Instanciamos que nuestro metodo sea global es decir que se pueda llamar.
   Future<Movie> getMovieID(String id);
+
+  //?Creamos el metodo para buscar películas
+  Future<List<Movie>> searchMovies({String query});
 }
