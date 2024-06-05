@@ -14,7 +14,7 @@ class ActorRepositoryImpl extends ActorsRepository {
   final ActorsDatasource datasource;
 
   //Constructor de la clase
-  ActorRepositoryImpl({required this.datasource});
+  ActorRepositoryImpl(this.datasource);
 
   @override
   Future<List<Actor>> getActorsByMovie(String movieId) {
