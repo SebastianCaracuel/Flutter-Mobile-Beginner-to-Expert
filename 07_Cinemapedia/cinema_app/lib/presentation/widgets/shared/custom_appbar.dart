@@ -1,4 +1,5 @@
 //Importaciones Flutter
+import 'package:cinema_app/presentation/delegates/search_movies_delegate.dart';
 import 'package:flutter/material.dart';
 //Importaciones nuestras
 
@@ -59,7 +60,16 @@ class CustomAppbar extends StatelessWidget {
               //todo:Agregamos un botón de busqueda, que será para filtrar o buscar las películas
               IconButton(
                   //Función del botón
-                  onPressed: () {},
+                  onPressed: () {
+                    // Se llama a la función showSearch cuando se presiona el botón (Función de flutter)
+                    showSearch(
+                      // Se pasa el contexto actual de la aplicación a la función showSearch.
+                      context: context,
+                      // Se pasa el delegado de búsqueda personalizado para manejar la lógica y presentación de la búsqueda.
+                      delegate: SearchMovieDelegate(),
+                    );
+                  },
+
                   //Icono del botón
                   icon: const Icon(Icons.search)),
 
