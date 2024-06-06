@@ -37,7 +37,8 @@ class MovieMapper {
           ? 'https://image.tmdb.org/t/p/w500${moviedb.posterPath}'
           : 'NO-POSTER',
       //
-      releaseDate: moviedb.releaseDate,
+      releaseDate:
+          moviedb.releaseDate != null ? moviedb.releaseDate! : DateTime.now(),
       //
       title: moviedb.title,
       //
