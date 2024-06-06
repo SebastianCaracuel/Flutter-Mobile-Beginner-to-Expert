@@ -5,8 +5,16 @@ import 'package:flutter/material.dart';
 import 'package:cinema_app/domain/entities/movie.dart';
 import 'package:animate_do/animate_do.dart';
 
+//?Creamos un tipo de función especifíca
+typedef SearchMoviesCallBack = Future<List<Movie>> Function(String query);
+
 //Creamos una clase
 class SearchMovieDelegate extends SearchDelegate<Movie?> {
+  //?Definimos una función para buscar las películas
+  final SearchMoviesCallBack searchMovies;
+  //Constructor con la función
+  SearchMovieDelegate({required this.searchMovies});
+
   // Esta propiedad sobreescribe el texto del marcador de posición (placeholder)
   // del campo de búsqueda. Cuando el usuario ve el campo de búsqueda vacío,
   // verá "search movie" en lugar del texto por defecto (search). Esto ayuda a indicar
@@ -59,6 +67,31 @@ class SearchMovieDelegate extends SearchDelegate<Movie?> {
   // Puede mostrar una lista de sugerencias o resultados previos.
   @override
   Widget buildSuggestions(BuildContext context) {
-    return const Text('buildSuggestions');
+    // FutureBuilder se usa para construir widgets basados en el resultado de un Future.
+    return FutureBuilder(
+      // El Future que se está esperando, que en este caso es el resultado de buscar películas
+      // basado en la consulta actual (query).
+      future: searchMovies(query),
+      // El constructor del FutureBuilder, que se llama cada vez que el Future cambia de estado.
+      builder: (context, snapshot) {
+        // Si snapshot.data es nulo, se asigna una lista vacía a películas.
+        final movies = snapshot.data ?? [];
+
+        // ListView.builder se usa para construir una lista de widgets.
+        return ListView.builder(
+          // La cantidad de elementos en la lista es el tamaño de la lista de películas.
+          itemCount: movies.length,
+          // itemBuilder se llama para construir cada elemento de la lista.
+          itemBuilder: (context, index) {
+            // Obtiene la película en el índice actual.
+            final movie = movies[index];
+            // Retorna un ListTile para cada película, mostrando el título de la película.
+            return ListTile(
+              title: Text(movie.title),
+            );
+          },
+        );
+      },
+    );
   }
 }

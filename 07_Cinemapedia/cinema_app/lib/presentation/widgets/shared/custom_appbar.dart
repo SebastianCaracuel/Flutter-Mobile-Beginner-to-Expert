@@ -1,10 +1,12 @@
 //Importaciones Flutter
-import 'package:cinema_app/presentation/delegates/search_movies_delegate.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 //Importaciones nuestras
+import 'package:cinema_app/presentation/delegates/search_movies_delegate.dart';
+import 'package:cinema_app/presentation/providers/providers.dart';
 
 //?Creamos un Appbar personalizado
-class CustomAppbar extends StatelessWidget {
+class CustomAppbar extends ConsumerWidget {
   //Propiedades de la clase
 
   //Constructor
@@ -12,7 +14,7 @@ class CustomAppbar extends StatelessWidget {
 
   //Objeto
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, ref) {
     //Propiedades del objeto
 
     //?Llamamos el color que asignamos en nuestro tema para la aplicación
@@ -61,12 +63,17 @@ class CustomAppbar extends StatelessWidget {
               IconButton(
                   //Función del botón
                   onPressed: () {
+                    //?Creamos una variable que llame a nuestra referencia de nuestro provider
+                    final movieRepository = ref.read(movieRepositoryProvider);
+
                     // Se llama a la función showSearch cuando se presiona el botón (Función de flutter)
                     showSearch(
                       // Se pasa el contexto actual de la aplicación a la función showSearch.
                       context: context,
                       // Se pasa el delegado de búsqueda personalizado para manejar la lógica y presentación de la búsqueda.
-                      delegate: SearchMovieDelegate(),
+                      delegate: SearchMovieDelegate(
+                          //Llamamos a la referencia, utilizando el método buscar películas
+                          searchMovies: movieRepository.searchMovies),
                     );
                   },
 
