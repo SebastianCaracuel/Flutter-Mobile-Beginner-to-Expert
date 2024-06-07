@@ -1,9 +1,10 @@
 //Importaciones flutter
-
-import 'package:cinema_app/config/helpers/human_formats.dart';
 import 'package:flutter/material.dart';
+import 'dart:async';
+
 //Importaciones nuestras
 import 'package:cinema_app/domain/entities/movie.dart';
+import 'package:cinema_app/config/helpers/human_formats.dart';
 import 'package:animate_do/animate_do.dart';
 
 //?Creamos un tipo de función especifíca
@@ -13,8 +14,32 @@ typedef SearchMoviesCallBack = Future<List<Movie>> Function(String query);
 class SearchMovieDelegate extends SearchDelegate<Movie?> {
   //?Definimos una función para buscar las películas
   final SearchMoviesCallBack searchMovies;
+
+  //?Creamos una variable de stream
+
+  StreamController<List<Movie>> debouncedMovies = StreamController.broadcast();
+
+  //?Creamos una variable que nos permita determinar un periodo de tiempo
+  Timer? _debounceTimer;
+
   //Constructor con la función
   SearchMovieDelegate({required this.searchMovies});
+
+  //?Creamos un metodo vacio para cuando el query cambie
+  //Función encargada para emitir el nuevo resultado de las películas
+  void _onQueryChanged(String query) {
+    //!
+
+    //determinamos si el tiempo tiene un valor o esta activo, voy a limpiarlo(cancelandolo)
+    if (_debounceTimer?.isActive ?? false) _debounceTimer!.cancel();
+
+    //le añadimos un tiempo, para esperar, o saber cuanto se va a demorar para mostrar el siguiente valor
+    //Esperamos una milesima de 500 milisegundos entre cada vez que la persona deja de escribir
+    _debounceTimer = Timer(const Duration(milliseconds: 500), () {
+      //Cuando deja de escribir por 500 milisegundos
+      //todo: Buscar películas y emitir al stream
+    });
+  }
 
   // Esta propiedad sobreescribe el texto del marcador de posición (placeholder)
   // del campo de búsqueda. Cuando el usuario ve el campo de búsqueda vacío,
@@ -68,13 +93,17 @@ class SearchMovieDelegate extends SearchDelegate<Movie?> {
   // Puede mostrar una lista de sugerencias o resultados previos.
   @override
   Widget buildSuggestions(BuildContext context) {
-    // FutureBuilder se usa para construir widgets basados en el resultado de un Future.
-    return FutureBuilder(
-      // El Future que se está esperando, que en este caso es el resultado de buscar películas
-      // basado en la consulta actual (query).
-      future: searchMovies(query),
-      // El constructor del FutureBuilder, que se llama cada vez que el Future cambia de estado.
+    //Llamamos al método OnQueryChanged
+    _onQueryChanged(query);
+
+    // Cambiamos nuestro Future Builder por un Streambuilder
+    return StreamBuilder(
+      stream: debouncedMovies.stream,
+
+      // El constructor del StreamBuilder
       builder: (context, snapshot) {
+        //todo:!auí se realizará la petición
+
         // Si snapshot.data es nulo, se asigna una lista vacía a películas.
         final movies = snapshot.data ?? [];
 
