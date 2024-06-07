@@ -114,8 +114,7 @@ class _MovieItem extends StatelessWidget {
       //Utilizamos un Row para tener objetos en horizontal
       child: Row(
         children: [
-          //Imagen
-
+          //todo: Imagen de la película
           //?Para la imagen necesito un tamaño especifico porque estoy dentro de un row
           //?Utilizamos un SizeBox para ese
           SizedBox(
@@ -132,9 +131,42 @@ class _MovieItem extends StatelessWidget {
                     FadeIn(child: child),
               ),
             ),
-          )
+          ),
 
-          //Descripción de la película
+          //damos un espacio vertical de 10 pixeles para que exista una separación entre la imagen y la descripción
+          const SizedBox(width: 10),
+
+          //todo:Descripción de la película
+          //?Utilizamos un Sizebox para tener un tamaño especifico del texto
+          SizedBox(
+            //Le añadimos un espacio determinado al Sizebox para mostrar el texto
+            width: size.width * 0.7,
+            //Utilizamos una columna para tener objetos en forma horizontal
+            child: Column(
+              //Queremos que todos nuestro objetos esten alineados y comiencen al principio
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                //Titulo de la película
+                Text(
+                    //Llamamos al titulo de la película
+                    movie.title,
+                    //Le añadimos un estilo al titulo
+                    style: textStyles.titleMedium),
+
+                //Reseña de la película
+                //?Controlamos todo el texto de las películas
+                // Evaluamos la longitud de la sinopsis de la película
+                (movie.overview.length > 100)
+                    // Si la sinopsis tiene más de 100 caracteres
+                    // Tomamos los primeros 100 caracteres de la sinopsis
+                    // Añadimos '...' al final para indicar que el texto ha sido truncado
+                    ? Text('${movie.overview.substring(0, 100)}...')
+                    // Si la sinopsis tiene 100 caracteres o menos
+                    // Mostramos la sinopsis completa sin truncar
+                    : Text(movie.overview),
+              ],
+            ),
+          ),
         ],
       ),
     );
