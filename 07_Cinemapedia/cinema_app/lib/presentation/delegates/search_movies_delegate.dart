@@ -77,21 +77,30 @@ class SearchMovieDelegate extends SearchDelegate<Movie?> {
         // Si snapshot.data es nulo, se asigna una lista vacía a películas.
         final movies = snapshot.data ?? [];
 
-        // ListView.builder se usa para construir una lista de widgets.
         return ListView.builder(
-          // La cantidad de elementos en la lista es el tamaño de la lista de películas.
           itemCount: movies.length,
-          // itemBuilder se llama para construir cada elemento de la lista.
-          itemBuilder: (context, index) {
-            // Obtiene la película en el índice actual.
-            final movie = movies[index];
-            // Retorna un ListTile para cada película, mostrando el título de la película.
-            return ListTile(
-              title: Text(movie.title),
-            );
-          },
+          itemBuilder: (context, index) => _MovieItem(
+            movie: movies[index],
+          ),
         );
       },
     );
+  }
+}
+
+//Creamos un Widget para mostrar las películas
+
+class _MovieItem extends StatelessWidget {
+  //Propiedades de la clase
+
+  //?Llamamos a nuetra película
+  final Movie movie;
+
+  //Constructor
+  const _MovieItem({required this.movie});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Placeholder();
   }
 }
