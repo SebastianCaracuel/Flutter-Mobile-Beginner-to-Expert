@@ -68,14 +68,29 @@ class CustomAppbar extends ConsumerWidget {
                     //?Creamos una variable que llame a nuestra referencia de nuestro provider
                     final movieRepository = ref.read(movieRepositoryProvider);
 
+                    //?Implementamos nuestro provider de busqueda
+                    final searchQuery = ref.read(searchQueryProvider);
+
                     // Se llama a la función showSearch cuando se presiona el botón (Función de flutter)
                     showSearch<Movie?>(
+                      //?Llamamos al provider de buscar
+                      query: searchQuery,
                       // Se pasa el contexto actual de la aplicación a la función showSearch.
                       context: context,
                       // Se pasa el delegado de búsqueda personalizado para manejar la lógica y presentación de la búsqueda.
                       delegate: SearchMovieDelegate(
-                          //Llamamos a la referencia, utilizando el método buscar películas
-                          searchMovies: movieRepository.searchMovies),
+                          // Llamamos a la referencia, utilizando el método buscar películas
+                          searchMovies: (query) {
+                        // Actualizamos el estado del proveedor searchQueryProvider con la nueva consulta
+                        ref
+                            .read(searchQueryProvider
+                                .notifier) // Leemos el notifier del proveedor
+                            .update((state) =>
+                                query); // Actualizamos el estado con la nueva consulta
+
+                        // Llamamos al método searchMovies del repositorio de películas y devolvemos el resultado
+                        return movieRepository.searchMovies(query);
+                      }),
                     ).then((movie) {
                       //Condición
                       if (movie == null) return;
