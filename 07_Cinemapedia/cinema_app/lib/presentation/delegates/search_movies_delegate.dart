@@ -25,6 +25,11 @@ class SearchMovieDelegate extends SearchDelegate<Movie?> {
   //Constructor con la función
   SearchMovieDelegate({required this.searchMovies});
 
+// ? Creamos un Método para limpiar y cerrar el stream
+  void clearStreams() {
+    debouncedMovies.close(); // Cerramos el stream debouncedMovies
+  }
+
   //?Creamos un metodo vacio para cuando el query cambie
 // Función encargada de emitir el nuevo resultado de las películas
   void _onQueryChanged(String query) {
@@ -87,7 +92,12 @@ class SearchMovieDelegate extends SearchDelegate<Movie?> {
     return IconButton(
       // Utilizamos un Onpressed para ir "hacia atras" la pagina principal
       // En este caso, se llama a `close` para cerrar la búsqueda y se pasa `null` como resultado.
-      onPressed: () => close(context, null),
+      onPressed: () {
+        // Llamamos a la función clearStreams para cerrar el stream debouncedMovies
+        clearStreams();
+        // Cerramos el contexto actual (podría ser una página o un diálogo)
+        close(context, null);
+      },
       // El icono mostrado en el botón es una flecha hacia atrás.
       icon: const Icon(Icons.arrow_back),
     );
@@ -122,7 +132,13 @@ class SearchMovieDelegate extends SearchDelegate<Movie?> {
           itemBuilder: (context, index) => _MovieItem(
             movie: movies[index],
             //
-            onMovieSelected: close,
+            onMovieSelected: (context, movie) {
+              // Llamamos a la función clearStreams para cerrar el stream debouncedMovies
+              clearStreams();
+
+              // Cerramos el contexto actual (como una página o diálogo) y devolvemos la película seleccionada
+              close(context, movie);
+            },
           ),
         );
       },
