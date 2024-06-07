@@ -82,6 +82,8 @@ class SearchMovieDelegate extends SearchDelegate<Movie?> {
           itemCount: movies.length,
           itemBuilder: (context, index) => _MovieItem(
             movie: movies[index],
+            //
+            onMovieSelected: close,
           ),
         );
       },
@@ -97,8 +99,11 @@ class _MovieItem extends StatelessWidget {
   //?Llamamos a nuetra película
   final Movie movie;
 
+  //?Recibimos una función que nos permite identificar cuando se selecciona una película.
+  final Function onMovieSelected;
+
   //Constructor
-  const _MovieItem({required this.movie});
+  const _MovieItem({required this.movie, required this.onMovieSelected});
 
   @override
   Widget build(BuildContext context) {
@@ -109,91 +114,98 @@ class _MovieItem extends StatelessWidget {
     //?Creamos una variable para ver las dimensiones del movil
     final size = MediaQuery.of(context).size;
 
-    return Padding(
-      //Asignamos un paddgin para que tenga una separación los objetos
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-      //Utilizamos un Row para tener objetos en horizontal
-      child: Row(
-        children: [
-          //todo: Imagen de la película
-          //?Para la imagen necesito un tamaño especifico porque estoy dentro de un row
-          //?Utilizamos un SizeBox para ese
-          SizedBox(
-            width: size.width * 0.2,
-            //Utilizamos un ClipRRect para que la imagen tenga bordes redondeados
-            child: ClipRRect(
-              //Le añadimos el borde radius
-              borderRadius: BorderRadius.circular(10),
-              //Llamamos la imagen de nuestra entidad película
-              child: Image.network(
-                movie.posterPath,
-                //Creamos una animación en cargado (Mostrar las películas si no estan cargadas con una animación)
-                loadingBuilder: (context, child, loadingProgress) =>
-                    FadeIn(child: child),
+    return GestureDetector(
+      //!Función de navegación
+      onTap: () {
+        //
+        onMovieSelected(context, movie);
+      },
+      child: Padding(
+        //Asignamos un paddgin para que tenga una separación los objetos
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+        //Utilizamos un Row para tener objetos en horizontal
+        child: Row(
+          children: [
+            //todo: Imagen de la película
+            //?Para la imagen necesito un tamaño especifico porque estoy dentro de un row
+            //?Utilizamos un SizeBox para ese
+            SizedBox(
+              width: size.width * 0.2,
+              //Utilizamos un ClipRRect para que la imagen tenga bordes redondeados
+              child: ClipRRect(
+                //Le añadimos el borde radius
+                borderRadius: BorderRadius.circular(10),
+                //Llamamos la imagen de nuestra entidad película
+                child: Image.network(
+                  movie.posterPath,
+                  //Creamos una animación en cargado (Mostrar las películas si no estan cargadas con una animación)
+                  loadingBuilder: (context, child, loadingProgress) =>
+                      FadeIn(child: child),
+                ),
               ),
             ),
-          ),
 
-          //damos un espacio vertical de 10 pixeles para que exista una separación entre la imagen y la descripción
-          const SizedBox(width: 10),
+            //damos un espacio vertical de 10 pixeles para que exista una separación entre la imagen y la descripción
+            const SizedBox(width: 10),
 
-          //todo:Descripción de la película
-          //?Utilizamos un Sizebox para tener un tamaño especifico del texto
-          SizedBox(
-            //Le añadimos un espacio determinado al Sizebox para mostrar el texto
-            width: size.width * 0.7,
-            //Utilizamos una columna para tener objetos en forma horizontal
-            child: Column(
-              //Queremos que todos nuestro objetos esten alineados y comiencen al principio
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                //Titulo de la película
-                Text(
-                    //Llamamos al titulo de la película
-                    movie.title,
-                    //Le añadimos un estilo al titulo
-                    style: textStyles.titleMedium),
+            //todo:Descripción de la película
+            //?Utilizamos un Sizebox para tener un tamaño especifico del texto
+            SizedBox(
+              //Le añadimos un espacio determinado al Sizebox para mostrar el texto
+              width: size.width * 0.7,
+              //Utilizamos una columna para tener objetos en forma horizontal
+              child: Column(
+                //Queremos que todos nuestro objetos esten alineados y comiencen al principio
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  //Titulo de la película
+                  Text(
+                      //Llamamos al titulo de la película
+                      movie.title,
+                      //Le añadimos un estilo al titulo
+                      style: textStyles.titleMedium),
 
-                //Reseña de la película
-                //?Controlamos todo el texto de las películas
-                // Evaluamos la longitud de la sinopsis de la película
-                (movie.overview.length > 100)
-                    // Si la sinopsis tiene más de 100 caracteres
-                    // Tomamos los primeros 100 caracteres de la sinopsis
-                    // Añadimos '...' al final para indicar que el texto ha sido truncado
-                    ? Text('${movie.overview.substring(0, 100)}...')
-                    // Si la sinopsis tiene 100 caracteres o menos
-                    // Mostramos la sinopsis completa sin truncar
-                    : Text(movie.overview),
+                  //Reseña de la película
+                  //?Controlamos todo el texto de las películas
+                  // Evaluamos la longitud de la sinopsis de la película
+                  (movie.overview.length > 100)
+                      // Si la sinopsis tiene más de 100 caracteres
+                      // Tomamos los primeros 100 caracteres de la sinopsis
+                      // Añadimos '...' al final para indicar que el texto ha sido truncado
+                      ? Text('${movie.overview.substring(0, 100)}...')
+                      // Si la sinopsis tiene 100 caracteres o menos
+                      // Mostramos la sinopsis completa sin truncar
+                      : Text(movie.overview),
 
-                //Calificación de la película
-                //?Mostramos por pantalla la calíficación de las personas
-                Row(
-                  children: [
-                    //Colocamos el icono de la calificación en estrellas
-                    Icon(
-                        //Llamamos un icono de estrella
-                        Icons.star_half_rounded,
-                        //Y tendrá un color amaraillo no tan luminoso
-                        color: Colors.yellow.shade800),
+                  //Calificación de la película
+                  //?Mostramos por pantalla la calíficación de las personas
+                  Row(
+                    children: [
+                      //Colocamos el icono de la calificación en estrellas
+                      Icon(
+                          //Llamamos un icono de estrella
+                          Icons.star_half_rounded,
+                          //Y tendrá un color amaraillo no tan luminoso
+                          color: Colors.yellow.shade800),
 
-                    //Pequeña separación entre el icono y la descripción
-                    const SizedBox(width: 5),
+                      //Pequeña separación entre el icono y la descripción
+                      const SizedBox(width: 5),
 
-                    //Llamamos los votos mostrados en un texto
-                    Text(
-                      //Colocamos el HumanFormat para poder ver los números en un formato humano visible
-                      HumanFormats.number(movie.voteAverage, 1),
-                      //Le añadimos un estilo al texto
-                      style: textStyles.bodyMedium!
-                          .copyWith(color: Colors.yellow.shade900),
-                    ),
-                  ],
-                )
-              ],
+                      //Llamamos los votos mostrados en un texto
+                      Text(
+                        //Colocamos el HumanFormat para poder ver los números en un formato humano visible
+                        HumanFormats.number(movie.voteAverage, 1),
+                        //Le añadimos un estilo al texto
+                        style: textStyles.bodyMedium!
+                            .copyWith(color: Colors.yellow.shade900),
+                      ),
+                    ],
+                  )
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

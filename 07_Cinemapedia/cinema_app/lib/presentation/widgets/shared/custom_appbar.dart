@@ -1,9 +1,11 @@
 //Importaciones Flutter
+import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 //Importaciones nuestras
 import 'package:cinema_app/presentation/delegates/search_movies_delegate.dart';
 import 'package:cinema_app/presentation/providers/providers.dart';
+import 'package:cinema_app/domain/entities/movie.dart';
 
 //?Creamos un Appbar personalizado
 class CustomAppbar extends ConsumerWidget {
@@ -67,14 +69,19 @@ class CustomAppbar extends ConsumerWidget {
                     final movieRepository = ref.read(movieRepositoryProvider);
 
                     // Se llama a la función showSearch cuando se presiona el botón (Función de flutter)
-                    showSearch(
+                    showSearch<Movie?>(
                       // Se pasa el contexto actual de la aplicación a la función showSearch.
                       context: context,
                       // Se pasa el delegado de búsqueda personalizado para manejar la lógica y presentación de la búsqueda.
                       delegate: SearchMovieDelegate(
                           //Llamamos a la referencia, utilizando el método buscar películas
                           searchMovies: movieRepository.searchMovies),
-                    );
+                    ).then((movie) {
+                      //Condición
+                      if (movie == null) return;
+
+                      context.push('/movie/${movie.id}');
+                    });
                   },
 
                   //Icono del botón
