@@ -1,5 +1,6 @@
 //Importaciones flutter
 
+import 'package:cinema_app/config/helpers/human_formats.dart';
 import 'package:flutter/material.dart';
 //Importaciones nuestras
 import 'package:cinema_app/domain/entities/movie.dart';
@@ -122,7 +123,7 @@ class _MovieItem extends StatelessWidget {
             //Utilizamos un ClipRRect para que la imagen tenga bordes redondeados
             child: ClipRRect(
               //Le añadimos el borde radius
-              borderRadius: BorderRadius.circular(20),
+              borderRadius: BorderRadius.circular(10),
               //Llamamos la imagen de nuestra entidad película
               child: Image.network(
                 movie.posterPath,
@@ -164,6 +165,31 @@ class _MovieItem extends StatelessWidget {
                     // Si la sinopsis tiene 100 caracteres o menos
                     // Mostramos la sinopsis completa sin truncar
                     : Text(movie.overview),
+
+                //Calificación de la película
+                //?Mostramos por pantalla la calíficación de las personas
+                Row(
+                  children: [
+                    //Colocamos el icono de la calificación en estrellas
+                    Icon(
+                        //Llamamos un icono de estrella
+                        Icons.star_half_rounded,
+                        //Y tendrá un color amaraillo no tan luminoso
+                        color: Colors.yellow.shade800),
+
+                    //Pequeña separación entre el icono y la descripción
+                    const SizedBox(width: 5),
+
+                    //Llamamos los votos mostrados en un texto
+                    Text(
+                      //Colocamos el HumanFormat para poder ver los números en un formato humano visible
+                      HumanFormats.number(movie.voteAverage, 1),
+                      //Le añadimos un estilo al texto
+                      style: textStyles.bodyMedium!
+                          .copyWith(color: Colors.yellow.shade900),
+                    ),
+                  ],
+                )
               ],
             ),
           ),
