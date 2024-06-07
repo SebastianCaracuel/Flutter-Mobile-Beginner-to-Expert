@@ -35,7 +35,7 @@ class MovieMapper {
       //Realizamos lo mismo de la imagen.
       posterPath: (moviedb.posterPath != '')
           ? 'https://image.tmdb.org/t/p/w500${moviedb.posterPath}'
-          : 'NO-POSTER',
+          : 'https://th.bing.com/th/id/OIP.59acm7M8zfvbkDUNHr6KdQAAAA?rs=1&pid=ImgDetMain',
       //
       releaseDate:
           moviedb.releaseDate != null ? moviedb.releaseDate! : DateTime.now(),
