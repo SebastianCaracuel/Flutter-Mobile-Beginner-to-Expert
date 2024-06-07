@@ -101,6 +101,42 @@ class _MovieItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    //Propiedades del objeto
+
+    //?Creamos una variable para utilizar cierto estilo de texto
+    final textStyles = Theme.of(context).textTheme;
+    //?Creamos una variable para ver las dimensiones del movil
+    final size = MediaQuery.of(context).size;
+
+    return Padding(
+      //Asignamos un paddgin para que tenga una separación los objetos
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+      //Utilizamos un Row para tener objetos en horizontal
+      child: Row(
+        children: [
+          //Imagen
+
+          //?Para la imagen necesito un tamaño especifico porque estoy dentro de un row
+          //?Utilizamos un SizeBox para ese
+          SizedBox(
+            width: size.width * 0.2,
+            //Utilizamos un ClipRRect para que la imagen tenga bordes redondeados
+            child: ClipRRect(
+              //Le añadimos el borde radius
+              borderRadius: BorderRadius.circular(20),
+              //Llamamos la imagen de nuestra entidad película
+              child: Image.network(
+                movie.posterPath,
+                //Creamos una animación en cargado (Mostrar las películas si no estan cargadas con una animación)
+                loadingBuilder: (context, child, loadingProgress) =>
+                    FadeIn(child: child),
+              ),
+            ),
+          )
+
+          //Descripción de la película
+        ],
+      ),
+    );
   }
 }
