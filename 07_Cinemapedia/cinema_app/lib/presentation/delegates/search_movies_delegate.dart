@@ -26,18 +26,28 @@ class SearchMovieDelegate extends SearchDelegate<Movie?> {
   SearchMovieDelegate({required this.searchMovies});
 
   //?Creamos un metodo vacio para cuando el query cambie
-  //Función encargada para emitir el nuevo resultado de las películas
+// Función encargada de emitir el nuevo resultado de las películas
   void _onQueryChanged(String query) {
-    //!
+    //! Esta función se llama cada vez que el usuario cambia el texto de búsqueda
 
-    //determinamos si el tiempo tiene un valor o esta activo, voy a limpiarlo(cancelandolo)
+    // Determinamos si el temporizador tiene un valor o está activo, y si lo está, lo cancelamos
     if (_debounceTimer?.isActive ?? false) _debounceTimer!.cancel();
 
-    //le añadimos un tiempo, para esperar, o saber cuanto se va a demorar para mostrar el siguiente valor
-    //Esperamos una milesima de 500 milisegundos entre cada vez que la persona deja de escribir
-    _debounceTimer = Timer(const Duration(milliseconds: 500), () {
-      //Cuando deja de escribir por 500 milisegundos
-      //todo: Buscar películas y emitir al stream
+    // Creamos un nuevo temporizador que espera 500 milisegundos después de que el usuario deja de escribir
+    _debounceTimer = Timer(const Duration(milliseconds: 500), () async {
+      // Cuando el usuario deja de escribir por 500 milisegundos, se ejecuta esta función
+
+      // Si la consulta de búsqueda está vacía, emitimos una lista vacía de películas
+      if (query.isEmpty) {
+        debouncedMovies.add([]); // Agregamos una lista vacía al stream
+        return; // Terminamos la ejecución de la función
+      }
+
+      // Si la consulta no está vacía, buscamos películas usando la consulta
+      final movies = await searchMovies(query);
+
+      // Agregamos las películas encontradas al stream
+      debouncedMovies.add(movies);
     });
   }
 
