@@ -66,8 +66,8 @@ class CustomAppbar extends ConsumerWidget {
                   //Función del botón
                   onPressed: () {
                     //?Creamos una variable que llame a nuestra referencia de nuestro provider
-                    //TODO
-                    //final searchedMovies = ref.read(searchedMoviesProvider);
+
+                    final searchedMovies = ref.read(searchedMoviesProvider);
 
                     //?Implementamos nuestro provider de busqueda
                     final searchQuery = ref.read(searchQueryProvider);
@@ -80,6 +80,7 @@ class CustomAppbar extends ConsumerWidget {
                       context: context,
                       // Se pasa el delegado de búsqueda personalizado para manejar la lógica y presentación de la búsqueda.
                       delegate: SearchMovieDelegate(
+                          initialMovies: searchedMovies,
                           // Llamamos a la referencia, utilizando el método buscar películas
                           searchMovies: ref
                               .read(searchedMoviesProvider.notifier)

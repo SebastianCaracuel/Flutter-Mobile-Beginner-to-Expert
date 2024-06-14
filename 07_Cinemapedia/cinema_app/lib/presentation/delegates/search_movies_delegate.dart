@@ -15,15 +15,18 @@ class SearchMovieDelegate extends SearchDelegate<Movie?> {
   //?Definimos una función para buscar las películas
   final SearchMoviesCallBack searchMovies;
 
-  //?Creamos una variable de stream
+  //Creamos una lista de peliculas
+  final List<Movie> initialMovies;
 
+  //?Creamos una variable de stream
   StreamController<List<Movie>> debouncedMovies = StreamController.broadcast();
 
   //?Creamos una variable que nos permita determinar un periodo de tiempo
   Timer? _debounceTimer;
 
   //Constructor con la función
-  SearchMovieDelegate({required this.searchMovies});
+  SearchMovieDelegate(
+      {required this.searchMovies, required this.initialMovies});
 
 // ? Creamos un Método para limpiar y cerrar el stream
   void clearStreams() {
@@ -118,6 +121,8 @@ class SearchMovieDelegate extends SearchDelegate<Movie?> {
 
     // Cambiamos nuestro Future Builder por un Streambuilder
     return StreamBuilder(
+      //Colocamos la iniciacion
+      initialData: initialMovies,
       stream: debouncedMovies.stream,
 
       // El constructor del StreamBuilder
