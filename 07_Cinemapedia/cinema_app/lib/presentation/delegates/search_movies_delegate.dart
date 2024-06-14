@@ -112,33 +112,7 @@ class SearchMovieDelegate extends SearchDelegate<Movie?> {
   // Este método construye los resultados de la búsqueda basados en la consulta del usuario.
   @override
   Widget buildResults(BuildContext context) {
-    return StreamBuilder(
-      //mostramos las películas que tenía en la ultima busqueda presionando enter
-      initialData: initialMovies,
-      //Luego tenemos la respuesta del stream
-      stream: debouncedMovies.stream,
-
-      // El constructor del StreamBuilder
-      builder: (context, snapshot) {
-        // Si snapshot.data es nulo, se asigna una lista vacía a películas.
-        final movies = snapshot.data ?? [];
-
-        return ListView.builder(
-          itemCount: movies.length,
-          itemBuilder: (context, index) => _MovieItem(
-            movie: movies[index],
-            //
-            onMovieSelected: (context, movie) {
-              // Llamamos a la función clearStreams para cerrar el stream debouncedMovies
-              clearStreams();
-
-              // Cerramos el contexto actual (como una página o diálogo) y devolvemos la película seleccionada
-              close(context, movie);
-            },
-          ),
-        );
-      },
-    );
+    return _builResultsAndSuggestions();
   }
 
   // Este método construye las sugerencias que se muestran mientras el usuario escribe.
@@ -149,6 +123,11 @@ class SearchMovieDelegate extends SearchDelegate<Movie?> {
     _onQueryChanged(query);
 
     // Cambiamos nuestro Future Builder por un Streambuilder
+    return _builResultsAndSuggestions();
+  }
+
+//Creamos un método para no repetir el código de buildResults y BuildSuggestions
+  Widget _builResultsAndSuggestions() {
     return StreamBuilder(
       //Colocamos la iniciacion
       initialData: initialMovies,
