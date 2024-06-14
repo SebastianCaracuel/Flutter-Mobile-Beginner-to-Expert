@@ -32,32 +32,37 @@ En esta Septima Etapa los conceptos que se vieron fueron:
 <br>
 
 1. Modelos.
-2. Datasources <br>
+2. Datasources. <br>
     a. Implementaciones.<br>
     b. Abstracciones.<br>
-3. Repositorios <br>
+3. Repositorios. <br>
     a. Implementaciones.<br>
     b. Abstracciones.<br>
 
-4. Entidades
-5. Mappers
+4. Entidades.
+5. Mappers.
 6. Riverpod<br>
     a. Provider.<br>
     b. StateNotifierProvider.<br>
-    c. Notifiers<br>
-7. Carrusel
-8. SwiperPagination
-9. Custom AppBar
+    c. Notifiers.<br>
+7. Carrusel.
+8. SwiperPagination.
+9. Custom AppBar.
 10. API TheMovieDB.<br>
     a. Películas populares.<br>
     b. Películas en cines. <br>
     c. Películas mejores calificadas.<br>
     d. Películas que próximamente estarán en cines.<br>
-11. SearchDelegate
-12. Búsqueda contra TheMovieDB
-13. Debouncer
-14. DRY
-15. Clean Arquitecture 
+11. SearchDelegate.
+12. Búsqueda contra TheMovieDB.
+13. Debouncer.
+14. DRY.
+15. Go_Router. <br>
+    a. Redirect.<br>
+    b. ShellRoute.<br>
+    c. SubShellRoutes.<br>
+ 
+16. Clean Arquitecture. 
 
 La aplicación consta de un catálogo de películas utilizando una API (TheMovieDB), esta es una aplicación más avanzanda donde utilizamos el gestor de estado Riverpod, arquitectura limpia, entre otras cosas.
 <br> 
