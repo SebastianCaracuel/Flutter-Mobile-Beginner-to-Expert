@@ -21,6 +21,9 @@ class SearchMovieDelegate extends SearchDelegate<Movie?> {
   //?Creamos una variable de stream
   StreamController<List<Movie>> debouncedMovies = StreamController.broadcast();
 
+  //?Creamos otra variable Stream para saber si esta cargando las películas en nuestro buscador
+  StreamController<bool> isLoadingStream = StreamController.broadcast();
+
   //?Creamos una variable que nos permita determinar un periodo de tiempo
   Timer? _debounceTimer;
 
@@ -36,6 +39,9 @@ class SearchMovieDelegate extends SearchDelegate<Movie?> {
   //?Creamos un metodo vacio para cuando el query cambie
 // Función encargada de emitir el nuevo resultado de las películas
   void _onQueryChanged(String query) {
+    //tan pronto la persona comience a escribir quiero regresar el stream "isLoadingStream"
+    isLoadingStream.add(true);
+
     //! Esta función se llama cada vez que el usuario cambia el texto de búsqueda
 
     // Determinamos si el temporizador tiene un valor o está activo, y si lo está, lo cancelamos
@@ -59,6 +65,9 @@ class SearchMovieDelegate extends SearchDelegate<Movie?> {
 
       // Agregamos las películas encontradas al stream
       debouncedMovies.add(movies);
+
+      //Detengo el cargado
+      isLoadingStream.add(false);
     });
   }
 
@@ -74,20 +83,52 @@ class SearchMovieDelegate extends SearchDelegate<Movie?> {
   @override
   List<Widget>? buildActions(BuildContext context) {
     return [
-      // El widget FadeIn anima su hijo (child) cuando su propiedad `animate` es verdadera.
-      FadeIn(
-        // La animación solo se activa si la consulta (query) no está vacía.
-        animate: query.isNotEmpty,
-        // Duración de la animación (200 milisegundos).
-        duration: const Duration(milliseconds: 200),
-        // El hijo del FadeIn es un IconButton.
-        child: IconButton(
-          // Cuando se presiona el botón, la consulta se borra (se establece en una cadena vacía).
-          onPressed: () => query = '',
-          // El icono mostrado en el botón es un ícono de limpiar (clear).
-          icon: const Icon(Icons.clear),
-        ),
-      ),
+      //Creamos un stram para utilizar la variable "isLoadingStram" que creamos
+      StreamBuilder(
+        //inicia en
+        initialData: false,
+        //Utilizamos la variable
+        stream: isLoadingStream.stream,
+        //Se construye
+        builder: (context, snapshot) {
+          //Creamos la condición - Si se esta escribiendo se muestra un icono de spin perfecto
+          //Que asegura que esta cargando
+          if (snapshot.data ?? false) {
+            // Cambiamos el Widget por un Giro perfecto para hacer una animación de carga
+            return SpinPerfect(
+              // Duración de la animación
+              duration: const Duration(seconds: 2),
+              //Colocamos cuantas vueltas dará, son 10 vueltas por segundo
+              spins: 10,
+              //Colocamos que sea infinito
+              infinite: true,
+              // El hijo del FadeIn es un IconButton.
+              child: IconButton(
+                // Cuando se presiona el botón, la consulta se borra (se establece en una cadena vacía).
+                onPressed: () => query = '',
+                // El icono mostrado en el botón es un cargando
+                icon: const Icon(Icons.refresh_rounded),
+              ),
+            );
+          }
+          //Si ya cargarón los datos se muestra el icono de eliminar
+          return
+              //El widget FadeIn anima su hijo (child) cuando su propiedad `animate` es verdadera.
+              FadeIn(
+            // La animación solo se activa si la consulta (query) no está vacía.
+            animate: query.isNotEmpty,
+            // Duración de la animación (200 milisegundos).
+            duration: const Duration(milliseconds: 200),
+            // El hijo del FadeIn es un IconButton.
+            child: IconButton(
+              // Cuando se presiona el botón, la consulta se borra (se establece en una cadena vacía).
+              onPressed: () => query = '',
+              // El icono mostrado en el botón es un ícono de limpiar (clear).
+              icon: const Icon(Icons.clear),
+            ),
+          );
+        },
+      )
     ];
   }
 
