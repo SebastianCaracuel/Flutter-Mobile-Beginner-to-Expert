@@ -46,10 +46,10 @@ class SearchMovieDelegate extends SearchDelegate<Movie?> {
       // Cuando el usuario deja de escribir por 500 milisegundos, se ejecuta esta función
 
       // Si la consulta de búsqueda está vacía, emitimos una lista vacía de películas
-      if (query.isEmpty) {
-        debouncedMovies.add([]); // Agregamos una lista vacía al stream
-        return; // Terminamos la ejecución de la función
-      }
+      // if (query.isEmpty) {
+      //   debouncedMovies.add([]); // Agregamos una lista vacía al stream
+      //   return; // Terminamos la ejecución de la función
+      // }
 
       // Si la consulta no está vacía, buscamos películas usando la consulta
       final movies = await searchMovies(query);
