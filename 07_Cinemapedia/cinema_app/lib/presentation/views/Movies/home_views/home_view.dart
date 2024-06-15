@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 //Importaciones nuestras
 import 'package:cinema_app/presentation/providers/providers.dart';
-import '../../widgets/widgets.dart';
+import '../../../widgets/widgets.dart';
 
 //
 
