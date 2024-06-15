@@ -7,6 +7,27 @@ import 'package:go_router/go_router.dart';
 class CustomButtomBar extends StatelessWidget {
   //Propiedades de la clase
 
+  //?Variable para que se mantenga activada el icono de navegación
+  int getCurrentIndex(BuildContext context) {
+    //
+    final String location = GoRouterState.of(context).matchedLocation;
+
+    //
+    switch (location) {
+      case '/':
+        return 0;
+
+      case '/category':
+        return 1;
+
+      case '/favorites':
+        return 2;
+
+      default:
+        return 0;
+    }
+  }
+
   //?Creamos un método
   void onItemTapped(BuildContext context, int index) {
     //Utilizamos un Switch basado en el Index
@@ -46,6 +67,8 @@ class CustomButtomBar extends StatelessWidget {
     return BottomNavigationBar(
       //Le quitamos la línea que se ve en la barra se llama "elevación"
       elevation: 0,
+      //Llamamos a la variable para que cambie el icono dependiendo de la navegación
+      currentIndex: getCurrentIndex(context),
       //Colocamos un onTap para poder llamar a nuestro método de navegación
       onTap: (index) => onItemTapped(context, index),
       //Tenemos que colocar los items que tendrá nuestra barra de navegación inferior
