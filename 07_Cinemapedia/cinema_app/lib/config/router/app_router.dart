@@ -9,34 +9,46 @@ final appRouter = GoRouter(
   //?Creamos una ruta inicial
   initialLocation: '/',
 
-  //?Todas las rutas
   routes: [
-    //Ruta inicial - Home Screen
-    GoRoute(
-        //Ruta definida para la pantalla
-        path: '/',
-        //Nombre definido para la pantalla
-        name: HomeScreen.name,
-        //Builder
-        builder: (context, state) => const HomeScreen(
-              childView: HomeView(),
-            ),
+    //Todo: Utilización del ShellRoute
+    ShellRoute(
+      //Es algo que se va a llamar en tiempo de ejecución para construir algo
+      builder: (context, state, child) {
+        //Llamamos al HomeScreen para que tenga el Appbar,
+        //Pero llamamos también a la vista del HomeScreen
+        return HomeScreen(childView: child);
+      },
+      //Las rutas
+      routes: [
+        GoRoute(
+          //Home Vista
+          path: '/',
+          builder: (context, state) {
+            return const HomeView();
+          },
+          //Las routes Hijas
+          routes: [
+            GoRoute(
+                //Ruta definida para la pantalla
+                path: 'movie/:id',
+                //Nombre definido para la pantalla
+                name: MovieScreen.name,
+                //Builder
+                builder: (context, state) {
+                  //?Como obtengo el ID de la película
+                  final movieId = state.pathParameters['id'] ?? 'no-id';
 
-        //todo:Definimos rutas anidads de la ruta HomeScreen
-        routes: [
-          //Ruta navegación - película Screen
-          GoRoute(
-              //Ruta definida para la pantalla
-              path: 'movie/:id',
-              //Nombre definido para la pantalla
-              name: MovieScreen.name,
-              //Builder
-              builder: (context, state) {
-                //?Como obtengo el ID de la película
-                final movieId = state.pathParameters['id'] ?? 'no-id';
-
-                return MovieScreen(movieId: movieId);
-              }),
-        ]),
+                  return MovieScreen(movieId: movieId);
+                }),
+          ],
+        ),
+        GoRoute(
+            // Favoritos vista
+            path: '/favorites',
+            builder: (context, state) {
+              return const FavoritesViews();
+            }),
+      ],
+    ),
   ],
 );
