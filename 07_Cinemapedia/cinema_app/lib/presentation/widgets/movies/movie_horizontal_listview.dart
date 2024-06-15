@@ -172,7 +172,7 @@ class _SlideHorizontal extends StatelessWidget {
                   //todo: Creamos un Gestor de detección del usuairo
                   return GestureDetector(
                     //Agregamos el OnTap que es la función
-                    onTap: () => context.push('/movie/${movie.id}'),
+                    onTap: () => context.push('/home/0/movie/${movie.id}'),
                     //Añadimos el child
                     child: FadeIn(child: child),
                   );
