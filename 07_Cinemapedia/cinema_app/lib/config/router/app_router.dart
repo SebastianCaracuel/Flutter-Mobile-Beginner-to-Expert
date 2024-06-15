@@ -32,5 +32,15 @@ final appRouter = GoRouter(
             }),
       ],
     ),
+
+    //Realizamos una configuración, ya que, no existe otra ruta con '/'
+    //Nuestra ruta inicial es '/home' por lo que, si alguien navega hacia '/'
+    //Sera redireccionado
+    GoRoute(
+      //Ruta
+      path: '/',
+      // El guión y doble guión indica que no necesito ninguno de esos dos argumentos
+      redirect: (_, __) => '/home/0',
+    )
   ],
 );
