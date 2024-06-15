@@ -1,6 +1,7 @@
 //Importación de Flutter
 import 'package:go_router/go_router.dart';
 //Importaciones nuestras
+import 'package:cinema_app/presentation/views/views.dart';
 import 'package:cinema_app/presentation/screens/all_screens.dart';
 
 //Creamos la clase implementando el Go_Router
@@ -17,7 +18,9 @@ final appRouter = GoRouter(
         //Nombre definido para la pantalla
         name: HomeScreen.name,
         //Builder
-        builder: (context, state) => const HomeScreen(),
+        builder: (context, state) => const HomeScreen(
+              childView: HomeView(),
+            ),
 
         //todo:Definimos rutas anidads de la ruta HomeScreen
         routes: [
