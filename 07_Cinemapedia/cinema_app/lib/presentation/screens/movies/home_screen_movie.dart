@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 //Importaciones nuestras
 import 'package:cinema_app/presentation/widgets/widgets.dart';
+import 'package:cinema_app/presentation/views/views.dart';
 
 //Creamos la clases
 class HomeScreen extends StatelessWidget {
@@ -10,10 +11,17 @@ class HomeScreen extends StatelessWidget {
   static const name = 'home_screen';
 
   //Creamos una nueva propiedad para la vista
-  final Widget childView;
+  final int pageIndex;
 
   //Constructor de la clase
-  const HomeScreen({super.key, required this.childView});
+  const HomeScreen({super.key, required this.pageIndex});
+
+  //?Creamos un listados
+  final viewRoutes = const <Widget>[
+    HomeView(),
+    SizedBox(), //<---Categorias View
+    FavoritesViews(),
+  ];
 
   //Objeto
   @override
@@ -23,7 +31,10 @@ class HomeScreen extends StatelessWidget {
     //Widgets
     return Scaffold(
       //Extraemos nuestro widget
-      body: childView,
+      body: IndexedStack(
+        index: pageIndex,
+        children: viewRoutes,
+      ),
 
       //Barra de navegación
       bottomNavigationBar: const CustomButtomBar(),
