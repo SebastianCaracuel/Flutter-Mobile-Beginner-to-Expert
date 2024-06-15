@@ -7,26 +7,11 @@ import 'package:go_router/go_router.dart';
 class CustomButtomBar extends StatelessWidget {
   //Propiedades de la clase
 
-  //?Variable para que se mantenga activada el icono de navegación
-  int getCurrentIndex(BuildContext context) {
-    //
-    final String location = GoRouterState.of(context).matchedLocation;
+  //Variable para la navegación con el indice
+  final int currentIndex;
 
-    //
-    switch (location) {
-      case '/':
-        return 0;
-
-      case '/category':
-        return 1;
-
-      case '/favorites':
-        return 2;
-
-      default:
-        return 0;
-    }
-  }
+  //Constructor
+  const CustomButtomBar({super.key, required this.currentIndex});
 
   //?Creamos un método
   void onItemTapped(BuildContext context, int index) {
@@ -35,28 +20,25 @@ class CustomButtomBar extends StatelessWidget {
       //Cuando se hace click en la primera opción
       case 0:
         //Va a navegar al Home
-        context.go('/');
+        context.go('/home/0');
         //Se utiliza el Break para que luego de la navegación no haga nada más
         break;
 
       //Cuando se hace click en la primera opción
       case 1:
         //Va a navegar a las categorias
-        context.go('/');
+        context.go('/home/1');
         //Se utiliza el Break para que luego de la navegación no haga nada más
         break;
 
       //Cuando se hace click en la primera opción
       case 2:
         //Va a navegar a los Favoritos
-        context.go('/favorites');
+        context.go('/home/2');
         //Se utiliza el Break para que luego de la navegación no haga nada más
         break;
     }
   }
-
-  //Constructor
-  const CustomButtomBar({super.key});
 
   //Objeto
   @override
@@ -67,8 +49,8 @@ class CustomButtomBar extends StatelessWidget {
     return BottomNavigationBar(
       //Le quitamos la línea que se ve en la barra se llama "elevación"
       elevation: 0,
-      //Llamamos a la variable para que cambie el icono dependiendo de la navegación
-      currentIndex: getCurrentIndex(context),
+      //llamamos a la variable del indice
+      currentIndex: currentIndex,
       //Colocamos un onTap para poder llamar a nuestro método de navegación
       onTap: (index) => onItemTapped(context, index),
       //Tenemos que colocar los items que tendrá nuestra barra de navegación inferior

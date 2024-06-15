@@ -30,14 +30,14 @@ class HomeScreen extends StatelessWidget {
 
     //Widgets
     return Scaffold(
-      //Extraemos nuestro widget
+      //Utilizamos un IndexedStack para mantener el estado de un Widget
       body: IndexedStack(
         index: pageIndex,
         children: viewRoutes,
       ),
 
       //Barra de navegación
-      bottomNavigationBar: const CustomButtomBar(),
+      bottomNavigationBar: CustomButtomBar(currentIndex: pageIndex),
     );
   }
 }
