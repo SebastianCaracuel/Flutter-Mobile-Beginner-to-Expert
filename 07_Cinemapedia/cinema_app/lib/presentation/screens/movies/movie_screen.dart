@@ -5,8 +5,7 @@ import 'package:animate_do/animate_do.dart';
 
 //Importaciones nuestras
 import 'package:cinema_app/domain/entities/movie.dart';
-import 'package:cinema_app/presentation/providers/actors/actors_by_movie_provider.dart';
-import 'package:cinema_app/presentation/providers/movies/movie_info_provider.dart';
+import 'package:cinema_app/presentation/providers/providers.dart';
 
 //Clase
 class MovieScreen extends ConsumerStatefulWidget {
@@ -282,7 +281,7 @@ class _ActorsByMovie extends ConsumerWidget {
 }
 
 //Creamos un Appbar personalizado para poder ver la información de la película, en esta caso, solo la imagen.
-class _CustomSliverAppbar extends StatelessWidget {
+class _CustomSliverAppbar extends ConsumerWidget {
   //Propiedades
 
   //Creamos una variable que llame a nuestra película
@@ -292,7 +291,7 @@ class _CustomSliverAppbar extends StatelessWidget {
   const _CustomSliverAppbar({required this.movie});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     //Propiedades del Objeto
 
     //?Creamos una variable que nos trae las dimensiones del dispositivo fisicamente
@@ -312,7 +311,8 @@ class _CustomSliverAppbar extends StatelessWidget {
         IconButton(
             //Le damos la función que realizará el botón
             onPressed: () {
-              //todo: ANOTAR AQUÍ LA FUNCIÓN QUE DEBE HACER EL BOTÓN
+              //Realizamos la implementación del Provider que se creo del LocalStorageRepository
+              ref.watch(localStorageRepositoryProvider).toggleFavorite(movie);
             },
             //!Este es el icono que utilizará para colocar la película como favorito.
             icon: const Icon(Icons.favorite_border_rounded)
