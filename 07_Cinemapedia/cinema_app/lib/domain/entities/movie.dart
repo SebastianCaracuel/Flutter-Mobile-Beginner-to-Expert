@@ -1,4 +1,14 @@
+//Importaciones Flutter
+import 'package:isar/isar.dart';
+
+//
+part 'movie.g.dart';
+
+//Llamamos a la base de datos ISAR
+@collection
 class Movie {
+  //Agregamos un Identificador unico para la base de datos ISAR
+  Id? isarId;
   final bool adult;
   final String backdropPath;
   final List<String> genreIds;
