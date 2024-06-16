@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 //Importaciones Nuestras
 import 'package:cinema_app/presentation/providers/providers.dart';
+import 'package:cinema_app/presentation/widgets/widgets.dart';
 
 //Clase para la vista de las películas Favoritas - Cambiamos de un Stateless a un ConsumerStatefulWidget
 class FavoritesViews extends ConsumerStatefulWidget {
@@ -29,26 +30,12 @@ class FavoritesViewsState extends ConsumerState<FavoritesViews> {
   //Objeto
   @override
   Widget build(BuildContext context) {
-    //Propiedades del Objeto
+    //Propiedades del Objeto | MoviesMasonry
 
     //Le colocamos una variable que podamos utilizar a nuestro provider de películas Favoritas
     final favoriteMovies = ref.watch(favoriteMoviesProvider).values.toList();
 
-    return Scaffold(
-        body: ListView.builder(
-      //Llamamos al largo de nuestras películas Favoritas
-      itemCount: favoriteMovies.length,
-      itemBuilder: (context, index) {
-        //Propiedades del Builder
-
-        //?Colocamos una variable que podamos utilizar a nuestro provider con el indice
-        final movie = favoriteMovies[index];
-
-        //Widget Padre
-        return ListTile(
-          title: Text(movie.title),
-        );
-      },
-    ));
+    //Retornamos el Widget de diseño MoviesMasonry y le colocamos las películas Favoritas.
+    return Scaffold(body: MoviesMasonry(movies: favoriteMovies));
   }
 }
