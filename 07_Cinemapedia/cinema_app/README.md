@@ -45,6 +45,7 @@ En esta Septima Etapa los conceptos que se vieron fueron:
     a. Provider.<br>
     b. StateNotifierProvider.<br>
     c. Notifiers.<br>
+    d. FutureProvider.<br>
 7. Carrusel.
 8. SwiperPagination.
 9. Custom AppBar.
@@ -61,8 +62,14 @@ En esta Septima Etapa los conceptos que se vieron fueron:
     a. Redirect.<br>
     b. ShellRoute.<br>
     c. SubShellRoutes.<br>
- 
-16. Clean Arquitecture. 
+
+16. Base de Datos Local. <br>
+    a. Leer.<br>
+    b. Insertar.<br>
+    c. Borrar.<br>
+    d. Realizar Query's.<br>
+    
+17. Clean Arquitecture. 
 
 La aplicación consta de un catálogo de películas utilizando una API (TheMovieDB), esta es una aplicación más avanzanda donde utilizamos el gestor de estado Riverpod, arquitectura limpia, entre otras cosas.
 <br> 
