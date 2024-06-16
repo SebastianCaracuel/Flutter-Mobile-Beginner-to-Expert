@@ -294,6 +294,9 @@ class _CustomSliverAppbar extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     //Propiedades del Objeto
 
+    //Llamamos a la referencia de nuestro provider para cambiar el icono de favoritos
+    final isFavoriteFuture = ref.watch(isFavoriteProvider(movie.id));
+
     //?Creamos una variable que nos trae las dimensiones del dispositivo fisicamente
     final size = MediaQuery.of(context).size;
 
@@ -309,20 +312,34 @@ class _CustomSliverAppbar extends ConsumerWidget {
       actions: [
         //Agregamos un icono con botón para agregar los favoritos
         IconButton(
-            //Le damos la función que realizará el botón
-            onPressed: () {
-              //Realizamos la implementación del Provider que se creo del LocalStorageRepository
-              ref.watch(localStorageRepositoryProvider).toggleFavorite(movie);
-            },
-            //!Este es el icono que utilizará para colocar la película como favorito.
-            icon: const Icon(Icons.favorite_border_rounded)
+          // Función que se ejecuta cuando se presiona el IconButton
+          onPressed: () async {
+            // Acción asincrónica para agregar/quitar la película de favoritos
+            await ref
+                .watch(localStorageRepositoryProvider)
+                .toggleFavorite(movie);
 
-            //!Este es el Icono que se utilizará cuando la película ya es una favorita.
-            // icon: const Icon(
-            //   Icons.favorite_rounded,
-            //   color: Colors.red,
-            // ),
-            ),
+            // Invalida el provider isFavoriteProvider para forzar su actualización
+            ref.invalidate(isFavoriteProvider(movie.id));
+          },
+          // !Icono dinámico que cambia según el estado de isFavoriteFuture
+          icon: isFavoriteFuture.when(
+            // Cuando los datos están disponibles (favoritos cargados correctamente)
+            data: (isFavorite) => isFavorite
+                ? const Icon(Icons.favorite_rounded,
+                    color: Colors.red) // ? Ícono de favorito
+                : const Icon(Icons
+                    .favorite_border_rounded), // ? Ícono sin marcar como favorito
+
+            // ! Manejo de error (no debería lanzar errores, solo para manejar casos inesperados)
+            error: (_, __) =>
+                throw UnimplementedError(), // Manejo básico de error, puede personalizarse
+
+            // Mientras está cargando (indicador de carga)
+            loading: () => const CircularProgressIndicator(
+                strokeWidth: 2), // Indicador de progreso
+          ),
+        ),
       ],
       //Este es el espacio flexible de nuestro custom appbar
       flexibleSpace: FlexibleSpaceBar(
