@@ -306,6 +306,24 @@ class _CustomSliverAppbar extends StatelessWidget {
       expandedHeight: size.height * 0.7,
       //Utilizamos foreground para los objetos que esten dentro de nuestro appbar personalizado, que se coloque en blanco
       foregroundColor: Colors.white,
+      //Utilizamos un actions, que es para los botones de la derecha
+      actions: [
+        //Agregamos un icono con botón para agregar los favoritos
+        IconButton(
+            //Le damos la función que realizará el botón
+            onPressed: () {
+              //todo: ANOTAR AQUÍ LA FUNCIÓN QUE DEBE HACER EL BOTÓN
+            },
+            //!Este es el icono que utilizará para colocar la película como favorito.
+            icon: const Icon(Icons.favorite_border_rounded)
+
+            //!Este es el Icono que se utilizará cuando la película ya es una favorita.
+            // icon: const Icon(
+            //   Icons.favorite_rounded,
+            //   color: Colors.red,
+            // ),
+            ),
+      ],
       //Este es el espacio flexible de nuestro custom appbar
       flexibleSpace: FlexibleSpaceBar(
         //Ahora queremos tener Objetos dentro de nuestro Appbar
@@ -329,58 +347,93 @@ class _CustomSliverAppbar extends StatelessWidget {
               },
             )),
 
-            //Creamos un gradiante para poder ver el cuerpo de la imagen y los objetos en su interior
-            const SizedBox.expand(
-                //Utilizamos una decoración
-                child: DecoratedBox(
-              //un Boxdecoration
-              decoration: BoxDecoration(
-                //Colocamos un gradiente
-                gradient: LinearGradient(
-                  //Donde comienza el gradiente
-                  begin: Alignment.topCenter,
-                  //Donde termina el gradiente
-                  end: Alignment.bottomCenter,
-                  //COnfiguramos los stops
-                  stops: [0.7, 1.0],
-                  //Utilizamos dos colores siempre en nuestro gradiente
-                  colors: [
-                    //un color claro o transparente
-                    Colors.transparent,
-                    //Y el color que simule la sombra
-                    Colors.black87
-                  ],
-                ),
-              ),
-            )),
+            //Gradiente para que se vea la flecha para devolverse al Home Screen
+            const _CustomGradient(
+              //Donde comienza el gradiente
+              begin: Alignment.topLeft,
+              //COnfiguramos los stops
+              stops: [0.0, 0.3],
+              //Utilizamos dos colores siempre en nuestro gradiente
+              colors: [
+                //un color claro o transparente
+                Colors.black87,
+                //Y el color que simule la sombra
+                Colors.transparent
+              ],
+            ),
 
-            //Creamos un nuevo gradiente para poder ver el botón superior
-            const SizedBox.expand(
-                //Utilizamos una decoración
-                child: DecoratedBox(
-              //un Boxdecoration
-              decoration: BoxDecoration(
-                //Colocamos un gradiente
-                gradient: LinearGradient(
-                  //Donde comienza el gradiente
-                  begin: Alignment.topLeft,
-                  //COnfiguramos los stops
-                  stops: [0.0, 0.4],
-                  //Utilizamos dos colores siempre en nuestro gradiente
-                  colors: [
-                    //Y el color que simule la sombra
-                    Colors.black87,
+            //Gradiente para que se vea el corazón de favoritos
+            const _CustomGradient(
+              begin: Alignment.topRight,
+              end: Alignment.bottomLeft,
+              stops: [0.0, 0.3],
+              colors: [
+                //un color claro o transparente
+                Colors.black54,
+                //Y el color que simule la sombra
+                Colors.transparent
+              ],
+            ),
 
-                    //un color claro o transparente
-
-                    Colors.transparent,
-                  ],
-                ),
-              ),
-            )),
+            //Gradiante para el inferior de la foot
+            const _CustomGradient(
+              //Donde comienza el gradiente
+              begin: Alignment.topCenter,
+              //Donde termina el gradiente
+              end: Alignment.bottomCenter,
+              //COnfiguramos los stops
+              stops: [0.7, 1.0],
+              //Utilizamos dos colores siempre en nuestro gradiente
+              colors: [
+                //un color claro o transparente
+                Colors.transparent,
+                //Y el color que simule la sombra
+                Colors.black54
+              ],
+            ),
           ],
         ),
       ),
     );
+  }
+}
+
+//Creamos un Widget personalizado para el Gradiente,para que no se repita el codigo
+class _CustomGradient extends StatelessWidget {
+  //Propiedades de la clase
+
+  //?
+  final AlignmentGeometry begin;
+  final AlignmentGeometry end;
+  final List<double> stops;
+  final List<Color> colors;
+
+  //Constructor
+  const _CustomGradient(
+      {this.begin = Alignment.centerLeft,
+      this.end = Alignment.centerRight,
+      required this.stops,
+      required this.colors});
+
+  @override
+  Widget build(BuildContext context) {
+    return //Creamos un nuevo gradiente para poder ver el botón superior
+        SizedBox.expand(
+            //Utilizamos una decoración
+            child: DecoratedBox(
+      //un Boxdecoration
+      decoration: BoxDecoration(
+        //Colocamos un gradiente
+        gradient: LinearGradient(
+            //Donde comienza el gradiente
+            begin: begin,
+            //Donde termina el gradiente
+            end: end,
+            //COnfiguramos los stops
+            stops: stops,
+            //Utilizamos dos colores siempre en nuestro gradiente
+            colors: colors),
+      ),
+    ));
   }
 }
