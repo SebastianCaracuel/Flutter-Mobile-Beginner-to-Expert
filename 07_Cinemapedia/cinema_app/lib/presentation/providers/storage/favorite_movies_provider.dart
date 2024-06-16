@@ -28,7 +28,7 @@ class StorageMoviesNotifier extends StateNotifier<Map<int, Movie>> {
   StorageMoviesNotifier({required this.localStorageRepository}) : super({});
 
   // Método asincrónico para cargar la siguiente página de películas
-  Future<void> loadNextPage() async {
+  Future<List<Movie>> loadNextPage() async {
     // Carga las películas desde el repositorio local, usando el offset calculado según la página actual
     final movies = await localStorageRepository.loadMovies(offset: page * 10);
 
@@ -45,5 +45,8 @@ class StorageMoviesNotifier extends StateNotifier<Map<int, Movie>> {
 
     // Actualiza el estado del StateNotifier con un nuevo mapa que contiene las películas cargadas
     state = {...state, ...tempMoviesMap};
+
+    // Regresamos las películas que vienen desde la petición
+    return movies;
   }
 }
