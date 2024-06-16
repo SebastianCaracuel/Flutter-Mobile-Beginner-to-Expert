@@ -314,9 +314,9 @@ class _CustomSliverAppbar extends ConsumerWidget {
         IconButton(
           // Función que se ejecuta cuando se presiona el IconButton
           onPressed: () async {
-            // Acción asincrónica para agregar/quitar la película de favoritos
+            //todo:
             await ref
-                .watch(localStorageRepositoryProvider)
+                .read(favoriteMoviesProvider.notifier)
                 .toggleFavorite(movie);
 
             // Invalida el provider isFavoriteProvider para forzar su actualización

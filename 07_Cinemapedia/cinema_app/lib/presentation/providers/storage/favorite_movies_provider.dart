@@ -30,7 +30,8 @@ class StorageMoviesNotifier extends StateNotifier<Map<int, Movie>> {
   // Método asincrónico para cargar la siguiente página de películas
   Future<List<Movie>> loadNextPage() async {
     // Carga las películas desde el repositorio local, usando el offset calculado según la página actual
-    final movies = await localStorageRepository.loadMovies(offset: page * 10);
+    final movies = await localStorageRepository.loadMovies(
+        offset: page * 10, limit: 20); //todo
 
     // Incrementa el número de página para la próxima carga
     page++;
@@ -48,5 +49,23 @@ class StorageMoviesNotifier extends StateNotifier<Map<int, Movie>> {
 
     // Regresamos las películas que vienen desde la petición
     return movies;
+  }
+
+  //! Método para alternar el estado de favorito de una película
+  Future<void> toggleFavorite(Movie movie) async {
+    // Llama al repositorio de almacenamiento local para alternar el estado de favorito de la película
+    await localStorageRepository.toggleFavorite(movie);
+
+    // Verifica si la película ya está en la lista de favoritos
+    final bool isMovieInFavorites = state[movie.id] != null;
+
+    // Si la película está en la lista de favoritos, la elimina
+    if (isMovieInFavorites) {
+      state.remove(movie.id); // Elimina la película del estado
+      state = {...state}; // Actualiza el estado con la película eliminada
+    } else {
+      // Si la película no está en la lista de favoritos, la agrega
+      state = {...state, movie.id: movie}; // Agrega la película al estado
+    }
   }
 }
