@@ -23,16 +23,15 @@ class MoviePosterLink extends StatelessWidget {
     //Propiedades del Objeto
 
     //Widget Padre | Utilizamos un Gestor de detecciónes para navegar a la película Favorita
-    return GestureDetector(
-      //? Al presionar la tarjeta, nos redireccionará a la película seleccionada
-      onTap: () => context.push('/home/0/movie/${movie.id}'),
-      // Utilizamos un ClipRRect para que tenga bordes redondendados
-      child: ClipRRect(
-        //Colocamos bordes redondeados a nuestras tarjetas
-        borderRadius: BorderRadius.circular(20),
-        //Utilizamos un Fade IN Para una animación, utilizando animate do de fernando herrera
-        child: FadeIn(
-          //LLamamos a la imagen de la película para que podamos visualizarlo
+    //Utilizamos un FadeInUp Para una animación, utilizando animate do de fernando herrero
+    return FadeInUp(
+      child: GestureDetector(
+        //? Al presionar la tarjeta, nos redireccionará a la película seleccionada
+        onTap: () => context.push('/home/0/movie/${movie.id}'),
+        // Utilizamos un ClipRRect para que tenga bordes redondendados
+        child: ClipRRect(
+          //Colocamos bordes redondeados a nuestras tarjetas
+          borderRadius: BorderRadius.circular(20),
           child: Image.network(movie.posterPath),
         ),
       ),

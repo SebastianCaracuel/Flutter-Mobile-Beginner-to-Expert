@@ -28,9 +28,35 @@ class MoviesMasonry extends StatefulWidget {
 class _MoviesMasonryState extends State<MoviesMasonry> {
   //Propiedades del State
 
-  //todo: init state
+  //?Creamos una propiedad de controller para tener el control de la acción que el cliente esta realizando
+  final scrollController = ScrollController();
 
-  //todo: dispose
+  //todo: init state - Iniciamos el controlador
+  @override
+  void initState() {
+    super.initState();
+
+    //añadimos el listener y la propiedad del controlador
+    scrollController.addListener(() {
+      //? Llamamos al cargador de la siguiente pagina, si no tiene nada que no regrese nada
+      if (widget.laodNextPage == null) return;
+
+      //? pero si tiene algo, si tengo un widget o un callback
+      if ((scrollController.position.pixels + 100) >=
+          scrollController.position.maxScrollExtent) {
+        //
+        widget.laodNextPage!();
+      }
+    });
+  }
+
+  //todo: dispose - Cerramos el controlador
+  @override
+  void dispose() {
+    //Cerramos el controlador
+    scrollController.dispose();
+    super.dispose();
+  }
 
   //Objeto
   @override
@@ -43,6 +69,10 @@ class _MoviesMasonryState extends State<MoviesMasonry> {
       padding: const EdgeInsets.symmetric(horizontal: 10),
       // ! Masonry -
       child: MasonryGridView.count(
+        // ? LLamamos a nuestro controllador
+        controller: scrollController,
+        // ?Quiero que tenga un rebote de scroll
+        physics: const BouncingScrollPhysics(),
         //? ¿Cuantas columnas queremos del Grid? - 3 Columnas
         crossAxisCount: 3,
         //? Colocamos el largo de las peliculas para que no se desborde nuestra aplicación
