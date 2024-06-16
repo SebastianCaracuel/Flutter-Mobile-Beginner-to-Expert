@@ -1,6 +1,7 @@
 //Importaciones flutter
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 //Importaciones Nuestras
 import 'package:cinema_app/presentation/providers/providers.dart';
 import 'package:cinema_app/presentation/widgets/widgets.dart';
@@ -58,6 +59,47 @@ class FavoritesViewsState extends ConsumerState<FavoritesViews> {
 
     //Le colocamos una variable que podamos utilizar a nuestro provider de películas Favoritas
     final favoriteMovies = ref.watch(favoriteMoviesProvider).values.toList();
+
+    //
+    if (favoriteMovies.isEmpty) {
+      //
+      final colors = Theme.of(context).colorScheme;
+
+      return Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            //Colocamos un icono solo de demostración
+            Icon(Icons.favorite_outline_sharp,
+                //Le añadimos un tamaño al icono
+                size: 60,
+                color: colors.primary),
+
+            //Añadimos un texto de susto
+            Text('OOOOOH NOOO!!!',
+                style: TextStyle(fontSize: 30, color: colors.primary)),
+
+            //Añadimos un texto que indica al usuario que no tiene películas
+            const Text("YOU DON'T HAVE FAVORITES MOVIES",
+                style: TextStyle(fontSize: 20, color: Colors.black45)),
+
+            //Añadimos un espacio
+            const SizedBox(height: 20),
+
+            //Añadimos un botón para direccionar al usuario a que busque películas
+            FilledButton.icon(
+                onPressed: () {
+                  context.push('/home/0');
+                },
+                icon: const Icon(
+                  Icons.add_box_rounded,
+                ),
+                label: const Text('Add Movies')),
+          ],
+        ),
+      );
+    }
 
     //Retornamos el Widget de diseño MoviesMasonry y le colocamos las películas Favoritas.
     return Scaffold(
