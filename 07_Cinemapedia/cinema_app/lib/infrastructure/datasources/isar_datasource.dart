@@ -29,21 +29,63 @@ class IsarDatasoruce extends LocalStorageDatasource {
     return Future.value(Isar.getInstance());
   }
 
+  // ? Sobrescribimos el método isMovieFavorite para comprobar si una película es favorita
   @override
-  Future<bool> isMovieFavorite(int movieId) {
-    // TODO: implement isMovieFavorite
-    throw UnimplementedError();
+  Future<bool> isMovieFavorite(int movieId) async {
+    // Espera a que el Future de la base de datos Isar se resuelva y obtiene la instancia de Isar
+    final isar = await db;
+
+    // Busca la primera película en la base de datos que tenga el id igual a movieId
+    final Movie? isFavoriteMovie = await isar.movies
+        // Aplica un filtro para encontrar la película con el id especificado
+        .filter()
+        .idEqualTo(movieId)
+        // Encuentra la primera coincidencia en la base de datos
+        .findFirst();
+
+    // Retorna true si isFavoriteMovie no es nulo (la película fue encontrada), false en caso contrario
+    return isFavoriteMovie != null;
   }
 
+  // ? Sobrescribimos el método toggleFavorite para alternar el estado de favorito de una película
   @override
-  Future<void> toggleFavorite(Movie movie) {
-    // TODO: implement toggleFavorite
-    throw UnimplementedError();
+  Future<void> toggleFavorite(Movie movie) async {
+    // Esperamos a que la base de datos esté lista
+    final isar = await db;
+
+    // Busca la primera película en la base de datos que tenga el id igual a movie.id
+    final favoriteMovie = await isar.movies
+        // Aplica un filtro para encontrar la película con el id especificado
+        .filter()
+        .idEqualTo(movie.id)
+        // Encuentra la primera coincidencia en la base de datos
+        .findFirst();
+
+    // Si la película fue encontrada, se elimina de la lista de favoritos
+    if (favoriteMovie != null) {
+      // Borrar la película usando una transacción síncrona
+      isar.writeTxnSync(() => isar.movies.deleteSync(favoriteMovie.isarId!));
+      return;
+    }
+
+    // Si la película no fue encontrada, se inserta en la lista de favoritos
+    isar.writeTxnSync(() => isar.movies.putSync(movie));
   }
 
+// Sobrescribimos el método loadMovies para cargar una lista de películas
   @override
-  Future<List<Movie>> loadMovies({int limit = 10, offset = 0}) {
-    // TODO: implement loadMovies
-    throw UnimplementedError();
+  Future<List<Movie>> loadMovies({int limit = 10, offset = 0}) async {
+    // Espera a que el Future de la base de datos Isar se resuelva y obtiene la instancia de Isar
+    final isar = await db;
+
+    // Realiza una consulta en la colección de películas con el desplazamiento y el límite especificados
+    return isar.movies
+        .where()
+        // Aplica un desplazamiento para saltar las primeras 'offset' películas
+        .offset(offset)
+        // Aplica un límite para restringir el número de películas devueltas a 'limit'
+        .limit(limit)
+        // Recupera todas las películas que cumplen con estos criterios
+        .findAll();
   }
 }
