@@ -1,9 +1,9 @@
 //Importaciones Flutter
 import 'package:flutter/material.dart';
+import 'movie_poster_link.dart';
 //Importaciones nuestras
-import 'package:cinema_app/domain/entities/movie.dart';
+import 'package:cinema_app/domain/entities/entities.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:cinema_app/presentation/widgets/widgets.dart';
 
 //? Este es un Widget para utilizar el Masonry, configurar el diseño que tendrán los Grid o tarjetas.
 
@@ -92,7 +92,7 @@ class _MoviesMasonryState extends State<MoviesMasonry> {
             return Column(
               children: [
                 //Colocamos un espacio de 40 px
-                const SizedBox(height: 40),
+                const SizedBox(height: 20),
                 //Llamamos a nuestras películas del ?Widget apartado
                 MoviePosterLink(movie: widget.movies[index]),
               ],
