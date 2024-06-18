@@ -1,7 +1,7 @@
 //Importaciones de Flutter
 
 //Importaciones nuestras
-import 'package:cinema_app/domain/entities/movie.dart';
+import 'package:cinema_app/domain/entities/entities.dart';
 
 //Creamos una clase abstracta //?Es abstracta porque no quiero crear instancias de movie
 
@@ -33,5 +33,5 @@ abstract class MoviesRepository {
   Future<List<Movie>> getSimilarMovies(int movieId);
 
   //?Creamos el método para que tengamos videos de trailer en nuestras películas
-  Future<List<Movie>> getYotubeVideosById(int movieId);
+  Future<List<Video>> getYotubeVideosById(int movieId);
 }
