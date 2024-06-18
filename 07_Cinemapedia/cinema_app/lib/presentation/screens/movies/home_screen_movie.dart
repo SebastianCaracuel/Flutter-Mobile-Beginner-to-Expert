@@ -5,7 +5,7 @@ import 'package:cinema_app/presentation/widgets/widgets.dart';
 import 'package:cinema_app/presentation/views/views.dart';
 
 //Creamos la clases
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   //Propiedades de la clase
   //?Nombre de la screen
   static const name = 'home_screen';
@@ -16,28 +16,73 @@ class HomeScreen extends StatelessWidget {
   //Constructor de la clase
   const HomeScreen({super.key, required this.pageIndex});
 
-  //?Creamos un listados
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+//todo: Este Mixin es necesario para mantener el estado en el PageView
+class _HomeScreenState extends State<HomeScreen>
+    with AutomaticKeepAliveClientMixin {
+  //Propiedades del State
+
+  // Declaración de un controlador de página con inicialización tardía
+  late PageController pageController;
+
+// Método que se llama al iniciar el estado del widget
+  @override
+  void initState() {
+    super.initState(); // Llama al método initState de la clase padre
+
+    // Inicializa el PageController, manteniendo la página actual al reconstruir el widget
+    pageController = PageController(keepPage: true);
+  }
+
+// Método que se llama al destruir el widget y liberar recursos
+  @override
+  void dispose() {
+    // Libera los recursos utilizados por el PageController
+    pageController.dispose();
+
+    super.dispose(); // Llama al método dispose de la clase padre
+  }
+
+  // Creación de una lista de widgets para las vistas
   final viewRoutes = const <Widget>[
-    HomeView(),
-    SizedBox(), //<---Categorias View
-    FavoritesViews(),
+    HomeView(), // Vista principal
+    SizedBox(), // Vista de categorías (vacía por ahora)
+    FavoritesViews(), // Vista de favoritos
   ];
 
-  //Objeto
+// Método build para construir la interfaz del widget
   @override
   Widget build(BuildContext context) {
-    //Propiedades del objeto
+    super.build(context); // Llama al método build de la clase padre
 
-    //Widgets
+    // Si el controlador de página tiene clientes (está inicializado y en uso)
+    if (pageController.hasClients) {
+      pageController.animateToPage(
+        widget.pageIndex, // Página a la que debe animar
+        duration: const Duration(milliseconds: 250), // Duración de la animación
+        curve: Curves.easeInOut, // Curva de la animación
+      );
+    }
+
+    // Construcción de la interfaz de usuario
     return Scaffold(
-      //Utilizamos un IndexedStack para mantener el estado de un Widget
-      body: IndexedStack(
-        index: pageIndex,
-        children: viewRoutes,
+      // Uso
+      body: PageView(
+        physics:
+            const NeverScrollableScrollPhysics(), // Evita el desplazamiento manual de las páginas
+        controller: pageController, // Controlador de la vista de páginas
+        children: viewRoutes, // Páginas a mostrar
       ),
 
-      //Barra de navegación
-      bottomNavigationBar: CustomButtomBar(currentIndex: pageIndex),
+      // Barra de navegación inferior personalizada
+      bottomNavigationBar: CustomButtomBar(currentIndex: widget.pageIndex),
     );
   }
+
+// Método que indica si el estado del widget debe mantenerse vivo
+  @override
+  bool get wantKeepAlive => true; // Retorna true para mantener el estado
 }
