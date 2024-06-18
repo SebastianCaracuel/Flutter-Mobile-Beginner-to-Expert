@@ -26,7 +26,7 @@ class HumanFormats {
     // Crea un formato de fecha específico utilizando la clase 'DateFormat'
     // 'yMMMEd' significa: año, mes abreviado y día de la semana
     // 'es' indica que el formato de fecha será en español
-    final format = DateFormat.yMMMEd('es');
+    final format = DateFormat.yMMMEd('en_US');
 
     // Formatea la fecha proporcionada según el formato especificado y la devuelve como una cadena
     return format.format(date);
