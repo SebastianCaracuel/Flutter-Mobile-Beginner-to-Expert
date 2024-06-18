@@ -1,7 +1,7 @@
 //Importaciones flutter
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 //Importaciones nuestras
-import 'package:cinema_app/domain/entities/movie.dart';
+import 'package:cinema_app/domain/entities/entities.dart';
 import 'package:cinema_app/presentation/providers/providers.dart';
 
 // ? Crearemos un provider para la busqueda activa de nuestra aplicación
@@ -19,7 +19,7 @@ final searchedMoviesProvider =
       ref: ref, searchMovies: movieRepository.searchMovies);
 });
 
-// Definimos el Typedef porque realizaremos una función personalizada
+// todo: Definimos el Typedef porque realizaremos una función personalizada
 typedef SearchMoviesCallback = Future<List<Movie>> Function(String query);
 
 // Clase SearchedMoviesNotifier que extiende StateNotifier y maneja una lista de películas
