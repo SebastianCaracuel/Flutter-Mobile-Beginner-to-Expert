@@ -12,7 +12,7 @@ class ActorMapper {
         name: cast.name,
         profilePath: cast.profilePath != null
             ? 'https://image.tmdb.org/t/p/w500${cast.profilePath}'
-            : 'https://painrehabproducts.com/wp-content/uploads/2014/10/facebook-default-no-profile-pic.jpg',
+            : 'https://st3.depositphotos.com/4111759/13425/v/600/depositphotos_134255710-stock-illustration-avatar-vector-male-profile-gray.jpg',
         character: cast.character,
       );
 }

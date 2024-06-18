@@ -3,9 +3,8 @@
 //Importaciones nuestras
 
 //clase Mapper (Crear una película basado en algún objeto que vamos a recibir.)
-import 'package:cinema_app/domain/entities/movie.dart';
-import 'package:cinema_app/infrastructure/models/moviedb/movie_details.dart';
-import 'package:cinema_app/infrastructure/models/moviedb/movie_moviedb.dart';
+import 'package:cinema_app/domain/entities/entities.dart';
+import 'package:cinema_app/infrastructure/models/models.dart';
 
 class MovieMapper {
   //propiedades
@@ -19,7 +18,7 @@ class MovieMapper {
           //Explicamos que debe llamar a nuestra imagen
           ? 'https://image.tmdb.org/t/p/w500${moviedb.backdropPath}'
           //Si no tiene imagen llamamos una de google
-          : 'https://th.bing.com/th/id/OIP.Lr_j_PgqTGzKxJTeIwajVwHaLH?rs=1&pid=ImgDetMain',
+          : 'https://sd.keepcalms.com/i-w600/keep-calm-poster-not-found.jpg',
       //
       genreIds: moviedb.genreIds.map((e) => e.toString()).toList(),
       //
@@ -35,7 +34,7 @@ class MovieMapper {
       //Realizamos lo mismo de la imagen.
       posterPath: (moviedb.posterPath != '')
           ? 'https://image.tmdb.org/t/p/w500${moviedb.posterPath}'
-          : 'https://th.bing.com/th/id/OIP.59acm7M8zfvbkDUNHr6KdQAAAA?rs=1&pid=ImgDetMain',
+          : 'https://www.movienewz.com/img/films/poster-holder.jpg',
       //
       releaseDate:
           moviedb.releaseDate != null ? moviedb.releaseDate! : DateTime.now(),
@@ -57,7 +56,7 @@ class MovieMapper {
           //Explicamos que debe llamar a nuestra imagen
           ? 'https://image.tmdb.org/t/p/w500${moviedb.backdropPath}'
           //Si no tiene imagen llamamos una de google
-          : 'https://th.bing.com/th/id/OIP.Lr_j_PgqTGzKxJTeIwajVwHaLH?rs=1&pid=ImgDetMain',
+          : 'https://sd.keepcalms.com/i-w600/keep-calm-poster-not-found.jpg',
       //
       genreIds: moviedb.genres.map((e) => e.name).toList(),
       //
@@ -73,7 +72,7 @@ class MovieMapper {
       //Realizamos lo mismo de la imagen.
       posterPath: (moviedb.posterPath != '')
           ? 'https://image.tmdb.org/t/p/w500${moviedb.posterPath}'
-          : 'NO-POSTER',
+          : 'https://sd.keepcalms.com/i-w600/keep-calm-poster-not-found.jpg',
       //
       releaseDate: moviedb.releaseDate,
       //
