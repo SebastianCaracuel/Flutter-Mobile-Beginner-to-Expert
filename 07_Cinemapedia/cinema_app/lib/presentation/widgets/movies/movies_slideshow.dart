@@ -1,9 +1,9 @@
 //Importaciones flutter
-import 'package:animate_do/animate_do.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 //Importaciones nuestras
-import 'package:cinema_app/domain/entities/movie.dart';
+import 'package:cinema_app/domain/entities/entities.dart';
+import 'package:go_router/go_router.dart';
 
 //Creamos la clase -
 class MovieSlideshow extends StatelessWidget {
@@ -111,25 +111,19 @@ class _SlideView extends StatelessWidget {
         child: ClipRRect(
           //Le agregamos el borde
           borderRadius: BorderRadius.circular(20),
-          //Utilizando image.network llamamos a la imagen de nuestro path
-          child: Image.network(
-            //Llamamos a la imagen que representa la película con el backdrophat.
-            movie.backdropPath,
-            //Le asignamos un fit . cover para que tome el espacio que le estamos dando a la aplicación
-            fit: BoxFit.cover,
-            //Agregamos un loading - que nos ayudará a saber si la imagen se construyo o no
-            loadingBuilder: (context, child, loadingProgress) {
-              //Si la imagen no esta cargando
-              if (loadingProgress != null) {
-                return const DecoratedBox(
-                    //Nos muestra un contenedor oscuro
-                    decoration: BoxDecoration(color: Colors.black12));
-              }
-              //si la imagen ya cargo, muestra la imagen
-              return
-                  //Utilizando - animate_do creamos una animación de que la imagen entra con suavidad utilizando FadeIn
-                  FadeIn(child: child);
-            },
+          //Utilizamos un detector de gestos
+          child: GestureDetector(
+            //todo: función de navegación
+            onTap: () => context.push('/home/0/movie/${movie.id}'),
+            //Si la imagen no esta, colocamos una imagen de carga, y le añadimos una animación
+            child: FadeInImage(
+                //rellenamos o extendimos la imagen
+                fit: BoxFit.cover,
+                placeholder:
+                    //le asingamos la imagen de carga
+                    const AssetImage('assets/loaders/bottle-loader.gif'),
+                //Si ya cargo, colocamos la imagen de la película.
+                image: NetworkImage(movie.backdropPath)),
           ),
         ),
       ),
