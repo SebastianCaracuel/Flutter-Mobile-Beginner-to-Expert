@@ -4,8 +4,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:animate_do/animate_do.dart';
 
 //Importaciones nuestras
-import 'package:cinema_app/domain/entities/movie.dart';
+import 'package:cinema_app/domain/entities/entities.dart';
+import 'package:cinema_app/presentation/widgets/widgets.dart';
 import 'package:cinema_app/presentation/providers/providers.dart';
+import 'package:cinema_app/config/helpers/human_formats.dart';
 
 //Clase
 class MovieScreen extends ConsumerStatefulWidget {
@@ -105,6 +107,16 @@ class _CustomMovieDetails extends StatelessWidget {
       // Alineamos los hijos de la columna al inicio en el eje horizontal
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        //* Titulo, OverView y Ratin
+
+        //* Generos de la película
+        _Genres(movie: movie),
+        //* Actores de la película
+        _ActorsByMovie(movieId: movie.id.toString()),
+        //* Película Similares
+
+        //* Videos de la película( Si tiene)
+
         // Colocamos un padding porque no queremos que todo quede muy pegado
         Padding(
           // Añadimos un padding uniforme de 8 píxeles a todos los lados
@@ -148,30 +160,6 @@ class _CustomMovieDetails extends StatelessWidget {
         ),
 
         // Sección de géneros de la película
-        Padding(
-          padding: const EdgeInsets.all(
-              8), // Añadimos padding de 8 píxeles alrededor de esta sección
-          child: Wrap(
-            // Utilizamos Wrap para que los géneros se distribuyan y se envuelvan automáticamente en la línea siguiente si no caben en una sola línea
-            children: [
-              // Usamos el operador de dispersión para agregar cada género como un widget Chip dentro del Wrap
-              ...movie.genreIds.map((gender) => Container(
-                  margin: const EdgeInsets.only(
-                      right:
-                          10), // Añadimos un margen derecho de 10 píxeles entre los chips
-                  child: Chip(
-                    label: Text(
-                        gender), // Mostramos el nombre del género dentro del chip
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(
-                            20)), // Redondeamos los bordes del chip
-                  ))),
-            ],
-          ),
-        ),
-
-        //todo:  mostrar actores - ListView
-        _ActorsByMovie(movieId: movie.id.toString()),
 
         //Espacio para scroll
         const SizedBox(
@@ -181,7 +169,113 @@ class _CustomMovieDetails extends StatelessWidget {
   }
 }
 
-//Creamos una nueva clase para mostrar los actores
+//todo: Título, OverView y Ratin
+class _TitleAndOverView extends StatelessWidget {
+  //Propiedades de la clase
+
+  //? Llamamos a las películas
+  final Movie movie;
+  //? Le añadimos un tamaño
+  final Size size;
+  //? Le añadimos un estilo al texto
+  final TextTheme textStyles;
+
+  //Constructor
+  const _TitleAndOverView(
+      {required this.movie, required this.size, required this.textStyles});
+
+  //Objeto
+  @override
+  Widget build(BuildContext context) {
+    //Propiedades del Objeto
+
+    //Widget Padre
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 15),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Imagen
+          ClipRRect(
+            borderRadius: BorderRadius.circular(20),
+            child: Image.network(
+              movie.posterPath,
+              width: size.width * 0.3,
+            ),
+          ),
+
+          const SizedBox(width: 10),
+
+          // Descripción
+          SizedBox(
+            width: (size.width - 40) * 0.7,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(movie.title, style: textStyles.titleLarge),
+                Text(movie.overview),
+                const SizedBox(height: 10),
+
+                //Todo: Crear el Widget
+                MovieRating(voteAverage: movie.voteAverage),
+                Row(
+                  children: [
+                    const Text('Estreno:',
+                        style: TextStyle(fontWeight: FontWeight.bold)),
+                    const SizedBox(width: 5),
+                    Text(HumanFormats.shortDate(movie.releaseDate))
+                  ],
+                )
+              ],
+            ),
+          )
+        ],
+      ),
+    );
+  }
+}
+
+final isFavoriteProvider =
+    FutureProvider.family.autoDispose((ref, int movieId) {
+  final localStorageRepository = ref.watch(localStorageRepositoryProvider);
+  return localStorageRepository.isMovieFavorite(movieId);
+});
+
+// todo: Widget extraido de los generos
+class _Genres extends StatelessWidget {
+  const _Genres({
+    required this.movie,
+  });
+
+  final Movie movie;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(
+          8), // Añadimos padding de 8 píxeles alrededor de esta sección
+      child: Wrap(
+        // Utilizamos Wrap para que los géneros se distribuyan y se envuelvan automáticamente en la línea siguiente si no caben en una sola línea
+        children: [
+          // Usamos el operador de dispersión para agregar cada género como un widget Chip dentro del Wrap
+          ...movie.genreIds.map((gender) => Container(
+              margin: const EdgeInsets.only(
+                  right:
+                      10), // Añadimos un margen derecho de 10 píxeles entre los chips
+              child: Chip(
+                label: Text(
+                    gender), // Mostramos el nombre del género dentro del chip
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(
+                        20)), // Redondeamos los bordes del chip
+              ))),
+        ],
+      ),
+    );
+  }
+}
+
+// todo: Widget extraido de los actores
 class _ActorsByMovie extends ConsumerWidget {
   //Propiedades de la clase
 
@@ -300,6 +394,9 @@ class _CustomSliverAppbar extends ConsumerWidget {
     //?Creamos una variable que nos trae las dimensiones del dispositivo fisicamente
     final size = MediaQuery.of(context).size;
 
+    //?
+    final scaffoldBackgroundColor = Theme.of(context).scaffoldBackgroundColor;
+
     //Creamos un appbar Personalizado o una barra superior
     return SliverAppBar(
       //Le agregamos un color a nuestro fondo
@@ -343,6 +440,14 @@ class _CustomSliverAppbar extends ConsumerWidget {
       ],
       //Este es el espacio flexible de nuestro custom appbar
       flexibleSpace: FlexibleSpaceBar(
+        //
+        titlePadding: const EdgeInsets.only(bottom: 0),
+        //
+        title: _CustomGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            stops: const [0.7, 1.0],
+            colors: [Colors.transparent, scaffoldBackgroundColor]),
         //Ahora queremos tener Objetos dentro de nuestro Appbar
         background: Stack(
           //Para esto utilizamos un Stack - para colocar Widgets encima de otros
