@@ -1,13 +1,13 @@
 class CreditsResponse {
-  final int id;
-  final List<Cast> cast;
-  final List<Cast> crew;
-
   CreditsResponse({
     required this.id,
     required this.cast,
     required this.crew,
   });
+
+  final int id;
+  final List<Cast> cast;
+  final List<Cast> crew;
 
   factory CreditsResponse.fromJson(Map<String, dynamic> json) =>
       CreditsResponse(
@@ -24,6 +24,23 @@ class CreditsResponse {
 }
 
 class Cast {
+  Cast({
+    required this.adult,
+    required this.gender,
+    required this.id,
+    required this.knownForDepartment,
+    required this.name,
+    required this.originalName,
+    required this.popularity,
+    this.profilePath,
+    this.castId,
+    this.character,
+    required this.creditId,
+    this.order,
+    this.department,
+    this.job,
+  });
+
   final bool adult;
   final int gender;
   final int id;
@@ -38,23 +55,6 @@ class Cast {
   final int? order;
   final String? department;
   final String? job;
-
-  Cast({
-    required this.adult,
-    required this.gender,
-    required this.id,
-    required this.knownForDepartment,
-    required this.name,
-    required this.originalName,
-    required this.popularity,
-    required this.profilePath,
-    this.castId,
-    this.character,
-    required this.creditId,
-    this.order,
-    this.department,
-    this.job,
-  });
 
   factory Cast.fromJson(Map<String, dynamic> json) => Cast(
         adult: json["adult"],

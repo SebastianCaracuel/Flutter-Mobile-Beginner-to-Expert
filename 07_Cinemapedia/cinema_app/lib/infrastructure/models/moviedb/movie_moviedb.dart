@@ -1,21 +1,5 @@
 //Creamos un nuevo archivo para la película TheMovieDB - Un archivo independiente
-
 class MovieMovieDB {
-  final bool adult;
-  final String backdropPath;
-  final List<int> genreIds;
-  final int id;
-  final String originalLanguage;
-  final String originalTitle;
-  final String overview;
-  final double popularity;
-  final String posterPath;
-  final DateTime? releaseDate;
-  final String title;
-  final bool video;
-  final double voteAverage;
-  final int voteCount;
-
   MovieMovieDB({
     required this.adult,
     required this.backdropPath,
@@ -33,6 +17,21 @@ class MovieMovieDB {
     required this.voteCount,
   });
 
+  final bool adult;
+  final String backdropPath;
+  final List<int> genreIds;
+  final int id;
+  final String originalLanguage;
+  final String originalTitle;
+  final String overview;
+  final double popularity;
+  final String posterPath;
+  final DateTime? releaseDate;
+  final String title;
+  final bool video;
+  final double voteAverage;
+  final int voteCount;
+
   factory MovieMovieDB.fromJson(Map<String, dynamic> json) => MovieMovieDB(
         adult: json["adult"] ?? false,
         backdropPath: json["backdrop_path"] ?? '',
@@ -47,7 +46,7 @@ class MovieMovieDB {
                 json["release_date"].toString().isNotEmpty
             ? DateTime.parse(json["release_date"])
             : null,
-        title: json["title"] ?? 'No title',
+        title: json["title"] ?? 'No Title',
         video: json["video"] ?? false,
         voteAverage: json["vote_average"]?.toDouble() ?? 0,
         voteCount: json["vote_count"] ?? 0,
