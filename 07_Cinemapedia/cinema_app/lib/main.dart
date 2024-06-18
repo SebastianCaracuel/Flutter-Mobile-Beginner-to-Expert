@@ -32,7 +32,7 @@ class MainApp extends StatelessWidget {
       //debugShowCheckedModeBanner: false,
 
       //?Llamamos a nuestro tema de la aplicación
-      theme: ApptTheme().getTheme(),
+      theme: AppTheme().getTheme(),
     );
   }
 }

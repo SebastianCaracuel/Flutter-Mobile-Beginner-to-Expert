@@ -2,14 +2,14 @@
 import 'package:flutter/material.dart';
 
 //Creamos una clase para nuestro tema
-class ApptTheme {
+class AppTheme {
   //Propiedades
 
   //? Cambiar de color a darkmode
   final bool isDarkMode;
 
   //COnstructor
-  ApptTheme({this.isDarkMode = false});
+  AppTheme({this.isDarkMode = false});
 
   ThemeData getTheme() => ThemeData(
         //Material 3
@@ -21,7 +21,7 @@ class ApptTheme {
       );
 
   //Creamos un método que es la copia de la clase
-  ApptTheme copyWith({bool? isDarkmode}) => ApptTheme(
+  AppTheme copyWith({bool? isDarkmode}) => AppTheme(
         isDarkMode: isDarkmode ?? isDarkMode,
       );
 }
