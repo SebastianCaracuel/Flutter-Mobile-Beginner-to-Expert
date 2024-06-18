@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 //Importaciones nuestras
 import 'movies_providers.dart';
-import 'package:cinema_app/domain/entities/movie.dart';
+import 'package:cinema_app/domain/entities/entities.dart';
 
 //?Creamos un provider de solo lectura
 final moviesSlideshowProvider = Provider<List<Movie>>((ref) {
