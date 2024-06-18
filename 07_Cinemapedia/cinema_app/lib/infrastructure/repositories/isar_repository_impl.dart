@@ -1,7 +1,7 @@
 //Importaciones Flutter
 
 // Importaciones Nuestras
-import 'package:cinema_app/domain/entities/movie.dart'; // Importa la clase Movie desde nuestro dominio de entidades
+import 'package:cinema_app/domain/entities/entities.dart'; // Importa la clase Movie desde nuestro dominio de entidades
 import 'package:cinema_app/domain/datasources/local_storage_datasource.dart'; // Importa la interfaz LocalStorageDatasource
 import 'package:cinema_app/domain/repositories/local_storage_repositories.dart'; // Importa la interfaz LocalStorageRepository
 

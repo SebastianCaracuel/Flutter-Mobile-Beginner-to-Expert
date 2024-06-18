@@ -3,7 +3,7 @@ import 'package:dio/dio.dart';
 
 //Importaciones nuestras
 import 'package:cinema_app/domain/datasources/actors_datasources.dart';
-import 'package:cinema_app/domain/entities/actor.dart';
+import 'package:cinema_app/domain/entities/entities.dart';
 import 'package:cinema_app/config/constants/environment.dart';
 import 'package:cinema_app/infrastructure/models/moviedb/credits_response.dart';
 import 'package:cinema_app/infrastructure/mappers/actor_mapper.dart';
@@ -22,7 +22,7 @@ class ActorMovieDbDatasource extends ActorsDatasource {
         //Configuramos la API Key
         'api_key': Environment.movieDBKey,
         //Configuramos el lenguaje que queremos traer
-        'language': 'es-MX',
+        'language': 'en-US',
       }));
 
   //

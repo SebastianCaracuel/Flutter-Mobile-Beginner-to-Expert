@@ -4,7 +4,7 @@ import 'package:path_provider/path_provider.dart';
 //Importaciones Nuestas
 
 import 'package:cinema_app/domain/datasources/local_storage_datasource.dart';
-import 'package:cinema_app/domain/entities/movie.dart';
+import 'package:cinema_app/domain/entities/entities.dart';
 
 //
 class IsarDatasoruce extends LocalStorageDatasource {

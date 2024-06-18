@@ -2,7 +2,7 @@
 
 //Importaciones Nuestras
 import 'package:cinema_app/domain/datasources/actors_datasources.dart';
-import 'package:cinema_app/domain/entities/actor.dart';
+import 'package:cinema_app/domain/entities/entities.dart';
 import 'package:cinema_app/domain/repositories/actors_repositories.dart';
 
 //Creamos una clase para nuestro repositorio que llamara al datasource
