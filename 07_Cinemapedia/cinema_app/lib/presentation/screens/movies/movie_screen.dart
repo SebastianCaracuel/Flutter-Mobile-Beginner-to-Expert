@@ -108,6 +108,7 @@ class _CustomMovieDetails extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         //* Titulo, OverView y Ratin
+        _TitleAndOverView(movie: movie, size: size, textStyles: textSyles),
 
         //*todo: Generos de la película
         _Genres(movie: movie),
