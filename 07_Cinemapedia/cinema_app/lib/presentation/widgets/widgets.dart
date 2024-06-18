@@ -9,3 +9,4 @@ export 'movies/similar_movies.dart';
 export 'shared/custom_appbar.dart';
 export 'shared/custom_buttombar.dart';
 export 'shared/FullScreen_loader.dart';
+export 'videos/videos_from_movie.dart';
