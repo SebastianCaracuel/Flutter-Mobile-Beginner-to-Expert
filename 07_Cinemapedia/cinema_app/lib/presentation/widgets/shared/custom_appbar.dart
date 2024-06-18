@@ -5,7 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 //Importaciones nuestras
 import 'package:cinema_app/presentation/delegates/search_movies_delegate.dart';
 import 'package:cinema_app/presentation/providers/providers.dart';
-import 'package:cinema_app/domain/entities/movie.dart';
+import 'package:cinema_app/domain/entities/entities.dart';
 
 //?Creamos un Appbar personalizado
 class CustomAppbar extends ConsumerWidget {
@@ -96,12 +96,12 @@ class CustomAppbar extends ConsumerWidget {
                   //Icono del botón
                   icon: const Icon(Icons.search)),
 
-              //todo: Agregamos otro botón que será para cambiar el modo oscuro o light de la aplicación
+              //todo: Agregamos otro botón que será un menu lateral
               IconButton(
                   //Función del botón
                   onPressed: () {},
                   //Icono del botón
-                  icon: const Icon(Icons.wb_sunny_outlined)),
+                  icon: const Icon(Icons.menu_rounded)),
             ],
           ),
         ),

@@ -6,23 +6,22 @@ import 'package:flutter/material.dart';
 class FullScreenLoader extends StatelessWidget {
   //Propiedades
 
+  //Constructor
+  const FullScreenLoader({super.key});
+
   //?Creamos un Método para obtener mensajes de carga - una lista de textos
   Stream<String> getLoadingMessages() {
     //? Arreglo de mensajes de carga
     final messages = <String>[
-      'Estamos calentando las palomitas de maíz para ti.',
-      'Cargando películas en cines',
-      'Cargando películas populares',
-      'Cargando películas más vistas',
+      "We're heating up the popcorn for you.",
+      'Loading movies in theaters.',
+      'Loading popular movies.',
     ];
     // Retorno del Stream de mensajes
     return Stream.periodic(const Duration(milliseconds: 1200), (step) {
       return messages[step];
     }).take(messages.length);
   }
-
-  //Constructor
-  const FullScreenLoader({super.key});
 
   //Objeto
   @override

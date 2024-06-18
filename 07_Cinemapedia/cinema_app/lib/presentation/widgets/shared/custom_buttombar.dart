@@ -65,10 +65,10 @@ class CustomButtomBar extends StatelessWidget {
 
         //todo: creamos el segundo item - categoria
         BottomNavigationBarItem(
-          //ICONO categoria
-          icon: Icon(Icons.label_outline_rounded),
+          //ICONO de populares
+          icon: Icon(Icons.thumbs_up_down_outlined),
           //nombre
-          label: 'Category',
+          label: 'Popular',
         ),
 
         //todo: creamos el tercer item - Favoritos
