@@ -1,4 +1,5 @@
 //Importaciones de Flutter
+import 'package:cinema_app/presentation/providers/theme/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 //Importaciones nuestras
@@ -18,11 +19,16 @@ Future<void> main() async {
           child: MainApp()));
 }
 
-class MainApp extends StatelessWidget {
+class MainApp extends ConsumerWidget {
   const MainApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    //Propieades del Objeto
+
+    //?Llamamos a nuestro método para que el dark mode funcione
+    final AppTheme appTheme = ref.watch(themeNotifierProvider);
+
     //Implementamos el router
     return MaterialApp.router(
       //?Dirección de la primera pantalla  - Home
@@ -31,8 +37,8 @@ class MainApp extends StatelessWidget {
       //?Banner
       //debugShowCheckedModeBanner: false,
 
-      //?Llamamos a nuestro tema de la aplicación
-      theme: AppTheme().getTheme(),
+      //?Llamamos a nuestro tema de la aplicación e implementamos el Provider
+      theme: appTheme.getTheme(),
     );
   }
 }
