@@ -1,7 +1,7 @@
 // Importaciones de Flutter y paquetes relacionados
 import 'package:flutter_riverpod/flutter_riverpod.dart'; // Importa flutter_riverpod, que es una biblioteca para la gestión del estado en Flutter
 // Importaciones de nuestros propios módulos
-import 'package:cinema_app/domain/entities/actor.dart'; // Importa la entidad Actors de nuestro dominio de la aplicación
+import 'package:cinema_app/domain/entities/entities.dart'; // Importa la entidad Actors de nuestro dominio de la aplicación
 import 'package:cinema_app/presentation/providers/actors/actors_repository_provider.dart';
 
 //? Proveedor de estado para la información del actor
@@ -17,15 +17,6 @@ final actorsByMovieProvider = StateNotifierProvider<ActorsByMovieNotifier,
   // Retorna una instancia de MovieMapNotifier, pasando el método getMovieID del repositorio.
   return ActorsByMovieNotifier(getActors: actorsRepository.getActorsByMovie);
 });
-
-/*
-  {
-    '505642': <Actor>[],
-    '505643': <Actor>[],
-    '505645': <Actor>[],
-    '501231': <Actor>[],
-  }
-*/
 
 // Define un alias para un callback que recibe un ID de película y devuelve una Future<Actor>
 typedef GetActorsCallback = Future<List<Actor>> Function(String movieId);
