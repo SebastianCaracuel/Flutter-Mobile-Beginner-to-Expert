@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 
 //Importaciones nuestras
-import 'package:cinema_app/domain/entities/movie.dart';
+import 'package:cinema_app/domain/entities/entities.dart';
 import 'package:cinema_app/config/helpers/human_formats.dart';
 import 'package:animate_do/animate_do.dart';
 
