@@ -18,7 +18,8 @@ class FavoritesViews extends ConsumerStatefulWidget {
 }
 
 //ConsumerStateFulWidget
-class FavoritesViewsState extends ConsumerState<FavoritesViews> {
+class FavoritesViewsState extends ConsumerState<FavoritesViews>
+    with AutomaticKeepAliveClientMixin {
   //?  Variables para manejar el estado de la carga de películas
   bool isLastPage = false; // Indica si hemos llegado a la última página.
   bool isLoading = false; // Indica si estamos actualmente cargando películas.
@@ -55,6 +56,7 @@ class FavoritesViewsState extends ConsumerState<FavoritesViews> {
   //Objeto
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     //Propiedades del Objeto | MoviesMasonry
 
     //Le colocamos una variable que podamos utilizar a nuestro provider de películas Favoritas
@@ -109,4 +111,8 @@ class FavoritesViewsState extends ConsumerState<FavoritesViews> {
             //Llamamos a las películas Favoritas
             movies: favoriteMovies));
   }
+
+  //
+  @override
+  bool get wantKeepAlive => true;
 }
