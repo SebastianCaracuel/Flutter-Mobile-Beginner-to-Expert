@@ -1,4 +1,5 @@
 //Importaciones de Flutter
+import 'package:cinema_app/presentation/views/Movies/popular_views/popular_view.dart';
 import 'package:flutter/material.dart';
 //Importaciones nuestras
 import 'package:cinema_app/presentation/widgets/widgets.dart';
@@ -49,7 +50,7 @@ class _HomeScreenState extends State<HomeScreen>
   // Creación de una lista de widgets para las vistas
   final viewRoutes = const <Widget>[
     HomeView(), // Vista principal
-    SizedBox(), // Vista de categorías (vacía por ahora)
+    PopularView(), // Vista de las populares
     FavoritesViews(), // Vista de favoritos
   ];
 
