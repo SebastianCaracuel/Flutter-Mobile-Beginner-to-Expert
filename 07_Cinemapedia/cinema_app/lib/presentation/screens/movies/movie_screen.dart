@@ -109,13 +109,14 @@ class _CustomMovieDetails extends StatelessWidget {
       children: [
         //* Titulo, OverView y Ratin
 
-        //* Generos de la película
+        //*todo: Generos de la película
         _Genres(movie: movie),
-        //* Actores de la película
+        //*todo :Actores de la película
         _ActorsByMovie(movieId: movie.id.toString()),
-        //* Película Similares
-
-        //* Videos de la película( Si tiene)
+        //*todo: Película Similares
+        SimilarMovies(movieId: movie.id),
+        //*todo: Videos de la película( Si tiene)
+        VideosFromMovie(movieId: movie.id),
 
         // Colocamos un padding porque no queremos que todo quede muy pegado
         Padding(

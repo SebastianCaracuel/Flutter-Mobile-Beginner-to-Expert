@@ -1,5 +1,4 @@
 //Importaciones de Flutter
-import 'package:cinema_app/presentation/views/Movies/popular_views/popular_view.dart';
 import 'package:flutter/material.dart';
 //Importaciones nuestras
 import 'package:cinema_app/presentation/widgets/widgets.dart';
