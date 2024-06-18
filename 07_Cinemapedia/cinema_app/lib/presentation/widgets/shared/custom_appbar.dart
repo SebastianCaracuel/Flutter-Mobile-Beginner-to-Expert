@@ -1,4 +1,5 @@
 //Importaciones Flutter
+import 'package:cinema_app/presentation/providers/theme/theme_provider.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -24,6 +25,9 @@ class CustomAppbar extends ConsumerWidget {
 
     //?Le asignamos un estilo al titulo
     final titleStyle = Theme.of(context).textTheme.titleMedium;
+
+    //?
+    final bool isDarkMode = ref.watch(isDarkModeProvider);
 
     //Creamos un SafeArea para que nuestro AppBar no choque con el Notch
     return SafeArea(
@@ -99,9 +103,15 @@ class CustomAppbar extends ConsumerWidget {
               //todo: Agregamos otro botón que será un menu lateral
               IconButton(
                   //Función del botón
-                  onPressed: () {},
+                  onPressed: () {
+                    ref
+                        .read(isDarkModeProvider.notifier)
+                        .update((state) => !state);
+                  },
                   //Icono del botón
-                  icon: const Icon(Icons.menu_rounded)),
+                  icon: Icon(isDarkMode
+                      ? Icons.dark_mode_rounded
+                      : Icons.light_mode_rounded)),
             ],
           ),
         ),

@@ -27,7 +27,7 @@ class MainApp extends ConsumerWidget {
     //Propieades del Objeto
 
     //?Llamamos a nuestro método para que el dark mode funcione
-    final AppTheme appTheme = ref.watch(themeNotifierProvider);
+    final isDarkmode = ref.watch(isDarkModeProvider);
 
     //Implementamos el router
     return MaterialApp.router(
@@ -38,7 +38,7 @@ class MainApp extends ConsumerWidget {
       //debugShowCheckedModeBanner: false,
 
       //?Llamamos a nuestro tema de la aplicación e implementamos el Provider
-      theme: appTheme.getTheme(),
+      theme: AppTheme(isDarkMode: isDarkmode).getTheme(),
     );
   }
 }
