@@ -1,11 +1,11 @@
 //Importaciones flutter
-import 'package:animate_do/animate_do.dart';
-import 'package:cinema_app/config/helpers/human_formats.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:animate_do/animate_do.dart';
 
 //Importaciones nuestras
-import 'package:cinema_app/domain/entities/movie.dart';
-import 'package:go_router/go_router.dart';
+import 'package:cinema_app/presentation/widgets/widgets.dart';
+import 'package:cinema_app/domain/entities/entities.dart';
 
 //Creamos la clase que mostrará información de la pelicula de forma horizontal
 class MovieHorizontalListview extends StatefulWidget {
@@ -145,40 +145,27 @@ class _SlideHorizontal extends StatelessWidget {
           SizedBox(
             //El tamaño es de ancho es de 150 px
             width: 150,
-            //Utilizamos un clipRRect para utilizar el borde circular en la tarjeta
+            //! Utilizamos un clipRRect para utilizar el borde circular en la tarjeta
             child: ClipRRect(
-              //BorderCircular
-              borderRadius: BorderRadius.circular(20),
-              //Utilizamos el image Network para mostrar una imagen
-              child: Image.network(
-                //Esa imagen la traemos nosotros de nuestra lista de películas.
-                movie.posterPath,
-                //Queremos que todas nuestras imagenes tengan el mismo tamaño para eso usamos fit
-                fit: BoxFit.cover,
-                //La imagen tendrá un ancho de 150 px
-                width: 150,
-                //Creamos un loading builder, cuando cargue la imagen
-                loadingBuilder: (context, child, loadingProgress) {
-                  //?Condición : Cuando estoy cargando la imagen
-                  if (loadingProgress != null) {
-                    return const Padding(
-                      padding: EdgeInsets.symmetric(vertical: 50),
-                      child: Center(
-                          child: CircularProgressIndicator(
-                              //Grosor de la linea del indicador
-                              strokeWidth: 4)),
-                    );
-                  }
-                  //todo: Creamos un Gestor de detección del usuairo
-                  return GestureDetector(
-                    //Agregamos el OnTap que es la función
-                    onTap: () => context.push('/home/0/movie/${movie.id}'),
-                    //Añadimos el child
-                    child: FadeIn(child: child),
-                  );
-                },
-              ),
-            ),
+                //BorderCircular
+                borderRadius: BorderRadius.circular(20),
+                //Utilizamos la detección de gestos
+                child: GestureDetector(
+                  //navegamos a la películas
+                  onTap: () => context.push('/home/0/movie/${movie.id}'),
+                  //Colocamos la imagen de la película y si no un cargado
+                  child: FadeInImage(
+                      //Le añadimos un tamaño de alto
+                      height: 220,
+                      //que la imagen se ajuste
+                      fit: BoxFit.cover,
+                      //Si la imagen esta en carga mostramos un loading.
+                      placeholder:
+                          //La imagen la utilizamos de nuestros Assets
+                          const AssetImage('assets/loaders/bottle-loader.gif'),
+                      //Si la imagen ya cargo le mandamos la imagen de la película
+                      image: NetworkImage(movie.posterPath)),
+                )),
           ),
 
           //Espacio
@@ -198,45 +185,8 @@ class _SlideHorizontal extends StatelessWidget {
               )),
 
           //todo: Rating - se refiere a una medida o calificación que indica la popularidad o calidad de algo.
-          SizedBox(
-            //Personalizamos el ancho
-            width: 150,
-            //utilizamos un row para tener los items de forma horizontal
-            child: Row(
-              children: [
-                //Icono de estrellas
-                Icon(
-                    //MOstramos el icono de la estrella
-                    Icons.star_half_rounded,
-                    //Le agregamos un color
-                    color: Colors.yellow.shade800),
 
-                //Texto que indica la calificación
-                Text(
-                    '${
-                    //Llamamos al radio de votos de la puntuación de la película
-                    movie.voteAverage}',
-                    //Estilo del texto
-                    style: titleSyle.bodyMedium?.copyWith(
-                        //Le agregamos el mismo color que al del Icono
-                        color: Colors.yellow.shade800)),
-
-                //Espacio entre textos
-                const Spacer(),
-
-                //Mostramos que tan popular es la película, cuanta gente la ha visto en formatos númericos humanos.
-                Text(
-                  //Llamamos a nuestro metodo de formatos humanos
-                  HumanFormats.number(
-                      //Llamamos a la gente que lo ha visto con nuestra Ref movie
-                      movie.popularity),
-
-                  //Le agregamos estilo al texto
-                  style: titleSyle.bodySmall,
-                ),
-              ],
-            ),
-          ),
+          MovieRating(voteAverage: movie.voteAverage)
         ],
       ),
     );
