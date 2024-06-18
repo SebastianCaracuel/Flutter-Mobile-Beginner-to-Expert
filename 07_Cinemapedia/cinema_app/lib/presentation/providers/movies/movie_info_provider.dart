@@ -1,9 +1,9 @@
 // Importaciones de Flutter y paquetes relacionados
-import 'package:cinema_app/presentation/providers/movies/movies_repository_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart'; // Importa flutter_riverpod, que es una biblioteca para la gestión del estado en Flutter
 
 // Importaciones de nuestros propios módulos
-import 'package:cinema_app/domain/entities/movie.dart'; // Importa la entidad Movie de nuestro dominio de la aplicación
+import 'package:cinema_app/domain/entities/entities.dart'; // Importa la entidad Movie de nuestro dominio de la aplicación
+import 'package:cinema_app/presentation/providers/providers.dart';
 
 //? Proveedor de estado para la información de la película
 final movieInfoProvider =
