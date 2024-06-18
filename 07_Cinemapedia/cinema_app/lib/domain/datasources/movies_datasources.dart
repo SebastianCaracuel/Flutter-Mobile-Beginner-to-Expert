@@ -27,4 +27,10 @@ abstract class MoviesDatasource {
 
   //?Creamos el metodo para buscar películas
   Future<List<Movie>> searchMovies(String query);
+
+  //?Creamos el método para las películas similares
+  Future<List<Movie>> getSimilarMovies(int movieId);
+
+  //?Creamos el método para que tengamos videos de trailer en nuestras películas
+  Future<List<Movie>> getYotubeVideosById(int movieId);
 }
