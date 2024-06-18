@@ -2,7 +2,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 // Importaciones Nuestras
-import 'package:cinema_app/domain/entities/movie.dart';
+import 'package:cinema_app/domain/entities/entities.dart';
 import 'package:cinema_app/presentation/providers/providers.dart';
 import 'package:cinema_app/infrastructure/repositories/isar_repository_impl.dart';
 
