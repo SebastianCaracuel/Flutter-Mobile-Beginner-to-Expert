@@ -3,7 +3,7 @@
 //Importaciones nuestras
 
 import 'package:cinema_app/domain/datasources/movies_datasources.dart';
-import 'package:cinema_app/domain/entities/movie.dart';
+import 'package:cinema_app/domain/entities/entities.dart';
 import 'package:cinema_app/domain/repositories/movies_repositories.dart';
 
 //Clase de la implementación del repositorio
@@ -54,5 +54,17 @@ class MovieRepositoryImpl extends MoviesRepository {
   Future<List<Movie>> searchMovies(String query) {
     //
     return datasource.searchMovies(query);
+  }
+
+  //todo: Buscamos una las películas similares
+  @override
+  Future<List<Movie>> getSimilarMovies(int movieId) {
+    return datasource.getSimilarMovies(movieId);
+  }
+
+  //todo: Buscamos los trailers en youtube de las películas
+  @override
+  Future<List<Video>> getYotubeVideosById(int movieId) {
+    return datasource.getYotubeVideosById(movieId);
   }
 }

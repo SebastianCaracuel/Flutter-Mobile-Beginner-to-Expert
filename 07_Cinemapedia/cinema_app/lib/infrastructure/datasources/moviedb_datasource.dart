@@ -1,13 +1,13 @@
 //Importaciones Flutter
-import 'package:cinema_app/infrastructure/models/moviedb/movie_details.dart';
+
+import 'package:cinema_app/infrastructure/mappers/mappers.dart';
 import 'package:dio/dio.dart';
 
 //Importaciones nuestras
-import 'package:cinema_app/domain/datasources/movies_datasources.dart';
-import 'package:cinema_app/domain/entities/movie.dart';
+import 'package:cinema_app/domain/entities/entities.dart';
+import 'package:cinema_app/infrastructure/models/models.dart';
 import 'package:cinema_app/config/constants/environment.dart';
-import 'package:cinema_app/infrastructure/models/moviedb/moviedb_response.dart';
-import 'package:cinema_app/infrastructure/mappers/movie_mapper.dart';
+import 'package:cinema_app/domain/datasources/movies_datasources.dart';
 
 //Clase para obtener las películas
 
@@ -25,7 +25,7 @@ class MoviedbDatasource extends MoviesDatasource {
         //Configuramos la API Key
         'api_key': Environment.movieDBKey,
         //Configuramos el lenguaje que queremos traer
-        'language': 'es-MX',
+        'language': 'en-US',
       }));
 
   //todo: creamos un metódo
@@ -139,5 +139,30 @@ class MoviedbDatasource extends MoviesDatasource {
     return _jsonToMovies(response.data);
   }
 
-  //todo: Buscar película o películas
+  // ? Método películas similares
+  @override
+  Future<List<Movie>> getSimilarMovies(int movieId) async {
+    //Parametrisamos nuestra url o el http en una variable
+    final response = await dio.get('/movie/$movieId/similar');
+
+    //Retornamos la variable con nuestra data
+    return _jsonToMovies(response.data);
+  }
+
+  // ? Método trailer Películas
+  @override
+  Future<List<Video>> getYotubeVideosById(int movieId) async {
+    final response = await dio.get('/movie/$movieId/videos');
+    final moviedbVideosReponse = MoviedbVideosResponse.fromJson(response.data);
+    final videos = <Video>[];
+
+    for (final moviedbVideo in moviedbVideosReponse.results) {
+      if (moviedbVideo.site == 'YouTube') {
+        final video = VideoMapper.moviedbVideoToEntity(moviedbVideo);
+        videos.add(video);
+      }
+    }
+
+    return videos;
+  }
 }
