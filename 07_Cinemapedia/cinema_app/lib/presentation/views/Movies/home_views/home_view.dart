@@ -60,9 +60,6 @@ class HomeViewState extends ConsumerState<HomeView> {
     //?Referencia para mostrar las películas
     final nowPlayingMovies = ref.watch(nowPlayingMoviesProvider);
 
-    //?Referencia para mostrar las películas Populares
-    final popularMovie = ref.watch(popularMoviesProvider);
-
     //?Referencia para mostrar las películas en Ranking
     final rankingMovie = ref.watch(rankingMoviesProvider);
 
@@ -138,18 +135,6 @@ class HomeViewState extends ConsumerState<HomeView> {
                       loadNextPage: () {
                         //Utilizamos nuestra referencia y le agregamos el metodo
                         ref.read(rankingMoviesProvider.notifier).laodNextPage();
-                      }),
-
-                  //todo: Llamamos a nuestra referencia de películas Populares
-                  MovieHorizontalListview(
-                      //?Llamamos a nuestra referencia
-                      movies: popularMovie,
-                      title: 'Popular',
-                      subtitle: 'In this Month',
-                      //Llamamos a la función de cargar otras paginas
-                      loadNextPage: () {
-                        //Utilizamos nuestra referencia y le agregamos el metodo
-                        ref.read(popularMoviesProvider.notifier).laodNextPage();
                       }),
 
                   //Espacio

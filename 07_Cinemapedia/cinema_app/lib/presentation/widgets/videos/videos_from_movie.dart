@@ -62,7 +62,7 @@ class _VideosList extends StatelessWidget {
         const Padding(
           padding: EdgeInsets.symmetric(horizontal: 10),
           child: Text(
-            'Videos',
+            'Video: Trailers and Featurettes',
             style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           ),
         ),
@@ -70,11 +70,6 @@ class _VideosList extends StatelessWidget {
         // Muestra sólo el primer video de la lista
         _YouTubeVideoPlayer(
             youtubeId: videos.first.youtubeKey, name: videos.first.name)
-
-        // Si se desean mostrar todos los videos, descomentar el siguiente bloque
-        // ...videos.map(
-        //   (video) => _YouTubeVideoPlayer(youtubeId: video.youtubeKey, name: video.name)
-        // ).toList()
       ],
     );
   }

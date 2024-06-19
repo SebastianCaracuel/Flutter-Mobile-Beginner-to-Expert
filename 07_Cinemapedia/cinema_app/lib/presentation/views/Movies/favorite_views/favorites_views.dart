@@ -79,11 +79,11 @@ class FavoritesViewsState extends ConsumerState<FavoritesViews>
                 color: colors.primary),
 
             //Añadimos un texto de susto
-            Text('OOOOOH NOOO!!!',
+            Text("You don't have Favorites",
                 style: TextStyle(fontSize: 30, color: colors.primary)),
 
             //Añadimos un texto que indica al usuario que no tiene películas
-            const Text("YOU DON'T HAVE FAVORITES MOVIES",
+            const Text("Search for some",
                 style: TextStyle(fontSize: 20, color: Colors.black45)),
 
             //Añadimos un espacio

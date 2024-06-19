@@ -114,58 +114,17 @@ class _CustomMovieDetails extends StatelessWidget {
         _Genres(movie: movie),
         //*todo :Actores de la película
         _ActorsByMovie(movieId: movie.id.toString()),
-        //*todo: Película Similares
-        SimilarMovies(movieId: movie.id),
         //*todo: Videos de la película( Si tiene)
         VideosFromMovie(movieId: movie.id),
-
-        // Colocamos un padding porque no queremos que todo quede muy pegado
-        Padding(
-          // Añadimos un padding uniforme de 8 píxeles a todos los lados
-          padding: const EdgeInsets.all(8),
-
-          // Utilizamos una fila para colocar los widgets horizontalmente
-          child: Row(
-            // Alineamos los hijos de la fila al inicio en el eje vertical
-            crossAxisAlignment: CrossAxisAlignment.start,
-
-            children: [
-              // Utilizamos ClipRRect para darle bordes redondeados a la imagen
-              ClipRRect(
-                  // Redondeamos las esquinas de la imagen con un radio de 20
-                  borderRadius: BorderRadius.circular(20),
-                  // Mostramos la imagen de la película desde una URL
-                  child: Image.network(movie.posterPath,
-                      // La imagen ocupará el 30% del ancho total disponible
-                      width: size.width * 0.3)),
-
-              // Añadimos un espacio horizontal entre la imagen y el siguiente widget
-              const SizedBox(width: 10),
-
-              //Titulo y descripción de la película
-              SizedBox(
-                  width: (size.width - 40) *
-                      0.7, // Asignamos un ancho al SizedBox que es el 70% del ancho disponible menos 40 píxeles
-                  child: Column(
-                      //
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      // Utilizamos otra columna para apilar el título y el resumen verticalmente
-                      children: [
-                        Text(movie.title,
-                            style: textSyles
-                                .titleLarge), // Mostramos el título de la película con un estilo de texto grande
-                        Text(movie
-                            .overview) // Mostramos el resumen de la película
-                      ])),
-            ],
-          ),
-        ),
+        const SizedBox(height: 25),
+        //*todo: Película Similares
+        SimilarMovies(movieId: movie.id),
 
         // Sección de géneros de la película
 
         //Espacio para scroll
         const SizedBox(
-            height: 50), // Añadimos un espacio vertical fijo de 150 píxeles
+            height: 10), // Añadimos un espacio vertical fijo de 150 píxeles
       ],
     );
   }
@@ -222,7 +181,7 @@ class _TitleAndOverView extends StatelessWidget {
                 MovieRating(voteAverage: movie.voteAverage),
                 Row(
                   children: [
-                    const Text('Estreno:',
+                    const Text('Premiere:',
                         style: TextStyle(fontWeight: FontWeight.bold)),
                     const SizedBox(width: 5),
                     Text(HumanFormats.shortDate(movie.releaseDate))
@@ -322,7 +281,7 @@ class _ActorsByMovie extends ConsumerWidget {
             //Utilizamos un padding para que no esten tan apegados nuestros actores
             padding: const EdgeInsets.all(8.0),
             //Le asignamos un tamaño al contenedor
-            width: 135,
+            width: 130,
             //Utilizamos una columna ya que vamos a usar varios widgetrs
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,

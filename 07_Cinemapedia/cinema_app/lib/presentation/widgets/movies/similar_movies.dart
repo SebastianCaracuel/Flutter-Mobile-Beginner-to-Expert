@@ -56,7 +56,8 @@ class _Recomendations extends StatelessWidget {
     return Container(
       margin: const EdgeInsetsDirectional.only(bottom: 50), // Margen inferior
       child: MovieHorizontalListview(
-        title: 'Recommendations', // Título de la lista
+        title: 'Other Movies', // Título de la lista
+        subtitle: 'Recommendations', //REcomendaciones
         movies: movies, // Lista de películas a mostrar
       ),
     );
