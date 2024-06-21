@@ -2,6 +2,7 @@
 
 //Importaciones Flutter
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 //Importaciones nuestras
 
@@ -31,7 +32,7 @@ class HomeScreen extends StatelessWidget {
             //Icono
             trailing: const Icon(Icons.arrow_forward_ios_rounded),
             //todo: Función de navegación
-            onTap: () {},
+            onTap: () => context.push('/cubits'),
           )
           //
 
