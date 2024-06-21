@@ -20,7 +20,7 @@ class BlocScreen extends StatelessWidget {
     return Scaffold(
       //Colocamos una barra superior
       appBar: AppBar(
-        title: const Center(child: Text('Cubits Counter')),
+        title: const Center(child: Text('Bloc Counter')),
         actions: [
           //Coloamos un botón
           IconButton(
