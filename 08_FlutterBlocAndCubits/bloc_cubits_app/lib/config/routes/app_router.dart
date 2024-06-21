@@ -24,6 +24,13 @@ final appRouter = GoRouter(
     //Ruta Menu - Cubits
     GoRoute(
       //Path que tendrá la ruta
+      path: '/cubit',
+      //Lo mandamos a la presentación a la que navegaremos
+      builder: (context, state) => const CubitsScreen(),
+    ),
+    //Ruta Menu - Bloc
+    GoRoute(
+      //Path que tendrá la ruta
       path: '/bloc',
       //Lo mandamos a la presentación a la que navegaremos
       builder: (context, state) => const BlocScreen(),
