@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 //Importaciones nuestras
 import 'package:bloc_cubits_app/config/theme/app_theme.dart';
+import 'package:bloc_cubits_app/config/routes/app_router.dart';
 
 //Devolvemos nuestro Widget
 void main() {
@@ -22,15 +23,12 @@ class MainApp extends StatelessWidget {
     //Propieades del objeto
 
     //Widget Padre
-    return MaterialApp(
+    return MaterialApp.router(
+      //Configuramos e implementamos las rutas
+      routerConfig: appRouter,
       //debugShowCheckedModeBanner: false, //? Le quitamos el Debug
       //Colocamos nuestro tema de la aplicación
       theme: AppTheme().getTheme(),
-      home: const Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
-        ),
-      ),
     );
   }
 }
