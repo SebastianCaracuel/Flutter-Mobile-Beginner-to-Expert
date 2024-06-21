@@ -26,7 +26,7 @@ final appRouter = GoRouter(
       //Path que tendrá la ruta
       path: '/cubits',
       //Lo mandamos a la presentación a la que navegaremos
-      builder: (context, state) => const HomeScreen(),
+      builder: (context, state) => const CubitsScreen(),
     ),
   ],
 );
