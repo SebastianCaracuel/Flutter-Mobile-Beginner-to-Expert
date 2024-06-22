@@ -8,7 +8,7 @@ class CounterCubit extends Cubit<CounterState> {
   CounterCubit()
       : super(CounterState(
             counter:
-                5)); // Inicializa el estado con CounterState donde counter es 5
+                0)); // Inicializa el estado con CounterState donde counter es 5
 
   // Método para incrementar el valor del contador por un valor específico
   void increaseBy(int value) {
