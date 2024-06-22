@@ -34,6 +34,11 @@ class _CubitCounterView extends StatelessWidget {
   //Constructor
   const _CubitCounterView();
 
+  //?Creamos un método
+  void increaseCounterBy(BuildContext context, [int value = 1]) {
+    context.read<CounterCubit>().increaseBy(value);
+  }
+
   //Objeto
   @override
   Widget build(BuildContext context) {
@@ -52,7 +57,9 @@ class _CubitCounterView extends StatelessWidget {
           //Coloamos un botón
           IconButton(
               //todo: Función
-              onPressed: () {},
+              onPressed: () {
+                context.read<CounterCubit>().reset();
+              },
               //Icono
               icon: const Icon(Icons.refresh_rounded))
         ],
@@ -66,7 +73,17 @@ class _CubitCounterView extends StatelessWidget {
           BlocBuilder<CounterCubit, CounterState>(
             //buildWhen: (previous, current) => current.counter != previous.counter,
             builder: (context, state) {
-              return Text('Counter Value: ${state.counter}');
+              return Column(
+                children: [
+                  const Text('COUNTER VALUE',
+                      style:
+                          TextStyle(fontSize: 45, fontWeight: FontWeight.bold)),
+                  //todo : Número
+                  Text('${state.counter}',
+                      style: const TextStyle(
+                          fontSize: 50, fontWeight: FontWeight.bold)),
+                ],
+              );
             },
           ),
 
@@ -81,7 +98,7 @@ class _CubitCounterView extends StatelessWidget {
                   //
                   heroTag: '1',
                   //todo: Función
-                  onPressed: () {},
+                  onPressed: () => increaseCounterBy(context, 1),
                   child: const Text('+1'),
                 ),
 
@@ -90,7 +107,7 @@ class _CubitCounterView extends StatelessWidget {
                   //
                   heroTag: '2',
                   //todo: Función
-                  onPressed: () {},
+                  onPressed: () => increaseCounterBy(context, 2),
                   child: const Text('+2'),
                 ),
 
@@ -99,7 +116,7 @@ class _CubitCounterView extends StatelessWidget {
                   //
                   heroTag: '3',
                   //todo: Función
-                  onPressed: () {},
+                  onPressed: () => increaseCounterBy(context, 3),
                   child: const Text('+3'),
                 ),
               ],
@@ -111,7 +128,10 @@ class _CubitCounterView extends StatelessWidget {
             //
             heroTag: '4',
             //todo: Función
-            onPressed: () {},
+            onPressed: () {
+              //REsetamos el valor
+              context.read<CounterCubit>().reset();
+            },
             child: const Icon(Icons.refresh_rounded),
           ),
         ],
