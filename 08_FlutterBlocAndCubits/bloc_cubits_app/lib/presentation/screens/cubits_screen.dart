@@ -45,14 +45,19 @@ class _CubitCounterView extends StatelessWidget {
     //Propieades del Objeto
 
     //?
-    final counterState = context.watch<CounterCubit>().state;
+    // final counterState = context.watch<CounterCubit>().state;
 
     //!Widget Hijo
     return Scaffold(
       //Colocamos una barra superior
       appBar: AppBar(
-        title: Center(
-            child: Text('Cubits Counter: ${counterState.transactionCount}')),
+        // El título del AppBar se construye utilizando el estado actual del CounterCubit
+        title: context.select((CounterCubit value) {
+          // Selecciona el estado actual de CounterCubit y devuelve un widget Text
+          // que muestra el contador de transacciones
+          return Center(
+              child: Text('Cubits Counter: ${value.state.transactionCount}'));
+        }),
         actions: [
           //Coloamos un botón
           IconButton(
@@ -75,13 +80,15 @@ class _CubitCounterView extends StatelessWidget {
             builder: (context, state) {
               return Column(
                 children: [
+                  //Colocamos el texto del contador
                   const Text('COUNTER VALUE',
+                      //Le agregamos un estilo
                       style:
-                          TextStyle(fontSize: 45, fontWeight: FontWeight.bold)),
+                          TextStyle(fontSize: 40, fontWeight: FontWeight.w800)),
                   //todo : Número
                   Text('${state.counter}',
                       style: const TextStyle(
-                          fontSize: 50, fontWeight: FontWeight.bold)),
+                          fontSize: 50, fontWeight: FontWeight.w300)),
                 ],
               );
             },

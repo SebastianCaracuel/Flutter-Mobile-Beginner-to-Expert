@@ -1,3 +1,4 @@
+import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart'; // Importa el paquete flutter_bloc
 
 part 'counter_state.dart'; // Indica que 'counter_state.dart' es parte de este archivo
@@ -6,7 +7,7 @@ part 'counter_state.dart'; // Indica que 'counter_state.dart' es parte de este a
 class CounterCubit extends Cubit<CounterState> {
   // Constructor de CounterCubit que llama al constructor de la superclase Cubit
   CounterCubit()
-      : super(CounterState(
+      : super(const CounterState(
             counter:
                 0)); // Inicializa el estado con CounterState donde counter es 5
 
