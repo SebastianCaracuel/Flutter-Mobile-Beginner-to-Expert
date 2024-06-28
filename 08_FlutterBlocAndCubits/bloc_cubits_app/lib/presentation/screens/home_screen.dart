@@ -39,7 +39,7 @@ class HomeScreen extends StatelessWidget {
               //Titulo de la lista
               title: const Text('BLoC'),
               //Subtitulo
-              subtitle: const Text('Gestor de Estado Simple'),
+              subtitle: const Text('Gestor de Estado compuesto'),
               //Icono
               trailing: const Icon(Icons.arrow_forward_ios_rounded),
               //todo: Función de navegación
