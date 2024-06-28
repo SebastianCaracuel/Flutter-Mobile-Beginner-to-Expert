@@ -2,7 +2,9 @@
 
 //Importaciones Flutter
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 //Importaciones nuestras
+import 'package:bloc_cubits_app/presentation/blocs/counter_bloc/counter_bloc_bloc.dart';
 
 //Creación de la pantalla para la navegación
 class BlocScreen extends StatelessWidget {
@@ -17,15 +19,40 @@ class BlocScreen extends StatelessWidget {
     //Propiedades
 
     //!Widget Padre
+    return BlocProvider(
+        create: (_) => CounterBlocBloc(), child: const _BlocCounterView());
+  }
+}
+
+//Extraer el Widget para transformar el Widget a un Bloc
+class _BlocCounterView extends StatelessWidget {
+  //Propiedades de la clase
+
+  //Constructor
+  const _BlocCounterView();
+
+  //? Cramos un método para incrementar el número del contador
+  void increaseCounterBy(BuildContext context, [int value = 1]) {
+    context.read<CounterBlocBloc>().add(CounterIncreased(value));
+  }
+
+  //Objeto
+  @override
+  Widget build(BuildContext context) {
+    //!Widget hijo
     return Scaffold(
       //Colocamos una barra superior
       appBar: AppBar(
-        title: const Center(child: Text('Bloc Counter')),
+        title: context.select(
+          (CounterBlocBloc bloc) => Center(
+              child: Text('Bloc Counter: ${bloc.state.transactionCount}')),
+        ),
         actions: [
           //Coloamos un botón
           IconButton(
               //todo: Función
-              onPressed: () {},
+              onPressed: () =>
+                  context.read<CounterBlocBloc>().add(CounterRest()),
               //Icono
               icon: const Icon(Icons.refresh_rounded))
         ],
@@ -40,8 +67,13 @@ class BlocScreen extends StatelessWidget {
               //Le agregamos un estilo
               style: TextStyle(fontSize: 40, fontWeight: FontWeight.w800)),
           //todo : Número
-          const Text('0',
-              style: TextStyle(fontSize: 50, fontWeight: FontWeight.w300)),
+          context.select(
+            (CounterBlocBloc counterBloc) => Text(
+                '${counterBloc.state.counter}',
+                style:
+                    const TextStyle(fontSize: 50, fontWeight: FontWeight.w300)),
+          ),
+
           //Botónes
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 50),
@@ -53,7 +85,7 @@ class BlocScreen extends StatelessWidget {
                   //
                   heroTag: '1',
                   //todo: Función
-                  onPressed: () {},
+                  onPressed: () => increaseCounterBy(context),
                   child: const Text('+1'),
                 ),
 
@@ -62,7 +94,7 @@ class BlocScreen extends StatelessWidget {
                   //
                   heroTag: '2',
                   //todo: Función
-                  onPressed: () {},
+                  onPressed: () => increaseCounterBy(context, 2),
                   child: const Text('+2'),
                 ),
 
@@ -71,7 +103,7 @@ class BlocScreen extends StatelessWidget {
                   //
                   heroTag: '3',
                   //todo: Función
-                  onPressed: () {},
+                  onPressed: () => increaseCounterBy(context, 3),
                   child: const Text('+3'),
                 ),
               ],
@@ -83,7 +115,7 @@ class BlocScreen extends StatelessWidget {
             //
             heroTag: '4',
             //todo: Función
-            onPressed: () {},
+            onPressed: () => context.read<CounterBlocBloc>().add(CounterRest()),
             child: const Icon(Icons.refresh_rounded),
           ),
         ],

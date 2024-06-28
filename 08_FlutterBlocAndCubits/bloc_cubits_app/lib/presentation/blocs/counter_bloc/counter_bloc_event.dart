@@ -6,7 +6,7 @@ abstract class CounterBlocEvent {
   const CounterBlocEvent();
 }
 
-//Creamos un nuevo evento
+//Creamos un nuevo evento para incrementar el contador
 class CounterIncreased extends CounterBlocEvent {
   //Si el counter incremento
   final int value;
@@ -14,3 +14,6 @@ class CounterIncreased extends CounterBlocEvent {
   //Constructor con el valor
   const CounterIncreased(this.value);
 }
+
+//Creamos un nuevo evento para resetear el número del contador
+class CounterRest extends CounterBlocEvent {}
