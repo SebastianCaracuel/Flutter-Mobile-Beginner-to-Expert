@@ -56,7 +56,8 @@ class _CubitCounterView extends StatelessWidget {
           // Selecciona el estado actual de CounterCubit y devuelve un widget Text
           // que muestra el contador de transacciones
           return Center(
-              child: Text('Cubits Counter: ${value.state.transactionCount}'));
+              child:
+                  Text('Cubits Transaction: ${value.state.transactionCount}'));
         }),
         actions: [
           //Coloamos un botón

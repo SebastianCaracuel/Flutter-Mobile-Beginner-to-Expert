@@ -45,7 +45,7 @@ class _BlocCounterView extends StatelessWidget {
       appBar: AppBar(
         title: context.select(
           (CounterBlocBloc bloc) => Center(
-              child: Text('Bloc Counter: ${bloc.state.transactionCount}')),
+              child: Text('Bloc Transaction: ${bloc.state.transactionCount}')),
         ),
         actions: [
           //Coloamos un botón
