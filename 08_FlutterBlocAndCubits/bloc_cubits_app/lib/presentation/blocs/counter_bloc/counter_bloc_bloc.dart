@@ -10,13 +10,17 @@ part 'counter_bloc_state.dart';
 class CounterBlocBloc extends Bloc<CounterBlocEvent, CounterBlocState> {
   //Constructor que inicializa el estado
   CounterBlocBloc() : super(const CounterBlocState()) {
-    //El cuerpo del constructor
+    //Mandamos la referencia de nuestro manjeador a la función
+    //? Lo que permite esto es que nosotros podamos llamar varias funciones y qure se vea ordenado
+    on<CounterIncreased>(_onCounterIncreased);
+  }
 
-    on<CounterIncreased>((event, emit) {
-      //Cuando el counter sea incrementado
-      emit(state.copyWith(
-          counter: state.counter + event.value,
-          transactionCount: state.transactionCount + 1));
-    });
+  //Creamos un manejador
+  void _onCounterIncreased(
+      CounterIncreased event, Emitter<CounterBlocState> emit) {
+    //Cuando el counter sea incrementado
+    emit(state.copyWith(
+        counter: state.counter + event.value,
+        transactionCount: state.transactionCount + 1));
   }
 }
