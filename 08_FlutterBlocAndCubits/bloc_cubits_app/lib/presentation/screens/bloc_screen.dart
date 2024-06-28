@@ -27,7 +27,7 @@ class BlocScreen extends StatelessWidget {
               //todo: Función
               onPressed: () {},
               //Icono
-              icon: const Icon(Icons.dark_mode_rounded))
+              icon: const Icon(Icons.refresh_rounded))
         ],
       ),
       //Cuerpo
@@ -35,9 +35,13 @@ class BlocScreen extends StatelessWidget {
           child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          //El texto donde estará el valor númerico
-          const Text('Counter Value: xxxxx'),
-
+          //Colocamos el texto del contador
+          const Text('COUNTER VALUE',
+              //Le agregamos un estilo
+              style: TextStyle(fontSize: 40, fontWeight: FontWeight.w800)),
+          //todo : Número
+          const Text('0',
+              style: TextStyle(fontSize: 50, fontWeight: FontWeight.w300)),
           //Botónes
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 50),
