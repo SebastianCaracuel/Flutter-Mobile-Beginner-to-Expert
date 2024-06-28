@@ -46,6 +46,10 @@ class HomeScreen extends StatelessWidget {
               onTap: () => context.push('/bloc')),
 
           //Expanded
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+            child: Divider(),
+          )
         ],
       ),
     );
