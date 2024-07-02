@@ -21,7 +21,10 @@ class RegisterScreen extends StatelessWidget {
     //!Widget Padre
     return Scaffold(
       //? Colocamos un titulo, y un Appbar
-      appBar: AppBar(title: const Center(child: Text('New User'))),
+      appBar: AppBar(
+        title: const Center(child: Text('Create New User')),
+        actions: const [Icon(Icons.settings)],
+      ),
 
       //todo: Extraimos el Widget
       body: const _RegisterView(),
