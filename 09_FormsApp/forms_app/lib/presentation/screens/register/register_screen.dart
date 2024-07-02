@@ -83,6 +83,9 @@ class _RegisterForm extends StatelessWidget {
   Widget build(BuildContext context) {
     //Propiedad del Objeto
 
+    //? Utilizamos los colores de nuestra aplicación
+    final colors = Theme.of(context).colorScheme;
+
     //!Widget Hijo
     return Form(
       child: Column(
@@ -90,13 +93,24 @@ class _RegisterForm extends StatelessWidget {
           //Espacio
           const SizedBox(height: 20),
 
-          //todo: TextFormField personalizado
+          //todo: TextFormField personalizado Nombre de Usuario
+          CustomTextFormField(
+              //Personalizamos el Primer Custom
+              label: 'Name User',
+              hint: 'Write your name user',
+              icon: Icon(Icons.supervised_user_circle_rounded,
+                  color: colors.primary)),
+
+          //Espacio
+          const SizedBox(height: 10),
+
+          //todo: TextFormField personalizado Correo Electronico
           const CustomTextFormField(),
 
           //Espacio
           const SizedBox(height: 10),
 
-          //todo: TextFormField personalizado
+          //todo: TextFormField personalizado Contraseña
           const CustomTextFormField(),
 
           //Espacio
