@@ -2,9 +2,11 @@
 
 //Importaciones Flutter
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 //Importaciones nuestras
 import 'package:forms_app/presentation/Widgets/widgets.dart';
+import 'package:forms_app/presentation/blocs/register_cubit/register_cubit.dart';
 
 //Creamos la nueva pantalla
 class RegisterScreen extends StatelessWidget {
@@ -20,15 +22,17 @@ class RegisterScreen extends StatelessWidget {
 
     //!Widget Padre
     return Scaffold(
-      //? Colocamos un titulo, y un Appbar
-      appBar: AppBar(
-        title: const Center(child: Text('Create New User')),
-        actions: const [Icon(Icons.settings)],
-      ),
+        //? Colocamos un titulo, y un Appbar
+        appBar: AppBar(
+          title: const Center(child: Text('Create New User')),
+          actions: const [Icon(Icons.settings)],
+        ),
 
-      //todo: Extraimos el Widget
-      body: const _RegisterView(),
-    );
+        //todo: Extraimos el Widget
+        body: BlocProvider(
+          create: (context) => RegisterCubit(),
+          child: const _RegisterView(),
+        ));
   }
 }
 
@@ -97,18 +101,13 @@ class _RegisterFormState extends State<_RegisterForm> {
   // ?Creamos una clave global para manejar el estado de un formulario.
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  //? Creamos variables para obtener datos que el usuario esta ingresando
-  // Creamos una variable para el nombre de usuario
-  String username = '';
-  // Creamos una variable para el correo
-  String email = '';
-  // Creamos una variable para la password
-  String password = '';
-
   //Objeto
   @override
   Widget build(BuildContext context) {
     //Propiedad del Objeto
+
+    //? Llamamos la referencia a nuestro Cubit, para conectar cubit al Formulario
+    final registerCubit = context.watch<RegisterCubit>();
 
     //? Utilizamos los colores de nuestra aplicación
     final colors = Theme.of(context).colorScheme;
@@ -130,7 +129,11 @@ class _RegisterFormState extends State<_RegisterForm> {
             icon: Icon(Icons.supervised_user_circle_rounded,
                 color: colors.primary),
             //conectamos el valor que escriba el usuario con la variable de nombre de usuario
-            onChanged: (value) => username = value,
+            onChanged: (value) {
+              //Cada vez que una persona realicé un cambio, se valida cada uno de los cambios
+              registerCubit.usernameChanged(value);
+              _formKey.currentState?.validate();
+            },
             // ? Validaciones correspondientes al campo
             validator: (value) {
               //Creamos una validación de que el valor no tiene que ir vacio
@@ -153,7 +156,11 @@ class _RegisterFormState extends State<_RegisterForm> {
             hint: 'Write your Email',
             icon: Icon(Icons.email_rounded, color: colors.primary),
             //conectamos el valor que escriba el usuario con la variable de Email
-            onChanged: (value) => email = value,
+            onChanged: (value) {
+              //Cada vez que una persona realicé un cambio, se valida cada uno de los cambios
+              registerCubit.emailChanged(value);
+              _formKey.currentState?.validate();
+            },
             // ? Validaciones correspondientes al campo
             validator: (value) {
               //Creamos una validación de que el valor no tiene que ir vacio
@@ -182,7 +189,11 @@ class _RegisterFormState extends State<_RegisterForm> {
             obscureText: true,
             icon: Icon(Icons.password_rounded, color: colors.primary),
             //conectamos el valor que escriba el usuario con la variable de contraseña
-            onChanged: (value) => password = value,
+            onChanged: (value) {
+              //Cada vez que una persona realicé un cambio, se valida cada uno de los cambios
+              registerCubit.passwordChanged(value);
+              _formKey.currentState?.validate();
+            },
             // ? Validaciones correspondientes al campo
             validator: (value) {
               //Creamos una validación de que el valor no tiene que ir vacio
@@ -207,7 +218,8 @@ class _RegisterFormState extends State<_RegisterForm> {
                 // Si el formulario no es válido, detenemos la ejecución del código.
                 if (!isValid) return;
 
-                print('$username, $email, $password');
+                //Llamamos al método
+                registerCubit.onSubmit();
               },
               icon: Icon(
                 Icons.save,
