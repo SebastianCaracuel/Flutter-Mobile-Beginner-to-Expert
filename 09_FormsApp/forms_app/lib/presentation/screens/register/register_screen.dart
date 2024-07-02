@@ -41,10 +41,10 @@ class _RegisterView extends StatelessWidget {
     //Propiedades
 
     //Widget Hijo
-    return SafeArea(
+    return const SafeArea(
       //Utilizamos un padding para que no este tan pegado el TextFormField del fondo
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
         //Utilizamos un SingleChiledScroll para que podamos realizar scroll en nuestra pantalla
         //Así poder ver todos nuestros formfield
         child: SingleChildScrollView(
@@ -54,37 +54,50 @@ class _RegisterView extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               //Utilizamos un flutter logo de ejemplo
-              const FlutterLogo(size: 250),
+              FlutterLogo(size: 250),
 
-              //Texto Formfield
-              TextFormField(),
-
-              //Texto Formfield
-              TextFormField(),
-
-              //Texto Formfield
-              TextFormField(),
-
-              //Texto Formfield
-              TextFormField(),
-
-              //Texto Formfield
-              TextFormField(),
+              //! Aquí va el Diseño del Formulario
+              _RegisterForm(),
 
               //Espacio
-              const SizedBox(height: 20),
-
-              //Botón
-              FilledButton.tonalIcon(
-                  onPressed: () {},
-                  icon: const Icon(Icons.save),
-                  label: const Text('Create new user')),
-
-              //Espacio
-              const SizedBox(height: 20),
+              SizedBox(height: 20),
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+//? Creamos un Widget que será exportado, esto es un Widget de Diseño, para el campo de texto (TextFormField)
+//Creamos la clase
+class _RegisterForm extends StatelessWidget {
+  //Propiedad de la calse
+
+  //Constructor
+  const _RegisterForm();
+
+  //Objeto
+  @override
+  Widget build(BuildContext context) {
+    //Propiedad del Objeto
+
+    //!Widget Hijo
+    return Form(
+      child: Column(
+        children: [
+          //TextFormField
+          TextFormField(),
+
+          //Espacio
+          const SizedBox(height: 20),
+
+          //Botón
+          FilledButton.tonalIcon(
+              onPressed: () {},
+              icon: const Icon(Icons.save),
+              label: const Text('Create new user')),
+        ],
       ),
     );
   }
