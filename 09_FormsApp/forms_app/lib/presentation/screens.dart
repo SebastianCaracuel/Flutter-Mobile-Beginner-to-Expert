@@ -1,5 +1,5 @@
 //? Este es un archivo de barril donde estarán todas las Screens Exportadas.
-export 'screens/bloc_counter_screen.dart';
-export 'screens/cubits_counter_screen.dart';
+export 'screens/counter/bloc_counter_screen.dart';
+export 'screens/counter/cubits_counter_screen.dart';
 export 'screens/home_screen.dart';
 export 'screens/register/register_screen.dart';
