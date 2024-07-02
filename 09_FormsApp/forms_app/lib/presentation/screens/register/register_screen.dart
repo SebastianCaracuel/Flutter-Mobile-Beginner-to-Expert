@@ -79,11 +79,31 @@ class _RegisterView extends StatelessWidget {
 
 //? Creamos un Widget que será exportado, esto es un Widget de Diseño, para el campo de texto (TextFormField)
 //Creamos la clase
-class _RegisterForm extends StatelessWidget {
+class _RegisterForm extends StatefulWidget {
   //Propiedad de la calse
 
   //Constructor
   const _RegisterForm();
+
+  //State
+  @override
+  State<_RegisterForm> createState() => _RegisterFormState();
+}
+
+//Clase State - //? Transformamos el _registerForm en un StatefulWidget
+class _RegisterFormState extends State<_RegisterForm> {
+  //Propiedades State
+
+  // ?Creamos una clave global para manejar el estado de un formulario.
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  //? Creamos variables para obtener datos que el usuario esta ingresando
+  // Creamos una variable para el nombre de usuario
+  String username = '';
+  // Creamos una variable para el correo
+  String email = '';
+  // Creamos una variable para la password
+  String password = '';
 
   //Objeto
   @override
@@ -95,6 +115,8 @@ class _RegisterForm extends StatelessWidget {
 
     //!Widget Hijo
     return Form(
+      //Añadimos nuestra clave global para manejar el estado del Formulario
+      key: _formKey,
       child: Column(
         children: [
           //Espacio
@@ -102,39 +124,91 @@ class _RegisterForm extends StatelessWidget {
 
           //todo: TextFormField personalizado Nombre de Usuario
           CustomTextFormField(
-              //Personalizamos el Primer Custom Nombre Usuario
-              label: 'Name User',
-              hint: 'Write your name user',
-              icon: Icon(Icons.supervised_user_circle_rounded,
-                  color: colors.primary)),
+            //Personalizamos el Primer Custom Nombre Usuario
+            label: 'Name User',
+            hint: 'Write your name user',
+            icon: Icon(Icons.supervised_user_circle_rounded,
+                color: colors.primary),
+            //conectamos el valor que escriba el usuario con la variable de nombre de usuario
+            onChanged: (value) => username = value,
+            // ? Validaciones correspondientes al campo
+            validator: (value) {
+              //Creamos una validación de que el valor no tiene que ir vacio
+              if (value == null || value.isEmpty) return 'Campo Requerido';
+              if (value.trim().isEmpty) return 'Campo Requerido';
+              if (value.trim().length < 6) {
+                return 'El Usuario debe tener más de 6 Letras';
+              }
+              return null;
+            },
+          ),
 
           //Espacio
           const SizedBox(height: 10),
 
           //todo: TextFormField personalizado Correo Electronico
           CustomTextFormField(
-              //Personalizamos el Segundo Custom Correo
-              label: 'E-mail address',
-              hint: 'Write your Email',
-              icon: Icon(Icons.email_rounded, color: colors.primary)),
+            //Personalizamos el Segundo Custom Correo
+            label: 'E-mail address',
+            hint: 'Write your Email',
+            icon: Icon(Icons.email_rounded, color: colors.primary),
+            //conectamos el valor que escriba el usuario con la variable de Email
+            onChanged: (value) => email = value,
+            // ? Validaciones correspondientes al campo
+            validator: (value) {
+              //Creamos una validación de que el valor no tiene que ir vacio
+              if (value == null || value.isEmpty) return 'Campo Requerido';
+              if (value.trim().isEmpty) return 'Campo Requerido';
+              final emailRegExp = RegExp(
+                r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$',
+              );
+
+              //
+              if (!emailRegExp.hasMatch(value)) {
+                return 'Formato de Correo incorrecto.';
+              }
+              return null;
+            },
+          ),
 
           //Espacio
           const SizedBox(height: 10),
 
           //todo: TextFormField personalizado Contraseña
           CustomTextFormField(
-              //Personalizamos el Tercer Custom Contraseña
-              label: 'Password',
-              hint: 'Write your Password',
-              obscureText: true,
-              icon: Icon(Icons.password_rounded, color: colors.primary)),
+            //Personalizamos el Tercer Custom Contraseña
+            label: 'Password',
+            hint: 'Write your Password',
+            obscureText: true,
+            icon: Icon(Icons.password_rounded, color: colors.primary),
+            //conectamos el valor que escriba el usuario con la variable de contraseña
+            onChanged: (value) => password = value,
+            // ? Validaciones correspondientes al campo
+            validator: (value) {
+              //Creamos una validación de que el valor no tiene que ir vacio
+              if (value == null || value.isEmpty) return 'Campo Requerido';
+              if (value.trim().isEmpty) return 'Campo Requerido';
+              if (value.trim().length < 6) {
+                return 'La Contraseña debe tener más de 6 Letras';
+              }
+              return null;
+            },
+          ),
 
           //Espacio
           const SizedBox(height: 20),
 
           //Botón
           FilledButton.tonalIcon(
-              onPressed: () {},
+              //! Función para ver los datos
+              onPressed: () {
+                // Validamos el formulario actual utilizando la clave global _formKey.
+                final isValid = _formKey.currentState!.validate();
+                // Si el formulario no es válido, detenemos la ejecución del código.
+                if (!isValid) return;
+
+                print('$username, $email, $password');
+              },
               icon: Icon(
                 Icons.save,
                 color: colors.primary,
