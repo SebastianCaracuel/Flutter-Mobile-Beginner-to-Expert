@@ -35,5 +35,13 @@ final appRouter = GoRouter(
       //Lo mandamos a la presentación a la que navegaremos
       builder: (context, state) => const BlocScreen(),
     ),
+
+    //Ruta Menu - Formulario
+    GoRoute(
+      //Path que tendrá la ruta
+      path: '/new-user',
+      //Lo mandamos a la presentación a la que navegaremos
+      builder: (context, state) => const RegisterScreen(),
+    ),
   ],
 );
