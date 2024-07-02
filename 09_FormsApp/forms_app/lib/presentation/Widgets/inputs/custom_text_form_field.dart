@@ -16,6 +16,9 @@ class CustomTextFormField extends StatelessWidget {
   // ? Creamos una variable que nos permitirá que el Error sea Opcional o requerido
   final String? errorMessage;
 
+  // ? Creamos una variable que nos permitirá que el Icono sea Opcional o requeridp
+  final Icon? icon;
+
   // ? Creamos una variable que nos permitirá definir una función que se ejecutará cada vez que el valor del campo de texto cambie.
   final Function(String)? onChanged;
 
@@ -29,7 +32,8 @@ class CustomTextFormField extends StatelessWidget {
       this.hint,
       this.errorMessage,
       this.onChanged,
-      this.validator});
+      this.validator,
+      this.icon});
 
   //Objeto
   @override
@@ -92,11 +96,7 @@ class CustomTextFormField extends StatelessWidget {
         //Esto es un indicador, le indica al Usuario que hay un error en el campo de Texto
         errorText: errorMessage,
         //Utilizamos un PreFixIcon que nos permite tener un Icono dentro de nuestro
-        prefixIcon: Icon(
-            //Le añadimos un Icono referente al campo
-            Icons.supervised_user_circle_rounded,
-            //Añadimos el color primario de la aplicación
-            color: colors.primary),
+        prefixIcon: icon,
         // ? Este es un Icono que nos permite colocar dentro de nuestro campo de texto, pero al final
         // suffixIcon: Icon(Icons.supervised_user_circle, color: colors.primary),
         // ? Este es un Icono fuera del campo de texto
