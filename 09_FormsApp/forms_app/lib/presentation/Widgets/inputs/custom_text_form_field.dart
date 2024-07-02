@@ -19,6 +19,9 @@ class CustomTextFormField extends StatelessWidget {
   // ? Creamos una variable que nos permitirá que el Icono sea Opcional o requeridp
   final Icon? icon;
 
+  //? Creamos una varible que nos permitirá ocultar el texto y si es Opcional o Requerido
+  final bool obscureText;
+
   // ? Creamos una variable que nos permitirá definir una función que se ejecutará cada vez que el valor del campo de texto cambie.
   final Function(String)? onChanged;
 
@@ -33,7 +36,8 @@ class CustomTextFormField extends StatelessWidget {
       this.errorMessage,
       this.onChanged,
       this.validator,
-      this.icon});
+      this.icon,
+      this.obscureText = false});
 
   //Objeto
   @override
@@ -53,7 +57,7 @@ class CustomTextFormField extends StatelessWidget {
     //!Widget Padre
     return TextFormField(
       //? obscureText: true, //! Esto es por si se esta escribiendo una contraseña coloca lo escrito en ( **** )
-
+      obscureText: obscureText,
       // Función que se llama cada vez que el valor del campo de texto cambia.
       onChanged: onChanged,
       // Función que valida el valor del campo de texto.
