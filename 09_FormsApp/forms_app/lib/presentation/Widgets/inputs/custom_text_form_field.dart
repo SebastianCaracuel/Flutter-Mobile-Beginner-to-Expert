@@ -9,8 +9,27 @@ import 'package:flutter/material.dart';
 class CustomTextFormField extends StatelessWidget {
   //Propiedades
 
+  // ? Creamos una variable que nos permitirá que el Texto sea Opcional o requerido
+  final String? label;
+  // ? Creamos una variable que nos permitirá que el Texto sea Opcional o requerido
+  final String? hint;
+  // ? Creamos una variable que nos permitirá que el Error sea Opcional o requerido
+  final String? errorMessage;
+
+  // ? Creamos una variable que nos permitirá definir una función que se ejecutará cada vez que el valor del campo de texto cambie.
+  final Function(String)? onChanged;
+
+  // ? Creamos una variable que nos permitirá validar, siendo opcional o requerido
+  final String? Function(String?)? validator;
+
   //Constructor
-  const CustomTextFormField({super.key});
+  const CustomTextFormField(
+      {super.key,
+      this.label,
+      this.hint,
+      this.errorMessage,
+      this.onChanged,
+      this.validator});
 
   //Objeto
   @override
