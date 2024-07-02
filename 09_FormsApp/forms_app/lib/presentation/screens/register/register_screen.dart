@@ -95,7 +95,7 @@ class _RegisterForm extends StatelessWidget {
 
           //todo: TextFormField personalizado Nombre de Usuario
           CustomTextFormField(
-              //Personalizamos el Primer Custom
+              //Personalizamos el Primer Custom Nombre Usuario
               label: 'Name User',
               hint: 'Write your name user',
               icon: Icon(Icons.supervised_user_circle_rounded,
@@ -105,13 +105,24 @@ class _RegisterForm extends StatelessWidget {
           const SizedBox(height: 10),
 
           //todo: TextFormField personalizado Correo Electronico
-          const CustomTextFormField(),
+          const CustomTextFormField(
+            //Personalizamos el Segundo Custom Correo
+            label: 'E-mail address',
+            hint: 'Write your Email',
+            icon: Icon(Icons.email_rounded),
+          ),
 
           //Espacio
           const SizedBox(height: 10),
 
           //todo: TextFormField personalizado Contraseña
-          const CustomTextFormField(),
+          const CustomTextFormField(
+            //Personalizamos el Tercer Custom Contraseña
+            label: 'Password',
+            hint: 'Write your Password',
+            obscureText: true,
+            icon: Icon(Icons.password_rounded),
+          ),
 
           //Espacio
           const SizedBox(height: 20),
