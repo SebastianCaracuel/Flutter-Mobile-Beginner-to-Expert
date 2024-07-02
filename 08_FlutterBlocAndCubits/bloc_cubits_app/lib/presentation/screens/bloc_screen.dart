@@ -33,7 +33,10 @@ class _BlocCounterView extends StatelessWidget {
 
   //? Cramos un método para incrementar el número del contador
   void increaseCounterBy(BuildContext context, [int value = 1]) {
-    context.read<CounterBlocBloc>().add(CounterIncreased(value));
+    // context.read<CounterBlocBloc>().add(CounterIncreased(value)); //?Cambio realizado en la clase Opcional
+    context
+        .read<CounterBlocBloc>()
+        .increaseBy(value); //Nueva función implementando el nuevo método
   }
 
   //Objeto
@@ -51,8 +54,7 @@ class _BlocCounterView extends StatelessWidget {
           //Coloamos un botón
           IconButton(
               //todo: Función
-              onPressed: () =>
-                  context.read<CounterBlocBloc>().add(CounterRest()),
+              onPressed: () => context.read<CounterBlocBloc>().resetCounter(),
               //Icono
               icon: const Icon(Icons.refresh_rounded))
         ],
@@ -115,7 +117,7 @@ class _BlocCounterView extends StatelessWidget {
             //
             heroTag: '4',
             //todo: Función
-            onPressed: () => context.read<CounterBlocBloc>().add(CounterRest()),
+            onPressed: () => context.read<CounterBlocBloc>().resetCounter(),
             child: const Icon(Icons.refresh_rounded),
           ),
         ],
