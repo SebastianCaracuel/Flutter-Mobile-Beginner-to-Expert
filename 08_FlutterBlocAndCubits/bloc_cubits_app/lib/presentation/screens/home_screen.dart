@@ -45,11 +45,38 @@ class HomeScreen extends StatelessWidget {
               //todo: Función de navegación
               onTap: () => context.push('/bloc')),
 
-          //Expanded
+          //Divider
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
             child: Divider(),
-          )
+          ),
+
+          //Expanded
+          const Expanded(
+              child: Column(
+            children: [
+              //Titulo
+              Text('Hello World',
+                  style: TextStyle(fontSize: 30, fontWeight: FontWeight.w900)),
+              //Contenido
+              Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Text(
+                      "📱 Counter App With Flutter BLoC 👨🏽‍💻\n\n"
+                      "Características:\n"
+                      "1️⃣ Incrementar contador\n"
+                      "0️⃣ Reiniciar contador\n\n"
+                      "🔍 Tecnologías:\n"
+                      "Flutter, Dart, BLoC, Cubits\n\n"
+                      "¿Como utilizar Flutter BLoC? \n"
+                      "📌DevTalles\n\n"
+                      "Ideal para principiantes 🚀\n",
+                      style: TextStyle(
+                          fontSize: 20, fontWeight: FontWeight.bold))),
+
+              FlutterLogo(size: 80),
+            ],
+          ))
         ],
       ),
     );
