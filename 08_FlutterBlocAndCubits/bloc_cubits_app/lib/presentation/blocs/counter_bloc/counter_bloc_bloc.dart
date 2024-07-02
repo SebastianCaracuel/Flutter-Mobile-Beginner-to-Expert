@@ -32,4 +32,14 @@ class CounterBlocBloc extends Bloc<CounterBlocEvent, CounterBlocState> {
       counter: 0,
     ));
   }
+
+  //Creamos un nuevo método de incrementación (Clase Opcional)
+  void increaseBy([int value = 1]) {
+    add(CounterIncreased(value));
+  }
+
+  //Creamos un nuevo método
+  void resetCounter() {
+    add(CounterRest());
+  }
 }
