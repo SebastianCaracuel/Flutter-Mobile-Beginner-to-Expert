@@ -24,30 +24,30 @@ class HomeScreen extends StatelessWidget {
       body: ListView(
         children: [
           //Cubits
-          ListTile(
-              //Titulo de la lista
-              title: const Text('Cubits'),
-              //Subtitulo
-              subtitle: const Text('Gestor de Estado Simple'),
-              //Icono
-              trailing: const Icon(Icons.arrow_forward_ios_rounded),
-              //todo: Función de navegación
-              onTap: () => context.push('/cubits')),
+          // ListTile(
+          //     //Titulo de la lista
+          //     title: const Text('Cubits'),
+          //     //Subtitulo
+          //     subtitle: const Text('Gestor de Estado Simple'),
+          //     //Icono
+          //     trailing: const Icon(Icons.arrow_forward_ios_rounded),
+          //     //todo: Función de navegación
+          //     onTap: () => context.push('/cubits')),
 
           //BLoC
-          ListTile(
-              //Titulo de la lista
-              title: const Text('BLoC'),
-              //Subtitulo
-              subtitle: const Text('Gestor de Estado compuesto'),
-              //Icono
-              trailing: const Icon(Icons.arrow_forward_ios_rounded),
-              //todo: Función de navegación
-              onTap: () => context.push('/bloc')),
+          // ListTile(
+          //     //Titulo de la lista
+          //     title: const Text('BLoC'),
+          //     //Subtitulo
+          //     subtitle: const Text('Gestor de Estado compuesto'),
+          //     //Icono
+          //     trailing: const Icon(Icons.arrow_forward_ios_rounded),
+          //     //todo: Función de navegación
+          //     onTap: () => context.push('/bloc')),
 
           //Divider
           const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 30),
               child: Divider()),
 
           //Formulario
