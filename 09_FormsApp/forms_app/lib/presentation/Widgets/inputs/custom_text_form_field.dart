@@ -51,24 +51,20 @@ class CustomTextFormField extends StatelessWidget {
       //? obscureText: true, //! Esto es por si se esta escribiendo una contraseña coloca lo escrito en ( **** )
 
       // Función que se llama cada vez que el valor del campo de texto cambia.
-      onChanged: (value) {
-        print('value: $value'); // Imprime el valor actual del campo de texto.
-      },
-
+      onChanged: onChanged,
       // Función que valida el valor del campo de texto.
-      validator: (value) {
-        // Si el valor es nulo, devuelve el mensaje de error 'Campo es Requerido'.
-        if (value == null) return 'Campo es Requerido';
+      validator: validator,
+      // Validator: (value) { //? Esta era la validación antes de hacerlo Opcional
+      //   // Si el valor es nulo, devuelve el mensaje de error 'Campo es Requerido'.
+      //   if (value == null) return 'Campo es Requerido';
+      //   // Si el valor es una cadena vacía, devuelve el mensaje de error 'Campo es Requerido'.
+      //   if (value.isEmpty) return 'Campo es Requerido';
+      //   // Si el valor contiene solo espacios en blanco, devuelve el mensaje de error 'Campo es Requerido'.
+      //   if (value.trim().isEmpty) return 'Campo es Requerido';
+      //   // Si todas las validaciones anteriores pasan, devuelve null indicando que el valor es válido.
+      //   return null;
+      // },
 
-        // Si el valor es una cadena vacía, devuelve el mensaje de error 'Campo es Requerido'.
-        if (value.isEmpty) return 'Campo es Requerido';
-
-        // Si el valor contiene solo espacios en blanco, devuelve el mensaje de error 'Campo es Requerido'.
-        if (value.trim().isEmpty) return 'Campo es Requerido';
-
-        // Si todas las validaciones anteriores pasan, devuelve null indicando que el valor es válido.
-        return null;
-      },
       //Esto es para la decoración del campo de texto
       decoration: InputDecoration(
         //Llamamos a utilizar la variable que definimos arriba para que el campo tenga un borde
@@ -88,13 +84,13 @@ class CustomTextFormField extends StatelessWidget {
         //No queremos que el campo sea tan grande, Hace que el campo de texto sea más compacto
         isDense: true,
         //Proporciona una etiqueta que se muestra dentro del campo de texto cuando está vacío.
-        label: const Text('User'),
+        label: label != null ? Text(label!) : null,
         // Muestra un texto de sugerencia dentro del campo de texto cuando está vacío, proporcionando una pista al usuario sobre qué escribir
-        hintText: 'Name User',
+        hintText: hint,
         // El color que se usa cuando el campo de texto tiene el foco (está seleccionado).
         focusColor: colors.primary,
         //Esto es un indicador, le indica al Usuario que hay un error en el campo de Texto
-        errorText: 'Este es el error text',
+        errorText: errorMessage,
         //Utilizamos un PreFixIcon que nos permite tener un Icono dentro de nuestro
         prefixIcon: Icon(
             //Le añadimos un Icono referente al campo
