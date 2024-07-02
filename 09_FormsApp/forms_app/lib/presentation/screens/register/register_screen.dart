@@ -42,10 +42,10 @@ class _RegisterView extends StatelessWidget {
     //Propiedades
 
     //Widget Hijo
-    return const SafeArea(
+    return SafeArea(
       //Utilizamos un padding para que no este tan pegado el TextFormField del fondo
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
         //Utilizamos un SingleChiledScroll para que podamos realizar scroll en nuestra pantalla
         //Así poder ver todos nuestros formfield
         child: SingleChildScrollView(
@@ -55,13 +55,17 @@ class _RegisterView extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               //Utilizamos un flutter logo de ejemplo
-              FlutterLogo(size: 250),
+
+              Image.asset(
+                'assets/logo/new_user.png',
+                scale: 1.4,
+              ),
 
               //! Aquí va el Diseño del Formulario
-              _RegisterForm(),
+              const _RegisterForm(),
 
               //Espacio
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
             ],
           ),
         ),
@@ -105,24 +109,22 @@ class _RegisterForm extends StatelessWidget {
           const SizedBox(height: 10),
 
           //todo: TextFormField personalizado Correo Electronico
-          const CustomTextFormField(
-            //Personalizamos el Segundo Custom Correo
-            label: 'E-mail address',
-            hint: 'Write your Email',
-            icon: Icon(Icons.email_rounded),
-          ),
+          CustomTextFormField(
+              //Personalizamos el Segundo Custom Correo
+              label: 'E-mail address',
+              hint: 'Write your Email',
+              icon: Icon(Icons.email_rounded, color: colors.primary)),
 
           //Espacio
           const SizedBox(height: 10),
 
           //todo: TextFormField personalizado Contraseña
-          const CustomTextFormField(
-            //Personalizamos el Tercer Custom Contraseña
-            label: 'Password',
-            hint: 'Write your Password',
-            obscureText: true,
-            icon: Icon(Icons.password_rounded),
-          ),
+          CustomTextFormField(
+              //Personalizamos el Tercer Custom Contraseña
+              label: 'Password',
+              hint: 'Write your Password',
+              obscureText: true,
+              icon: Icon(Icons.password_rounded, color: colors.primary)),
 
           //Espacio
           const SizedBox(height: 20),
@@ -130,7 +132,10 @@ class _RegisterForm extends StatelessWidget {
           //Botón
           FilledButton.tonalIcon(
               onPressed: () {},
-              icon: const Icon(Icons.save),
+              icon: Icon(
+                Icons.save,
+                color: colors.primary,
+              ),
               label: const Text('Create new user')),
         ],
       ),
