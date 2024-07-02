@@ -4,6 +4,7 @@
 import 'package:flutter/material.dart';
 
 //Importaciones nuestras
+import 'package:forms_app/presentation/Widgets/widgets.dart';
 
 //Creamos la nueva pantalla
 class RegisterScreen extends StatelessWidget {
@@ -86,8 +87,14 @@ class _RegisterForm extends StatelessWidget {
     return Form(
       child: Column(
         children: [
-          //TextFormField
-          TextFormField(),
+          //todo: TextFormField personalizado
+          const CustomTextFormField(),
+
+          //Espacio
+          const SizedBox(height: 10),
+
+          //todo: TextFormField personalizado
+          const CustomTextFormField(),
 
           //Espacio
           const SizedBox(height: 20),
