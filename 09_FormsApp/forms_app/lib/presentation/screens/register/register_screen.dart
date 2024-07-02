@@ -87,6 +87,8 @@ class _RegisterForm extends StatelessWidget {
     return Form(
       child: Column(
         children: [
+          //Espacio
+          const SizedBox(height: 20),
           //todo: TextFormField personalizado
           const CustomTextFormField(),
 
