@@ -24,25 +24,29 @@ class RegisterFormState extends Equatable {
   //? Creamos las variables del formulario para su respectiva validación
 
   //Nombre de usuario
-  final String username;
+  final Username username;
   //Nombre de email
   final String email;
   //Nombre de password
   final String password;
   //
   final FormStatus formstatus;
+  //Creamos una variable para saber si es valido
+  final bool isValid;
 
   //Constructor
-  const RegisterFormState(
-      {this.username = '',
-      this.email = '',
-      this.password = '',
-      this.formstatus = FormStatus.invalid});
+  const RegisterFormState({
+    this.username = const Username.pure(),
+    this.email = '',
+    this.password = '',
+    this.formstatus = FormStatus.invalid,
+    this.isValid = false,
+  });
 
 //Creamos un método de CopyWith
   RegisterFormState copyWith({
     //Nombre de usuario
-    String? username,
+    Username? username,
     //Nombre de email
     String? email,
     //Nombre de password
