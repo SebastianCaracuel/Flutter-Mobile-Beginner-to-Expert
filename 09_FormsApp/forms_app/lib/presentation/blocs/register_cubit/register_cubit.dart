@@ -1,6 +1,12 @@
+//Importaciones flutter
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:formz/formz.dart';
 
+//Importaciones nuestras
+import 'package:forms_app/infrastructure/inputs.dart';
+
+//Conexion con otro archivo
 part 'register_state.dart';
 
 class RegisterCubit extends Cubit<RegisterFormState> {
@@ -16,10 +22,14 @@ class RegisterCubit extends Cubit<RegisterFormState> {
 
 // Método que se llama cuando el valor del campo de texto 'username' cambia.
   void usernameChanged(String value) {
+    //Creamos un campo, con una nueva instancia "dirty(Sucia)" con el valor que me estan mandando
+    final username = Username.dirty(value);
+
     // Emite un nuevo estado del formulario con el valor actualizado del nombre de usuario.
     emit(state.copyWith(
-      username: value,
-    ));
+        username: username,
+        //Si el username cambia, validamos el cambio
+        isValid: Formz.validate([username])));
   }
 
 // Método que se llama cuando el valor del campo de texto 'email' cambia.
