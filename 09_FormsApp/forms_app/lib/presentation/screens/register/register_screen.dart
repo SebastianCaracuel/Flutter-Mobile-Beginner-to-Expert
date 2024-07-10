@@ -213,10 +213,10 @@ class _RegisterFormState extends State<_RegisterForm> {
           FilledButton.tonalIcon(
               //! Función para ver los datos
               onPressed: () {
-                // Validamos el formulario actual utilizando la clave global _formKey.
-                final isValid = _formKey.currentState!.validate();
-                // Si el formulario no es válido, detenemos la ejecución del código.
-                if (!isValid) return;
+                // // Validamos el formulario actual utilizando la clave global _formKey.
+                // final isValid = _formKey.currentState!.validate();
+                // // Si el formulario no es válido, detenemos la ejecución del código.
+                // if (!isValid) return;
 
                 //Llamamos al método
                 registerCubit.onSubmit();
