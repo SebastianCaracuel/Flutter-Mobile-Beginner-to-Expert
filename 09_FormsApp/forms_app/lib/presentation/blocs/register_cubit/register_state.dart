@@ -53,18 +53,22 @@ class RegisterFormState extends Equatable {
     String? password,
     //
     FormStatus? formstatus,
+    //Creamos una variable para saber si es valido
+    bool? isValid,
   }) =>
       RegisterFormState(
         username: username ?? this.username,
         email: email ?? this.email,
         password: password ?? this.password,
         formstatus: formstatus ?? this.formstatus,
+        isValid: isValid ?? this.isValid,
       );
 
   @override
   List<Object> get props => [
         formstatus,
         username,
+        isValid,
         email,
         password
       ]; // Retorna una lista de propiedades que determinan la igualdad del objeto
