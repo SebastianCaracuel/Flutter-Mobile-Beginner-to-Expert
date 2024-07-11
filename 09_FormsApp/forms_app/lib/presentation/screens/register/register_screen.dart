@@ -98,9 +98,6 @@ class _RegisterForm extends StatefulWidget {
 class _RegisterFormState extends State<_RegisterForm> {
   //Propiedades State
 
-  // ?Creamos una clave global para manejar el estado de un formulario.
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-
   //Objeto
   @override
   Widget build(BuildContext context) {
@@ -115,7 +112,6 @@ class _RegisterFormState extends State<_RegisterForm> {
     //!Widget Hijo
     return Form(
       //Añadimos nuestra clave global para manejar el estado del Formulario
-      key: _formKey,
       child: Column(
         children: [
           //Espacio
@@ -132,7 +128,6 @@ class _RegisterFormState extends State<_RegisterForm> {
             onChanged: (value) {
               //Cada vez que una persona realicé un cambio, se valida cada uno de los cambios
               registerCubit.usernameChanged(value);
-              _formKey.currentState?.validate();
             },
             // ? Validaciones correspondientes al campo
             validator: (value) {
@@ -159,7 +154,6 @@ class _RegisterFormState extends State<_RegisterForm> {
             onChanged: (value) {
               //Cada vez que una persona realicé un cambio, se valida cada uno de los cambios
               registerCubit.emailChanged(value);
-              _formKey.currentState?.validate();
             },
             // ? Validaciones correspondientes al campo
             validator: (value) {
@@ -192,7 +186,6 @@ class _RegisterFormState extends State<_RegisterForm> {
             onChanged: (value) {
               //Cada vez que una persona realicé un cambio, se valida cada uno de los cambios
               registerCubit.passwordChanged(value);
-              _formKey.currentState?.validate();
             },
             // ? Validaciones correspondientes al campo
             validator: (value) {
@@ -213,11 +206,6 @@ class _RegisterFormState extends State<_RegisterForm> {
           FilledButton.tonalIcon(
               //! Función para ver los datos
               onPressed: () {
-                // // Validamos el formulario actual utilizando la clave global _formKey.
-                // final isValid = _formKey.currentState!.validate();
-                // // Si el formulario no es válido, detenemos la ejecución del código.
-                // if (!isValid) return;
-
                 //Llamamos al método
                 registerCubit.onSubmit();
               },
