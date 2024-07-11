@@ -83,22 +83,14 @@ class _RegisterView extends StatelessWidget {
 
 //? Creamos un Widget que será exportado, esto es un Widget de Diseño, para el campo de texto (TextFormField)
 //Creamos la clase
-class _RegisterForm extends StatefulWidget {
+class _RegisterForm extends StatelessWidget {
   //Propiedad de la calse
 
   //Constructor
   const _RegisterForm();
 
   //State
-  @override
-  State<_RegisterForm> createState() => _RegisterFormState();
-}
-
-//Clase State - //? Transformamos el _registerForm en un StatefulWidget
-class _RegisterFormState extends State<_RegisterForm> {
   //Propiedades State
-
-  //Objeto
   @override
   Widget build(BuildContext context) {
     //Propiedad del Objeto
