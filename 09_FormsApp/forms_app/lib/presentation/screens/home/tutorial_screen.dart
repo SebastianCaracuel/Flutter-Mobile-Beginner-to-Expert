@@ -22,9 +22,6 @@ final slides = <SlideInfo>[
   //Dos
   SlideInfo('Welcome To My Channel', '📱 Forms App for Beginners 👨🏽‍💻',
       'assets/tutorial/1.png'),
-  //Tres
-  SlideInfo('Welcome To My Channel', '📱 Forms App for Beginners 👨🏽‍💻',
-      'assets/tutorial/1.png'),
 ];
 
 //Creación de la pantalla
@@ -76,6 +73,6 @@ class _Slide extends StatelessWidget {
     //Propiedades del Objeto
 
     //!Widget Hijo
-    return Container();
+    return const Placeholder();
   }
 }
