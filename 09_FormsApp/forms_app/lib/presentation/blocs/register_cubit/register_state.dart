@@ -26,7 +26,7 @@ class RegisterFormState extends Equatable {
   //Nombre de usuario
   final Username username;
   //Nombre de email
-  final String email;
+  final Email email;
   //Nombre de password
   final Password password;
   //
@@ -37,7 +37,7 @@ class RegisterFormState extends Equatable {
   //Constructor
   const RegisterFormState({
     this.username = const Username.pure(),
-    this.email = '',
+    this.email = const Email.pure(),
     this.password = const Password.pure(),
     this.formstatus = FormStatus.invalid,
     this.isValid = false,
@@ -48,7 +48,7 @@ class RegisterFormState extends Equatable {
     //Nombre de usuario
     Username? username,
     //Nombre de email
-    String? email,
+    Email? email,
     //Nombre de password
     Password? password,
     //
