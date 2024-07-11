@@ -14,6 +14,17 @@ class RegisterCubit extends Cubit<RegisterFormState> {
 
 // Método que se llama cuando se envía el formulario.
   void onSubmit() {
+    //? Colocamos nuestro OnSubmit en un nuevo estado
+    emit(state.copyWith(
+        formstatus: FormStatus.validating,
+        username: Username.dirty(state.username.value),
+        password: Password.dirty(state.password.value),
+        //email: Email.dirty(state.email.value),
+        isValid: Formz.validate([
+          state.username,
+          state.password,
+          //todo: state.email
+        ])));
     // Imprime el estado actual del formulario en la consola.
     print('Submit: $state');
   }
