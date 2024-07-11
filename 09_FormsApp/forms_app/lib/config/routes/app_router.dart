@@ -16,9 +16,17 @@ final appRouter = GoRouter(
     //Ruta inicial - Home Screen
     GoRoute(
       //Path que tendrá la ruta
-      path: '/',
+      path: '/home',
       //Lo mandamos a la presentación a la que navegaremos
       builder: (context, state) => const HomeScreen(),
+    ),
+
+    //Tutorial
+    GoRoute(
+      //Path que tendrá la ruta
+      path: '/',
+      //Lo mandamos a la presentación a la que navegaremos
+      builder: (context, state) => const TutorialScreen(),
     ),
 
     //Ruta Menu - Cubits
