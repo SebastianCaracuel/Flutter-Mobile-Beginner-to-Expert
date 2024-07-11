@@ -104,6 +104,7 @@ class _RegisterForm extends StatelessWidget {
     // Password
     final password = registerCubit.state.password;
     //Email - Correo
+    final email = registerCubit.state.email;
 
     //? Utilizamos los colores de nuestra aplicación
     final colors = Theme.of(context).colorScheme;
@@ -138,25 +139,8 @@ class _RegisterForm extends StatelessWidget {
             hint: 'Write your Email',
             icon: Icon(Icons.email_rounded, color: colors.primary),
             //conectamos el valor que escriba el usuario con la variable de Email
-            onChanged: (value) {
-              //Cada vez que una persona realicé un cambio, se valida cada uno de los cambios
-              registerCubit.emailChanged(value);
-            },
-            // ? Validaciones correspondientes al campo
-            validator: (value) {
-              //Creamos una validación de que el valor no tiene que ir vacio
-              if (value == null || value.isEmpty) return 'Campo Requerido';
-              if (value.trim().isEmpty) return 'Campo Requerido';
-              final emailRegExp = RegExp(
-                r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$',
-              );
-
-              //
-              if (!emailRegExp.hasMatch(value)) {
-                return 'Formato de Correo incorrecto.';
-              }
-              return null;
-            },
+            onChanged: registerCubit.emailChanged,
+            errorMessage: email.errorMessage,
           ),
 
           //Espacio
