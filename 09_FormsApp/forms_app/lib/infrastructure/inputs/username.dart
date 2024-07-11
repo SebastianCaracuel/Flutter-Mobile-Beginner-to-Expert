@@ -10,7 +10,7 @@ class Username extends FormzInput<String, UsernameError> {
   const Username.pure() : super.pure('');
 
   // Llama a super.dirty para representar una entrada de formulario modificada.
-  const Username.dirty(String value) : super.dirty(value);
+  const Username.dirty(super.value) : super.dirty();
 
   // Sobrescribe el validador para manejar la validación de un valor de entrada dado.
   @override
