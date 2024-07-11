@@ -118,20 +118,15 @@ class _RegisterForm extends StatelessWidget {
 
           //todo: TextFormField personalizado Nombre de Usuario
           CustomTextFormField(
-            //Personalizamos el Primer Custom Nombre Usuario
-            label: 'Name User',
-            hint: 'Write your name user',
-            icon: Icon(Icons.supervised_user_circle_rounded,
-                color: colors.primary),
-            //conectamos el valor que escriba el usuario con la variable de nombre de usuario
-            onChanged: registerCubit.usernameChanged,
-            //? Mensajes de error, hasta que se escriba este código se valida
-            errorMessage: username.isPure || username.isValid
-                //Si es valido el usuario no regresa nada
-                ? null
-                //Pero si el nombre de usuario no es valido
-                : 'Username is not valid.',
-          ),
+              //Personalizamos el Primer Custom Nombre Usuario
+              label: 'Name User',
+              hint: 'Write your name user',
+              icon: Icon(Icons.supervised_user_circle_rounded,
+                  color: colors.primary),
+              //conectamos el valor que escriba el usuario con la variable de nombre de usuario
+              onChanged: registerCubit.usernameChanged,
+              //? Mensajes de error, hasta que se escriba este código se valida
+              errorMessage: username.errorMessage),
 
           //Espacio
           const SizedBox(height: 10),
