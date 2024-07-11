@@ -45,10 +45,12 @@ class RegisterCubit extends Cubit<RegisterFormState> {
 
 // Método que se llama cuando el valor del campo de texto 'email' cambia.
   void emailChanged(String value) {
+    //? Creamos la variable que utilizaremos, para guardar nuestro Email (input)
+    final email = Email.dirty(value);
     // Emite un nuevo estado del formulario con el valor actualizado del correo electrónico.
     emit(state.copyWith(
-      email: value,
-    ));
+        email: email,
+        isValid: Formz.validate([email, state.username, state.password])));
   }
 
 // Método que se llama cuando el valor del campo de texto 'password' cambia.
