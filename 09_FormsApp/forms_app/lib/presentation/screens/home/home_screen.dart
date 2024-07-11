@@ -60,6 +60,32 @@ class HomeScreen extends StatelessWidget {
               trailing: const Icon(Icons.arrow_forward_ios_rounded),
               //todo: Función de navegación
               onTap: () => context.push('/new-user')),
+
+          //Divider
+          const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 30),
+              child: Divider()),
+
+          const Column(
+            children: [
+              //Titulo
+              Text('Forms App',
+                  style: TextStyle(fontSize: 30, fontWeight: FontWeight.w900)),
+              //Contenido
+              Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Text(
+                      "📱 Forms App for Beginners 👨🏽‍💻\n\n"
+                      "Características:\n"
+                      "1️⃣ Formulario\n"
+                      "2️⃣ Validaciones\n"
+                      "3️⃣ Formulario Personalizado\n"
+                      "4️⃣ Gestor de Estado\n\n"
+                      "Ideal para principiantes 🚀\n",
+                      style: TextStyle(
+                          fontSize: 20, fontWeight: FontWeight.bold))),
+            ],
+          ),
         ],
       ),
     );
