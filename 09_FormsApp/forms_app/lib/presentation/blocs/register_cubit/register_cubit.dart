@@ -19,6 +19,7 @@ class RegisterCubit extends Cubit<RegisterFormState> {
         formstatus: FormStatus.validating,
         username: Username.dirty(state.username.value),
         password: Password.dirty(state.password.value),
+        email: Email.dirty(state.email.value),
         //email: Email.dirty(state.email.value),
         isValid:
             Formz.validate([state.username, state.password, state.email])));
@@ -37,7 +38,7 @@ class RegisterCubit extends Cubit<RegisterFormState> {
     emit(state.copyWith(
         username: username,
         //Si el username cambia, validamos el cambio
-        isValid: Formz.validate([username, state.password])));
+        isValid: Formz.validate([username, state.password, state.email])));
   }
 
 // Método que se llama cuando el valor del campo de texto 'email' cambia.
@@ -57,6 +58,6 @@ class RegisterCubit extends Cubit<RegisterFormState> {
     // Emite un nuevo estado del formulario con el valor actualizado de la contraseña.
     emit(state.copyWith(
         password: password,
-        isValid: Formz.validate([password, state.username])));
+        isValid: Formz.validate([password, state.username, state.email])));
   }
 }
