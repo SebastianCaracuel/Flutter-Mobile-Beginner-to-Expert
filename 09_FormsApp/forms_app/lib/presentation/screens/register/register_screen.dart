@@ -164,27 +164,14 @@ class _RegisterForm extends StatelessWidget {
 
           //todo: TextFormField personalizado Contraseña
           CustomTextFormField(
-            //Personalizamos el Tercer Custom Contraseña
-            label: 'Password',
-            hint: 'Write your Password',
-            obscureText: true,
-            icon: Icon(Icons.password_rounded, color: colors.primary),
-            //conectamos el valor que escriba el usuario con la variable de contraseña
-            onChanged: (value) {
-              //Cada vez que una persona realicé un cambio, se valida cada uno de los cambios
-              registerCubit.passwordChanged(value);
-            },
-            // ? Validaciones correspondientes al campo
-            validator: (value) {
-              //Creamos una validación de que el valor no tiene que ir vacio
-              if (value == null || value.isEmpty) return 'Campo Requerido';
-              if (value.trim().isEmpty) return 'Campo Requerido';
-              if (value.trim().length < 6) {
-                return 'La Contraseña debe tener más de 6 Letras';
-              }
-              return null;
-            },
-          ),
+              //Personalizamos el Tercer Custom Contraseña
+              label: 'Password',
+              hint: 'Write your Password',
+              obscureText: true,
+              icon: Icon(Icons.password_rounded, color: colors.primary),
+              //conectamos el valor que escriba el usuario con la variable de contraseña
+              onChanged: registerCubit.passwordChanged,
+              errorMessage: password.errorMessage),
 
           //Espacio
           const SizedBox(height: 20),
