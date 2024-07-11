@@ -98,6 +98,13 @@ class _RegisterForm extends StatelessWidget {
     //? Llamamos la referencia a nuestro Cubit, para conectar cubit al Formulario
     final registerCubit = context.watch<RegisterCubit>();
 
+    //? Llamamos a nuestros Inputs personalizados y al Cubit
+    // Username
+    final username = registerCubit.state.username;
+    // Password
+    final password = registerCubit.state.password;
+    //Email - Correo
+
     //? Utilizamos los colores de nuestra aplicación
     final colors = Theme.of(context).colorScheme;
 
@@ -117,20 +124,13 @@ class _RegisterForm extends StatelessWidget {
             icon: Icon(Icons.supervised_user_circle_rounded,
                 color: colors.primary),
             //conectamos el valor que escriba el usuario con la variable de nombre de usuario
-            onChanged: (value) {
-              //Cada vez que una persona realicé un cambio, se valida cada uno de los cambios
-              registerCubit.usernameChanged(value);
-            },
-            // ? Validaciones correspondientes al campo
-            validator: (value) {
-              //Creamos una validación de que el valor no tiene que ir vacio
-              if (value == null || value.isEmpty) return 'Campo Requerido';
-              if (value.trim().isEmpty) return 'Campo Requerido';
-              if (value.trim().length < 6) {
-                return 'El Usuario debe tener más de 6 Letras';
-              }
-              return null;
-            },
+            onChanged: registerCubit.usernameChanged,
+            //? Mensajes de error, hasta que se escriba este código se valida
+            errorMessage: username.isPure || username.isValid
+                //Si es valido el usuario no regresa nada
+                ? null
+                //Pero si el nombre de usuario no es valido
+                : 'Username is not valid.',
           ),
 
           //Espacio
