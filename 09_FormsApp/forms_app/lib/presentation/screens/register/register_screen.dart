@@ -22,17 +22,12 @@ class RegisterScreen extends StatelessWidget {
 
     //!Widget Padre
     return Scaffold(
-        //? Colocamos un titulo, y un Appbar
-        appBar: AppBar(
-          title: const Center(child: Text('Create New User')),
-          actions: const [Icon(Icons.settings)],
-        ),
 
         //todo: Extraimos el Widget
         body: BlocProvider(
-          create: (context) => RegisterCubit(),
-          child: const _RegisterView(),
-        ));
+      create: (context) => RegisterCubit(),
+      child: const _RegisterView(),
+    ));
   }
 }
 
