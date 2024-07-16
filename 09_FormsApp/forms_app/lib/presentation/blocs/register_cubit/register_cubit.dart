@@ -24,7 +24,6 @@ class RegisterCubit extends Cubit<RegisterFormState> {
         isValid:
             Formz.validate([state.username, state.password, state.email])));
     // Imprime el estado actual del formulario en la consola.
-    print('Submit: $state');
   }
 
 //todo:Métodos para actualizar el estado del formulario
