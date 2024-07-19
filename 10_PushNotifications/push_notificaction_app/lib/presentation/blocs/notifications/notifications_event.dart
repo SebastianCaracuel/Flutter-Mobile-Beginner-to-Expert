@@ -1,8 +1,12 @@
 part of 'notifications_bloc.dart';
 
-sealed class NotificationsEvent extends Equatable {
+abstract class NotificationsEvent {
   const NotificationsEvent();
+}
 
-  @override
-  List<Object> get props => [];
+//Creamos una nueva clase que nos traerá el nuevo status de la autorización
+class NotificationStatusChanged extends NotificationsEvent {
+  final AuthorizationStatus status;
+
+  const NotificationStatusChanged(this.status);
 }
