@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1044870006125",
+    "project_id": "notificationapp-fh",
+    "storage_bucket": "notificationapp-fh.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1044870006125:android:b762d27b1d5900d9330664",
+        "android_client_info": {
+          "package_name": "com.SCode.push_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCK90f3LcPWTEmYnVz8KepnpPe9jWEWQ_E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
