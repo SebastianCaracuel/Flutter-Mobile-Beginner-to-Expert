@@ -20,6 +20,9 @@ class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
 
     //Llamamos al método de inicialización del Status
     _initialStatusCheck();
+
+    //Listener para notificaciones en Foreground
+    _onForegroundMessage();
   }
 
   //todo: Creamos un nuevo método que nos díra si cambio o no el estado de autorización
@@ -48,6 +51,29 @@ class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
     final token = await messaging.getToken();
     //Vemos si llama el token
     print(token);
+  }
+
+  //todo: método para imprimir un mesaje
+  void _handleRemoteMessage(RemoteMessage message) {
+    // Imprime un mensaje indicando que se recibió un mensaje mientras la aplicación está en primer plano.
+    print('Got a message whilst in the foreground');
+
+    // Imprime los datos del mensaje recibido.
+    print('Message data: ${message.data}');
+
+    // Si el mensaje contiene una notificación, se sale de la función.
+    // La función retorna sin hacer nada más.
+    if (message.notification != null) return;
+
+    // Imprime los detalles de la notificación contenida en el mensaje.
+    // Este punto del código solo se ejecuta si el mensaje no contiene una notificación.
+    print('Message also contained a notification: ${message.notification}');
+  }
+
+  //todo: creamos otro método listener para que se pueda imprirmir nuestro mensaje
+  void _onForegroundMessage() {
+    //Llamamos al mensaje
+    FirebaseMessaging.onMessage.listen(_handleRemoteMessage);
   }
 
 //todo :Creamos un método para los permisos
