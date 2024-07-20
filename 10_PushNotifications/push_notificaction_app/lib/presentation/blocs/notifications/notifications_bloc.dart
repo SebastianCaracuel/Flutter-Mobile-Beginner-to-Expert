@@ -1,4 +1,6 @@
 //Importaciones Flutter
+import 'dart:io';
+
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -67,19 +69,22 @@ class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
 
   //todo: método para imprimir un mesaje
   void _handleRemoteMessage(RemoteMessage message) {
-    // Imprime un mensaje indicando que se recibió un mensaje mientras la aplicación está en primer plano.
-    print('Got a message whilst in the foreground');
-
-    // Imprime los datos del mensaje recibido.
-    print('Message data: ${message.data}');
-
     // Si el mensaje contiene una notificación, se sale de la función.
     // La función retorna sin hacer nada más.
-    if (message.notification != null) return;
+    if (message.notification == null) return;
 
-    // Imprime los detalles de la notificación contenida en el mensaje.
-    // Este punto del código solo se ejecuta si el mensaje no contiene una notificación.
-    print('Message also contained a notification: ${message.notification}');
+    //
+    final notification = PushMessage(
+        messageId: message.messageId?.replaceAll('%', '') ?? '',
+        title: message.notification!.title ?? '',
+        body: message.notification!.body ?? '',
+        sentDate: message.sentTime ?? DateTime.now(),
+        data: message.data,
+        imageUrl: Platform.isAndroid
+            ? message.notification!.android?.imageUrl
+            : message.notification!.apple?.imageUrl);
+
+    print(notification);
   }
 
   //todo: creamos otro método listener para que se pueda imprirmir nuestro mensaje
