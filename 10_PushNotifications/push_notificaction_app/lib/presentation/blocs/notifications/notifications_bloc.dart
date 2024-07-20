@@ -9,6 +9,17 @@ import 'package:push_notificaction_app/firebase_options.dart';
 part 'notifications_event.dart';
 part 'notifications_state.dart';
 
+// ? Función Esta función maneja mensajes remotos recibidos cuando la aplicación está en segundo plano.
+Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  // Inicializa Firebase. Esto es necesario para asegurarse de que los servicios de Firebase
+  // estén disponibles cuando se maneje un mensaje en segundo plano.
+  await Firebase.initializeApp();
+
+  // Imprime un mensaje indicando que se está manejando un mensaje en segundo plano.
+  // También imprime el ID del mensaje recibido.
+  print('Handling a background message: ${message.messageId}');
+}
+
 class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
   //Propiedades del bLoC
 
