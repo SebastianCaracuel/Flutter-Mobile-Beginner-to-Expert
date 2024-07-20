@@ -22,11 +22,13 @@ class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
     _initialStatusCheck();
   }
 
-  //? Creamos un nuevo método que nos díra si cambio o no el estado de autorización
+  //todo: Creamos un nuevo método que nos díra si cambio o no el estado de autorización
   void _notificationStatusChanged(
       NotificationStatusChanged event, Emitter<NotificationsState> emit) {
     //Llamamos la notificación
     emit(state.copyWith(status: event.status));
+    //Llamamos el método que obtiene el token
+    _getFirebaseToken();
   }
 
   //todo: creamos  un nuevo método, llamamos al método antes de que se inicie el LIstener
@@ -37,10 +39,20 @@ class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
     add(NotificationStatusChanged(settings.authorizationStatus));
   }
 
+  //todo: Obtener el Token del dispositivo
+  void _getFirebaseToken() async {
+    //Para ver el token del dispositivo solo lo podemos identificar con la autorización
+    if (state.status != AuthorizationStatus.authorized) return;
+
+    //Llamamos al Token y le asignamos una variable
+    final token = await messaging.getToken();
+    //Vemos si llama el token
+    print(token);
+  }
+
 //todo :Creamos un método para los permisos
   void requestPermission() async {
     //?
-    //
     NotificationSettings settings = await messaging.requestPermission(
       alert: true,
       announcement: false,
