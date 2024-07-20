@@ -5,6 +5,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 //Importaciones nuestras
 import 'package:push_notificaction_app/firebase_options.dart';
+import 'package:push_notificaction_app/domain/entities/push_message.dart';
 
 part 'notifications_event.dart';
 part 'notifications_state.dart';
