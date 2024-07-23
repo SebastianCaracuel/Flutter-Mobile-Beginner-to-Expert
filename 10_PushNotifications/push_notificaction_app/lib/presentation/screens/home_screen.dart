@@ -23,8 +23,16 @@ class HomeScreen extends StatelessWidget {
       //Creamos una barra superior
       appBar: AppBar(
         //Le añadimos un texto como titulo
-        title: const Text('Permisos'),
-
+        title: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text('Permisos'),
+            context.select((NotificationsBloc bloc) => Text(
+                  '${bloc.state.status}',
+                  style: const TextStyle(fontSize: 15),
+                )),
+          ],
+        ),
         //Creamos unos botones
         actions: [
           IconButton(
@@ -53,15 +61,24 @@ class _HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     //Propieades del Objeto
 
+    //Llamamos nuestra Bloc con las notificaciones
+    final notifications =
+        context.watch<NotificationsBloc>().state.notifications;
+
     //!Widget hijo
-    return ListView(
-      //Le añadimos un padding
-      padding: const EdgeInsets.all(8),
-      children: [
-        //Añadimos un texto, para ver el status de la autorización
-        context.select((NotificationsBloc bloc) =>
-            Center(child: Text('${bloc.state.status}'))),
-      ],
+    return ListView.builder(
+      itemCount: notifications.length,
+      itemBuilder: (BuildContext context, int index) {
+        // ? Notificaciones
+        final notification = notifications[index];
+        return ListTile(
+          title: Text(notification.title),
+          subtitle: Text(notification.body),
+          leading: notification.imageUrl != null
+              ? Image.network(notification.imageUrl!)
+              : null,
+        );
+      },
     );
   }
 }
