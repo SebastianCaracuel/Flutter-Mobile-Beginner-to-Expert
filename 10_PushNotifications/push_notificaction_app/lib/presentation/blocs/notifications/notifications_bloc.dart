@@ -80,7 +80,7 @@ class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
   }
 
   //todo: método para imprimir un mesaje
-  void _handleRemoteMessage(RemoteMessage message) {
+  void handleRemoteMessage(RemoteMessage message) {
     // Si el mensaje contiene una notificación, se sale de la función.
     // La función retorna sin hacer nada más.
     if (message.notification == null) return;
@@ -103,7 +103,7 @@ class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
   //todo: creamos otro método listener para que se pueda imprirmir nuestro mensaje
   void _onForegroundMessage() {
     //Llamamos al mensaje
-    FirebaseMessaging.onMessage.listen(_handleRemoteMessage);
+    FirebaseMessaging.onMessage.listen(handleRemoteMessage);
   }
 
 //todo :Creamos un método para los permisos
