@@ -31,6 +31,73 @@ class MainApp extends StatelessWidget {
       //Quitamos el banner debugShowCheckedModeBanner: false,
       //Colocamos el color de la aplicación
       theme: AppTheme().getTheme(),
+      builder: (context, child) =>
+          HandleNotificationInteractions(child: child!),
     );
+  }
+}
+
+// ? Creamos un nuevo Widget independiente para mejorar la interacción con las notificaciones
+// Lo que nos permitirá, al momento de que llegué la notificación, navegar inmediatamente a la pantalla de detellas
+class HandleNotificationInteractions extends StatefulWidget {
+  //Propieades
+
+  //?
+  final Widget child;
+
+  const HandleNotificationInteractions({super.key, required this.child});
+
+  @override
+  State<HandleNotificationInteractions> createState() =>
+      _HandleNotificationInteractionsState();
+}
+
+class _HandleNotificationInteractionsState
+    extends State<HandleNotificationInteractions> {
+  //Propieades
+
+  // Se asume que todos los mensajes contienen un campo de datos con la clave 'type'
+  Future<void> setupInteractedMessage() async {
+    // Obtener cualquier mensaje que haya causado la apertura de la aplicación desde
+    // un estado terminado.
+    RemoteMessage? initialMessage =
+        await FirebaseMessaging.instance.getInitialMessage();
+
+    // Si el mensaje también contiene una propiedad de datos con un "tipo" de "chat",
+    // navegar a una pantalla de chat
+    if (initialMessage != null) {
+      _handleMessage(initialMessage);
+    }
+
+    // También manejar cualquier interacción cuando la aplicación está en segundo plano a través de un
+    // oyente de Stream
+    FirebaseMessaging.onMessageOpenedApp.listen(_handleMessage);
+  }
+
+  void _handleMessage(RemoteMessage message) {
+    //Cuando yo toco la notificación voy a almacenarla en mi Bloc
+    context.read<NotificationsBloc>().handleRemoteMessage(message);
+
+    //? Creamos una variable para Obtener el Id
+    final messageId =
+        message.messageId?.replaceAll(':', '').replaceAll('%', '');
+
+    //Cuando yo recibo una notificación push, quiero navegar a ella con el ID
+    appRouter.push('/push-details/$messageId');
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    // Ejecutar el código necesario para manejar mensajes interactuados en una función async
+    // ya que initState() no debe ser async
+    setupInteractedMessage();
+  }
+
+  //Objeto
+  @override
+  Widget build(BuildContext context) {
+    return widget.child;
   }
 }
