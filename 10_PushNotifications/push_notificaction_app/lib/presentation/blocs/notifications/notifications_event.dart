@@ -10,3 +10,10 @@ class NotificationStatusChanged extends NotificationsEvent {
 
   const NotificationStatusChanged(this.status);
 }
+
+//todo: Crear un nuevo envento llamado NotificationReceived, recibimos un argunmento que es de tipo PushMessage
+class NotificationRecived extends NotificationsEvent {
+  final PushMessage pushMessage;
+
+  NotificationRecived(this.pushMessage);
+}
