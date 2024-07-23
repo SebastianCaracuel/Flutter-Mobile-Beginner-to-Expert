@@ -31,6 +31,8 @@ class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
   NotificationsBloc() : super(const NotificationsState()) {
     //Mandamos como referencia el método
     on<NotificationStatusChanged>(_notificationStatusChanged);
+    //Para el nuevo evento de NotificationRecived
+    on<NotificationRecived>(_onPushMessageReceived);
 
     //Llamamos al método de inicialización del Status
     _initialStatusCheck();
@@ -44,6 +46,16 @@ class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
       NotificationStatusChanged event, Emitter<NotificationsState> emit) {
     //Llamamos la notificación
     emit(state.copyWith(status: event.status));
+    //Llamamos el método que obtiene el token
+    _getFirebaseToken();
+  }
+
+  //todo: Creamos un nuevo método que nos díra si cambio o no el estado de autorización
+  void _onPushMessageReceived(
+      NotificationRecived event, Emitter<NotificationsState> emit) {
+    //Llamamos la notificación
+    emit(state
+        .copyWith(notifications: [event.pushMessage, ...state.notifications]));
     //Llamamos el método que obtiene el token
     _getFirebaseToken();
   }
@@ -84,7 +96,8 @@ class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
             ? message.notification!.android?.imageUrl
             : message.notification!.apple?.imageUrl);
 
-    print(notification);
+    //todo: TAREA AÑADIR UN NUEVO EVENTO
+    add(NotificationRecived(notification));
   }
 
   //todo: creamos otro método listener para que se pueda imprirmir nuestro mensaje
