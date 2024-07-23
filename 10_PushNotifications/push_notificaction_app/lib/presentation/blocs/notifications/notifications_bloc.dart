@@ -130,4 +130,17 @@ class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
     await Firebase.initializeApp(
         options: DefaultFirebaseOptions.currentPlatform);
   }
+
+  //todo: Cremaos un nuevo método que obtendrá la notificación Push, si existe o no.
+  PushMessage? getMessageById(String pushMessageId) {
+    //¿Existe la notificación?
+    final exist = state.notifications
+        .any((element) => element.messageId == pushMessageId);
+
+    //Si no existe la Notificación
+    if (!exist) return null;
+    //Pero si existe entonces se regresa
+    return state.notifications
+        .firstWhere((element) => element.messageId == pushMessageId);
+  }
 }
