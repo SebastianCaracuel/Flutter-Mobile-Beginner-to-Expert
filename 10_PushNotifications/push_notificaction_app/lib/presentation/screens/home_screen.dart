@@ -3,6 +3,7 @@
 //Importaciones Flutter
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 //Importaciones Nuestras
 import 'package:push_notificaction_app/presentation/blocs/notifications/notifications_bloc.dart';
 
@@ -69,7 +70,7 @@ class _HomeView extends StatelessWidget {
     return ListView.builder(
       itemCount: notifications.length,
       itemBuilder: (BuildContext context, int index) {
-        // ? Notificaciones
+        // ? Notificaciones - Esta es la notificación
         final notification = notifications[index];
         return ListTile(
           title: Text(notification.title),
@@ -77,6 +78,11 @@ class _HomeView extends StatelessWidget {
           leading: notification.imageUrl != null
               ? Image.network(notification.imageUrl!)
               : null,
+
+          //todo: Cuando alguíen presione la notificación lo llevará a la pantalla de detalles
+          onTap: () {
+            context.push('/push-details/${notification.messageId}');
+          },
         );
       },
     );
