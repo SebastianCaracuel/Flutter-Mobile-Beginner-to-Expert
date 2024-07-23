@@ -87,7 +87,8 @@ class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
 
     //
     final notification = PushMessage(
-        messageId: message.messageId?.replaceAll('%', '') ?? '',
+        messageId:
+            message.messageId?.replaceAll(':', '').replaceAll('%', '') ?? '',
         title: message.notification!.title ?? '',
         body: message.notification!.body ?? '',
         sentDate: message.sentTime ?? DateTime.now(),
