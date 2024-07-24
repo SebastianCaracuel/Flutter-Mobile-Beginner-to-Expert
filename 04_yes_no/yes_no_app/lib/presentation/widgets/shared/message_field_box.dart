@@ -41,23 +41,26 @@ class MessageFieldBox extends StatelessWidget {
     );
 
     //!? Creamos un TextFormField donde colocatremos nuestro Input Personalizado
-    return TextFormField(
-      //Colocamos el textController
-      controller: textController,
-      //Elemento FOCUS
-      focusNode: focusNode,
-      //Para presionar afuera y que se pierda el focus
-      onTapOutside: (event) {
-        focusNode.unfocus();
-      },
-      //Le colocamos decoración
-      decoration: inputDecoraction,
-      //Vemos el valor de lo que se esta escribiendo en la caja de texto
-      onFieldSubmitted: (value) {
-        onValue(value);
-        textController.clear();
-        focusNode.requestFocus();
-      },
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: TextFormField(
+        //Colocamos el textController
+        controller: textController,
+        //Elemento FOCUS
+        focusNode: focusNode,
+        //Para presionar afuera y que se pierda el focus
+        onTapOutside: (event) {
+          focusNode.unfocus();
+        },
+        //Le colocamos decoración
+        decoration: inputDecoraction,
+        //Vemos el valor de lo que se esta escribiendo en la caja de texto
+        onFieldSubmitted: (value) {
+          onValue(value);
+          textController.clear();
+          focusNode.requestFocus();
+        },
+      ),
     );
   }
 }

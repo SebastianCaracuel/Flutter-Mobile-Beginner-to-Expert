@@ -18,7 +18,7 @@ class ChatScreen extends StatelessWidget {
           padding: EdgeInsets.all(4.0),
           child: CircleAvatar(
             backgroundImage: NetworkImage(
-                'https://th.bing.com/th/id/OIP.mSbqR1SvIcywqzbh8VALSwHaHa?rs=1&pid=ImgDetMain'),
+                'https://reactormag.com/wp-content/uploads/2023/06/Miles-Across-the-Spider-Verse-740x493.png'),
           ),
         ),
         //Titulo del mensaje
