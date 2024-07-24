@@ -38,6 +38,11 @@ En esta Decima Etapa los conceptos que se vieron fueron:
 5. Interacciones
 6. Navegación a diferentes rutas basados en la Push
 7. Firebase
+8. Postman
+9. Bearer Token
+10. Local Notifications
+11. Sonidos e iconos personalizados
+12. Aprender a evitar las dependencias ocultas.
 
 Esta aplicación es para aprender sobre el <b>Manejo de Notificaciones</b>.
 <br> 
