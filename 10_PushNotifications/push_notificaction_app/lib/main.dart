@@ -89,7 +89,7 @@ class _HandleNotificationInteractionsState
 
   void _handleMessage(RemoteMessage message) {
     //Cuando yo toco la notificación voy a almacenarla en mi Bloc
-    context.read<NotificationsBloc>().handleRemoteMessage(message);
+    context.read<NotificationsBloc>().handleRemoteMessage(message, false);
 
     //? Creamos una variable para Obtener el Id
     final messageId =

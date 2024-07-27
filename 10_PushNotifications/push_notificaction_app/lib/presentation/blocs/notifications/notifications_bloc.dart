@@ -99,7 +99,7 @@ class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
   }
 
   //todo: método para imprimir un mesaje
-  void handleRemoteMessage(RemoteMessage message) {
+  void handleRemoteMessage(RemoteMessage message, bool isForeground) {
     // Si el mensaje contiene una notificación, se sale de la función.
     // La función retorna sin hacer nada más.
     if (message.notification == null) return;
@@ -117,7 +117,7 @@ class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
             : message.notification!.apple?.imageUrl);
 
     // Validamos si el ShowLocalNotifications existe
-    if (showLocalNotification != null) {
+    if (isForeground && showLocalNotification != null) {
       //? Mandamos la Notificación local
       showLocalNotification!(
           id: pushNumberId++,
@@ -133,7 +133,8 @@ class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
   //todo: creamos otro método listener para que se pueda imprirmir nuestro mensaje
   void _onForegroundMessage() {
     //Llamamos al mensaje
-    FirebaseMessaging.onMessage.listen(handleRemoteMessage);
+    FirebaseMessaging.onMessage
+        .listen((message) => handleRemoteMessage(message, true));
   }
 
 //todo :Creamos un método para los permisos
