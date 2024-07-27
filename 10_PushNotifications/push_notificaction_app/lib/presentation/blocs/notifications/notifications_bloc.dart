@@ -30,15 +30,24 @@ class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
   //? Creamos una variable para el ID de la notificación Local
   int pushNumberId = 0;
 
-  //Creamos una nueva propiedad
+  //Creamos una nueva propiedad que es para obtener respuesta de la notificación
   final Future<void> Function()? requestLocalNotificationPermissions;
+
+  //Creamos una nueva propiedad que es para mostrar las notificaciones
+  final void Function(
+      {required int id,
+      String? title,
+      String? body,
+      String? data})? showLocalNotification;
 
   FirebaseMessaging messaging = FirebaseMessaging.instance;
 
   //Constructor
   NotificationsBloc(
-      { //Propiedad
-      this.requestLocalNotificationPermissions})
+      {
+      //Propiedad
+      this.requestLocalNotificationPermissions,
+      this.showLocalNotification})
       : super(const NotificationsState()) {
     //Mandamos como referencia el método
     on<NotificationStatusChanged>(_notificationStatusChanged);
@@ -108,12 +117,15 @@ class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
             ? message.notification!.android?.imageUrl
             : message.notification!.apple?.imageUrl);
 
-    //? Mandamos la Notificación local
-    LocalNotifications.showLocalNotification(
-        id: pushNumberId++,
-        title: notification.title,
-        body: notification.body,
-        data: notification.data.toString());
+    // Validamos si el ShowLocalNotifications existe
+    if (showLocalNotification != null) {
+      //? Mandamos la Notificación local
+      showLocalNotification!(
+          id: pushNumberId++,
+          title: notification.title,
+          body: notification.body,
+          data: notification.data.toString());
+    }
 
     //todo: TAREA AÑADIR UN NUEVO EVENTO
     add(NotificationRecived(notification));
