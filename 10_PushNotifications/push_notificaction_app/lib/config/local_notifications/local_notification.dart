@@ -1,5 +1,6 @@
 //Importacion flutter
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:push_notificaction_app/config/router/app_router.dart';
 
 //Creamos una clase para las notificaciones locales
 class LocalNotifications {
@@ -29,12 +30,10 @@ class LocalNotifications {
     );
 
     //
-    await flutterLocalNotificationsPlugin.initialize(
-      initializationSettings,
+    await flutterLocalNotificationsPlugin.initialize(initializationSettings,
 
-      //TODO
-      //onDidReceiveBackgroundNotificationResponse: onDidReceiveBackgroundNotificationResponse
-    );
+        //todo: Realizamos la navegación a la notifcación entrante
+        onDidReceiveNotificationResponse: onDidReceiveNotificationResponse);
   }
 
   //todo: creamos un nuevo método que es la configuración y data de la Notificación - titulo - sonidos - cuerpo - etc
@@ -71,5 +70,11 @@ class LocalNotifications {
     //
     flutterLocalNotificationsPlugin.show(id, title, body, notificationDetails,
         payload: data);
+  }
+
+  //todo: Créamos un nuevo método que es para realizar la navegación a los detalles de la notificación entrante
+  static void onDidReceiveNotificationResponse(NotificationResponse response) {
+    //? Creamos la navegación a la pantalla de los detalles
+    appRouter.push('/push-details/${response.payload}');
   }
 }
