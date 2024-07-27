@@ -7,13 +7,21 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:push_notificaction_app/config/theme/app_theme.dart';
 import 'package:push_notificaction_app/config/router/app_router.dart';
 import 'package:push_notificaction_app/presentation/blocs/notifications/notifications_bloc.dart';
+import 'package:push_notificaction_app/config/local_notifications/local_notification.dart';
 
 void main() async {
   //Inicialiazmos Firebase
   WidgetsFlutterBinding.ensureInitialized();
+
   //Configuración de Firebase
   FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
+
+  //Inicializamos las notificaiones desde Firebase
   await NotificationsBloc.initializeFirebaseNotifications();
+
+  //Incializamos las Notificaciones Locales
+  await LocalNotifications.initializeLocalNotifications();
+
   runApp(MultiBlocProvider(
       providers: [BlocProvider(create: (_) => NotificationsBloc())],
       child: const MainApp()));
