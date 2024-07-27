@@ -30,9 +30,16 @@ class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
   //? Creamos una variable para el ID de la notificación Local
   int pushNumberId = 0;
 
+  //Creamos una nueva propiedad
+  final Future<void> Function()? requestLocalNotificationPermissions;
+
   FirebaseMessaging messaging = FirebaseMessaging.instance;
-  //
-  NotificationsBloc() : super(const NotificationsState()) {
+
+  //Constructor
+  NotificationsBloc(
+      { //Propiedad
+      this.requestLocalNotificationPermissions})
+      : super(const NotificationsState()) {
     //Mandamos como referencia el método
     on<NotificationStatusChanged>(_notificationStatusChanged);
     //Para el nuevo evento de NotificationRecived
@@ -131,8 +138,11 @@ class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
       sound: true,
     );
 
-    // Solicitar permiso a las local Notification
-    await LocalNotifications.requestPermissionLocalNotifications();
+    // ? Solicitar permiso a las local Notification
+    //Realizamos la validación del request local notificacition
+    if (requestLocalNotificationPermissions != null) {
+      await requestLocalNotificationPermissions!();
+    }
 
     //Añadimos la notificación
     add(NotificationStatusChanged(

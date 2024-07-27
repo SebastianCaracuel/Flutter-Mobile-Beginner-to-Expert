@@ -22,9 +22,12 @@ void main() async {
   //Incializamos las Notificaciones Locales
   await LocalNotifications.initializeLocalNotifications();
 
-  runApp(MultiBlocProvider(
-      providers: [BlocProvider(create: (_) => NotificationsBloc())],
-      child: const MainApp()));
+  runApp(MultiBlocProvider(providers: [
+    BlocProvider(
+        create: (_) => NotificationsBloc(
+            requestLocalNotificationPermissions:
+                LocalNotifications.requestPermissionLocalNotifications))
+  ], child: const MainApp()));
 }
 
 class MainApp extends StatelessWidget {
