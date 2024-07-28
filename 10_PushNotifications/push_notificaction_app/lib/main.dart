@@ -7,16 +7,29 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:push_notificaction_app/config/theme/app_theme.dart';
 import 'package:push_notificaction_app/config/router/app_router.dart';
 import 'package:push_notificaction_app/presentation/blocs/notifications/notifications_bloc.dart';
+import 'package:push_notificaction_app/config/local_notifications/local_notification.dart';
 
 void main() async {
   //Inicialiazmos Firebase
   WidgetsFlutterBinding.ensureInitialized();
+
   //Configuración de Firebase
   FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
+
+  //Inicializamos las notificaiones desde Firebase
   await NotificationsBloc.initializeFirebaseNotifications();
-  runApp(MultiBlocProvider(
-      providers: [BlocProvider(create: (_) => NotificationsBloc())],
-      child: const MainApp()));
+
+  //Incializamos las Notificaciones Locales
+  await LocalNotifications.initializeLocalNotifications();
+
+  runApp(MultiBlocProvider(providers: [
+    BlocProvider(
+        create: (_) => NotificationsBloc(
+              requestLocalNotificationPermissions:
+                  LocalNotifications.requestPermissionLocalNotifications,
+              showLocalNotification: LocalNotifications.showLocalNotification,
+            ))
+  ], child: const MainApp()));
 }
 
 class MainApp extends StatelessWidget {
@@ -76,7 +89,7 @@ class _HandleNotificationInteractionsState
 
   void _handleMessage(RemoteMessage message) {
     //Cuando yo toco la notificación voy a almacenarla en mi Bloc
-    context.read<NotificationsBloc>().handleRemoteMessage(message);
+    context.read<NotificationsBloc>().handleRemoteMessage(message, false);
 
     //? Creamos una variable para Obtener el Id
     final messageId =

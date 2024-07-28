@@ -26,9 +26,28 @@ Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
 class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
   //Propiedades del bLoC
 
+  //? Creamos una variable para el ID de la notificación Local
+  int pushNumberId = 0;
+
+  //Creamos una nueva propiedad que es para obtener respuesta de la notificación
+  final Future<void> Function()? requestLocalNotificationPermissions;
+
+  //Creamos una nueva propiedad que es para mostrar las notificaciones
+  final void Function(
+      {required int id,
+      String? title,
+      String? body,
+      String? data})? showLocalNotification;
+
   FirebaseMessaging messaging = FirebaseMessaging.instance;
-  //
-  NotificationsBloc() : super(const NotificationsState()) {
+
+  //Constructor
+  NotificationsBloc(
+      {
+      //Propiedad
+      this.requestLocalNotificationPermissions,
+      this.showLocalNotification})
+      : super(const NotificationsState()) {
     //Mandamos como referencia el método
     on<NotificationStatusChanged>(_notificationStatusChanged);
     //Para el nuevo evento de NotificationRecived
@@ -80,7 +99,7 @@ class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
   }
 
   //todo: método para imprimir un mesaje
-  void handleRemoteMessage(RemoteMessage message) {
+  void handleRemoteMessage(RemoteMessage message, bool isForeground) {
     // Si el mensaje contiene una notificación, se sale de la función.
     // La función retorna sin hacer nada más.
     if (message.notification == null) return;
@@ -97,6 +116,16 @@ class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
             ? message.notification!.android?.imageUrl
             : message.notification!.apple?.imageUrl);
 
+    // Validamos si el ShowLocalNotifications existe
+    if (isForeground && showLocalNotification != null) {
+      //? Mandamos la Notificación local
+      showLocalNotification!(
+          id: pushNumberId++,
+          title: notification.title,
+          body: notification.body,
+          data: notification.messageId);
+    }
+
     //todo: TAREA AÑADIR UN NUEVO EVENTO
     add(NotificationRecived(notification));
   }
@@ -104,7 +133,8 @@ class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
   //todo: creamos otro método listener para que se pueda imprirmir nuestro mensaje
   void _onForegroundMessage() {
     //Llamamos al mensaje
-    FirebaseMessaging.onMessage.listen(handleRemoteMessage);
+    FirebaseMessaging.onMessage
+        .listen((message) => handleRemoteMessage(message, true));
   }
 
 //todo :Creamos un método para los permisos
@@ -119,6 +149,12 @@ class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
       provisional: false,
       sound: true,
     );
+
+    // ? Solicitar permiso a las local Notification
+    //Realizamos la validación del request local notificacition
+    if (requestLocalNotificationPermissions != null) {
+      await requestLocalNotificationPermissions!();
+    }
 
     //Añadimos la notificación
     add(NotificationStatusChanged(
