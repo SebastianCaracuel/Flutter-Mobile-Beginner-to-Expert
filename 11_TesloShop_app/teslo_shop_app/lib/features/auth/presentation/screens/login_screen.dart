@@ -75,7 +75,9 @@ class _LoginForm extends ConsumerWidget {
             //Cuando el correo cambia - le mandamos la referencia de nuestro provider
             onChanged: ref.read(loginFormProvider.notifier).onEmailChange,
             //Error de mensaje
-            errorMessage: loginForm.email.errorMessage,
+            errorMessage:
+                //Realizamos una validación, que al presionar el botón se muestra el error en los campos, si tiene error.
+                loginForm.isFormPosted ? loginForm.email.errorMessage : null,
           ),
           const SizedBox(height: 30),
 
@@ -86,7 +88,8 @@ class _LoginForm extends ConsumerWidget {
             //Cuando el correo cambia - le mandamos la referencia de nuestro provider
             onChanged: ref.read(loginFormProvider.notifier).onPasswordChanged,
             //Error de mensaje
-            errorMessage: loginForm.password.errorMessage,
+            errorMessage: //Realizamos una validación, que al presionar el botón se muestra el error en los campos, si tiene error.
+                loginForm.isFormPosted ? loginForm.password.errorMessage : null,
           ),
           const SizedBox(height: 30),
 
