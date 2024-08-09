@@ -12,7 +12,7 @@ class AuthRepositoryImpl extends AuthRepository {
   final AuthDatasource dataSource;
 
   //El constructor de la propiedad
-  AuthRepositoryImpl(AuthDatasource? dataSource)
+  AuthRepositoryImpl([AuthDatasource? dataSource])
       : dataSource = dataSource ?? AuthDatasourceImpl();
 
   @override
