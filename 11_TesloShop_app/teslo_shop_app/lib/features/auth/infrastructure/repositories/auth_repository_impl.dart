@@ -7,12 +7,9 @@ import '../infrastructure.dart';
 //Esta es la clase con extensión de nuestro repositorio para ser implementado
 class AuthRepositoryImpl extends AuthRepository {
   //Propiedades
-
-  //? Creamos una variable que llame a nuestro datasource
   final AuthDatasource dataSource;
 
-  //El constructor de la propiedad
-  AuthRepositoryImpl([AuthDatasource? dataSource])
+  AuthRepositoryImpl({AuthDatasource? dataSource})
       : dataSource = dataSource ?? AuthDatasourceImpl();
 
   @override
