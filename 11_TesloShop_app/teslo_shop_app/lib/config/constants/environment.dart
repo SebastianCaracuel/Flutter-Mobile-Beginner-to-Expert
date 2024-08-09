@@ -11,10 +11,10 @@ class Environment {
 
   //?Creamos una propiedad para traer a nuestro .env
   static initEnvironment() async {
-    await dotenv.load(fileName: ".env");
+    await dotenv.load(fileName: '.env');
   }
 
   //? Creamos una Propiedad estatica que trae una URL
   static String apiUrl =
-      dotenv.env['API_URL'] ?? 'No está configgurado el API o la URL';
+      dotenv.env['API_URL'] ?? 'No está configurado el API_URL';
 }
