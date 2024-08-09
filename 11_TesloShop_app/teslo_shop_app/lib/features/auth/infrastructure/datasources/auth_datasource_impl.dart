@@ -18,13 +18,10 @@ class AuthDatasourceImpl extends AuthDatasource {
       BaseOptions(baseUrl: Environment.apiUrl));
   @override
   Future<User> login(String email, String password) async {
-    //Realizamos un TryCatch para verificar errores
     try {
-      //Cramos una variable, donde realizamos una petición post
-      final response = await dio.post(
-        '/auth/login',
-        data: {'email': email, 'password': password},
-      );
+      final response = await dio
+          .post('/auth/login', data: {'email': email, 'password': password});
+
       final user = UserMapper.userJsonToEntity(response.data);
       return user;
 
