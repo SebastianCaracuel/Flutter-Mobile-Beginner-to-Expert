@@ -12,8 +12,9 @@ final authProvider = StateNotifierProvider<AuthNotifier, AuthState>((ref) {
   //Propiedades
 
   //Colocamos nuestro AuthRepositoryImpl, en una variable
-  final authRepository =
-      AuthRepositoryImpl(); //Al añadir el authreposity ya tenemos los casos de uso o métodos
+  //Al añadir el authreposity ya tenemos los casos de uso o métodos
+  final authRepository = AuthRepositoryImpl();
+
   return AuthNotifier(authRepository: authRepository);
 });
 
@@ -56,17 +57,16 @@ class AuthNotifier extends StateNotifier<AuthState> {
 
   //todo: método de logout
   Future<void> logout([String? errorMessage]) async {
-    //TODO: limpiar tokern
+    // TODO: limpiar token
     state = state.copyWith(
-      authStatus: AuthStatus.notAuthenticated,
-      user: null,
-      errorMessage: errorMessage,
-    );
+        authStatus: AuthStatus.notAuthenticated,
+        user: null,
+        errorMessage: errorMessage);
   }
 
   //todo: Creamoremos un método en el que se //! Centralizará todo
   void _setLoggedUser(User user) {
-    //TODO: necesito guardar el token fisiciamente
+    // TODO: necesito guardar el token físicamente
     state = state.copyWith(
       user: user,
       authStatus: AuthStatus.authenticated,
