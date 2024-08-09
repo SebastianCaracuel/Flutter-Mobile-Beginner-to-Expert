@@ -50,7 +50,7 @@ class RegisterScreen extends StatelessWidget {
 
             Container(
               height: size.height -
-                  190, //- 260, // 80 los dos sizebox y 100 el ícono
+                  130, //- 260, // 80 los dos sizebox y 100 el ícono
               width: double.infinity,
               decoration: BoxDecoration(
                 color: scaffoldBackgroundColor,
