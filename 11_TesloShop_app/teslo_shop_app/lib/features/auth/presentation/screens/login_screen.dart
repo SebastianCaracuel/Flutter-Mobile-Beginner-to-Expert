@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:teslo_shop_app/features/auth/presentation/providers/auth/login_form_provider.dart';
+import 'package:teslo_shop_app/features/auth/presentation/providers/providers.dart';
 //Importaciones Nuestras
 import 'package:teslo_shop_app/features/shared/shared.dart';
 
@@ -53,11 +53,26 @@ class LoginScreen extends StatelessWidget {
 class _LoginForm extends ConsumerWidget {
   const _LoginForm();
 
+  //?Creamos el método del ShowSnackbar
+  void showSnackbar(BuildContext context, String message) {
+    ScaffoldMessenger.of(context).hideCurrentSnackBar();
+    ScaffoldMessenger.of(context)
+        .showSnackBar(SnackBar(content: Text(message)));
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     //llamamos a la referencia de nuestro provider
     final loginForm = ref.watch(loginFormProvider);
-    //
+
+    //Escucharemos al provider
+    ref.listen(authProvider, (previus, next) {
+      if (next.errorMessage.isEmpty) return;
+
+      //? Método para mostrar el SNACKBAR
+      showSnackbar(context, next.errorMessage);
+    });
+    //Variable para los textos
     final textStyles = Theme.of(context).textTheme;
 
     return Padding(
