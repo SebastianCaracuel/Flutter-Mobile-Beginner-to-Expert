@@ -7,79 +7,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:teslo_shop_app/features/auth/domain/domain.dart';
 import 'package:teslo_shop_app/features/auth/infrastructure/infrastructure.dart';
 
-//Creamos nuestro provider
-final authProvider = StateNotifierProvider<AuthNotifier, AuthState>((ref) {
-  //Propiedades
-
-  //Colocamos nuestro AuthRepositoryImpl, en una variable
-  //Al añadir el authreposity ya tenemos los casos de uso o métodos
-  final authRepository = AuthRepositoryImpl();
-
-  return AuthNotifier(authRepository: authRepository);
-});
-
-//Creamos un StateNotifier
-class AuthNotifier extends StateNotifier<AuthState> {
-  //Llamamos a nuestro repositorioIMPL
-  final AuthRepository authRepository;
-
-  AuthNotifier({required this.authRepository}) : super(AuthState());
-
-  //todo: método Login
-  Future<void> loginUser(String email, String password) async {
-    //Cuando realizo el login retrasaré un poco el login
-    await Future.delayed(const Duration(milliseconds: 500));
-
-    //!TryCatch
-    try {
-      //
-      final user = await authRepository.login(email, password);
-      _setLoggedUser(user);
-
-      //! Colocamos un error controlado referente a nuestro error personalizado
-    } on WrongCredentials {
-      //Como las credenciales no fueron correctas
-      logout('Credenciales no son correctas');
-      //! Llamamos un error no personalizado, un error no controlado
-    } catch (e) {
-      logout('Error no controlado');
-    }
-
-    // final user = await authRepository.login(email, password);
-    // state = state.copyWith(user: user, authStatus: AuthStatus.authenticated);
-  }
-
-  //todo: método Register
-  void registerUser(String email, String password) async {}
-
-  //todo: método Checking
-  void checkAuthStatus() async {}
-
-  //todo: método de logout
-  Future<void> logout([String? errorMessage]) async {
-    // TODO: limpiar token
-    state = state.copyWith(
-        authStatus: AuthStatus.notAuthenticated,
-        user: null,
-        errorMessage: errorMessage);
-  }
-
-  //todo: Creamoremos un método en el que se //! Centralizará todo
-  void _setLoggedUser(User user) {
-    // TODO: necesito guardar el token físicamente
-    state = state.copyWith(
-      user: user,
-      authStatus: AuthStatus.authenticated,
-    );
-  }
-}
-
 //? Creamos una enumeración propia ( Tendrá 3 estados )
 // #Checking = Para revisar si el Token es valido o no
 // #authenticated para ver si el usuario esta autenticado o no
 enum AuthStatus { checking, authenticated, notAuthenticated }
 
-//Creamos nuestra clase AuthState
+//todo: Creamos nuestra clase AuthState
 class AuthState {
   //Propiedades
 
@@ -106,4 +39,60 @@ class AuthState {
           authStatus: authStatus ?? this.authStatus,
           user: user ?? this.user,
           errorMessage: errorMessage ?? this.errorMessage);
+}
+
+//todo: creamos un Provider
+final authProvider = StateNotifierProvider<AuthNotifier, AuthState>((ref) {
+  //Propiedad
+
+  //? Llamamos a nuestro RepositorioImplementado
+  final authRepository = AuthRepositoryImpl();
+  //Retornamos la variable
+  return AuthNotifier(authRepository: authRepository);
+});
+
+//todo creamos un Notifier
+class AuthNotifier extends StateNotifier<AuthState> {
+  //Propiedades
+
+  //?Propiedad del repositorio
+  final AuthRepository authRepository;
+  //Constructor
+  AuthNotifier({required this.authRepository}) : super(AuthState());
+
+  //? Aquí van todos los métodos
+
+  Future<void> loginUser(String email, String password) async {
+    await Future.delayed(const Duration(milliseconds: 500));
+
+    try {
+      final user = await authRepository.login(email, password);
+      _setLoggedUser(user);
+    } on WrongCredentials {
+      logout('Credenciales no son Correctas');
+    } catch (e) {
+      logout('Error no controlado');
+    }
+  }
+
+  Future<void> logout(String? errorMessage) async {
+    //todo: limpiar token
+    state = state.copyWith(
+      authStatus: AuthStatus.notAuthenticated,
+      user: null,
+      errorMessage: errorMessage,
+    );
+  }
+
+  void registerUser(String email, String password) async {}
+
+  void checkAuthStatus() async {}
+
+  void _setLoggedUser(User user) {
+    //todo: Cuando yo tenga un usuario, necesito guardar el token en el Dispositivo Fisicamente
+    state = state.copyWith(
+      user: user,
+      authStatus: AuthStatus.authenticated,
+    );
+  }
 }
