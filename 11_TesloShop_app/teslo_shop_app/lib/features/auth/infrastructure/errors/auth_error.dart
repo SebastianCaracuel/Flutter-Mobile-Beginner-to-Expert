@@ -14,8 +14,8 @@ class CustomError implements Exception {
   //Propiedades
 
   final String message;
-  final int errorCode;
+  //final int errorCode;
 
   //Constructor
-  CustomError(this.message, this.errorCode);
+  CustomError(this.message);
 }
