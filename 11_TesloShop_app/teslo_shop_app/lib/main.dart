@@ -15,6 +15,8 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //print(Environment.apiUrl); //? Ver URL
+
     return MaterialApp.router(
       routerConfig: appRouter,
       theme: AppTheme().getTheme(),
