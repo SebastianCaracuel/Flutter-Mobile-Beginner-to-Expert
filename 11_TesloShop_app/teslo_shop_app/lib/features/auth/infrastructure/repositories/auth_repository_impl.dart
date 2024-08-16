@@ -12,21 +12,24 @@ class AuthRepositoryImpl extends AuthRepository {
   AuthRepositoryImpl({AuthDatasource? dataSource})
       : dataSource = dataSource ?? AuthDatasourceImpl();
 
-  @override
-  Future<User> checkAuthStatus(String token) {
-    //Realizamos la validación del token
-    return dataSource.checkAuthStatus(token);
-  }
-
+  //todo:Login
   @override
   Future<User> login(String email, String password) {
     //Realizamos la validación del Login
     return dataSource.login(email, password);
   }
 
+  //todo: register
   @override
   Future<User> register(String email, String password, String fullName) {
     //Realizamos la validación del registro
     return dataSource.register(email, password, fullName);
+  }
+
+  //todo: checkAuthStatus
+  @override
+  Future<User> checkAuthStatus(String token) {
+    //Realizamos la validación del token
+    return dataSource.checkAuthStatus(token);
   }
 }
