@@ -12,35 +12,43 @@ import 'package:teslo_shop_app/features/auth/infrastructure/infrastructure.dart'
 class AuthDatasourceImpl extends AuthDatasource {
   //Propiedades
 
-  //? Creamos una propiedad para utilizar Dio (La dependencia)
-  final dio = Dio(
-      //Llamamos a nuestra URl
-      BaseOptions(baseUrl: Environment.apiUrl));
+  //? Creamos una propiedades para utilizar la dependencia DIO
+  final dio = Dio(BaseOptions(baseUrl: Environment.apiUrl));
+
+  //todo: Login
   @override
   Future<User> login(String email, String password) async {
     try {
-      final response = await dio
-          .post('/auth/login', data: {'email': email, 'password': password});
+      //?Creamos una variable para obtener el path de autorización y logeo
+      final response = await dio.post(
+        '/auth/login',
+        data: {'email': email, 'password': password},
+      );
 
+      //? Obtenemos nuestro usuario
       final user = UserMapper.userJsonToEntity(response.data);
+
+      //Retornamos a nuestro usuario
       return user;
 
-      //! Implementamos lo errores
+      //Error
     } catch (e) {
-      //? Llamamos a nuestro error personalizado
+      //Llamamos al error personalizado de Credenciales
       throw WrongCredentials();
     }
   }
 
+  //todo: Register
   @override
   Future<User> register(String email, String password, String fullName) {
-    // TODO: implement register
+    //! FALTA POR IMPLEMENTAR
     throw UnimplementedError();
   }
 
+  //todo: CheckAuthStatus
   @override
   Future<User> checkAuthStatus(String token) {
-    // TODO: implement checkAuthStatus
+    //!FALTA POR IMPLEMENTAR
     throw UnimplementedError();
   }
 }
