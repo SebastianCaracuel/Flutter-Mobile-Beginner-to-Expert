@@ -10,12 +10,15 @@ void main() async {
       const ProviderScope(child: MainApp()));
 }
 
-class MainApp extends StatelessWidget {
+class MainApp extends ConsumerWidget {
   const MainApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     //print(Environment.apiUrl); //? Ver URL
+
+    //Llamamos a la nueva ruta con el provider
+    final appRouter = ref.watch(goRouterProvider);
 
     return MaterialApp.router(
       routerConfig: appRouter,
