@@ -68,9 +68,12 @@ class AuthNotifier extends StateNotifier<AuthState> {
   //?Propiedad para la clave del servicio
   final KeyValueStorageService keyValueStorageService;
   //Constructor
-  AuthNotifier(
-      {required this.authRepository, required this.keyValueStorageService})
-      : super(AuthState());
+  AuthNotifier({
+    required this.authRepository,
+    required this.keyValueStorageService,
+  }) : super(AuthState()) {
+    checkAuthStatus();
+  }
 
   //? Aquí van todos los métodos
 
@@ -87,7 +90,7 @@ class AuthNotifier extends StateNotifier<AuthState> {
     }
   }
 
-  Future<void> logout(String? errorMessage) async {
+  Future<void> logout([String? errorMessage]) async {
     //todo: limpiar token
     await keyValueStorageService.removeKey('token');
 
@@ -101,7 +104,23 @@ class AuthNotifier extends StateNotifier<AuthState> {
 
   void registerUser(String email, String password) async {}
 
-  void checkAuthStatus() async {}
+  void checkAuthStatus() async {
+    //El estado de la autenticación
+
+    //Verificamos si tenemos el token
+    final token = await keyValueStorageService.getValue<String>('token');
+
+    //SI el token no existe
+    if (token == null) return logout();
+
+    //Si el Token existe
+    try {
+      final user = await authRepository.checkAuthStatus(token);
+      _setLoggedUser(user);
+    } catch (e) {
+      logout(); //SI el toquen no es valido se saca nomas
+    }
+  }
 
   void _setLoggedUser(User user) async {
     //todo: Cuando yo tenga un usuario, necesito guardar el token en el Dispositivo Fisicamente
