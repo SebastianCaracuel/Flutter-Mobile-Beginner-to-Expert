@@ -55,8 +55,28 @@ class AuthDatasourceImpl extends AuthDatasource {
 
   //todo: CheckAuthStatus
   @override
-  Future<User> checkAuthStatus(String token) {
-    //!FALTA POR IMPLEMENTAR
-    throw UnimplementedError();
+  Future<User> checkAuthStatus(String token) async {
+    //Recibir el Token
+    try {
+      //Utilizamos el path para revisar el estado de la autenticación
+      final response = await dio.get('/auth/check-status',
+          options: Options(
+            //Headers
+            headers: {'Authorization': 'Bearer $token'},
+          ));
+
+      //le pasamos la data al usuario
+      final user = UserMapper.userJsonToEntity(response.data);
+      //Retornamos el usuario
+      return user;
+    } on DioException catch (e) {
+      if (e.response?.statusCode == 401) {
+        throw CustomError('Token incorrecto'); //El token esta incorrecto
+      }
+
+      throw Exception(); //Error no controlado
+    } catch (e) {
+      throw Exception(); //Error no controlado
+    }
   }
 }
