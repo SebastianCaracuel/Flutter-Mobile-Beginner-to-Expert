@@ -6,6 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 //Importaciones Nuestras
 import 'package:teslo_shop_app/features/auth/domain/domain.dart';
 import 'package:teslo_shop_app/features/auth/infrastructure/infrastructure.dart';
+import 'package:teslo_shop_app/features/shared/infrastructure/shared_infrastructure.dart';
 
 //? Creamos una enumeración propia ( Tendrá 3 estados )
 // #Checking = Para revisar si el Token es valido o no
@@ -47,8 +48,14 @@ final authProvider = StateNotifierProvider<AuthNotifier, AuthState>((ref) {
 
   //? Llamamos a nuestro RepositorioImplementado
   final authRepository = AuthRepositoryImpl();
+
+  //?
+  final keyValueStorageService = KeyValueStorageServicesImpl();
+
   //Retornamos la variable
-  return AuthNotifier(authRepository: authRepository);
+  return AuthNotifier(
+      authRepository: authRepository,
+      keyValueStorageService: keyValueStorageService);
 });
 
 //todo creamos un Notifier
@@ -57,8 +64,13 @@ class AuthNotifier extends StateNotifier<AuthState> {
 
   //?Propiedad del repositorio
   final AuthRepository authRepository;
+
+  //?Propiedad para la clave del servicio
+  final KeyValueStorageService keyValueStorageService;
   //Constructor
-  AuthNotifier({required this.authRepository}) : super(AuthState());
+  AuthNotifier(
+      {required this.authRepository, required this.keyValueStorageService})
+      : super(AuthState());
 
   //? Aquí van todos los métodos
 
@@ -77,6 +89,9 @@ class AuthNotifier extends StateNotifier<AuthState> {
 
   Future<void> logout(String? errorMessage) async {
     //todo: limpiar token
+    await keyValueStorageService.removeKey('token');
+
+    //
     state = state.copyWith(
       authStatus: AuthStatus.notAuthenticated,
       user: null,
@@ -88,8 +103,9 @@ class AuthNotifier extends StateNotifier<AuthState> {
 
   void checkAuthStatus() async {}
 
-  void _setLoggedUser(User user) {
+  void _setLoggedUser(User user) async {
     //todo: Cuando yo tenga un usuario, necesito guardar el token en el Dispositivo Fisicamente
+    await keyValueStorageService.setKeyValue('token', user.token);
     state = state.copyWith(
       user: user,
       authStatus: AuthStatus.authenticated,
