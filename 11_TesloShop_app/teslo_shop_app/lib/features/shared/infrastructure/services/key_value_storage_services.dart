@@ -1,6 +1,6 @@
 //? Este es un archivo para un servicio de almacenamiento de datos basado en pares clave-valor
 
-abstract class KeyValueStorageServices {
+abstract class KeyValueStorageService {
   //? Este método es asíncrono y se utiliza para guardar un valor (value)
   //? asociado a una clave (key) en el almacenamiento.
   //? No devuelve nada (void).
