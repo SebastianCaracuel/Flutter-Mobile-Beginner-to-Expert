@@ -9,7 +9,7 @@ import 'key_value_storage_services.dart';
 
 //? Esta clase implementa los métodos de la interfaz KeyValueStorageServices
 //? usando SharedPreferences.
-class KeyValueStorageServicesImpl extends KeyValueStorageServices {
+class KeyValueStorageServicesImpl extends KeyValueStorageService {
   //! MÉTODO PRIVADO
   //! Este método privado obtiene una instancia de SharedPreferences
   //! de manera asíncrona, que es necesaria para acceder al almacenamiento.
