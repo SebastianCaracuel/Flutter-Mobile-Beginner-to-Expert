@@ -102,6 +102,8 @@ class _LoginForm extends ConsumerWidget {
             obscureText: true,
             //Cuando el correo cambia - le mandamos la referencia de nuestro provider
             onChanged: ref.read(loginFormProvider.notifier).onPasswordChanged,
+            onFieldSubmit: (_) =>
+                ref.read(loginFormProvider.notifier).onFormSubmit(),
             //Error de mensaje
             errorMessage: //Realizamos una validación, que al presionar el botón se muestra el error en los campos, si tiene error.
                 loginForm.isFormPosted ? loginForm.password.errorMessage : null,
