@@ -43,7 +43,10 @@ En esta Onceava Etapa los conceptos que se vieron fueron:
 10. Colocar listeners de GoRouter
 11. Change notifier
 12. Preferencias de usuario
-13. Almacenar Token de acceso de forma permanente
+13. Almacenar Token de acceso de forma permanente.
+14. Masonry ListView
+15. Riverpod
+
 
 Esta aplicación es lo más apegado a la realidad posible, con un CRUD, autorización, etc</b>.
 <br> 
