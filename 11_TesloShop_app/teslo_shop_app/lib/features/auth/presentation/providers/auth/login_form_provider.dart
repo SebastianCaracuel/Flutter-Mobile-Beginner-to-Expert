@@ -44,9 +44,17 @@ class LoginFormNotifier extends StateNotifier<LoginFormState> {
   onFormSubmit() async {
     _touchEveryField();
 
+    //Si el formulario es valido
     if (!state.isValid) return;
 
+    //El posteo esta en true
+    state = state.copyWith(isPosting: true);
+
+    //Se realiza la autenticación de los datos.
     await loginUserCallback(state.email.value, state.password.value);
+
+    //Cuando eso termine, sea exitoso o no, se cambiará el estado a falso.
+    state = state.copyWith(isPosting: false);
   }
 
   //todo: Creamos un método privado para que al presionar el Botón todos los campos se verifiquen
