@@ -113,12 +113,12 @@ class _LoginForm extends ConsumerWidget {
               width: double.infinity,
               height: 60,
               child: CustomFilledButton(
-                text: 'Ingresar',
-                buttonColor: Colors.black,
-                onPressed: () {
-                  ref.read(loginFormProvider.notifier).onFormSubmit();
-                },
-              )),
+                  text: 'Ingresar',
+                  buttonColor: Colors.black,
+                  //! Realizamos una validación para que el botón no se pueda presionar dos veces al hacer el login
+                  onPressed: loginForm.isPosting
+                      ? null
+                      : ref.read(loginFormProvider.notifier).onFormSubmit)),
           const Spacer(flex: 2),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
