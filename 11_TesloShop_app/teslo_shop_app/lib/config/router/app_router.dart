@@ -50,8 +50,6 @@ final goRouterProvider = Provider((ref) {
       //?Propiedad para ver si esta autenticado o no
       final authStatus = goRouterNotifier.authStatus;
 
-      print('GRouter isLoggedIn $authStatus, $isGoingTo');
-
       //Sí va al splash screen, y estoy verificando la autorización o los datos de la persona
       if (isGoingTo == '/splash' && authStatus == AuthStatus.checking) {
         return null;
