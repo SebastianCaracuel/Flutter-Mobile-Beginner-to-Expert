@@ -12,7 +12,7 @@ abstract class ProductsRepository {
 
   // Método abstracto que obtiene un producto basado en su ID
   // 'id' es un parámetro requerido que identifica de manera única al producto
-  Future<Producto> getProductsById({String id});
+  Future<Producto> getProductsById(String id);
 
   // Método abstracto que busca productos basados en un término de búsqueda
   // 'term' es el texto o palabra clave que se utilizará para buscar productos
