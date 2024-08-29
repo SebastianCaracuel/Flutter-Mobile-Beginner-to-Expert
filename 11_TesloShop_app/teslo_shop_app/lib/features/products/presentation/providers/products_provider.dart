@@ -1,6 +1,18 @@
 // Importamos las definiciones del dominio, que probablemente incluye la clase 'Producto'
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:teslo_shop_app/features/products/domain/domain.dart';
+import 'products_repository_provider.dart';
+
+//todo: Definimos un proveedor de estado utilizando 'StateNotifierProvider'
+// 'ProductsNotifier' es el gestor de estado y 'ProductsState' es el tipo de estado que gestiona
+final productsProvider =
+    StateNotifierProvider<ProductsNotifier, ProductsState>((ref) {
+  // Obtenemos una instancia de 'ProductsRepository' utilizando el 'productsRepositoryProvider'
+  final productsRepository = ref.watch(productsRepositoryProvider);
+
+  // Retornamos una instancia de 'ProductsNotifier' inicializada con el 'productsRepository'
+  return ProductsNotifier(productsRepository: productsRepository);
+});
 
 //todo: Definimos la clase 'ProductsNotifier', que extiende 'StateNotifier' con un estado de tipo 'ProductsState'
 class ProductsNotifier extends StateNotifier<ProductsState> {
