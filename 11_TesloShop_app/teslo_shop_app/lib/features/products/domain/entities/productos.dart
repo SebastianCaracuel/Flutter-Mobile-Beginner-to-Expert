@@ -9,7 +9,7 @@ import 'package:teslo_shop_app/features/auth/domain/domain.dart';
 class Producto {
   String id;
   String title;
-  int price;
+  double price;
   String description;
   String slug;
   int stock;
