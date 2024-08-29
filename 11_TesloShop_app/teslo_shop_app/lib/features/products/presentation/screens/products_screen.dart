@@ -1,6 +1,8 @@
 //Importaciones Flutter
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:teslo_shop_app/features/products/presentation/providers/products_provider.dart';
 //Importaciones Nuestras
 import 'package:teslo_shop_app/features/shared/shared.dart';
 
@@ -37,8 +39,43 @@ class _ProductsView extends ConsumerStatefulWidget {
 }
 
 class _ProductsViewState extends ConsumerState {
+  //Definimos una propiedad para controlar el scroll
+  final ScrollController scrollController = ScrollController();
+
+//!inti
+  @override
+  void initState() {
+    super.initState();
+
+    //TODO: infiniteScroll Pending
+    ref.read(productsProvider.notifier).loadNextPage();
+  }
+
+//!dispose
+  @override
+  void dispose() {
+    scrollController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return const Center(child: Text('Eres genial!'));
+    //Llamamos al producto para saber el largo de estos
+    final productsState = ref.watch(productsProvider);
+
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 10),
+      child: MasonryGridView.count(
+        physics: const BouncingScrollPhysics(),
+        crossAxisCount: 2,
+        mainAxisSpacing: 20,
+        crossAxisSpacing: 35,
+        itemCount: productsState.products.length,
+        itemBuilder: (context, index) {
+          final product = productsState.products[index];
+          return Text(product.title);
+        },
+      ),
+    );
   }
 }
