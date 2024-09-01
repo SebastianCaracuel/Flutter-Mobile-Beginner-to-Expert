@@ -2,9 +2,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:teslo_shop_app/features/products/presentation/providers/products_provider.dart';
 //Importaciones Nuestras
 import 'package:teslo_shop_app/features/shared/shared.dart';
+import 'package:teslo_shop_app/features/products/presentation/providers/products_provider.dart';
+import 'package:teslo_shop_app/features/products/presentation/widgets/widgets.dart';
 
 class ProductsScreen extends StatelessWidget {
   const ProductsScreen({super.key});
@@ -73,7 +74,7 @@ class _ProductsViewState extends ConsumerState {
         itemCount: productsState.products.length,
         itemBuilder: (context, index) {
           final product = productsState.products[index];
-          return Text(product.title);
+          return ProductCard(product: product);
         },
       ),
     );
