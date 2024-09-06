@@ -46,6 +46,10 @@ En esta Onceava Etapa los conceptos que se vieron fueron:
 13. Almacenar Token de acceso de forma permanente.
 14. Masonry ListView
 15. Riverpod
+16. Posteos ( Path / Post ).
+17. Retroalimentación de sucesos.
+18. Inputs personalizados.
+19. Mantenimientos de productos.
 
 
 Esta aplicación es lo más apegado a la realidad posible, con un CRUD, autorización, etc</b>.
