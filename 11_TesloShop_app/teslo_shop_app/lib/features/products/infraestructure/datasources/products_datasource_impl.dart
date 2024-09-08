@@ -4,9 +4,10 @@
 import 'package:dio/dio.dart';
 
 //Importaciones nuestras
+import '../mappers/products_mapper.dart';
 import 'package:teslo_shop_app/config/config.dart';
 import 'package:teslo_shop_app/features/products/domain/domain.dart';
-import '../mappers/products_mapper.dart';
+import '../errors/product_errors.dart';
 
 class ProductsDatasourceImpl extends ProductsDatasource {
   //Utilizamos DIO
@@ -26,9 +27,22 @@ class ProductsDatasourceImpl extends ProductsDatasource {
   }
 
   @override
-  Future<Producto> getProductsById(String id) {
-    // TODO: implement getProductsById
-    throw UnimplementedError();
+  Future<Producto> getProductsById(String id) async {
+    try {
+      //? si todo sale bine
+      final response = await dio.get('/products/$id');
+      final product = ProductMapper.jsonToEntity(response.data);
+
+      //retornamos el producto si todo sale bien
+      return product;
+
+      //!Si no recibimos un producto de esos
+    } on DioException catch (e) {
+      if (e.response!.statusCode == 404) throw ProductNotFound();
+      throw Exception();
+    } catch (e) {
+      throw Exception();
+    }
   }
 
   @override
