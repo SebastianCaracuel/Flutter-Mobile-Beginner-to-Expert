@@ -31,11 +31,31 @@ class ProductNotifier extends StateNotifier<ProductState> {
   ProductNotifier({
     required this.productsRepository,
     required String productId,
-  }) : super(ProductState(id: productId));
+  }) : super(ProductState(id: productId)) {
+    loadProduct();
+  }
 
   // Método que permitirá cargar el producto desde el repositorio
-  // Por ahora no hace nada, pero eventualmente contendrá la lógica de carga del producto
-  Future<void> loadProduct() async {}
+  Future<void> loadProduct() async {
+    try {
+      //Llamamos al producto mediante el repository
+      final product = await productsRepository.getProductsById(state.id);
+
+      //SI tenemos un producto y todo sale bien
+      state = state.copywith(
+        isLoading: false,
+        product: product,
+      );
+
+      //Puede ser que el producto exista o no exista
+    } catch (e) {
+      //? SI el producto no existe entonces ERROR '404' product not found
+
+      //Si sale algo mal
+
+      print(e);
+    }
+  }
 }
 
 // todo: Clase que define el estado del producto
