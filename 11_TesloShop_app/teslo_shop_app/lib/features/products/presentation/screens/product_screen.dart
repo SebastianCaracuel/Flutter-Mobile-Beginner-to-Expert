@@ -4,6 +4,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:teslo_shop_app/features/products/presentation/providers/providers.dart';
+import 'package:teslo_shop_app/features/shared/shared.dart';
 
 //Importación Nuestras
 
@@ -31,7 +32,7 @@ class ProductScreen extends ConsumerWidget {
               onPressed: () {}, icon: const Icon(Icons.camera_alt_outlined))
         ],
       ),
-      body: Center(child: Text(productState.product?.title ?? 'Cargando')),
+      body: const FullScreenLoader(),
       floatingActionButton: FloatingActionButton(
           onPressed: () {}, child: const Icon(Icons.save_alt_outlined)),
     );
