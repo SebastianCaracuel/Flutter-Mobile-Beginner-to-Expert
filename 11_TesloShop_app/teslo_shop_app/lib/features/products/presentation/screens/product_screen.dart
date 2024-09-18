@@ -68,6 +68,7 @@ class _ProductView extends StatelessWidget {
   }
 }
 
+//todo: Información del producto
 class _ProductInformation extends ConsumerWidget {
   final Producto product;
   const _ProductInformation({required this.product});
@@ -87,7 +88,6 @@ class _ProductInformation extends ConsumerWidget {
             initialValue: product.title,
           ),
           CustomProductField(
-            isTopField: true,
             label: 'Slug',
             initialValue: product.slug,
           ),
@@ -129,6 +129,7 @@ class _ProductInformation extends ConsumerWidget {
   }
 }
 
+//todo: Seleccion de tallas
 class _SizeSelector extends StatelessWidget {
   final List<String> selectedSizes;
   final List<String> sizes = const ['XS', 'S', 'M', 'L', 'XL', 'XXL', 'XXXL'];
@@ -138,6 +139,7 @@ class _SizeSelector extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SegmentedButton(
+      emptySelectionAllowed: true,
       showSelectedIcon: false,
       segments: sizes.map((size) {
         return ButtonSegment(
@@ -153,6 +155,7 @@ class _SizeSelector extends StatelessWidget {
   }
 }
 
+//todo: Selecionamos el genero
 class _GenderSelector extends StatelessWidget {
   final String selectedGender;
   final List<String> genders = const ['men', 'women', 'kid'];
@@ -186,6 +189,7 @@ class _GenderSelector extends StatelessWidget {
   }
 }
 
+//todo:
 class _ImageGallery extends StatelessWidget {
   final List<String> images;
   const _ImageGallery({required this.images});
