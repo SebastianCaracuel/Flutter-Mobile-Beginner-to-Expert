@@ -3,6 +3,7 @@
 //Importaciones flutter
 import 'package:formz/formz.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:teslo_shop_app/config/config.dart';
 
 //Importaciones nuestras
 import 'package:teslo_shop_app/features/shared/shared.dart';
@@ -26,6 +27,35 @@ class ProductFormNotifier extends StateNotifier<ProductFormState> {
           tags: product.tags.join(', '),
           images: product.images,
         ));
+
+  Future<bool> onFormSubmit() async {
+    _touchedEverything();
+
+    //Si el formulario no es valido, no voy a hacer nada
+    if (!state.isFormValid) return false;
+
+    //
+    if (onSubmitCallback == null) return false;
+
+    //Si tenemos un callback, crearemos un ProductLike (El objeto que esta esperando mi backend)
+    final productLike = {
+      'id': state.id,
+      'title': state.title.value,
+      'price': state.price.value,
+      'descripction': state.description,
+      'slug': state.slug.value,
+      'stock': state.inStock,
+      'sizes': state.sizes,
+      'gender': state.gender,
+      'tags': state.tags.split(','),
+      'images': state.images
+          .map((image) =>
+              image.replaceAll('${Environment.apiUrl}/files/product', ''))
+          .toList()
+    };
+
+    return true;
+  }
 
   //? Creamos un método privado, que nos sirve para forzar que todo haya sido manipulado.
   void _touchedEverything() {
