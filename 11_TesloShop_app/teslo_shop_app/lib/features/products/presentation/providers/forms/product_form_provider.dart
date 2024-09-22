@@ -97,6 +97,11 @@ class ProductFormNotifier extends StateNotifier<ProductFormState> {
   void onDescriptionChanged(String description) {
     state = state.copyWith(description: description);
   }
+
+  //Método para cambiar los Tags del producto
+  void onTagsChanged(String tags) {
+    state = state.copyWith(tags: tags);
+  }
 }
 
 //todo: Creamos la clase de nuestor ProductForm STATE
