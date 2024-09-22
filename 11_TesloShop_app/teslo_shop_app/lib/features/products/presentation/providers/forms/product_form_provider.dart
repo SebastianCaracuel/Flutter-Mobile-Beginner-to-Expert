@@ -27,6 +27,17 @@ class ProductFormNotifier extends StateNotifier<ProductFormState> {
           images: product.images,
         ));
 
+  //? Creamos un método privado, que nos sirve para forzar que todo haya sido manipulado.
+  void _touchedEverything() {
+    state = state.copyWith(
+        isFormValid: Formz.validate([
+      Title.dirty(state.title.value),
+      Slug.dirty(state.slug.value),
+      Price.dirty(state.price.value),
+      Stock.dirty(state.inStock.value),
+    ]));
+  }
+
   //Método para para cambiar el titulo del producto, y la validación de los formularios.
   void onTitleChanged(String value) {
     state = state.copyWith(
