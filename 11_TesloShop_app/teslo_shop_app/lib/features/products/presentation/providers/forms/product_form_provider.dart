@@ -82,6 +82,21 @@ class ProductFormNotifier extends StateNotifier<ProductFormState> {
           ],
         ));
   }
+
+  //Método para cambiar el Size o el tamaño de los productos
+  void onSizeChanged(List<String> sizes) {
+    state = state.copyWith(sizes: sizes);
+  }
+
+  //Método para cambiar el Gender o el genero de los productos
+  void onGenderChanged(String gender) {
+    state = state.copyWith(gender: gender);
+  }
+
+  //Método para cambiar la descripción del producto
+  void onDescriptionChanged(String description) {
+    state = state.copyWith(description: description);
+  }
 }
 
 //todo: Creamos la clase de nuestor ProductForm STATE
