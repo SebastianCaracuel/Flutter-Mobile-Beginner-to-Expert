@@ -1,9 +1,88 @@
 //? Este es un archivo del formulario del producto con provider
 
 //Importaciones flutter
+import 'package:formz/formz.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 //Importaciones nuestras
 import 'package:teslo_shop_app/features/shared/shared.dart';
+import 'package:teslo_shop_app/features/products/domain/domain.dart';
+
+//todo:Notifier
+class ProductFormNotifier extends StateNotifier<ProductFormState> {
+  //
+  final void Function(Map<String, dynamic> productLike)? onSubmitCallback;
+
+  ProductFormNotifier({this.onSubmitCallback, required Producto product})
+      : super(ProductFormState(
+          id: product.id,
+          title: Title.dirty(product.title),
+          slug: Slug.dirty(product.slug),
+          price: Price.dirty(product.price),
+          inStock: Stock.dirty(product.stock),
+          sizes: product.sizes,
+          gender: product.gender,
+          description: product.description,
+          tags: product.tags.join(', '),
+          images: product.images,
+        ));
+
+  //Método para para cambiar el titulo del producto, y la validación de los formularios.
+  void onTitleChanged(String value) {
+    state = state.copyWith(
+        title: Title.dirty(value),
+        isFormValid: Formz.validate(
+          [
+            Title.dirty(value),
+            Slug.dirty(state.slug.value),
+            Price.dirty(state.price.value),
+            Stock.dirty(state.inStock.value),
+          ],
+        ));
+  }
+
+  //Método para para cambiar el Slug  del producto, y la validación de los formularios.
+  void onSlugChanged(String value) {
+    state = state.copyWith(
+        slug: Slug.dirty(value),
+        isFormValid: Formz.validate(
+          [
+            Title.dirty(state.title.value),
+            Slug.dirty(value),
+            Price.dirty(state.price.value),
+            Stock.dirty(state.inStock.value),
+          ],
+        ));
+  }
+
+  //Método para para cambiar el Precio  del producto, y la validación de los formularios.
+  void onPricehanged(double value) {
+    state = state.copyWith(
+        price: Price.dirty(value),
+        isFormValid: Formz.validate(
+          [
+            Title.dirty(state.title.value),
+            Slug.dirty(state.slug.value),
+            Price.dirty(value),
+            Stock.dirty(state.inStock.value),
+          ],
+        ));
+  }
+
+  //Método para para cambiar el Stock  del producto, y la validación de los formularios.
+  void onStockehanged(int value) {
+    state = state.copyWith(
+        inStock: Stock.dirty(value),
+        isFormValid: Formz.validate(
+          [
+            Title.dirty(state.title.value),
+            Slug.dirty(state.slug.value),
+            Price.dirty(state.price.value),
+            Stock.dirty(value),
+          ],
+        ));
+  }
+}
 
 //todo: Creamos la clase de nuestor ProductForm STATE
 class ProductFormState {
