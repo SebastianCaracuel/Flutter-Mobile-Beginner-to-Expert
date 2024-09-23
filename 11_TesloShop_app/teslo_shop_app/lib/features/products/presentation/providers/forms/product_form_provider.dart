@@ -119,7 +119,7 @@ class ProductFormNotifier extends StateNotifier<ProductFormState> {
   }
 
   //Método para para cambiar el Stock  del producto, y la validación de los formularios.
-  void onStockehanged(int value) {
+  void onStockchanged(int value) {
     state = state.copyWith(
         inStock: Stock.dirty(value),
         isFormValid: Formz.validate(
