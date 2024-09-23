@@ -105,7 +105,7 @@ class ProductFormNotifier extends StateNotifier<ProductFormState> {
   }
 
   //Método para para cambiar el Precio  del producto, y la validación de los formularios.
-  void onPricehanged(double value) {
+  void onPriceChanged(double value) {
     state = state.copyWith(
         price: Price.dirty(value),
         isFormValid: Formz.validate(
