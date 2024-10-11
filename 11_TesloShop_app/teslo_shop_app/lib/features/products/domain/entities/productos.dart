@@ -6,7 +6,7 @@
 import 'package:teslo_shop_app/features/auth/domain/domain.dart';
 
 //Creamos nuesta clase de nuestro producto
-class Producto {
+class Product {
   String id;
   String title;
   double price;
@@ -19,7 +19,7 @@ class Producto {
   List<String> images;
   User? user;
 
-  Producto({
+  Product({
     required this.id,
     required this.title,
     required this.price,

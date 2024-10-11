@@ -44,7 +44,7 @@ class ProductScreen extends ConsumerWidget {
 
 //!Vista del Producto. Este es el Codigo de Fernando Herrera del curso - Sección 29
 class _ProductView extends ConsumerWidget {
-  final Producto product;
+  final Product product;
 
   const _ProductView({required this.product});
 
@@ -74,7 +74,7 @@ class _ProductView extends ConsumerWidget {
 
 //todo: Información del producto
 class _ProductInformation extends ConsumerWidget {
-  final Producto product;
+  final Product product;
   const _ProductInformation({required this.product});
 
   @override

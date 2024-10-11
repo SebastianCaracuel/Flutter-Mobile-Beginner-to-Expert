@@ -76,7 +76,7 @@ class ProductsState {
   final bool isLoading;
 
   // Lista de productos actualmente cargados
-  final List<Producto> products;
+  final List<Product> products;
 
   // Constructor de la clase 'ProductsState'
   // Establece valores predeterminados para cada propiedad
@@ -95,7 +95,7 @@ class ProductsState {
     int? limit, // Permite cambiar el límite de productos
     int? offset, // Permite cambiar el desplazamiento
     bool? isLoading, // Permite cambiar el estado de carga
-    List<Producto>? products,
+    List<Product>? products,
   }) => // Permite cambiar la lista de productos
       // Retorna una nueva instancia de 'ProductsState' con las propiedades
       // sobrescritas o los valores actuales si no se proporcionan nuevos valores

@@ -21,7 +21,7 @@ class ProductsDatasourceImpl extends ProductsDatasource {
         ));
 
   @override
-  Future<Producto> createUpdateProduct(Map<String, dynamic> productLike) async {
+  Future<Product> createUpdateProduct(Map<String, dynamic> productLike) async {
     try {
       final String? productId = productLike['id'];
       //Removemos el ID
@@ -49,7 +49,7 @@ class ProductsDatasourceImpl extends ProductsDatasource {
   }
 
   @override
-  Future<Producto> getProductsById(String id) async {
+  Future<Product> getProductsById(String id) async {
     try {
       //? si todo sale bine
       final response = await dio.get('/products/$id');
@@ -68,13 +68,13 @@ class ProductsDatasourceImpl extends ProductsDatasource {
   }
 
   @override
-  Future<List<Producto>> getProductsByPage(
+  Future<List<Product>> getProductsByPage(
       {int limit = 10, int offset = 0}) async {
     final response =
         await dio.get<List>('/products?limit=$limit&offset=$offset');
 
     //Producto
-    final List<Producto> products = [];
+    final List<Product> products = [];
     for (final product in response.data ?? []) {
       products.add(ProductMapper.jsonToEntity(product));
     }
@@ -82,7 +82,7 @@ class ProductsDatasourceImpl extends ProductsDatasource {
   }
 
   @override
-  Future<List<Producto>> searchProducByTerm(String term) {
+  Future<List<Product>> searchProducByTerm(String term) {
     // TODO: implement searchProducByTerm
     throw UnimplementedError();
   }

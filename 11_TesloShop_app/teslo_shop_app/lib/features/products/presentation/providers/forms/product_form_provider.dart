@@ -11,7 +11,7 @@ import 'package:teslo_shop_app/features/products/domain/domain.dart';
 
 //todo: Provider
 final productFormProvider = StateNotifierProvider.autoDispose
-    .family<ProductFormNotifier, ProductFormState, Producto>((ref, product) {
+    .family<ProductFormNotifier, ProductFormState, Product>((ref, product) {
   //TODO: CreateUpdateCallback
   return ProductFormNotifier(product: product);
   //TODO: onSubmitCallBack: CreateUpdateCallBack
@@ -22,7 +22,7 @@ class ProductFormNotifier extends StateNotifier<ProductFormState> {
   //
   final void Function(Map<String, dynamic> productLike)? onSubmitCallback;
 
-  ProductFormNotifier({this.onSubmitCallback, required Producto product})
+  ProductFormNotifier({this.onSubmitCallback, required Product product})
       : super(ProductFormState(
           id: product.id,
           title: Title.dirty(product.title),

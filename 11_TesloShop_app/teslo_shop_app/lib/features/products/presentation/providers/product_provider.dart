@@ -62,7 +62,7 @@ class ProductNotifier extends StateNotifier<ProductState> {
 class ProductState {
   // Propiedades del estado de un producto
   final String id; // Identificador del producto
-  final Producto?
+  final Product?
       product; // El producto en sí, puede ser nulo si no ha sido cargado
   final bool isLoading; // Indica si se está cargando el producto
   final bool isSaving; // Indica si se está guardando el producto
@@ -79,7 +79,7 @@ class ProductState {
   // Permite cambiar algunas propiedades sin modificar el estado original
   ProductState copywith({
     String? id,
-    Producto? product,
+    Product? product,
     bool? isLoading,
     bool? isSaving,
   }) =>

@@ -8,17 +8,17 @@ abstract class ProductsDatasource {
   // Método abstracto que obtiene una lista de productos paginados
   // 'limit' establece la cantidad máxima de productos a devolver (valor por defecto es 10)
   // 'offset' define el desplazamiento desde el primer producto, útil para la paginación (valor por defecto es 0)
-  Future<List<Producto>> getProductsByPage({int limit = 10, int offset = 0});
+  Future<List<Product>> getProductsByPage({int limit = 10, int offset = 0});
 
   // Método abstracto que obtiene un producto basado en su ID
   // 'id' es un parámetro requerido que identifica de manera única al producto
-  Future<Producto> getProductsById(String id);
+  Future<Product> getProductsById(String id);
 
   // Método abstracto que busca productos basados en un término de búsqueda
   // 'term' es el texto o palabra clave que se utilizará para buscar productos
-  Future<List<Producto>> searchProducByTerm(String term);
+  Future<List<Product>> searchProducByTerm(String term);
 
   // Método abstracto que crea o actualiza un producto en la fuente de datos
   // 'productLike' es un mapa que contiene las propiedades del producto que se va a crear o actualizar
-  Future<Producto> createUpdateProduct(Map<String, dynamic> productLike);
+  Future<Product> createUpdateProduct(Map<String, dynamic> productLike);
 }

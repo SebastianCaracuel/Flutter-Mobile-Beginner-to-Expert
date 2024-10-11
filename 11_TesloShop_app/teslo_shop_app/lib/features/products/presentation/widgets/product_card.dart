@@ -6,7 +6,7 @@ import 'package:teslo_shop_app/features/products/domain/domain.dart';
 
 class ProductCard extends StatelessWidget {
   //Llamamos a nuestra entidad del producto
-  final Producto product;
+  final Product product;
 
   //Propiedad
   const ProductCard({
