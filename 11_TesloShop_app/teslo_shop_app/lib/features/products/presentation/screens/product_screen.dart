@@ -9,6 +9,7 @@ import 'package:teslo_shop_app/features/shared/shared.dart';
 import 'package:teslo_shop_app/features/products/domain/domain.dart';
 import 'package:teslo_shop_app/features/products/presentation/providers/providers.dart';
 
+//todo: ProductScreen
 class ProductScreen extends ConsumerWidget {
   //parametro
   final String productId;
@@ -42,7 +43,7 @@ class ProductScreen extends ConsumerWidget {
   }
 }
 
-//!Vista del Producto. Este es el Codigo de Fernando Herrera del curso - Sección 29
+//todo: Vista del Producto. Este es el Codigo de Fernando Herrera del curso - Sección 29
 class _ProductView extends ConsumerWidget {
   final Product product;
 
@@ -79,6 +80,7 @@ class _ProductInformation extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    //Llamamos al provider del formulario del producto
     final productForm = ref.watch(productFormProvider(product));
 
     return Padding(
@@ -115,18 +117,23 @@ class _ProductInformation extends ConsumerWidget {
           ),
           const SizedBox(height: 15),
           const Text('Extras'),
+
+          //todo: tallas
           _SizeSelector(
             selectedSizes: productForm.sizes,
             onSizesChanged:
                 ref.read(productFormProvider(product).notifier).onSizeChanged,
           ),
           const SizedBox(height: 5),
+
+          //todo: genero
           _GenderSelector(
             selectedGender: productForm.gender,
             onGenderChanged:
                 ref.read(productFormProvider(product).notifier).onGenderChanged,
           ),
           const SizedBox(height: 15),
+          //todo: stock
           CustomProductField(
             isTopField: true,
             label: 'Existencias',
@@ -134,9 +141,10 @@ class _ProductInformation extends ConsumerWidget {
             initialValue: productForm.inStock.value.toString(),
             onChanged: (value) => ref
                 .read(productFormProvider(product).notifier)
-                .onStockchanged(int.tryParse(value) ?? -1),
+                .onStockChanged(int.tryParse(value) ?? -1),
             errorMessage: productForm.inStock.errorMessage,
           ),
+          //todo:descripción
           CustomProductField(
             maxLines: 6,
             label: 'Descripción',
@@ -146,6 +154,7 @@ class _ProductInformation extends ConsumerWidget {
                 .read(productFormProvider(product).notifier)
                 .onDescriptionChanged,
           ),
+          //todo: tags
           CustomProductField(
             isBottomField: true,
             maxLines: 2,
@@ -153,7 +162,7 @@ class _ProductInformation extends ConsumerWidget {
             keyboardType: TextInputType.multiline,
             initialValue: product.tags.join(', '),
             onChanged:
-                ref.read(productFormProvider(product).notifier).onTagsChanged,
+                ref.read(productFormProvider(product).notifier).onTagasChanged,
           ),
           const SizedBox(height: 100),
         ],
@@ -167,10 +176,13 @@ class _SizeSelector extends StatelessWidget {
   final List<String> selectedSizes;
   final List<String> sizes = const ['XS', 'S', 'M', 'L', 'XL', 'XXL', 'XXXL'];
 
+  //Para poder cambiar el listado
   final void Function(List<String> selectedSizes) onSizesChanged;
 
-  const _SizeSelector(
-      {required this.selectedSizes, required this.onSizesChanged});
+  const _SizeSelector({
+    required this.selectedSizes,
+    required this.onSizesChanged,
+  });
 
   @override
   Widget build(BuildContext context) {
