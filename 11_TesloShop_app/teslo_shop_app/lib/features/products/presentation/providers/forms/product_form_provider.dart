@@ -1,161 +1,15 @@
-//? Este es un archivo del formulario del producto con provider
-
-//Importaciones flutter
+//Importaciones Flutter
 import 'package:formz/formz.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:teslo_shop_app/config/config.dart';
 
 //Importaciones nuestras
+import 'package:teslo_shop_app/config/config.dart';
 import 'package:teslo_shop_app/features/shared/shared.dart';
 import 'package:teslo_shop_app/features/products/domain/domain.dart';
 
-//todo: Provider
-final productFormProvider = StateNotifierProvider.autoDispose
-    .family<ProductFormNotifier, ProductFormState, Product>((ref, product) {
-  //TODO: CreateUpdateCallback
-  return ProductFormNotifier(product: product);
-  //TODO: onSubmitCallBack: CreateUpdateCallBack
-});
-
-//todo:Notifier
-class ProductFormNotifier extends StateNotifier<ProductFormState> {
-  //
-  final void Function(Map<String, dynamic> productLike)? onSubmitCallback;
-
-  ProductFormNotifier({this.onSubmitCallback, required Product product})
-      : super(ProductFormState(
-          id: product.id,
-          title: Title.dirty(product.title),
-          slug: Slug.dirty(product.slug),
-          price: Price.dirty(product.price),
-          inStock: Stock.dirty(product.stock),
-          sizes: product.sizes,
-          gender: product.gender,
-          description: product.description,
-          tags: product.tags.join(', '),
-          images: product.images,
-        ));
-
-  Future<bool> onFormSubmit() async {
-    _touchedEverything();
-
-    //Si el formulario no es valido, no voy a hacer nada
-    if (!state.isFormValid) return false;
-
-    //
-    if (onSubmitCallback == null) return false;
-
-    //Si tenemos un callback, crearemos un ProductLike (El objeto que esta esperando mi backend)
-    final productLike = {
-      'id': state.id,
-      'title': state.title.value,
-      'price': state.price.value,
-      'descripction': state.description,
-      'slug': state.slug.value,
-      'stock': state.inStock,
-      'sizes': state.sizes,
-      'gender': state.gender,
-      'tags': state.tags.split(','),
-      'images': state.images
-          .map((image) =>
-              image.replaceAll('${Environment.apiUrl}/files/product', ''))
-          .toList()
-    };
-
-    return true;
-  }
-
-  //? Creamos un método privado, que nos sirve para forzar que todo haya sido manipulado.
-  void _touchedEverything() {
-    state = state.copyWith(
-        isFormValid: Formz.validate([
-      Title.dirty(state.title.value),
-      Slug.dirty(state.slug.value),
-      Price.dirty(state.price.value),
-      Stock.dirty(state.inStock.value),
-    ]));
-  }
-
-  //Método para para cambiar el titulo del producto, y la validación de los formularios.
-  void onTitleChanged(String value) {
-    state = state.copyWith(
-        title: Title.dirty(value),
-        isFormValid: Formz.validate(
-          [
-            Title.dirty(value),
-            Slug.dirty(state.slug.value),
-            Price.dirty(state.price.value),
-            Stock.dirty(state.inStock.value),
-          ],
-        ));
-  }
-
-  //Método para para cambiar el Slug  del producto, y la validación de los formularios.
-  void onSlugChanged(String value) {
-    state = state.copyWith(
-        slug: Slug.dirty(value),
-        isFormValid: Formz.validate(
-          [
-            Title.dirty(state.title.value),
-            Slug.dirty(value),
-            Price.dirty(state.price.value),
-            Stock.dirty(state.inStock.value),
-          ],
-        ));
-  }
-
-  //Método para para cambiar el Precio  del producto, y la validación de los formularios.
-  void onPriceChanged(double value) {
-    state = state.copyWith(
-        price: Price.dirty(value),
-        isFormValid: Formz.validate(
-          [
-            Title.dirty(state.title.value),
-            Slug.dirty(state.slug.value),
-            Price.dirty(value),
-            Stock.dirty(state.inStock.value),
-          ],
-        ));
-  }
-
-  //Método para para cambiar el Stock  del producto, y la validación de los formularios.
-  void onStockchanged(int value) {
-    state = state.copyWith(
-        inStock: Stock.dirty(value),
-        isFormValid: Formz.validate(
-          [
-            Title.dirty(state.title.value),
-            Slug.dirty(state.slug.value),
-            Price.dirty(state.price.value),
-            Stock.dirty(value),
-          ],
-        ));
-  }
-
-  //Método para cambiar el Size o el tamaño de los productos
-  void onSizeChanged(List<String> sizes) {
-    state = state.copyWith(sizes: sizes);
-  }
-
-  //Método para cambiar el Gender o el genero de los productos
-  void onGenderChanged(String gender) {
-    state = state.copyWith(gender: gender);
-  }
-
-  //Método para cambiar la descripción del producto
-  void onDescriptionChanged(String description) {
-    state = state.copyWith(description: description);
-  }
-
-  //Método para cambiar los Tags del producto
-  void onTagsChanged(String tags) {
-    state = state.copyWith(tags: tags);
-  }
-}
-
-//todo: Creamos la clase de nuestor ProductForm STATE
+//todo: STATE PROVIDER
 class ProductFormState {
-  //Parametros
+  //atributos
   final bool isFormValid;
   final String? id;
   final Title title;
@@ -168,7 +22,7 @@ class ProductFormState {
   final String tags;
   final List<String> images;
 
-  //COnstructor con parametros
+  //Constructor
   ProductFormState({
     this.isFormValid = false,
     this.id,
@@ -183,7 +37,7 @@ class ProductFormState {
     this.images = const [],
   });
 
-  //?CopyWith
+  //? Creamos el CopyWith
   ProductFormState copyWith({
     bool? isFormValid,
     String? id,
@@ -211,3 +65,152 @@ class ProductFormState {
         images: images ?? this.images,
       );
 }
+
+//todo: NOTIFIER
+class ProductFormNotifier extends StateNotifier<ProductFormState> {
+  //con este onSubmitcallback vamos intentar mandar la información
+  final void Function(Map<String, dynamic> productLike)? onSubmitCallback;
+
+  //Constructor
+  ProductFormNotifier({
+    this.onSubmitCallback,
+    required Product product,
+  }) : super(ProductFormState(
+          id: product.id,
+          title: Title.dirty(product.title),
+          slug: Slug.dirty(product.slug),
+          price: Price.dirty(product.price),
+          inStock: Stock.dirty(product.stock),
+          sizes: product.sizes,
+          gender: product.gender,
+          description: product.description,
+          tags: product.tags.join(', '),
+          images: product.images,
+        ));
+
+  Future<bool> onFormSubmit() async {
+    _touchedEverything();
+
+    //Si el formulario no es valido, no voy a mandar nada
+    if (!state.isFormValid) return false;
+
+    //tenemos la función?
+    if (onSubmitCallback == null) return false;
+
+    //Sí tenemos la función de onSubmitCallback
+    final productLike = {
+      'id': state.id,
+      'title': state.title.value,
+      'price': state.price.value,
+      'description': state.description,
+      'slug': state.slug.value,
+      'stock': state.inStock.value,
+      'sizes': state.sizes,
+      'gender': state.gender,
+      'tags': state.tags.split(','),
+      'images': state.images
+          .map((image) =>
+              image.replaceAll('${Environment.apiUrl}/files/product', ''))
+          .toList()
+    };
+
+    return true;
+    //TODO: lamar on submit callback
+  }
+
+  //?Creamos un método privado para tocar cada uno de los campos
+  void _touchedEverything() {
+    state = state.copyWith(
+      isFormValid: Formz.validate([
+        Title.dirty(state.title.value),
+        Slug.dirty(state.slug.value),
+        Price.dirty(state.price.value),
+        Stock.dirty(state.inStock.value),
+      ]),
+    );
+  }
+
+  //Método para cambiar el titulo
+  void onTitleChanged(String value) {
+    state = state.copyWith(
+      title: Title.dirty(value),
+      isFormValid: Formz.validate([
+        Title.dirty(value),
+        Slug.dirty(state.slug.value),
+        Price.dirty(state.price.value),
+        Stock.dirty(state.inStock.value),
+      ]),
+    );
+  }
+
+  //Método para cambiar el Slug
+  void onSlugChanged(String value) {
+    state = state.copyWith(
+      slug: Slug.dirty(value),
+      isFormValid: Formz.validate([
+        Title.dirty(state.title.value),
+        Slug.dirty(value),
+        Price.dirty(state.price.value),
+        Stock.dirty(state.inStock.value),
+      ]),
+    );
+  }
+
+  //Método para cambiar el Precio
+  void onPriceChanged(double value) {
+    state = state.copyWith(
+      price: Price.dirty(value),
+      isFormValid: Formz.validate([
+        Title.dirty(state.title.value),
+        Slug.dirty(state.slug.value),
+        Price.dirty(value),
+        Stock.dirty(state.inStock.value),
+      ]),
+    );
+  }
+
+  //Método para cambiar el Stock
+  void onStockChanged(int value) {
+    state = state.copyWith(
+      inStock: Stock.dirty(value),
+      isFormValid: Formz.validate([
+        Title.dirty(state.title.value),
+        Slug.dirty(state.slug.value),
+        Price.dirty(state.price.value),
+        Stock.dirty(value),
+      ]),
+    );
+  }
+
+  //Método para cambiar el Size
+  void onSizeChanged(List<String> sizes) {
+    state = state.copyWith(sizes: sizes);
+  }
+
+  //Método para cambiar el genero
+  void onGenderChanged(String gender) {
+    state = state.copyWith(gender: gender);
+  }
+
+  //Método para cambiar la description
+  void onDescriptionChanged(String description) {
+    state = state.copyWith(description: description);
+  }
+
+  //Método para cambiar los Tags
+  void onTagasChanged(String tags) {
+    state = state.copyWith(tags: tags);
+  }
+}
+
+//todo: PROVIDER
+final productFormProvider = StateNotifierProvider.autoDispose
+    .family<ProductFormNotifier, ProductFormState, Product>((ref, product) {
+  //TODO: createUpdateCallback
+
+  //constructor
+  return ProductFormNotifier(
+    product: product,
+    //TODO: onSubmitCallback: CreateUpdateCallback
+  );
+});
