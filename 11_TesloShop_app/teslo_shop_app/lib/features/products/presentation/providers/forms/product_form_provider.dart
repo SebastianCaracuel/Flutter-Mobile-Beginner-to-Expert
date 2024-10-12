@@ -6,6 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:teslo_shop_app/config/config.dart';
 import 'package:teslo_shop_app/features/shared/shared.dart';
 import 'package:teslo_shop_app/features/products/domain/domain.dart';
+import 'package:teslo_shop_app/features/products/presentation/providers/providers.dart';
 
 //todo: STATE PROVIDER
 class ProductFormState {
@@ -69,7 +70,8 @@ class ProductFormState {
 //todo: NOTIFIER
 class ProductFormNotifier extends StateNotifier<ProductFormState> {
   //con este onSubmitcallback vamos intentar mandar la información
-  final void Function(Map<String, dynamic> productLike)? onSubmitCallback;
+  final Future<Product> Function(Map<String, dynamic> productLike)?
+      onSubmitCallback;
 
   //Constructor
   ProductFormNotifier({
@@ -114,8 +116,16 @@ class ProductFormNotifier extends StateNotifier<ProductFormState> {
           .toList()
     };
 
-    return true;
-    //TODO: lamar on submit callback
+    //TODO:ACA ESTABAS TRABAJADNO SEBASTIAN
+    try {
+      await onSubmitCallback!(productLike);
+
+      //Si todo sale bien
+      return true;
+      //SI falla
+    } catch (e) {
+      return false;
+    }
   }
 
   //?Creamos un método privado para tocar cada uno de los campos
@@ -206,11 +216,13 @@ class ProductFormNotifier extends StateNotifier<ProductFormState> {
 //todo: PROVIDER
 final productFormProvider = StateNotifierProvider.autoDispose
     .family<ProductFormNotifier, ProductFormState, Product>((ref, product) {
-  //TODO: createUpdateCallback
+  //todo: createUpdateCallback
+  final createUpdateCallback =
+      ref.watch(productsRepositoryProvider).createUpdateProduct;
 
   //constructor
   return ProductFormNotifier(
     product: product,
-    //TODO: onSubmitCallback: CreateUpdateCallback
+    onSubmitCallback: createUpdateCallback,
   );
 });
