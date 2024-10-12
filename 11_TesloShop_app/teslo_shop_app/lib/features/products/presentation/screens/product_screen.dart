@@ -38,7 +38,15 @@ class ProductScreen extends ConsumerWidget {
           ? const FullScreenLoader()
           : _ProductView(product: productState.product!),
       floatingActionButton: FloatingActionButton(
-          onPressed: () {}, child: const Icon(Icons.save_as_outlined)),
+          onPressed: () {
+            //Condición, si no encuentra el producto, entonces no hace nada
+            if (productState.product == null) return;
+            //
+            ref
+                .read(productFormProvider(productState.product!).notifier)
+                .onFormSubmit();
+          },
+          child: const Icon(Icons.save_as_outlined)),
     );
   }
 }
