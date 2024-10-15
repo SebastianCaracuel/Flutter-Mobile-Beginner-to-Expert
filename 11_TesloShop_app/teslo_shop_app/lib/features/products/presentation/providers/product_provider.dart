@@ -18,10 +18,12 @@ final productProvider = StateNotifierProvider.autoDispose
 
   // Retornamos una instancia de 'ProductNotifier' pasando el repositorio y el 'productId'
   return ProductNotifier(
-      productsRepository: productsRepository, productId: productId);
+    productsRepository: productsRepository,
+    productId: productId,
+  );
 });
 
-//todo: Notificador que gestionará el estado relacionado con un producto específico
+//todo: NOTIFIER
 class ProductNotifier extends StateNotifier<ProductState> {
   // Dependencia del repositorio de productos
   final ProductsRepository productsRepository;
@@ -35,9 +37,34 @@ class ProductNotifier extends StateNotifier<ProductState> {
     loadProduct();
   }
 
+  //? Creamos un producto en blanco o vacio
+  Product newEmptyProduct() {
+    return Product(
+      id: 'new',
+      title: 'Nuevo titulo',
+      price: 0,
+      description: 'Añade una descripción',
+      slug: '',
+      stock: 0,
+      sizes: [],
+      gender: 'men',
+      tags: [],
+      images: [],
+    );
+  }
+
   // Método que permitirá cargar el producto desde el repositorio
   Future<void> loadProduct() async {
     try {
+      //Si el state id es nuevo
+      if (state.id == 'new') {
+        //Le mandamos el nuevo producto vacio
+        state = state.copywith(
+          isLoading: false,
+          product: newEmptyProduct(),
+        );
+        return;
+      }
       //Llamamos al producto mediante el repository
       final product = await productsRepository.getProductsById(state.id);
 
@@ -58,7 +85,7 @@ class ProductNotifier extends StateNotifier<ProductState> {
   }
 }
 
-// todo: Clase que define el estado del producto
+// todo: STATE
 class ProductState {
   // Propiedades del estado de un producto
   final String id; // Identificador del producto
