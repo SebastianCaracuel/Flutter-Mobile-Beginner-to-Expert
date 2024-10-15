@@ -39,10 +39,29 @@ class ProductScreen extends ConsumerWidget {
         appBar: AppBar(
           title: const Text('Editar Producto'),
           actions: [
+            //? Botón para escoger una foto de la galeria
             IconButton(
-                onPressed: () {
+                onPressed: () async {
                   //Ocultamos el teclado al darle al botón guardar.
                   FocusScope.of(context).unfocus();
+                  final photoPath =
+                      await CameraGalleryServiceImpl().selectPhoto();
+                  //Preguntamos
+                  if (photoPath == null) return;
+                  photoPath;
+                },
+                icon: const Icon(Icons.photo_library_rounded)),
+
+            //? Botón para sacar una fotografía.
+            IconButton(
+                onPressed: () async {
+                  //Ocultamos el teclado al darle al botón guardar.
+                  FocusScope.of(context).unfocus();
+                  final photoPath =
+                      await CameraGalleryServiceImpl().takePhoto();
+                  //Preguntamos
+                  if (photoPath == null) return;
+                  photoPath;
                 },
                 icon: const Icon(Icons.camera_alt_outlined))
           ],
