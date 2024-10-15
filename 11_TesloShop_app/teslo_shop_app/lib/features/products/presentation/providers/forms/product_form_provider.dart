@@ -70,7 +70,7 @@ class ProductFormState {
 //todo: NOTIFIER
 class ProductFormNotifier extends StateNotifier<ProductFormState> {
   //con este onSubmitcallback vamos intentar mandar la información
-  final Future<Product> Function(Map<String, dynamic> productLike)?
+  final Future<bool> Function(Map<String, dynamic> productLike)?
       onSubmitCallback;
 
   //Constructor
@@ -118,10 +118,10 @@ class ProductFormNotifier extends StateNotifier<ProductFormState> {
 
     //TODO:ACA ESTABAS TRABAJADNO SEBASTIAN
     try {
-      await onSubmitCallback!(productLike);
-
       //Si todo sale bien
-      return true;
+
+      return await onSubmitCallback!(productLike);
+
       //SI falla
     } catch (e) {
       return false;
@@ -216,8 +216,10 @@ class ProductFormNotifier extends StateNotifier<ProductFormState> {
 //todo: PROVIDER
 final productFormProvider = StateNotifierProvider.autoDispose
     .family<ProductFormNotifier, ProductFormState, Product>((ref, product) {
+  //final createUpdateCallback = ref.watch(productsRepositoryProvider).createUpdateProduct;
+
   final createUpdateCallback =
-      ref.watch(productsRepositoryProvider).createUpdateProduct;
+      ref.watch(productsProvider.notifier).createOrUpdateProduct;
 
   //constructor
   return ProductFormNotifier(
