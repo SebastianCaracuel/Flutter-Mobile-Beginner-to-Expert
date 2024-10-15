@@ -1,6 +1,8 @@
 //? Crear, o actualizar los productos
 
 //Importación flutter
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -48,7 +50,11 @@ class ProductScreen extends ConsumerWidget {
                       await CameraGalleryServiceImpl().selectPhoto();
                   //Preguntamos
                   if (photoPath == null) return;
-                  photoPath;
+
+                  //Añadimos la referencia de nuestro nuevo método para añadir una imagen
+                  ref
+                      .read(productFormProvider(productState.product!).notifier)
+                      .updateProductImages(photoPath);
                 },
                 icon: const Icon(Icons.photo_library_rounded)),
 
@@ -61,7 +67,9 @@ class ProductScreen extends ConsumerWidget {
                       await CameraGalleryServiceImpl().takePhoto();
                   //Preguntamos
                   if (photoPath == null) return;
-                  photoPath;
+                  ref
+                      .read(productFormProvider(productState.product!).notifier)
+                      .updateProductImages(photoPath);
                 },
                 icon: const Icon(Icons.camera_alt_outlined))
           ],
@@ -295,32 +303,48 @@ class _GenderSelector extends StatelessWidget {
   }
 }
 
-//todo:
+//todo: Galeria de imagens
 class _ImageGallery extends StatelessWidget {
   final List<String> images;
   const _ImageGallery({required this.images});
 
   @override
   Widget build(BuildContext context) {
+    //Si la imagen esta vacia, manda esta imagen
+    if (images.isEmpty) {
+      ClipRRect(
+          borderRadius: const BorderRadius.all(Radius.circular(20)),
+          child: Image.asset('assets/images/no-image.jpg', fit: BoxFit.cover));
+    }
+
     return PageView(
       scrollDirection: Axis.horizontal,
       controller: PageController(viewportFraction: 0.7),
-      children: images.isEmpty
-          ? [
-              ClipRRect(
-                  borderRadius: const BorderRadius.all(Radius.circular(20)),
-                  child: Image.asset('assets/images/no-image.jpg',
-                      fit: BoxFit.cover))
-            ]
-          : images.map((e) {
-              return ClipRRect(
-                borderRadius: const BorderRadius.all(Radius.circular(20)),
-                child: Image.network(
-                  e,
-                  fit: BoxFit.cover,
-                ),
-              );
-            }).toList(),
+      children: images.map((image) {
+        //Creamos una variable de nuestro imageProvider
+        late ImageProvider imageProvider;
+
+        //Creamos una condición
+        //Sí, la imagen tiene un http es una NetworkImage
+        if (image.startsWith('http')) {
+          imageProvider = NetworkImage(image);
+          //Si no es un http, es una imagen local, fileImage
+        } else {
+          imageProvider = FileImage(File(image));
+        }
+
+        return Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10),
+          child: ClipRRect(
+            borderRadius: const BorderRadius.all(Radius.circular(20)),
+            child: FadeInImage(
+              fit: BoxFit.cover,
+              image: imageProvider,
+              placeholder: const AssetImage('assets/loaders/bottle-loader.gif'),
+            ),
+          ),
+        );
+      }).toList(),
     );
   }
 }
