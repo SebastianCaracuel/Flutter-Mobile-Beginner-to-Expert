@@ -211,6 +211,11 @@ class ProductFormNotifier extends StateNotifier<ProductFormState> {
   void onTagasChanged(String tags) {
     state = state.copyWith(tags: tags);
   }
+
+  //Método para añadir una nueva imagen al listado
+  void updateProductImages(String path) {
+    state = state.copyWith(images: [...state.images, path]);
+  }
 }
 
 //todo: PROVIDER
