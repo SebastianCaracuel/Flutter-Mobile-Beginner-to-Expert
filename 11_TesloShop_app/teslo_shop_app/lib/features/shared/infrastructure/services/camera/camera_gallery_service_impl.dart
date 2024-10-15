@@ -7,21 +7,17 @@ import 'package:image_picker/image_picker.dart';
 import 'camera_gallery_service.dart';
 
 class CameraGalleryServiceImpl extends CameraGalleryService {
+  //Llamamos a la referencia del Paquete
+  final ImagePicker _picker = ImagePicker();
+
   //todo: Tomar una Foto
   @override
   Future<String?> takePhoto() async {
-    final ImagePicker picker = ImagePicker();
+    final XFile? photo = await _picker.pickImage(
+        source: ImageSource.camera,
+        imageQuality: 80,
+        preferredCameraDevice: CameraDevice.rear);
 
-    // Capture a photo.
-    final XFile? photo = await picker.pickImage(
-      source: ImageSource.camera,
-      //Le decimos que queremos el 80% de la calidad de la imagen, pero también puede ser el 100
-      imageQuality: 80,
-      //Le decimos que queremos utilizar la camara trasera
-      preferredCameraDevice: CameraDevice.rear,
-    );
-
-    //Preguntamos
     if (photo == null) return null;
 
     print('Tenemos una imagen ${photo.path}');
@@ -32,10 +28,10 @@ class CameraGalleryServiceImpl extends CameraGalleryService {
   //todo: Seleccionar una foto
   @override
   Future<String?> selectPhoto() async {
-    final ImagePicker picker = ImagePicker();
+    final ImagePicker _picker = ImagePicker();
 
     // Capture a photo.
-    final XFile? photo = await picker.pickImage(
+    final XFile? photo = await _picker.pickImage(
       source: ImageSource.gallery,
       //Le decimos que queremos el 80% de la calidad de la imagen, pero también puede ser el 100
       imageQuality: 80,
