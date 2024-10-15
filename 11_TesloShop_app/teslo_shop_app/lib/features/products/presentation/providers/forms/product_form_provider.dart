@@ -112,7 +112,7 @@ class ProductFormNotifier extends StateNotifier<ProductFormState> {
       'tags': state.tags.split(','),
       'images': state.images
           .map((image) =>
-              image.replaceAll('${Environment.apiUrl}/files/product', ''))
+              image.replaceAll('${Environment.apiUrl}/files/product/', ''))
           .toList()
     };
 
@@ -216,7 +216,6 @@ class ProductFormNotifier extends StateNotifier<ProductFormState> {
 //todo: PROVIDER
 final productFormProvider = StateNotifierProvider.autoDispose
     .family<ProductFormNotifier, ProductFormState, Product>((ref, product) {
-  //todo: createUpdateCallback
   final createUpdateCallback =
       ref.watch(productsRepositoryProvider).createUpdateProduct;
 
