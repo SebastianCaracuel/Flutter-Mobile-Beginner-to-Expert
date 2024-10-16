@@ -15,10 +15,28 @@ class ProductsDatasourceImpl extends ProductsDatasource {
   final String accessToken;
 
   ProductsDatasourceImpl({required this.accessToken})
-      : dio = Dio(BaseOptions(
-          baseUrl: Environment.apiUrl,
-          headers: {'Authorization': 'Bearer $accessToken'},
-        ));
+      : dio = Dio(
+          BaseOptions(
+            baseUrl: Environment.apiUrl,
+            headers: {'Authorization': 'Bearer $accessToken'},
+          ),
+        );
+
+  Future<List<String>> _uploadPhotos(List<String> photos) async {
+    //Excluimos las fotografias que tengan /
+    final photosToUpload =
+        photos.where((element) => element.contains('/')).toList();
+    //Necesito las fotografias que voy a ingnorar
+    final photosToIgnore =
+        photos.where((element) => !element.contains('/')).toList();
+
+    //TODO: CREAR UNA SERIE DE FUTURES DE CARGA DE IMÁGENES
+    final List<Future<String>> uploadJob = [];
+    final newImages = await Future.wait(uploadJob);
+
+    //Retornamos
+    return [...photosToIgnore, ...newImages];
+  }
 
   @override
   Future<Product> createUpdateProduct(Map<String, dynamic> productLike) async {
@@ -30,7 +48,9 @@ class ProductsDatasourceImpl extends ProductsDatasource {
 
       //Removemos el ID
       productLike.remove('id');
+      productLike['images'] = await _uploadPhotos(productLike['images']);
 
+      throw Exception();
       final response = await dio.request(
         url,
         data: productLike,
