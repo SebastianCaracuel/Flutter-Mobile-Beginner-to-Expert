@@ -22,22 +22,38 @@ class ProductsDatasourceImpl extends ProductsDatasource {
           ),
         );
 
+//Método para cargar el archivo
+  Future<String> _uploadFile(String path) async {
+    try {
+      final fileName = path.split('/').last;
+      final FormData data = FormData.fromMap(
+          {'file': MultipartFile.fromFileSync(path, filename: fileName)});
+
+      final respose = await dio.post('/files/product', data: data);
+
+      return respose.data['image'];
+    } catch (e) {
+      throw Exception();
+    }
+  }
+
+  //Método para subir las imagenes
   Future<List<String>> _uploadPhotos(List<String> photos) async {
-    //Excluimos las fotografias que tengan /
     final photosToUpload =
         photos.where((element) => element.contains('/')).toList();
-    //Necesito las fotografias que voy a ingnorar
     final photosToIgnore =
         photos.where((element) => !element.contains('/')).toList();
 
-    //TODO: CREAR UNA SERIE DE FUTURES DE CARGA DE IMÁGENES
-    final List<Future<String>> uploadJob = [];
+    //todo: crear una serie de Futures de carga de imágenes
+    final List<Future<String>> uploadJob =
+        photosToUpload.map(_uploadFile).toList();
+
     final newImages = await Future.wait(uploadJob);
 
-    //Retornamos
     return [...photosToIgnore, ...newImages];
   }
 
+  //Método para crear o actualizar un producto
   @override
   Future<Product> createUpdateProduct(Map<String, dynamic> productLike) async {
     try {
@@ -50,7 +66,6 @@ class ProductsDatasourceImpl extends ProductsDatasource {
       productLike.remove('id');
       productLike['images'] = await _uploadPhotos(productLike['images']);
 
-      throw Exception();
       final response = await dio.request(
         url,
         data: productLike,
@@ -68,6 +83,7 @@ class ProductsDatasourceImpl extends ProductsDatasource {
     }
   }
 
+//Método para obtener un producto en base a su ID
   @override
   Future<Product> getProductsById(String id) async {
     try {
@@ -87,6 +103,7 @@ class ProductsDatasourceImpl extends ProductsDatasource {
     }
   }
 
+//Método para obtener un producto
   @override
   Future<List<Product>> getProductsByPage(
       {int limit = 10, int offset = 0}) async {
@@ -101,6 +118,7 @@ class ProductsDatasourceImpl extends ProductsDatasource {
     return products;
   }
 
+//Método para buscar un producto
   @override
   Future<List<Product>> searchProducByTerm(String term) {
     // TODO: implement searchProducByTerm
