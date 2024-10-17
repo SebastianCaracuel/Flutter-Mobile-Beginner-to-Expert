@@ -1,6 +1,7 @@
 //Importaciones Flutter
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 //Importaciones nuestras
 import 'package:cinema_app/presentation/providers/providers.dart';
@@ -55,6 +56,9 @@ class HomeViewState extends ConsumerState<HomeView> {
     if (initialLoading) {
       return const FullScreenLoader();
     }
+
+    //?Removemos el SplashScreen
+    FlutterNativeSplash.remove();
 
     //Llamamos a nuestras referencias para poder ver las películas por pantalla
     //?Referencia para mostrar las películas
