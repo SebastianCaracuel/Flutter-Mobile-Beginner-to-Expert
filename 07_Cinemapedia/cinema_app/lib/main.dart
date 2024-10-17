@@ -1,13 +1,19 @@
 //Importaciones de Flutter
-import 'package:cinema_app/presentation/providers/theme/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
+
 //Importaciones nuestras
 import 'package:cinema_app/config/router/app_router.dart';
 import 'package:cinema_app/config/theme/app_theme.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:cinema_app/presentation/providers/providers.dart';
 
 Future<void> main() async {
+  //Splash Screen
+  FlutterNativeSplash.preserve(
+      widgetsBinding: WidgetsFlutterBinding.ensureInitialized());
+
   //Definimos el paquete .env
   await dotenv.load(fileName: '.env');
 
