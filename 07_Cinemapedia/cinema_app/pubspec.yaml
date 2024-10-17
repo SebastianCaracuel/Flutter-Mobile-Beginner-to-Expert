@@ -41,7 +41,7 @@ flutter_launcher_icons:
   adaptive_icon_foreground: "assets/icon/app-icon-2.jpg"
 
 flutter_native_splash:
-  color:"#252829"
+  color: "#252829"
 
 flutter:
   uses-material-design: true
