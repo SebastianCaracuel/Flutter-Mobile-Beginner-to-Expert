@@ -1,5 +1,4 @@
 //Importaciones Flutter
-import 'package:cinema_app/presentation/providers/theme/theme_provider.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
