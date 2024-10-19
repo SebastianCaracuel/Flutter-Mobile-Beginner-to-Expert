@@ -11,7 +11,7 @@ class HeaderCuadrado extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 300,
-      color: const Color(0xff615AAB),
+      color: const Color(0xff1A334A),
     );
   }
 }
@@ -25,7 +25,7 @@ class HeaderBordesRedondeados extends StatelessWidget {
     return Container(
       height: 300,
       decoration: const BoxDecoration(
-          color: Color(0xff615AAB),
+          color: Color(0xff1E526E),
           borderRadius: BorderRadius.only(
             bottomLeft: Radius.circular(50),
             bottomRight: Radius.circular(50),
