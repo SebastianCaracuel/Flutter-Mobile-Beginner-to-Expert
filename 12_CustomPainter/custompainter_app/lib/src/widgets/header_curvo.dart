@@ -27,7 +27,7 @@ class _HeaderCurvoPainter extends CustomPainter {
     final lapiz = Paint();
 
     //?Propiedades del Lapiz
-    lapiz.color = const Color(0xff615AAB);
+    lapiz.color = const Color(0xff6F71A1);
 
     //?¿Que tipo de rellenado quiero?
     // lapiz.style = PaintingStyle.stroke; //Son solo los bordes
