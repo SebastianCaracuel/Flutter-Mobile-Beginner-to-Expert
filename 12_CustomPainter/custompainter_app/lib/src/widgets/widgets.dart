@@ -1,4 +1,4 @@
 //? Este es un archivo de barril
 
-//todo:cuadrado
 export 'header_cuadrado.dart';
+export 'header_diagonal.dart';
