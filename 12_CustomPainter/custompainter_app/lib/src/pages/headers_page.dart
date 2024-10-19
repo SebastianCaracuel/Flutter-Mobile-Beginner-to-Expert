@@ -152,4 +152,7 @@ final slides = <SlideInfo>[
 
   //todo:7
   SlideInfo('Header Waves', const HeaderWave()),
+
+  //todo:8
+  SlideInfo('Header Waves Gradiant', const HeaderGradient()),
 ];
