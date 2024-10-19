@@ -27,7 +27,7 @@ class _HeaderPicoPainter extends CustomPainter {
     final lapiz = Paint();
 
     //?Propiedades del Lapiz
-    lapiz.color = const Color(0xff615AAB);
+    lapiz.color = const Color(0xff5AA5CD);
 
     //?¿Que tipo de rellenado quiero?
     // lapiz.style = PaintingStyle.stroke; //Son solo los bordes
