@@ -1,5 +1,8 @@
-import 'package:custompainter_app/src/widgets/header_cuadrado.dart';
+//Importaciones FLutter
 import 'package:flutter/material.dart';
+
+//Importaciones Nuestras
+import 'package:custompainter_app/src/widgets/widgets.dart';
 
 //Creamos nuestra Screen
 class HeadersPage extends StatefulWidget {
@@ -21,13 +24,11 @@ class _HeadersPageState extends State<HeadersPage> {
   @override
   void initState() {
     super.initState();
-    //
     pageViewControlle.addListener(() {
       final page = pageViewControlle.page ?? 0;
 
       //Creamos la condición - la condicion dice que cuando la pagina este por la mitad o apunto de pasar a la final
       //que se muestre el botón debido a que llegamos al final de las paginas
-
       if (!endReached && page >= (slides.length - 1.5)) {
         //Llamamos al set
         setState(() {
@@ -131,15 +132,24 @@ class SlideInfo {
 //? Le añadimos los Distintos tipos de Headers a los Sliders.
 final slides = <SlideInfo>[
   //Slide uno
-  SlideInfo('Slide 1: Cuadrado', const HeaderCuadrado()),
-  //Slide dos
-  SlideInfo(
-    'Delivery will arrive soon',
-    Container(),
-  ),
-  //Slide tres
-  SlideInfo(
-    'Enojoy! your meal. Thank you for trusting us.',
-    Container(),
-  ),
+  SlideInfo('Header Cuadrado', const HeaderCuadrado()),
+
+  //todo:2
+  SlideInfo('Header Cuadrado con bordes redondeados',
+      const HeaderBordesRedondeados()),
+
+  //todo:3
+  SlideInfo('Header Diagonal', const HeaderDiagonal()),
+
+  //todo:4
+  SlideInfo('Header Triangulo', const HeaderTriangulo()),
+
+  //todo:5
+  SlideInfo('Header Pico', const HeaderPico()),
+
+  //todo:6
+  SlideInfo('Header Curvo', const HeaderCurvo()),
+
+  //todo:7
+  SlideInfo('Header Waves', const HeaderWave()),
 ];
