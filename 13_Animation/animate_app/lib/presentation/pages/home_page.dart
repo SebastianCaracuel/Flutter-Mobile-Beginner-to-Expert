@@ -1,5 +1,6 @@
 //Importaciones Flutter
 import 'package:flutter/material.dart';
+import 'dart:math' as Math;
 //Importaciones nuestras
 
 class AnimacionesPage extends StatelessWidget {
@@ -44,8 +45,22 @@ class _CuadradoAnimadoState extends State<CuadradoAnimado>
     //¿Que tipo de animación quiero?
     rotacion = Tween(
       begin: 0.0,
-      end: 2.0,
+      end: 2 * Math.pi,
     ).animate(controller);
+
+    //El transcurso de la animación
+    controller.addListener(() {
+      print('Status ${controller.status}');
+
+      //? Cuando termina la animación, ahora animalo en reversa
+      if (controller.status == AnimationStatus.completed) {
+        controller.reverse();
+      }
+      //?Y cuando termine el Reversa, que comience otra vez, esto haría un Loop Infinito
+      // else if (controller.status == AnimationStatus.dismissed) {
+      //   controller.forward();
+      // }
+    });
 
     super.initState();
   }
